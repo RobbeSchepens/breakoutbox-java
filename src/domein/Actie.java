@@ -19,7 +19,7 @@ public class Actie {
     }
     
     public Actie(String omschrijving){
-        
+        this.omschrijving = omschrijving;
     }
     
 }

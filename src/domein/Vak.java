@@ -19,7 +19,8 @@ public class Vak {
         
     }
     public Vak(String naam, String omschrijving){
-        
+        this.naam = naam;
+        this.omschrijving = omschrijving;
     }
     
     
