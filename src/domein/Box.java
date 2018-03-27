@@ -5,7 +5,7 @@
  */
 package domein;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,14 +16,14 @@ public class Box {
     
     private String naamBox;
     private String omschrijving;
-    private Collection<Actie> acties;
-    private Collection<Oefening> Oefeningen;
-    private Collection<Toegangscode> toegangscodes;
+    private ArrayList<Actie> acties;
+    private ArrayList<Oefening> Oefeningen;
+    private ArrayList<Toegangscode> toegangscodes;
       
     protected Box(){
   
     }
-    public Box(Collection<Actie> acties, Collection<Oefening> oefeningen, Collection<Toegangscode> toegangscodes, String omschrijving, String naambox)
+    public Box(ArrayList<Actie> acties, ArrayList<Oefening> oefeningen, ArrayList<Toegangscode> toegangscodes, String omschrijving, String naambox)
     {
       
         this.naamBox = naambox;
@@ -32,6 +32,9 @@ public class Box {
         this.Oefeningen = oefeningen;
         this.toegangscodes = toegangscodes;
     }
+    
+    
+    
     
     
 }

@@ -6,7 +6,7 @@
 package domein;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,13 +20,13 @@ public class Leerkracht {
     private String voornaam;
     private String achternaam;
     private String email;
-    private Collection<Sessie> sessies;
-    private Collection<Klas> klassen;
+    private ArrayList<Sessie> sessies;
+    private ArrayList<Klas> klassen;
     
     protected Leerkracht(){
         
     }
-    public Leerkracht(String voornaam, String achternaam, String email, Collection<Klas> klassen){   
+    public Leerkracht(String voornaam, String achternaam, String email, ArrayList<Klas> klassen){   
         sessies = new ArrayList<>();
         klassen = klassen; 
         this.voornaam = voornaam;

@@ -5,7 +5,7 @@
  */
 package domein;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,14 +13,14 @@ import java.util.Collection;
  */
 public class Klas {
     private int klasId;
-    private Collection<Leerling> leerlingen;
+    private ArrayList<Leerling> leerlingen;
     private Leerkracht leerkracht;
     
     
     protected Klas(){
         
     }
-    public Klas(Collection<Leerling> leerlingen, Leerkracht leerkracht){
+    public Klas(ArrayList<Leerling> leerlingen, Leerkracht leerkracht){
         this.leerkracht = leerkracht;
         this.leerlingen = leerlingen;
     }

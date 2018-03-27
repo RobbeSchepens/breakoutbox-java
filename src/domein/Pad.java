@@ -6,7 +6,7 @@
 package domein;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,7 +14,7 @@ import java.util.Collection;
  */
 public class Pad {
     private int padId;
-    private Collection<Opdracht> opdrachten = new ArrayList<>();  
+    private ArrayList<Opdracht> opdrachten = new ArrayList<>();  
     protected Pad(){
         
     }
