@@ -55,9 +55,7 @@ public class Sessie {
         int groepSize = 0;     
         groepSize = (int)(leerlingen.size() / aantalGroepen);  
         Collections.shuffle(leerlingen);*/
-   
-    }
-    public void equalize(){ // indien er een zeer kleine groep is worden er leden van andere groepen gepakt en in de kleine groep gestoken
+        
         
     }
     
