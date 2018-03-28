@@ -10,16 +10,17 @@ package domein;
  * @author Daan
  */
 public class Actie {
+
     private int ActieId;
-    
+
     private String omschrijving;
-    
-    protected Actie(){
-        
+
+    protected Actie() {
+
     }
-    
-    public Actie(String omschrijving){
+
+    public Actie(String omschrijving) {
         this.omschrijving = omschrijving;
     }
-    
+
 }
