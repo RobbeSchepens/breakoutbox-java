@@ -4,19 +4,29 @@
  * and open the template in the editor.
  */
 package domein;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author Daan
  */
+@Entity
+@Table(name = "feedback")
 public class Feedback {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int feedbackId;
-    
+
     private String omschrijving;
-    
-    protected Feedback(String omschrijving){
+
+    protected Feedback(String omschrijving) {
         this.omschrijving = omschrijving;
     }
-    
-    
-    
+
 }

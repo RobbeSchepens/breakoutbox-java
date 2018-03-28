@@ -6,41 +6,47 @@
 package domein;
 
 import java.util.ArrayList;
+import java.util.Set;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Entity;
 
 /**
  *
  * @author Daan
  */
+@Entity
+@Table(name = "groepen")
 public class Groep {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int groepId;
-    
-    private ArrayList<Leerling> leerlingen;
+
+    private Set<Leerling> leerlingen;
     private Pad pad;
-    
-    protected Groep(){
-        
+
+    protected Groep() {
+
     }
-    public Groep(Pad pad, ArrayList<Leerling> leerlingen){
+
+    public Groep(Pad pad, Set<Leerling> leerlingen) {
         this.pad = pad;
         this.leerlingen = leerlingen;
     }
 
-    public void setLeerlingen(ArrayList<Leerling> leerlingen) {
+    public void setLeerlingen(Set<Leerling> leerlingen) {
         this.leerlingen = leerlingen;
     }
 
-    public void addLeerling(Leerling l){
+    public void addLeerling(Leerling l) {
         leerlingen.add(l);
     }
 
-    public ArrayList<Leerling> getLeerlingen() {
+    public Set<Leerling> getLeerlingen() {
         return leerlingen;
     }
-    
-    
-    
-    
-    
-    
-    
+
 }
