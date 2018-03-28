@@ -6,35 +6,42 @@
 package domein;
 
 import java.util.ArrayList;
+import java.util.Set;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Entity;
 
 /**
  *
  * @author Daan
  */
-public class Box {  
+@Entity
+@Table(name = "boxen")
+public class Box {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int boxId;
-    
+
     private String naamBox;
     private String omschrijving;
-    private ArrayList<Actie> acties;
-    private ArrayList<Oefening> Oefeningen;
-    private ArrayList<Toegangscode> toegangscodes;
-      
-    protected Box(){
-  
+    private Set<Actie> acties;
+    private Set<Oefening> Oefeningen;
+    private Set<Toegangscode> toegangscodes;
+
+    protected Box() {
+
     }
-    public Box(ArrayList<Actie> acties, ArrayList<Oefening> oefeningen, ArrayList<Toegangscode> toegangscodes, String omschrijving, String naambox)
-    {
-      
+
+    public Box(Set<Actie> acties, Set<Oefening> oefeningen, Set<Toegangscode> toegangscodes, String omschrijving, String naambox) {
+
         this.naamBox = naambox;
         this.omschrijving = omschrijving;
         this.acties = acties;
         this.Oefeningen = oefeningen;
         this.toegangscodes = toegangscodes;
     }
-    
-    
-    
-    
-    
+
 }

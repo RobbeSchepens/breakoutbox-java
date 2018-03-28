@@ -10,8 +10,6 @@ package domein;
  * @author Daan
  */
 public class GroepsBewerking {
-    
+
     // hier groepsbewerking genereren ?
-    
-    
 }
