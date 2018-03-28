@@ -3,11 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domein;
+package domeinA;
 
-import java.util.ArrayList;
-import java.util.ArrayList;
-import java.util.Set;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,20 +16,20 @@ import javax.persistence.Entity;
  * @author Daan
  */
 @Entity
-@Table(name = "paden")
-public class Pad {
+@Table(name = "acties")
+public class Actie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int padId;
-    private Set<Opdracht> opdrachten;
+    private int ActieId;
+    private String omschrijving;
 
-    protected Pad() {
+    protected Actie() {
 
     }
 
-    public void addOpdracht(Opdracht o) {
-        opdrachten.add(o);
+    public Actie(String omschrijving) {
+        this.omschrijving = omschrijving;
     }
 
 }

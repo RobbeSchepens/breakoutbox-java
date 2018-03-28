@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domein;
+package domeinA;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,20 +16,22 @@ import javax.persistence.Entity;
  * @author Daan
  */
 @Entity
-@Table(name = "toegangscodes")
-public class Toegangscode {
+@Table(name = "leerlingen")
+public class Leerling {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int toegangscodeId;
-    public String code;
+    private int leerlingId;
+    private String voornaam;
+    private String achternaam;
 
-    protected Toegangscode() {
+    protected Leerling() {
 
     }
 
-    public Toegangscode(String code) {
-        this.code = code;
+    public Leerling(String voornaam, String achternaam) {
+        this.voornaam = voornaam;
+        this.achternaam = achternaam;
     }
 
 }

@@ -3,37 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domein;
+package domeinA;
 
-import java.util.ArrayList;
-import java.util.Set;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Entity;
 
 /**
  *
  * @author Daan
  */
 @Entity
-@Table(name = "klassen")
-public class Klas {
+@Table(name = "feedback")
+public class Feedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int klasId;
-    private Set<Leerling> leerlingen;
-    private Leerkracht leerkracht;
+    private int feedbackId;
 
-    protected Klas() {
+    private String omschrijving;
 
-    }
-
-    public Klas(Set<Leerling> leerlingen, Leerkracht leerkracht) {
-        this.leerkracht = leerkracht;
-        this.leerlingen = leerlingen;
+    protected Feedback(String omschrijving) {
+        this.omschrijving = omschrijving;
     }
 
 }

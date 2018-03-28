@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domein;
+package domeinA;
 
+import java.util.ArrayList;
+import java.util.Set;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,22 +18,22 @@ import javax.persistence.Entity;
  * @author Daan
  */
 @Entity
-@Table(name = "leerlingen")
-public class Leerling {
+@Table(name = "klassen")
+public class Klas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int leerlingId;
-    private String voornaam;
-    private String achternaam;
+    private int klasId;
+    private Set<Leerling> leerlingen;
+    private Leerkracht leerkracht;
 
-    protected Leerling() {
+    protected Klas() {
 
     }
 
-    public Leerling(String voornaam, String achternaam) {
-        this.voornaam = voornaam;
-        this.achternaam = achternaam;
+    public Klas(Set<Leerling> leerlingen, Leerkracht leerkracht) {
+        this.leerkracht = leerkracht;
+        this.leerlingen = leerlingen;
     }
 
 }

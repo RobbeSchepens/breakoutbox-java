@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domein;
+package domeinA;
 
 import java.util.Set;
 import javax.persistence.GeneratedValue;
@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -30,11 +31,10 @@ public class Sessie {
     private String omschrijving;
 
     private Klas klas;
-    @OneToMany
     private Set<Leerling> leerlingen;
-
+    @OneToMany
     private Set<Groep> groepen;
-
+    
     private Box box;
     private int state;
 
