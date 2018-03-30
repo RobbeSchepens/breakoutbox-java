@@ -34,7 +34,7 @@ public class Sessie {
     private Set<Leerling> leerlingen;
     @OneToMany
     private Set<Groep> groepen;
-    
+
     private Box box;
     private int state;
 
@@ -48,25 +48,6 @@ public class Sessie {
         this.leerlingen = leerlingen;
         this.box = box;
         this.state = state;
-    }
-
-    public void MaakRandomGroepenGroepSize(int groepSize) {
-        /*Groep groep = new Groep(); // een groep met random ingedeelde personen
-        ArrayList<Leerling> leerlingen = this.leerlingen; // een lijst van de huidige leerlingen in een sessie
-        ArrayList<Groep> lijstVanGroepen = new ArrayList<>(); // een lijst van de al random ingedeelde groepen
-        Random rand = new Random();  
-        Collections.shuffle(leerlingen);*/
-
-    }
-
-    public void maakRandomGroepenAantalGroepen(int aantalGroepen) {
-        /* Groep groep = new Groep(); 
-        ArrayList<Leerling> leerlingen = this.leerlingen; 
-        ArrayList<Groep> lijstVanGroepen = new ArrayList<>();
-        int groepSize = 0;     
-        groepSize = (int)(leerlingen.size() / aantalGroepen);  
-        Collections.shuffle(leerlingen);*/
-
     }
 
 }
