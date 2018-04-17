@@ -27,5 +27,6 @@ hs_err_pid*
 /manifest.mf
 /build.xml
 /nbproject/
+/BoB/nbproject/private/
 /dist/
 /build/
