@@ -1,33 +1,38 @@
 package domein;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Leerling implements Serializable {
+public class Pad implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int leerlingId;
-    private String voornaam;
-    private String achternaam;
+    private int padId;
+    @OneToMany
+    private Set<Opdracht> opdrachten = new HashSet<>();
 
-    public Leerling() {
+    public Pad() {
     }
 
-    public Leerling(String voornaam, String achternaam) {
-        this.voornaam = voornaam;
-        this.achternaam = achternaam;
+    public void addOpdracht(Opdracht e) {
+        opdrachten.add(e);
+    }
+
+    public void removeOpdracht(Opdracht e) {
+        opdrachten.add(e);
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 41 * hash + Objects.hashCode(this.voornaam);
-        hash = 41 * hash + Objects.hashCode(this.achternaam);
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.opdrachten);
         return hash;
     }
 
@@ -42,11 +47,8 @@ public class Leerling implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Leerling other = (Leerling) obj;
-        if (!Objects.equals(this.voornaam, other.voornaam)) {
-            return false;
-        }
-        if (!Objects.equals(this.achternaam, other.achternaam)) {
+        final Pad other = (Pad) obj;
+        if (!Objects.equals(this.opdrachten, other.opdrachten)) {
             return false;
         }
         return true;

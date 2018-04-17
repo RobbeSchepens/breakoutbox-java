@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import repository.GenericDao;
-import repository.GenericDaoJpa;
+import repository.LeerkrachtDaoJpa;
+import repository.SessieDao;
+import repository.SessieDaoJpa;
 
 public class SessieController {
     private List<Sessie> sessieLijst;
-    private GenericDao<Sessie> sessieRepo;
+    private LeerkrachtDaoJpa leerkrachtRepo;
+    private SessieDao sessieRepo;
     
     public SessieController() {
         this(true);
@@ -19,10 +21,15 @@ public class SessieController {
         if (withInit) {
             new PopulateDB().run();
         }
-        setSessieRepo(new GenericDaoJpa<>(Sessie.class));
+        setLeerkrachtRepo(new LeerkrachtDaoJpa());
+        setSessieRepo(new SessieDaoJpa());
+    }
+    
+    public void setLeerkrachtRepo(LeerkrachtDaoJpa mock){
+        leerkrachtRepo = mock;
     }
 
-    public void setSessieRepo(GenericDao<Sessie> mock){
+    public void setSessieRepo(SessieDaoJpa mock){
         sessieRepo = mock;
     }
 
@@ -44,9 +51,9 @@ public class SessieController {
         if (!sessie.isPresent()) {
                 throw new IllegalArgumentException("Sessie " + sessiecode + " komt niet voor.");
         }
-        GenericDaoJpa.startTransaction();
+        SessieDaoJpa.startTransaction();
         sessie.get().addGroep(groep);
-        GenericDaoJpa.commitTransaction();
+        SessieDaoJpa.commitTransaction();
     }
     
     public List<String> geefGroepLijst(Sessie sessie) {
@@ -55,6 +62,6 @@ public class SessieController {
     }
 
     public void close() {
-        GenericDaoJpa.closePersistency();
+        SessieDaoJpa.closePersistency();
     }
 }

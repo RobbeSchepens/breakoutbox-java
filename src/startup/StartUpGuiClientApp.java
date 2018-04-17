@@ -1,6 +1,7 @@
 package startup;
 
 import domein.SessieController;
+import static java.lang.System.exit;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -40,6 +41,7 @@ public class StartUpGuiClientApp extends Application {
         System.out.println("Sessies :");
         System.out.println(sessieController.geefSessieLijst());
         sessieController.close();
+        exit(0);
     }
     
 }

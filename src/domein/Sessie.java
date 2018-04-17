@@ -11,12 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "sessies")
 @NamedQueries({
-    @NamedQuery(name = "Sessie.findByCode", query = "select s from Sessie s where s.code = :code")
+    @NamedQuery(name = "Sessie.findByCode", query = "select s from Sessie s where s.code = :code"),
+    @NamedQuery(name = "Sessie.findByName", query = "select s from Sessie s where s.naam = :sessienaam")
 })
 public class Sessie implements Serializable {
     private static long serialVersionUID = 1L;
@@ -61,16 +60,22 @@ public class Sessie implements Serializable {
     public void setKlas(Klas klas) {
         this.klas = klas;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 43 * hash + Objects.hashCode(this.code);
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.code);
+        hash = 61 * hash + Objects.hashCode(this.naam);
+        hash = 61 * hash + Objects.hashCode(this.omschrijving);
+        hash = 61 * hash + Objects.hashCode(this.klas);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
@@ -78,6 +83,15 @@ public class Sessie implements Serializable {
             return false;
         }
         final Sessie other = (Sessie) obj;
-        return Objects.equals(this.code, other.code);
+        if (!Objects.equals(this.code, other.code)) {
+            return false;
+        }
+        if (!Objects.equals(this.naam, other.naam)) {
+            return false;
+        }
+        if (!Objects.equals(this.omschrijving, other.omschrijving)) {
+            return false;
+        }
+        return true;
     }
 }

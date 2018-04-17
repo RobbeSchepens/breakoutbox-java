@@ -8,26 +8,23 @@ import javax.persistence.Id;
 import javax.persistence.Entity;
 
 @Entity
-public class Leerling implements Serializable {
+public class Toegangscode implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int leerlingId;
-    private String voornaam;
-    private String achternaam;
+    private int toegangscodeId;
+    public String code;
 
-    public Leerling() {
+    public Toegangscode() {
     }
 
-    public Leerling(String voornaam, String achternaam) {
-        this.voornaam = voornaam;
-        this.achternaam = achternaam;
+    public Toegangscode(String code) {
+        this.code = code;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 41 * hash + Objects.hashCode(this.voornaam);
-        hash = 41 * hash + Objects.hashCode(this.achternaam);
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.code);
         return hash;
     }
 
@@ -42,11 +39,8 @@ public class Leerling implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Leerling other = (Leerling) obj;
-        if (!Objects.equals(this.voornaam, other.voornaam)) {
-            return false;
-        }
-        if (!Objects.equals(this.achternaam, other.achternaam)) {
+        final Toegangscode other = (Toegangscode) obj;
+        if (!Objects.equals(this.code, other.code)) {
             return false;
         }
         return true;
