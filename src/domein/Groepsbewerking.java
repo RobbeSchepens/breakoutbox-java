@@ -2,6 +2,8 @@ package domein;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +15,7 @@ public class Groepsbewerking implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int groepsbewerkingId;
     @ManyToOne
+    @Enumerated(EnumType.STRING)
     private EnumBewerking bewerking;
     private double getal;
 

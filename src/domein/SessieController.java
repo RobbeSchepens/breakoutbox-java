@@ -29,7 +29,7 @@ public class SessieController {
         leerkrachtRepo = mock;
     }
 
-    public void setSessieRepo(SessieDaoJpa mock){
+    public void setSessieRepo(SessieDao mock){
         sessieRepo = mock;
     }
 

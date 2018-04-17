@@ -15,16 +15,17 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import repository.GenericDao;
+import repository.SessieDao;
 
 public class DomeinTest {
     @Mock
-    private GenericDao<Sessie> sessieRepo;
+    private SessieDao sessieRepo;
     private SessieController sessieController;
     
     @Before
     public void before() {
         sessieController = new SessieController();
-        MockitoAnnotations.initMocks(this);
+        sessieRepo = Mockito.mock(SessieDao.class);
         sessieController.setSessieRepo(sessieRepo);
     }
     
@@ -38,13 +39,13 @@ public class DomeinTest {
        Groep eenGroep = new Groep();
 
        Mockito.when(sessieRepo.findAll()).thenReturn(Arrays.asList(eenSessie));
-       //Mockito.when(bierRepo.getBierByName(BIERNAAM)).thenReturn(eenBier);
+       Mockito.when(sessieRepo.getSessieByCode(SESSIECODE)).thenReturn(eenSessie);
        
        assertFalse(eenSessie.getGroepSet().contains(eenGroep));
        sessieController.voegGroepBijSessie(eenGroep, SESSIECODE);
        assertTrue(eenSessie.getGroepSet().contains(eenGroep));
        Mockito.verify(sessieRepo).findAll();
-       //Mockito.verify(bierRepo).getBierByName(BIERNAAM);
+       Mockito.verify(sessieRepo).getSessieByCode(SESSIECODE);
         
     }
 }
