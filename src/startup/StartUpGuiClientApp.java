@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package startup;
 
+import domein.SessieController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,10 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-/**
- *
- * @author robbe
- */
 public class StartUpGuiClientApp extends Application {
     
     @Override
@@ -41,11 +33,13 @@ public class StartUpGuiClientApp extends Application {
         primaryStage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        launch(args);
+        //launch(args); //GUI
+        
+        SessieController sessieController = new SessieController();
+        System.out.println("Sessies :");
+        System.out.println(sessieController.geefSessieLijst());
+        sessieController.close();
     }
     
 }
