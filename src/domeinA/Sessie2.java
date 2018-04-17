@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @Table(name = "sessies")
-public class Sessie {
+public class Sessie2 {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,10 +38,10 @@ public class Sessie {
     private Box box;
     private int state;
 
-    protected Sessie() {
+    protected Sessie2() {
     }
 
-    public Sessie(String code, String naam, String omschrijving, Set<Leerling> leerlingen, Box box, int state) {
+    public Sessie2(String code, String naam, String omschrijving, Set<Leerling> leerlingen, Box box, int state) {
         this.code = code;
         this.naam = naam;
         this.omschrijving = omschrijving;
