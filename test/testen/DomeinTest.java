@@ -34,7 +34,7 @@ public class DomeinTest {
     public void voegBierBijWinkel() {
        final String SESSIECODE = "X9Z3";
 
-       Sessie eenSessie = new Sessie(SESSIECODE);   
+       Sessie eenSessie = new Sessie(SESSIECODE, "Naam", "Beschrijving.");   
        Groep eenGroep = new Groep();
 
        Mockito.when(sessieRepo.findAll()).thenReturn(Arrays.asList(eenSessie));

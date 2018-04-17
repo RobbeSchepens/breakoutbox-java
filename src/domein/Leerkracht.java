@@ -1,41 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package domeinA;
+package domein;
 
-import java.util.ArrayList;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
-/**
- *
- * @author Daan
- */
 @Entity
 @Table(name = "leerkrachten")
+@NamedQueries({
+    @NamedQuery(name = "Leerkracht.findByName", 
+            query = "select lk from leerkrachten lk where lk.voornaam = :voornaam and lk.achternaam = :achternaam"),
+    @NamedQuery(name = "Leerkracht.findByEmail", 
+            query = "select lk from leerkrachten lk where lk.email = :email")
+})
 public class Leerkracht {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int leerkrachtId;
-
     private String voornaam;
     private String achternaam;
     private String email;
+    @OneToMany
     private Set<Sessie> sessies;
+    @OneToMany
     private Set<Klas> klassen;
 
     protected Leerkracht() {
-
     }
 
     public Leerkracht(String voornaam, String achternaam, String email, Set<Klas> klassen) {
@@ -48,5 +43,4 @@ public class Leerkracht {
     public void addSessie(Sessie s) {
         sessies.add(s);
     }
-
 }

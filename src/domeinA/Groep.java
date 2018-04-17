@@ -5,6 +5,7 @@
  */
 package domeinA;
 
+import domein.Leerling;
 import java.util.ArrayList;
 import java.util.Set;
 import javax.persistence.GeneratedValue;

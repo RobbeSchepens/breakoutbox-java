@@ -7,26 +7,35 @@ import java.util.Set;
 import java.util.HashSet;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "sessies")
 @NamedQueries({
-    @NamedQuery(name = "Sessie.findByCode", query = "select s from Sessie s where s.code = :code")
+    @NamedQuery(name = "Sessie.findByCode", query = "select s from sessies s where s.code = :code")
 })
 public class Sessie implements Serializable {
     private static long serialVersionUID = 1L;
     @Id
     private String code;
+    private String naam;
+    private String omschrijving;
     @OneToMany
-    private Set<Groep> groepSet = new HashSet<>();
+    private Set<Groep> groepen = new HashSet<>();
+    @ManyToOne
+    private Klas klas;
 
     public Sessie() {
     }
 
-    public Sessie(String code) {
+    public Sessie(String code, String naam, String omschrijving) {
         this.code = code;
+        this.naam = naam;
+        this.omschrijving = omschrijving;
     }
     
     public String getCode() {
@@ -34,15 +43,23 @@ public class Sessie implements Serializable {
     }
 
     public Set<Groep> getGroepSet() {
-        return Collections.unmodifiableSet(groepSet);
+        return Collections.unmodifiableSet(groepen);
     }
     
     public void addGroep(Groep groep){
-        groepSet.add(groep);
+        groepen.add(groep);
     }
     
     public void removeGroep(Groep groep){
-        groepSet.remove(groep);
+        groepen.remove(groep);
+    }
+
+    public Klas getKlas() {
+        return klas;
+    }
+
+    public void setKlas(Klas klas) {
+        this.klas = klas;
     }
     
     @Override
