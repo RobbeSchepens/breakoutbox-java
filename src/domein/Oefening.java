@@ -1,12 +1,11 @@
 package domein;
 
-import domeinA.Feedback;
-import domeinA.Opgave;
 import java.io.Serializable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Oefening implements Serializable {
@@ -14,15 +13,17 @@ public class Oefening implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int oefeningId;
     private String naam;
-    private String opgave;
+    @OneToOne
+    private Opgave opgave;
     private double antwoord;
-    private String feedback;
+    @OneToOne
+    private Feedback feedback;
     private Vak vak;
 
     public Oefening() {
     }
 
-    public Oefening(String naam, String opgave, double antwoord, String feedback, Vak vak) {
+    public Oefening(String naam, Opgave opgave, double antwoord, Feedback feedback, Vak vak) {
         this.naam = naam;
         this.opgave = opgave;
         this.antwoord = antwoord;
@@ -34,7 +35,7 @@ public class Oefening implements Serializable {
         return naam;
     }
 
-    public String getOpgave() {
+    public Opgave getOpgave() {
         return opgave;
     }
 
@@ -42,7 +43,7 @@ public class Oefening implements Serializable {
         return antwoord;
     }
 
-    public String getFeedback() {
+    public Feedback getFeedback() {
         return feedback;
     }
 
