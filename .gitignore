@@ -27,6 +27,7 @@ hs_err_pid*
 /manifest.mf
 /build.xml
 /nbproject/
+<<<<<<< HEAD
 # Compiled class file
 *.class
 
@@ -62,4 +63,6 @@ hs_err_pid*
 /build/
 =======
 /BoB/nbproject/private/
+=======
+>>>>>>> origin/master
 /BoB/nbproject/private/
