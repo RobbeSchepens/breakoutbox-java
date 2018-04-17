@@ -6,29 +6,24 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class GenericDaoJpa<T> implements GenericDao<T> {
-
     private static final String PU_NAME = "breakoutboxPU";
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU_NAME);
     protected static final EntityManager em = emf.createEntityManager();
     private final Class<T> type;
-
+    
     public GenericDaoJpa(Class<T> type) {
         this.type = type;
     }
-
     public static void closePersistency() {
         em.close();
         emf.close();
     }
-
     public static void startTransaction() {
         em.getTransaction().begin();
     }
-
     public static void commitTransaction() {
         em.getTransaction().commit();
     }
-
     public static void rollbackTransaction() {
         em.getTransaction().rollback();
     }
@@ -42,7 +37,7 @@ public class GenericDaoJpa<T> implements GenericDao<T> {
     }
 
     @Override
-    public T get(Long id) {
+    public <U> T get(U id) {
         T entity = em.find(type, id);
         return entity;
     }
@@ -63,7 +58,7 @@ public class GenericDaoJpa<T> implements GenericDao<T> {
     }
 
     @Override
-    public boolean exists(Long id) {
+    public <U> boolean exists(U id) {
         T entity = em.find(type, id);
         return entity != null;
     }

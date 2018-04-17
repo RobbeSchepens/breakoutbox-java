@@ -1,5 +1,6 @@
 package domeinA;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Set;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,7 @@ import javax.persistence.Entity;
 
 @Entity
 @Table(name = "boxen")
-public class Box {
+public class Box implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int boxId;

@@ -1,23 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domeinA;
 
+import java.io.Serializable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 
-/**
- *
- * @author Daan
- */
 @Entity
 @Table(name = "toegangscodes")
-public class Toegangscode {
+public class Toegangscode implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +17,9 @@ public class Toegangscode {
     public String code;
 
     protected Toegangscode() {
-
     }
 
     public Toegangscode(String code) {
         this.code = code;
     }
-
 }

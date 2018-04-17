@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sessies")
 @NamedQueries({
-    @NamedQuery(name = "Sessie.findByCode", query = "select s from sessies s where s.code = :code")
+    @NamedQuery(name = "Sessie.findByCode", query = "select s from Sessie s where s.code = :code")
 })
 public class Sessie implements Serializable {
     private static long serialVersionUID = 1L;

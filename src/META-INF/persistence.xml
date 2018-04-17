@@ -3,6 +3,10 @@
   <persistence-unit name="breakoutboxPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>domein.Sessie</class>
+    <class>domein.Klas</class>
+    <class>domein.Groep</class>
+    <class>domein.Leerkracht</class>
+    <class>domein.Leerling</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/breakoutbox"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

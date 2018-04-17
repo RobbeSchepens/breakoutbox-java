@@ -1,5 +1,6 @@
 package domein;
 
+import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,11 +15,11 @@ import javax.persistence.OneToMany;
 @Table(name = "leerkrachten")
 @NamedQueries({
     @NamedQuery(name = "Leerkracht.findByName", 
-            query = "select lk from leerkrachten lk where lk.voornaam = :voornaam and lk.achternaam = :achternaam"),
+            query = "select lk from Leerkracht lk where lk.voornaam = :voornaam and lk.achternaam = :achternaam"),
     @NamedQuery(name = "Leerkracht.findByEmail", 
-            query = "select lk from leerkrachten lk where lk.email = :email")
+            query = "select lk from Leerkracht lk where lk.email = :email")
 })
-public class Leerkracht {
+public class Leerkracht implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int leerkrachtId;

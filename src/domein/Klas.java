@@ -1,5 +1,6 @@
 package domein;
 
+import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +12,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Table(name = "klassen")
-public class Klas {
+public class Klas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int klasId;

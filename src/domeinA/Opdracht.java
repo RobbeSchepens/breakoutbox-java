@@ -1,23 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domeinA;
 
+import java.io.Serializable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Entity;
 
-/**
- *
- * @author Daan
- */
 @Entity
 @Table(name = "opdrachten")
-public class Opdracht {
+public class Opdracht implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +21,6 @@ public class Opdracht {
     private Toegangscode toegangscode;
 
     protected Opdracht() {
-
     }
 
     public Opdracht(int volgNr, Actie actie, Oefening oefening, Toegangscode toegangscode) {
@@ -38,5 +29,4 @@ public class Opdracht {
         this.oefening = oefening;
         this.toegangscode = toegangscode;
     }
-
 }
