@@ -7,15 +7,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Groep implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @ManyToOne
+    private Sessie sessie;
     @OneToMany
     private Set<Leerling> leerlingen;
+    @OneToOne
     private Pad pad;
 
     public Groep() {

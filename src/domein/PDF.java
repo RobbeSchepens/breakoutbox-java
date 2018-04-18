@@ -3,15 +3,15 @@ package domein;
 import java.io.Serializable;
 import java.util.Arrays;
 import javax.persistence.Basic;
-import javax.persistence.Entity;
-import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Entity;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.Lob;
 
 @Entity
-public class Feedback implements Serializable {
+public class PDF implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -19,17 +19,17 @@ public class Feedback implements Serializable {
     @Lob
     private byte[] pdf;
 
-    public Feedback() {
+    public PDF() {
     }
 
-    public Feedback(byte[] pdf) {
+    public PDF(byte[] pdf) {
         this.pdf = pdf;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 17 * hash + Arrays.hashCode(this.pdf);
+        int hash = 7;
+        hash = 47 * hash + Arrays.hashCode(this.pdf);
         return hash;
     }
 
@@ -44,7 +44,7 @@ public class Feedback implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Feedback other = (Feedback) obj;
+        final PDF other = (PDF) obj;
         if (!Arrays.equals(this.pdf, other.pdf)) {
             return false;
         }

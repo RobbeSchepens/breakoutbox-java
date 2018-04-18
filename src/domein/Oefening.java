@@ -20,16 +20,16 @@ public class Oefening implements Serializable {
     private long id;
     private String naam;
     @OneToOne
-    private Opgave opgave;
+    private PDF opgave;
     private double antwoord;
     @OneToOne
-    private Feedback feedback;
+    private PDF feedback;
     private Vak vak;
 
     public Oefening() {
     }
 
-    public Oefening(String naam, Opgave opgave, double antwoord, Feedback feedback, Vak vak) {
+    public Oefening(String naam, PDF opgave, double antwoord, PDF feedback, Vak vak) {
         this.naam = naam;
         this.opgave = opgave;
         this.antwoord = antwoord;
@@ -41,7 +41,7 @@ public class Oefening implements Serializable {
         return naam;
     }
 
-    public Opgave getOpgave() {
+    public PDF getOpgave() {
         return opgave;
     }
 
@@ -49,7 +49,7 @@ public class Oefening implements Serializable {
         return antwoord;
     }
 
-    public Feedback getFeedback() {
+    public PDF getFeedback() {
         return feedback;
     }
 

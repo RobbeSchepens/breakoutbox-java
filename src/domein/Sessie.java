@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 import java.util.HashSet;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -23,7 +24,7 @@ public class Sessie implements Serializable {
     private String code;
     private String naam;
     private String omschrijving;
-    @OneToMany
+    @OneToMany(mappedBy = "sessie", cascade = CascadeType.ALL)
     private Set<Groep> groepen = new HashSet<>();
     @ManyToOne
     private Klas klas;
