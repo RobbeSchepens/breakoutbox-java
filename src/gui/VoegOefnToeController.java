@@ -7,14 +7,14 @@ package gui;
 
 import domein.OefeningController;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -22,24 +22,28 @@ import javafx.stage.Stage;
  *
  * @author Daan
  */
-public class HoofdMenuController extends AnchorPane {
+public class VoegOefnToeController extends AnchorPane {
 
-    public HoofdMenuController() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdMenu.fxml"));
+    private OefeningController dc;
+
+    public VoegOefnToeController(OefeningController dc) {
+        this.dc = dc;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/VoegOefnToe.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
         try {
+
             loader.load();
+
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }
 
     @FXML
-    private void btnBeheerOefOnAction(ActionEvent event) {
-
-        OefeningenOverzichtController oefLijstView = new OefeningenOverzichtController(new OefeningController());
+    public void btnTerugNaarOverzichtOefnOnAction(ActionEvent event) {
+        OefeningenOverzichtController oefLijstView = new OefeningenOverzichtController(dc);
         Stage stage = (Stage) (this.getScene().getWindow());
         Scene scene = new Scene(oefLijstView);
         stage.setScene(scene);
