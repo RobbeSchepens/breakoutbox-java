@@ -39,7 +39,7 @@ public class HoofdMenuController extends AnchorPane {
     @FXML
     private void btnBeheerOefOnAction(ActionEvent event) {
 
-        OefeningenOverzichtController oefLijstView = new OefeningenOverzichtController(new OefeningController());
+        OefeningenOverzichtController oefLijstView = new OefeningenOverzichtController(new OefeningController(false));
         Stage stage = (Stage) (this.getScene().getWindow());
         Scene scene = new Scene(oefLijstView);
         stage.setScene(scene);
