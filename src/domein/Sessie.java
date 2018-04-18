@@ -27,6 +27,8 @@ public class Sessie implements Serializable {
     private Set<Groep> groepen = new HashSet<>();
     @ManyToOne
     private Klas klas;
+    @ManyToOne
+    private Leerkracht leerkracht;
 
     public Sessie() {
     }

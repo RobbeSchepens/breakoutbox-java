@@ -14,7 +14,7 @@ import javax.persistence.Lob;
 public class Opgave implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int opgaveId;
+    private long id;
     @Basic(fetch=LAZY)
     @Lob
     private byte[] pdf;

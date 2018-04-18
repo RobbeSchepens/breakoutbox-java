@@ -1,28 +1,34 @@
 package domein;
 
-import domein.Oefening;
-import domein.Toegangscode;
-import domein.Actie;
-import domein.Groepsbewerking;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Box.findById", query = "select e from Box e where e.id = :id"),
+    @NamedQuery(name = "Box.findByName", query = "select e from Box e where e.naam = :boxnaam")
+})
 public class Box implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int boxId;
+    private long id;
     private String naam;
     private String omschrijving;
+    @OneToMany
     private Set<Actie> acties;
+    @OneToMany
     private Set<Oefening> oefeningen;
+    @OneToMany
     private Set<Toegangscode> toegangscodes;
+    @OneToMany
     private Set<Groepsbewerking> groepsbewerkingen;
 
     public Box() {

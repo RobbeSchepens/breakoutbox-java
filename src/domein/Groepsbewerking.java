@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 public class Groepsbewerking implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int groepsbewerkingId;
+    private long id;
     @ManyToOne
     @Enumerated(EnumType.STRING)
     private EnumBewerking bewerking;

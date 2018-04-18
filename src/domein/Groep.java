@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 public class Groep implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int groepId;
+    private long id;
     @OneToMany
     private Set<Leerling> leerlingen;
     private Pad pad;

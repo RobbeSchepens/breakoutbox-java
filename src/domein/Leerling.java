@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 public class Leerling implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int leerlingId;
+    private long id;
     private String voornaam;
     private String achternaam;
 
@@ -50,5 +50,10 @@ public class Leerling implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return voornaam + " " + achternaam;
     }
 }

@@ -9,23 +9,38 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Klas.findById", query = "select e from Klas e where e.id = :id")
+})
 public class Klas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int klasId;
+    private long id;
     @ManyToOne
     private Leerkracht leerkracht;
     @OneToMany
     private Set<Leerling> leerlingen = new HashSet<>();
+//    @OneToMany
+//    private Sessie sessie;
 
     public Klas() {
     }
 
     public Klas(Leerkracht leerkracht) {
         this.leerkracht = leerkracht;
+    }
+
+    public Set<Leerling> getLeerlingen() {
+        return leerlingen;
+    }
+    
+    public void setLeerlingen(Set<Leerling> leerlingen) {
+        this.leerlingen = leerlingen;
     }
     
     public void addLeerling(Leerling e) {
@@ -63,5 +78,10 @@ public class Klas implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Klas met id " + id + " van leerkracht " + leerkracht.toString() + ".";
     }
 }

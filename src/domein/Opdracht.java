@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 public class Opdracht implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int opdrachtId;
+    private long id;
     private int volgNr;
     private int maxPogingen = 3;
     private int maxTijdInMinuten = 30;

@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
 public class Leerkracht implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int leerkrachtId;
+    private long id;
     private String voornaam;
     private String achternaam;
     private String email;
@@ -83,5 +83,10 @@ public class Leerkracht implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return voornaam + " " + achternaam;
     }
 }

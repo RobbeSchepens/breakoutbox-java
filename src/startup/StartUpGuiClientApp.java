@@ -1,14 +1,11 @@
 package startup;
 
+import domein.Controller;
+import domein.KlasController;
 import domein.SessieController;
 import gui.HoofdMenuController;
-import static java.lang.System.exit;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class StartUpGuiClientApp extends Application {
@@ -26,13 +23,18 @@ public class StartUpGuiClientApp extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args); //GUI
-
-        /*SessieController sessieController = new SessieController();
-        System.out.println("Sessies :");
-        System.out.println(sessieController.geefSessieLijst());
-        sessieController.close();
-        exit(0);*/
+        testconsole();
+        launch(args);
     }
 
+    private static void testconsole(){
+        Controller controller = new Controller();
+        SessieController sessieController = new SessieController();
+        System.out.println("Sessies:");
+        System.out.println(sessieController.geefSessieLijst());
+//        KlasController klasController = new KlasController();
+//        System.out.println("\nKlas met leerlingen:");
+//        System.out.println(klasController.geefLeerlingenVanKlasLijst(0));
+        controller.close();
+    }
 }

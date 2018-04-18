@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 public class Vak implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int vakId;
+    private long id;
     public String naam;
 
     public Vak() {

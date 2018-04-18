@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 public class Actie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ActieId;
+    private long id;
     private String omschrijving;
 
     public Actie() {

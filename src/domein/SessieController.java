@@ -1,16 +1,16 @@
 package domein;
 
+import repository.PopulateDB;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import repository.LeerkrachtDaoJpa;
+import repository.GenericDaoJpa;
 import repository.SessieDao;
 import repository.SessieDaoJpa;
 
-public class SessieController {
+public final class SessieController {
     private List<Sessie> sessieLijst;
-    private LeerkrachtDaoJpa leerkrachtRepo;
     private SessieDao sessieRepo;
     
     public SessieController() {
@@ -21,12 +21,7 @@ public class SessieController {
         if (withInit) {
             new PopulateDB().run();
         }
-        setLeerkrachtRepo(new LeerkrachtDaoJpa());
         setSessieRepo(new SessieDaoJpa());
-    }
-    
-    public void setLeerkrachtRepo(LeerkrachtDaoJpa mock){
-        leerkrachtRepo = mock;
     }
 
     public void setSessieRepo(SessieDao mock){
@@ -49,19 +44,15 @@ public class SessieController {
                 .filter( e -> e.getCode().equalsIgnoreCase(sessiecode))
                 .findFirst();
         if (!sessie.isPresent()) {
-                throw new IllegalArgumentException("Sessie " + sessiecode + " komt niet voor.");
+            throw new IllegalArgumentException("Sessie met code " + sessiecode + " komt niet voor.");
         }
-        SessieDaoJpa.startTransaction();
+        GenericDaoJpa.startTransaction();
         sessie.get().addGroep(groep);
-        SessieDaoJpa.commitTransaction();
+        GenericDaoJpa.commitTransaction();
     }
     
     public List<String> geefGroepLijst(Sessie sessie) {
         Set<Groep> groepSet = sessie.getGroepSet();
         return groepSet.stream().map(Groep::toString).collect(Collectors.toList());
-    }
-
-    public void close() {
-        SessieDaoJpa.closePersistency();
     }
 }

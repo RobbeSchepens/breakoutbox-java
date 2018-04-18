@@ -9,12 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "padd") // Let op: Pad is een reserved word in SQL
 public class Pad implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int padId;
+    private long id;
     @OneToMany
     private Set<Opdracht> opdrachten = new HashSet<>();
 

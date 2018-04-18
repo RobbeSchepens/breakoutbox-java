@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 public class Toegangscode implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int toegangscodeId;
+    private long id;
     public String code;
 
     public Toegangscode() {
