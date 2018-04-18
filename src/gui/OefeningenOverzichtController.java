@@ -10,13 +10,19 @@ import domein.OefeningController;
 import domein.Vak;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -37,12 +43,15 @@ public class OefeningenOverzichtController extends AnchorPane {
     private TableColumn<Oefening, Vak> colVak;
     @FXML
     private TableColumn<Oefening, String> colOmschrijving;
+    @FXML
+    private ChoiceBox<Vak> vakFilterChoiceBox;
 
     //Attributes
     //doelstellingen ??
     //bewerkingen??
     private OefeningController dc;
     private List<Vak> vakkenlijst;
+    private List<Vak> vakkenlijstFilter;
     private FileChooser opgaveChooser;
     private FileChooser feedbackChooser;
     private File opgave;
@@ -62,7 +71,15 @@ public class OefeningenOverzichtController extends AnchorPane {
         // initialize
         this.dc = dc;
 
-        //oefeningenTable.setItems(dc.getOefeningLijst());
+//      this.vakkenlijst = new ArrayList(dc.geefAlleVakken());
+        this.vakkenlijstFilter = new ArrayList<>();
+        Vak vakTemp = new Vak("Alles");
+        vakkenlijstFilter.add(vakTemp);
+
+//      vakFilterChoiceBox.addAll(vakkenlijst);
+        vakFilterChoiceBox.getSelectionModel().select(0);
+        vakFilterChoiceBox.setItems(FXCollections.observableArrayList(vakkenlijstFilter));
+
     }
 
     @FXML

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class Vak implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -53,4 +54,10 @@ public class Vak implements Serializable {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return naam;
+    }
+
 }
