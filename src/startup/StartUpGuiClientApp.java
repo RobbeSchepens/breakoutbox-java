@@ -1,6 +1,7 @@
 package startup;
 
 import domein.SessieController;
+import gui.HoofdMenuController;
 import static java.lang.System.exit;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -11,37 +12,27 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class StartUpGuiClientApp extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
+
+        HoofdMenuController root = new HoofdMenuController();
+
         Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
+
+        primaryStage.setTitle("Break Out Box");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     public static void main(String[] args) {
-        //launch(args); //GUI
-        
-        SessieController sessieController = new SessieController();
+        launch(args); //GUI
+
+        /*SessieController sessieController = new SessieController();
         System.out.println("Sessies :");
         System.out.println(sessieController.geefSessieLijst());
         sessieController.close();
-        exit(0);
+        exit(0);*/
     }
-    
+
 }
