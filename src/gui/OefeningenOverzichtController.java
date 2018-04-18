@@ -5,23 +5,33 @@
  */
 package gui;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import domein.OefeningController;
+import domein.Vak;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
  *
  * @author Daan
  */
-public class OefeningenOverzichtController implements Initializable {
+public class OefeningenOverzichtController extends AnchorPane {
+//doelstellingen ??
+    //bewerkingen??
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    private OefeningController dc;
+    private List<Vak> vakkenlijst;
+    private FileChooser opgaveChooser;
+    private FileChooser feedbackChooser;
+    private File opgave;
+    private File feedback;
+
+    public OefeningenOverzichtController(OefeningController dc) {
+
     }
-
 }

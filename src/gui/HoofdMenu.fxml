@@ -5,10 +5,10 @@
 
 <fx:root id="AnchorPane" prefHeight="400.0" prefWidth="600.0" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="91.0" layoutY="42.0" mnemonicParsing="false" text="Acties Beheren" />
-      <Button layoutX="88.0" layoutY="77.0" mnemonicParsing="false" text="Klassen Beheren" />
-      <Button layoutX="76.0" layoutY="114.0" mnemonicParsing="false" text="Opdrachten Beheren" />
-      <Button layoutX="94.0" layoutY="153.0" mnemonicParsing="false" text="BoBs Beheren" />
-      <Button layoutX="89.0" layoutY="188.0" mnemonicParsing="false" text="Sessies Beheren" />
+      <Button layoutX="88.0" layoutY="31.0" mnemonicParsing="false" text="Acties Beheren" />
+      <Button layoutX="85.0" layoutY="72.0" mnemonicParsing="false" text="Klassen Beheren" />
+      <Button layoutX="72.0" layoutY="110.0" mnemonicParsing="false" onAction="#btnBeheerOefOnAction" text="Opdrachten Beheren" />
+      <Button layoutX="92.0" layoutY="146.0" mnemonicParsing="false" text="BoBs Beheren" />
+      <Button layoutX="87.0" layoutY="188.0" mnemonicParsing="false" text="Sessies Beheren" />
    </children>
 </fx:root>

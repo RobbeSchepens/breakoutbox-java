@@ -5,16 +5,15 @@
  */
 package gui;
 
+import domein.OefeningController;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -23,7 +22,7 @@ import javafx.stage.Stage;
  *
  * @author Daan
  */
-public class HoofdMenuController extends AnchorPane { //implements Initializable
+public class HoofdMenuController extends AnchorPane {
 
     public HoofdMenuController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdMenu.fxml"));
@@ -35,6 +34,11 @@ public class HoofdMenuController extends AnchorPane { //implements Initializable
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+    }
+
+    @FXML
+    private void btnBeheerOefOnAction(ActionEvent event) {
+
     }
 
 }
