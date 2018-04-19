@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import domein.OefeningController;
@@ -10,19 +5,12 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Screen;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Daan
- */
-public class HoofdMenuController extends AnchorPane {
+public class HoofdMenuController extends GridPane {
 
     public HoofdMenuController() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdMenu.fxml"));
@@ -38,12 +26,9 @@ public class HoofdMenuController extends AnchorPane {
 
     @FXML
     private void btnBeheerOefOnAction(ActionEvent event) {
-
-        OefeningenOverzichtController oefLijstView = new OefeningenOverzichtController(new OefeningController(false));
-        Stage stage = (Stage) (this.getScene().getWindow());
-        Scene scene = new Scene(oefLijstView);
-        stage.setScene(scene);
-        stage.show();
+        OefeningenOverzichtController sc = new OefeningenOverzichtController(new OefeningController(false));
+        Scene scene = new Scene(sc, 1280, 720, Color.web("#ffffff"));
+        scene.getStylesheets().add("gui/css/style.css");
+        ((Stage)this.getScene().getWindow()).setScene(scene);
     }
-
 }

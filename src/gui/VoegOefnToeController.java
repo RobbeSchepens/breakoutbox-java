@@ -1,27 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import domein.OefeningController;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Daan
- */
 public class VoegOefnToeController extends AnchorPane {
 
     private OefeningController dc;
@@ -33,9 +21,7 @@ public class VoegOefnToeController extends AnchorPane {
         loader.setController(this);
 
         try {
-
             loader.load();
-
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
@@ -43,11 +29,9 @@ public class VoegOefnToeController extends AnchorPane {
 
     @FXML
     public void btnTerugNaarOverzichtOefnOnAction(ActionEvent event) {
-        OefeningenOverzichtController oefLijstView = new OefeningenOverzichtController(dc);
-        Stage stage = (Stage) (this.getScene().getWindow());
-        Scene scene = new Scene(oefLijstView);
-        stage.setScene(scene);
-        stage.show();
+        OefeningenOverzichtController sc = new OefeningenOverzichtController(dc);
+        Scene scene = new Scene(sc, 1280, 720, Color.web("#ffffff"));
+        scene.getStylesheets().add("gui/css/style.css");
+        ((Stage)this.getScene().getWindow()).setScene(scene);
     }
-
 }

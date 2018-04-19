@@ -1,0 +1,140 @@
+.text-primary {
+  color: #007bff !important;
+}
+
+a.text-primary:hover, a.text-primary:focus {
+  color: #0062cc !important;
+}
+
+.text-secondary {
+  color: #5A6169 !important;
+}
+
+a.text-secondary:hover, a.text-secondary:focus {
+  color: #42484e !important;
+}
+
+.text-success {
+  color: #17c671 !important;
+}
+
+a.text-success:hover, a.text-success:focus {
+  color: #129857 !important;
+}
+
+.text-info {
+  color: #00b8d8 !important;
+}
+
+a.text-info:hover, a.text-info:focus {
+  color: #008da5 !important;
+}
+
+.text-warning {
+  color: #ffb400 !important;
+}
+
+a.text-warning:hover, a.text-warning:focus {
+  color: #cc9000 !important;
+}
+
+.text-danger {
+  color: #c4183c !important;
+}
+
+a.text-danger:hover, a.text-danger:focus {
+  color: #97122e !important;
+}
+
+.text-light {
+  color: #e9ecef !important;
+}
+
+a.text-light:hover, a.text-light:focus {
+  color: #cbd3da !important;
+}
+
+.text-dark {
+  color: #212529 !important;
+}
+
+a.text-dark:hover, a.text-dark:focus {
+  color: #0a0c0d !important;
+}
+
+a.text-white:hover, a.text-white:focus {
+  color: #e6e6e6 !important;
+}
+
+.text-black {
+  color: #000;
+}
+
+a.text-black:hover, a.text-black:focus {
+  color: black !important;
+}
+
+.text-muted {
+  color: #868e96 !important;
+}
+
+
+.btn-primary {
+  -fx-text-fill: #fff;
+  border-color: #006fe6;
+  -fx-background-color: #006fe6;
+}
+
+.btn-secondary {
+  color: #fff;
+  border-color: #5A6169;
+  -fx-background-color: #5A6169;
+}
+
+.btn-success {
+  color: #fff;
+  border-color: #17c671;
+  -fx-background-color: #17c671;
+}
+
+.btn-info {
+  color: #fff;
+  border-color: #00b8d8;
+  background-color: #00b8d8;
+}
+
+.btn-warning {
+  color: #212529;
+  border-color: #ffb400;
+  background-color: #ffb400;
+}
+
+.btn-danger {
+  color: #fff;
+  border-color: #c4183c;
+  -fx-background-color: #c4183c;
+}
+
+.btn-light {
+  color: #212529;
+  border-color: #e9ecef;
+  -fx-background-color: #e9ecef;
+}
+
+.btn-dark {
+  color: #fff;
+  border-color: #212529;
+  -fx-background-color: #212529;
+}
+
+.btn-white {
+  color: #212529;
+  border-color: #fff;
+  -fx-background-color: #fff;
+}
+
+.btn-black {
+  color: #fff;
+  border-color: #000;
+  -fx-background-color: #000;
+}
