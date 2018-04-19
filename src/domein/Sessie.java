@@ -1,12 +1,15 @@
 package domein;
 
 import java.io.Serializable;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 import java.util.HashSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -21,6 +24,8 @@ import javax.persistence.OneToMany;
 public class Sessie implements Serializable {
     private static long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String code;
     private String naam;
     private String omschrijving;
@@ -35,7 +40,9 @@ public class Sessie implements Serializable {
     }
 
     public Sessie(String code, String naam, String omschrijving) {
-        this.code = code;
+        byte[] encodedBytes = Base64.getEncoder().encode("1".getBytes());
+        System.out.println("encodedBytes " + new String(encodedBytes));
+        this.code = new String(encodedBytes);
         this.naam = naam;
         this.omschrijving = omschrijving;
     }
