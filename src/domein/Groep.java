@@ -22,12 +22,12 @@ public class Groep implements Serializable {
     @ManyToOne
     @JoinColumn(name = "sessieId")
     private Sessie sessie;
-    @Basic(fetch=LAZY)
+    //@Basic(fetch=LAZY)
     @OneToMany
     private Set<Leerling> leerlingen;
-    @Basic(fetch=LAZY)
+    //@Basic(fetch=LAZY)
     @OneToOne
-    private Pad pad;
+    private Pad padd;
 
     public Groep() {
     }
@@ -56,11 +56,11 @@ public class Groep implements Serializable {
     }
 
     public Pad getPad() {
-        return pad;
+        return padd;
     }
 
     public void setPad(Pad pad) {
-        this.pad = pad;
+        this.padd = pad;
     }
 
     @Override

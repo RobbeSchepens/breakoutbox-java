@@ -27,7 +27,7 @@ public class StartUpGuiClientApp extends Application {
     }
 
     public static void main(String[] args) {
-        // testconsole();
+        testconsole();
         launch(args);
     }
 
@@ -36,9 +36,9 @@ public class StartUpGuiClientApp extends Application {
         SessieController sessieController = new SessieController();
         System.out.println("Sessies:");
         System.out.println(sessieController.geefSessieLijst());
-//        KlasController klasController = new KlasController();
-//        System.out.println("\nKlas met leerlingen:");
-//        System.out.println(klasController.geefLeerlingenVanKlasLijst(0));
+        KlasController klasController = new KlasController();
+        System.out.println("\nKlas met leerlingen:");
+        System.out.println(klasController.geefLeerlingenVanKlasLijst(0));
         controller.close();
     }
 }

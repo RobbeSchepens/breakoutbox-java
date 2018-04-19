@@ -26,8 +26,8 @@ public class Klas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @JoinColumn(name = "leerkrachtId")
     @ManyToOne
+    @JoinColumn(name = "leerkrachtId")
     private Leerkracht leerkracht;
     //@Basic(fetch=LAZY)
     @OneToMany(mappedBy = "klas")
