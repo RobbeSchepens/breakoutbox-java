@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root id="AnchorPane" prefHeight="394.0" prefWidth="400.0" type="AnchorPane" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="AnchorPane" prefHeight="394.0" prefWidth="400.0" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="534.0" prefWidth="400.0">
          <children>
@@ -31,7 +31,6 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" onAction="#btnTerugNaarOverzichtOefnOnAction" styleClass="btn-primary" text="Terug naar overzicht oefeningen" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>

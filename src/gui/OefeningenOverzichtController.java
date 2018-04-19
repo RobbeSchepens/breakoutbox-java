@@ -73,7 +73,7 @@ public class OefeningenOverzichtController extends AnchorPane {
         HoofdMenuController sc = new HoofdMenuController();
         Scene scene = new Scene(sc, 1280, 720);
         scene.getStylesheets().add("gui/css/style.css");
-        ((Stage)this.getScene().getWindow()).setScene(scene);
+        ((Stage) this.getScene().getWindow()).setScene(scene);
     }
 
     @FXML
@@ -81,6 +81,6 @@ public class OefeningenOverzichtController extends AnchorPane {
         VoegOefnToeController sc = new VoegOefnToeController(dc);
         Scene scene = new Scene(sc, 1280, 720, Color.web("#ffffff"));
         scene.getStylesheets().add("gui/css/style.css");
-        ((Stage)this.getScene().getWindow()).setScene(scene);
+        ((Stage) this.getScene().getWindow()).setScene(scene);
     }
 }

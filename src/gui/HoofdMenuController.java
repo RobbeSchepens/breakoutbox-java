@@ -22,6 +22,7 @@ public class HoofdMenuController extends GridPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+
     }
 
     @FXML
@@ -29,6 +30,8 @@ public class HoofdMenuController extends GridPane {
         OefeningenOverzichtController sc = new OefeningenOverzichtController(new OefeningController(false));
         Scene scene = new Scene(sc, 1280, 720, Color.web("#ffffff"));
         scene.getStylesheets().add("gui/css/style.css");
-        ((Stage)this.getScene().getWindow()).setScene(scene);
+        ((Stage) this.getScene().getWindow()).setScene(scene);
+
     }
+
 }

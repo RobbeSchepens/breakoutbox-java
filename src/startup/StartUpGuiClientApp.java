@@ -19,7 +19,7 @@ public class StartUpGuiClientApp extends Application {
 
         Scene scene = new Scene(root, 1280, 720, Color.web("#ffffff"));
         scene.getStylesheets().add("gui/css/style.css");
-        
+
         primaryStage.getIcons().add(new Image("gui/img/favicon.png"));
         primaryStage.setTitle("Break Out Box");
         primaryStage.setScene(scene);
@@ -27,11 +27,11 @@ public class StartUpGuiClientApp extends Application {
     }
 
     public static void main(String[] args) {
-        testconsole();
+        // testconsole();
         launch(args);
     }
 
-    private static void testconsole(){
+    private static void testconsole() {
         Controller controller = new Controller();
         SessieController sessieController = new SessieController();
         System.out.println("Sessies:");
