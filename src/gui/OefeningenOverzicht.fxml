@@ -148,7 +148,7 @@
                                     <Insets left="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <ChoiceBox prefWidth="180.0" GridPane.halignment="CENTER" />
+                              <ChoiceBox fx:id="vakKeuzeChoiceBox" prefWidth="180.0" GridPane.halignment="CENTER" />
                            </children>
                         </GridPane>
                      </children>
@@ -181,9 +181,8 @@
                      <children>
                         <GridPane prefHeight="80.0" prefWidth="400.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
@@ -195,8 +194,9 @@
                                     <Insets left="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Button maxWidth="70.0" mnemonicParsing="false" text="Add file" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                              <Button maxWidth="70.0" mnemonicParsing="false" text="Preview" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                              <Button maxWidth="70.0" mnemonicParsing="false" onAction="#addOpgaveOnAction" text="Add file" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <Label fx:id="lblOpgavePadNaam" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+                              <Button fx:id="btnOpgavePreview" mnemonicParsing="false" onAction="#btnOpgavePreviewOnAction" text="Preview" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
                            </children>
                         </GridPane>
                      </children>
@@ -205,10 +205,9 @@
                      <children>
                         <GridPane prefHeight="80.0" prefWidth="400.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.5" minWidth="10.0" prefWidth="117.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -219,8 +218,9 @@
                                     <Insets left="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Button maxWidth="70.0" mnemonicParsing="false" text="Add file" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                              <Button maxWidth="70.0" mnemonicParsing="false" text="Preview" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                              <Button maxWidth="70.0" mnemonicParsing="false" onAction="#addFeedbackOnAction" text="Add file" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <Label fx:id="lblFeedbackPadNaam" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
+                              <Button fx:id="btnFeedbackPreview" mnemonicParsing="false" onAction="#btnFeedbackPreviewOnAction" text="Preview" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
                            </children>
                         </GridPane>
                      </children>
@@ -256,16 +256,6 @@
                   <Label text="Geselecteerde bewerkingen" GridPane.columnIndex="2" />
                   <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
                   <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" text="&gt;&gt;&gt;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets bottom="30.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" text="&lt;&lt;&lt;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets top="30.0" />
-                     </GridPane.margin>
-                  </Button>
                </children>
             </GridPane>
          </children>

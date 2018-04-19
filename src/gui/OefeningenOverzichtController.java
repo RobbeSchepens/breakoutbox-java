@@ -3,6 +3,7 @@ package gui;
 import domein.Oefening;
 import domein.OefeningController;
 import domein.Vak;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,9 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -33,6 +38,16 @@ public class OefeningenOverzichtController extends AnchorPane {
     private TableColumn<Oefening, String> colOmschrijving;
     @FXML
     private ChoiceBox<Vak> vakFilterChoiceBox;
+    @FXML
+    private ChoiceBox<Vak> vakKeuzeChoiceBox;
+    @FXML
+    private Label lblOpgavePadNaam;
+    @FXML
+    private Label lblFeedbackPadNaam;
+    @FXML
+    private Button btnOpgavePreview;
+    @FXML
+    private Button btnFeedbackPreview;
 
     //Attributes
     //doelstellingen ??
@@ -55,17 +70,32 @@ public class OefeningenOverzichtController extends AnchorPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+        //init file chooser
+        this.opgaveChooser = new FileChooser();
+        opgaveChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+        this.feedbackChooser = new FileChooser();
+        feedbackChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+
+        //default layout
+        btnOpgavePreview.setDisable(true);
+        btnFeedbackPreview.setDisable(true);
+
         // initialize
         this.dc = dc;
 
-//      this.vakkenlijst = new ArrayList(dc.geefAlleVakken());
+        // default "alles" in choise box
+        this.vakkenlijst = new ArrayList(/*dc.geefAlleVakken()*/);
         this.vakkenlijstFilter = new ArrayList<>();
-        Vak vakTemp = new Vak("Alles");
-        vakkenlijstFilter.add(vakTemp);
 
-//      vakFilterChoiceBox.addAll(vakkenlijst);
-        vakFilterChoiceBox.getSelectionModel().select(0);
+        vakkenlijstFilter.add(new Vak("Alles"));
+        vakkenlijstFilter.addAll(vakkenlijst);
+        // choice box links
+        vakKeuzeChoiceBox.setItems(FXCollections.observableArrayList(vakkenlijstFilter));
+        vakKeuzeChoiceBox.getSelectionModel().selectFirst();
+        // choice box rechts
         vakFilterChoiceBox.setItems(FXCollections.observableArrayList(vakkenlijstFilter));
+        vakFilterChoiceBox.getSelectionModel().selectFirst();
+
     }
 
     @FXML
@@ -83,4 +113,56 @@ public class OefeningenOverzichtController extends AnchorPane {
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
+
+    @FXML
+    private void addOpgaveOnAction(ActionEvent event) {
+
+        opgave = opgaveChooser.showOpenDialog((Stage) (this.getScene().getWindow()));
+        if (opgave != null) {
+            lblOpgavePadNaam.setText(opgave.getName());
+            btnOpgavePreview.setDisable(false);
+        } else {
+            btnOpgavePreview.setDisable(true);
+        }
+    }
+
+    @FXML
+    private void addFeedbackOnAction(ActionEvent event) {
+        feedback = feedbackChooser.showOpenDialog((Stage) (this.getScene().getWindow()));
+        if (feedback != null) {
+            lblFeedbackPadNaam.setText(feedback.getName());
+            btnFeedbackPreview.setDisable(false);
+        } else {
+            btnFeedbackPreview.setDisable(true);
+        }
+    }
+
+    @FXML
+    private void btnOpgavePreviewOnAction(ActionEvent event) {
+        try {
+            if (opgave.toString().endsWith(".pdf")) {
+                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + opgave);
+            } else {
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(opgave);
+            }
+        } catch (IOException ioe) {
+            System.out.println("fout");
+        }
+    }
+
+    @FXML
+    private void btnFeedbackPreviewOnAction(ActionEvent event) {
+        try {
+            if (feedback.toString().endsWith(".pdf")) {
+                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + feedback);
+            } else {
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(feedback);
+            }
+        } catch (IOException ioe) {
+            System.out.println("fout");
+        }
+    }
+
 }
