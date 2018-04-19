@@ -4,10 +4,15 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.LAZY;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -21,12 +26,14 @@ public class Klas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @JoinColumn(name = "leerkrachtId")
     @ManyToOne
     private Leerkracht leerkracht;
-    @OneToMany
+    //@Basic(fetch=LAZY)
+    @OneToMany(mappedBy = "klas")
     private Set<Leerling> leerlingen = new HashSet<>();
-//    @OneToMany
-//    private Sessie sessie;
+    @OneToMany(mappedBy = "klas")
+    private Set<Sessie> sessies = new HashSet<>();
 
     public Klas() {
     }

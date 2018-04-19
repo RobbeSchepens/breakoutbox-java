@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -23,12 +26,16 @@ public class Leerkracht implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false)
     private String voornaam;
+    @Column(nullable = false)
     private String achternaam;
     private String email;
-    @OneToMany
+    //@Basic(fetch=LAZY)
+    @OneToMany(mappedBy = "leerkracht")
     private Set<Sessie> sessies = new HashSet<>();
-    @OneToMany
+    //@Basic(fetch=LAZY)
+    @OneToMany(mappedBy = "leerkracht")
     private Set<Klas> klassen = new HashSet<>();
 
     public Leerkracht() {

@@ -6,8 +6,11 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 import java.util.HashSet;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,13 +29,18 @@ public class Sessie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false)
     private String code;
+    @Column(nullable = false)
     private String naam;
     private String omschrijving;
     @OneToMany(mappedBy = "sessie", cascade = CascadeType.ALL)
+    //@Basic(fetch=LAZY)
     private Set<Groep> groepen = new HashSet<>();
+    //@Basic(fetch=LAZY)
     @ManyToOne
     private Klas klas;
+    //@Basic(fetch=LAZY)
     @ManyToOne
     private Leerkracht leerkracht;
 
@@ -40,8 +48,7 @@ public class Sessie implements Serializable {
     }
 
     public Sessie(String code, String naam, String omschrijving) {
-        byte[] encodedBytes = Base64.getEncoder().encode("1".getBytes());
-        System.out.println("encodedBytes " + new String(encodedBytes));
+        byte[] encodedBytes = Base64.getEncoder().encode((Objects.toString(id, null)).getBytes());
         this.code = new String(encodedBytes);
         this.naam = naam;
         this.omschrijving = omschrijving;

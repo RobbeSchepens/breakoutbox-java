@@ -3,10 +3,13 @@ package domein;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
+import javax.persistence.Basic;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.LAZY;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -17,9 +20,12 @@ public class Groep implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
+    @JoinColumn(name = "sessieId")
     private Sessie sessie;
+    @Basic(fetch=LAZY)
     @OneToMany
     private Set<Leerling> leerlingen;
+    @Basic(fetch=LAZY)
     @OneToOne
     private Pad pad;
 

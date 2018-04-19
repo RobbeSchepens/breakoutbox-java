@@ -1,5 +1,6 @@
 package repository;
 
+import domein.Groep;
 import domein.Klas;
 import domein.Leerkracht;
 import domein.Leerling;
@@ -21,11 +22,17 @@ public class PopulateDB {
             leerlingen.add(new Leerling("Duplo"+i, "Lego"+i));
         k.setLeerlingen(leerlingen);
         
+        Sessie s1 = new Sessie("ABC", "1D Maandag", "Mix van alle oefeningen voor de klas 1D.");
+        //Sessie s2 = new Sessie("X9Y3", "6E Dinsdag", "Wiskunde oefeningen voor de klas 6E.");
+        
+        Groep g1 = new Groep(leerlingen);
+        s1.addGroep(g1);
+        
         GenericDaoJpa.startTransaction();
         leerkrachtdao.insert(lk);
         
-        sessiedao.insert(new Sessie("ABC", "1D Maandag", "Mix van alle oefeningen voor de klas 1D."));
-        sessiedao.insert(new Sessie("X9Y3", "6E Dinsdag", "Wiskunde oefeningen voor de klas 6E."));
+        sessiedao.insert(s1);
+        //sessiedao.insert(s2);
         
         for (Leerling l : leerlingen)
             leerlingdao.insert(l);
