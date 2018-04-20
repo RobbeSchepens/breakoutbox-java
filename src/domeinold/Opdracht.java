@@ -1,4 +1,4 @@
-package domein;
+package domeinold;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -26,7 +26,7 @@ public class Opdracht implements Serializable {
     @OneToOne
     private Toegangscode toegangscode;
     @OneToOne
-    private Groepsbewerking groepsbewerking;
+    private Groepsbewerking2 groepsbewerking;
     @ManyToOne
     @Enumerated(EnumType.STRING)
     private EnumOpdrachtBepaler opdrachtBepaler;
@@ -34,7 +34,7 @@ public class Opdracht implements Serializable {
     public Opdracht() {
     }
 
-    public Opdracht(int volgNr, Actie actie, Oefening oefening, Toegangscode toegangscode, Groepsbewerking groepsbewerking, EnumOpdrachtBepaler opdrachtBepaler) {
+    public Opdracht(int volgNr, Actie actie, Oefening oefening, Toegangscode toegangscode, Groepsbewerking2 groepsbewerking, EnumOpdrachtBepaler opdrachtBepaler) {
         this.volgNr = volgNr;
         this.actie = actie;
         this.oefening = oefening;
@@ -75,11 +75,11 @@ public class Opdracht implements Serializable {
         this.toegangscode = toegangscode;
     }
 
-    public Groepsbewerking getGroepsbewerking() {
+    public Groepsbewerking2 getGroepsbewerking() {
         return groepsbewerking;
     }
 
-    public void setGroepsbewerking(Groepsbewerking groepsbewerking) {
+    public void setGroepsbewerking(Groepsbewerking2 groepsbewerking) {
         this.groepsbewerking = groepsbewerking;
     }
     

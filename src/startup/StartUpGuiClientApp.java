@@ -1,8 +1,8 @@
 package startup;
 
-import domein.Controller;
-import domein.KlasController;
-import domein.SessieController;
+import domeinold.Controller;
+import domeinold.KlasController;
+import domeinold.SessieController;
 import gui.HoofdMenuController;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -32,13 +32,6 @@ public class StartUpGuiClientApp extends Application {
     }
 
     private static void testconsole() {
-        Controller controller = new Controller();
-        SessieController sessieController = new SessieController();
-        System.out.println("Sessies:");
-        System.out.println(sessieController.geefSessieLijst());
-        KlasController klasController = new KlasController();
-        System.out.println("\nKlas met leerlingen:");
-        System.out.println(klasController.geefLeerlingenVanKlasLijst(0));
-        controller.close();
+        
     }
 }

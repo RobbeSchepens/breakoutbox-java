@@ -1,6 +1,6 @@
 package repository;
 
-import domein.Leerkracht;
+import domeinold.Leerkracht;
 import javax.persistence.EntityNotFoundException;
 
 public interface LeerkrachtDao extends GenericDao<Leerkracht> {

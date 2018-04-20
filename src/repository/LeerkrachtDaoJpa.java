@@ -1,6 +1,6 @@
 package repository;
 
-import domein.Leerkracht;
+import domeinold.Leerkracht;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 

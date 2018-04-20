@@ -1,12 +1,16 @@
-package repository;
+package domeinold;
 
-import domein.Groep;
-import domein.Klas;
-import domein.Leerkracht;
-import domein.Leerling;
-import domein.Sessie;
+import domeinold.Groep;
+import domeinold.Klas;
+import domeinold.Leerkracht;
+import domeinold.Leerling;
+import domeinold.Sessie;
 import java.util.HashSet;
 import java.util.Set;
+import repository.GenericDaoJpa;
+import repository.KlasDaoJpa;
+import repository.LeerkrachtDaoJpa;
+import repository.SessieDaoJpa;
 
 public class PopulateDB {
     public void run() {

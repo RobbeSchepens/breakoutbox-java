@@ -1,4 +1,4 @@
-package domein;
+package domeinold;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -29,12 +29,12 @@ public class Box implements Serializable {
     @OneToMany
     private Set<Toegangscode> toegangscodes;
     @OneToMany
-    private Set<Groepsbewerking> groepsbewerkingen;
+    private Set<Groepsbewerking2> groepsbewerkingen;
 
     public Box() {
     }
 
-    public Box(String naam, String omschrijving, Set<Actie> acties, Set<Oefening> oefeningen, Set<Toegangscode> toegangscodes, Set<Groepsbewerking> groepsbewerkingen) {
+    public Box(String naam, String omschrijving, Set<Actie> acties, Set<Oefening> oefeningen, Set<Toegangscode> toegangscodes, Set<Groepsbewerking2> groepsbewerkingen) {
         this.naam = naam;
         this.omschrijving = omschrijving;
         this.acties = acties;

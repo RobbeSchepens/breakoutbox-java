@@ -1,6 +1,6 @@
 package repository;
 
-import domein.Oefening;
+import domeinold.Oefening;
 import javax.persistence.EntityNotFoundException;
 
 public interface OefeningDao extends GenericDao<Oefening> {

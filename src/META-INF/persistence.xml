@@ -2,21 +2,9 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="breakoutboxPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>domein.Sessie</class>
-    <class>domein.Klas</class>
-    <class>domein.Groep</class>
-    <class>domein.Leerkracht</class>
-    <class>domein.Leerling</class>
-    <class>domein.Actie</class>
-    <class>domein.Box</class>
-    <class>domein.Groepsbewerking</class>
     <class>domein.Oefening</class>
-    <class>domein.Opdracht</class>
-    <class>domein.Opgave</class>
-    <class>domein.Pad</class>
-    <class>domein.Toegangscode</class>
-    <class>domein.Vak</class>
     <class>domein.PDF</class>
+    <class>domein.Vak</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/breakoutbox"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

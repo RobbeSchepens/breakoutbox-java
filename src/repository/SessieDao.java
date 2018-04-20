@@ -1,6 +1,6 @@
 package repository;
 
-import domein.Sessie;
+import domeinold.Sessie;
 import javax.persistence.EntityNotFoundException;
 
 public interface SessieDao extends GenericDao<Sessie> {

@@ -1,6 +1,6 @@
 package repository;
 
-import domein.Box;
+import domeinold.Box;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import static repository.GenericDaoJpa.em;

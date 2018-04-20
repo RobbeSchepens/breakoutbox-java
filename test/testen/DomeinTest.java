@@ -1,8 +1,8 @@
 package testen;
 
-import domein.Groep;
-import domein.Sessie;
-import domein.SessieController;
+import domeinold.Groep;
+import domeinold.Sessie;
+import domeinold.SessieController;
 import java.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;

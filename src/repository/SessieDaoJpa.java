@@ -1,6 +1,6 @@
 package repository;
 
-import domein.Sessie;
+import domeinold.Sessie;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 

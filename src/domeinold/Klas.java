@@ -1,9 +1,12 @@
-package domein;
+package domeinold;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,62 +14,55 @@ import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
-public class Groep implements Serializable {
+@NamedQueries({
+    @NamedQuery(name = "Klas.findById", query = "select e from Klas e where e.id = :id")
+})
+public class Klas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
-    @JoinColumn(name = "sessieId")
-    private Sessie sessie;
+    @JoinColumn(name = "leerkrachtId")
+    private Leerkracht leerkracht;
     //@Basic(fetch=LAZY)
-    @OneToMany
-    private Set<Leerling> leerlingen;
-    //@Basic(fetch=LAZY)
-    @OneToOne
-    private Pad padd;
+    @OneToMany(mappedBy = "klas")
+    private Set<Leerling> leerlingen = new HashSet<>();
+    @OneToMany(mappedBy = "klas")
+    private Set<Sessie> sessies = new HashSet<>();
 
-    public Groep() {
+    public Klas() {
     }
 
-    public Groep(Set<Leerling> leerlingen) {
-        //@TODO
-        // Domeinregels voor leerlingen in groep te zetten (min 2, max 4)
-        // In setter!
-        this.leerlingen = leerlingen;
+    public Klas(Leerkracht leerkracht) {
+        this.leerkracht = leerkracht;
     }
 
     public Set<Leerling> getLeerlingen() {
-        return this.leerlingen;
+        return leerlingen;
     }
-
+    
     public void setLeerlingen(Set<Leerling> leerlingen) {
         this.leerlingen = leerlingen;
     }
-
+    
     public void addLeerling(Leerling e) {
         leerlingen.add(e);
     }
-    
+
     public void removeLeerling(Leerling e) {
         leerlingen.remove(e);
     }
 
-    public Pad getPad() {
-        return padd;
-    }
-
-    public void setPad(Pad pad) {
-        this.padd = pad;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 47 * hash + Objects.hashCode(this.leerlingen);
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.leerkracht);
+        hash = 97 * hash + Objects.hashCode(this.leerlingen);
         return hash;
     }
 
@@ -81,10 +77,18 @@ public class Groep implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Groep other = (Groep) obj;
+        final Klas other = (Klas) obj;
+        if (!Objects.equals(this.leerkracht, other.leerkracht)) {
+            return false;
+        }
         if (!Objects.equals(this.leerlingen, other.leerlingen)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Klas met id " + id + " van leerkracht " + leerkracht.toString() + ".";
     }
 }

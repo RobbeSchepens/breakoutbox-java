@@ -1,6 +1,6 @@
 package repository;
 
-import domein.Oefening;
+import domeinold.Oefening;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import static repository.GenericDaoJpa.em;

@@ -1,6 +1,6 @@
 package repository;
 
-import domein.Klas;
+import domeinold.Klas;
 import javax.persistence.EntityNotFoundException;
 
 public interface KlasDao extends GenericDao<Klas> {

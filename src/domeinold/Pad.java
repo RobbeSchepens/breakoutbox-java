@@ -1,4 +1,4 @@
-package domein;
+package domeinold;
 
 import java.io.Serializable;
 import java.util.HashSet;

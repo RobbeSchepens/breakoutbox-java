@@ -1,7 +1,7 @@
 package gui;
 
-import domein.Oefening;
-import domein.OefeningController;
+import domeinold.Oefening;
+import domeinold.OefeningController;
 import domein.Vak;
 import java.awt.Desktop;
 import java.io.File;

@@ -1,6 +1,6 @@
 package repository;
 
-import domein.Klas;
+import domeinold.Klas;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 
