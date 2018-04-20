@@ -36,4 +36,9 @@ public class DomeinController {
     public ObservableList<IOefening> geefOefeningen(){
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(oefeningLijst));
     }
+
+    public void setHuidigeOefening(Oefening huidigeOefening) {
+        this.huidigeOefening = huidigeOefening;
+        huidigeOefening.setHuidig();
+    }
 }

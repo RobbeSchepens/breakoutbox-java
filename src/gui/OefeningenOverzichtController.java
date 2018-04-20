@@ -102,11 +102,16 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         vakFilterChoiceBox.setItems(FXCollections.observableArrayList(vakkenlijstFilter));
         vakFilterChoiceBox.getSelectionModel().selectFirst();
 
+        oefeningenTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if(newValue != null){
+                dc.setHuidigeOefening(newValue);
+            }
+        });
     }
 
     @FXML
     private void btnHoofdmenuOnAction(ActionEvent event) {
-        HoofdMenuController sc = new HoofdMenuController();
+        HoofdMenuController sc = new HoofdMenuController(dc);
         Scene scene = new Scene(sc, 1280, 720);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);

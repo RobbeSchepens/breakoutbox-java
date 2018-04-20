@@ -5,6 +5,8 @@
     <class>domein.Oefening</class>
     <class>domein.PDF</class>
     <class>domein.Vak</class>
+    <class>domein.Antwoord</class>
+    <class>domein.Groepsbewerking</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/breakoutbox"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -1,5 +1,6 @@
 package startup;
 
+import domein.DomeinController;
 import domeinold.Controller;
 import domeinold.KlasController;
 import domeinold.SessieController;
@@ -15,7 +16,7 @@ public class StartUpGuiClientApp extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        HoofdMenuController root = new HoofdMenuController();
+        HoofdMenuController root = new HoofdMenuController(new DomeinController());
 
         Scene scene = new Scene(root, 1280, 720, Color.web("#ffffff"));
         scene.getStylesheets().add("gui/css/style.css");

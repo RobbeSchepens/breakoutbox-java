@@ -3,14 +3,17 @@ package domein;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 @NamedQueries({
@@ -26,9 +29,12 @@ public class Oefening implements IOefening, Serializable, Subject {
     private String antwoord;
     @OneToOne
     private PDF feedback;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Vak vak;
-    
+    //private Set<String> doelstellingen = new HashSet<>();
+    @ManyToMany
+    private Set<Groepsbewerking> groepsbewerkingen = new HashSet<>();
+    @Transient
     private Set<OefeningObserver> observers = new HashSet<>();
     
     public Oefening() { 
@@ -97,5 +103,9 @@ public class Oefening implements IOefening, Serializable, Subject {
         for (OefeningObserver observer : observers) {
             observer.update(naam, antwoord, vak);
         }
+    }
+
+    public void setHuidig() {
+        notifyObservers();
     }
 }

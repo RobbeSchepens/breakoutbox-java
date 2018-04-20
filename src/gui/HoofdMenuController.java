@@ -11,8 +11,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class HoofdMenuController extends GridPane {
-
-    public HoofdMenuController() {
+    private DomeinController dc;
+    
+    public HoofdMenuController(DomeinController dc) {
+        this.dc = dc;
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdMenu.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -27,7 +30,7 @@ public class HoofdMenuController extends GridPane {
 
     @FXML
     private void btnBeheerOefOnAction(ActionEvent event) {
-        OefeningenOverzichtController sc = new OefeningenOverzichtController(new DomeinController());
+        OefeningenOverzichtController sc = new OefeningenOverzichtController(dc);
         Scene scene = new Scene(sc, 1280, 720, Color.web("#ffffff"));
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
