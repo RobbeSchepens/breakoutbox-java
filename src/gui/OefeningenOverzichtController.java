@@ -1,7 +1,8 @@
 package gui;
 
-import domeinold.Oefening;
-import domeinold.OefeningController;
+import domein.DomeinController;
+import domein.OefeningObserver;
+import domein.Oefening;
 import domein.Vak;
 import java.awt.Desktop;
 import java.io.File;
@@ -25,7 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class OefeningenOverzichtController extends AnchorPane {
+public class OefeningenOverzichtController extends AnchorPane implements OefeningObserver {
 
     //FXML
     @FXML
@@ -52,15 +53,20 @@ public class OefeningenOverzichtController extends AnchorPane {
     //Attributes
     //doelstellingen ??
     //bewerkingen??
-    private OefeningController dc;
+    private DomeinController dc;
     private List<Vak> vakkenlijst;
     private List<Vak> vakkenlijstFilter;
     private FileChooser opgaveChooser;
     private FileChooser feedbackChooser;
     private File opgave;
     private File feedback;
+    
+    // huidigeOefening
+    private String naam;
+    private String antwoord;
+    private Vak vak;
 
-    public OefeningenOverzichtController(OefeningController dc) {
+    public OefeningenOverzichtController(DomeinController dc) {
         //scene loaden
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/OefeningenOverzicht.fxml"));
         loader.setRoot(this);
@@ -163,6 +169,18 @@ public class OefeningenOverzichtController extends AnchorPane {
         } catch (IOException ioe) {
             System.out.println("fout");
         }
+    }
+
+    @Override
+    public void update(String naam, String antwoord, Vak vak) {
+        this.naam = naam;
+        this.antwoord = antwoord;
+        this.vak = vak;
+        display();
+    }
+
+    public void display() {
+        System.out.printf(naam +" "+ antwoord +" "+ vak.toString());
     }
 
 }

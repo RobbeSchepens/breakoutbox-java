@@ -1,6 +1,6 @@
 package domein;
 
 public interface Subject {
-    void addObserver(Observer o);
-    void removeObserver(Observer o);
+    void addObserver(OefeningObserver o);
+    void removeObserver(OefeningObserver o);
 }

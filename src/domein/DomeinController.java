@@ -3,6 +3,7 @@ package domein;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 public class DomeinController {
@@ -17,15 +18,19 @@ public class DomeinController {
     // Sessie
     //private Sessie huidigeSessie;
     
-    public List<String> geefOefeningLijst(){
-        return getOefeningList().stream().map(Oefening::getNaam).collect(Collectors.toList());
-    }
-    
     private List<Oefening> getOefeningList() {
         if (oefeningLijst == null) {
             oefeningLijst = ob.geefOefeningenJPA();
         }
         return oefeningLijst;
+    }
+
+    public boolean noOefeningen() {
+        return oefeningLijst.isEmpty();
+    }
+    
+    public List<String> geefOefeningNaamLijst(){
+        return getOefeningList().stream().map(Oefening::getNaam).collect(Collectors.toList());
     }
     
     public ObservableList<IOefening> geefOefeningen(){

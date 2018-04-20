@@ -1,6 +1,6 @@
 package gui;
 
-import domeinold.OefeningController;
+import domein.DomeinController;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,9 +12,9 @@ import javafx.stage.Stage;
 
 public class VoegOefnToeController extends AnchorPane {
 
-    private OefeningController dc;
+    private DomeinController dc;
 
-    public VoegOefnToeController(OefeningController dc) {
+    public VoegOefnToeController(DomeinController dc) {
         this.dc = dc;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/VoegOefnToe.fxml"));
         loader.setRoot(this);

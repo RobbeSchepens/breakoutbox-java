@@ -1,6 +1,6 @@
 package gui;
 
-import domeinold.OefeningController;
+import domein.DomeinController;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +27,7 @@ public class HoofdMenuController extends GridPane {
 
     @FXML
     private void btnBeheerOefOnAction(ActionEvent event) {
-        OefeningenOverzichtController sc = new OefeningenOverzichtController(new OefeningController(false));
+        OefeningenOverzichtController sc = new OefeningenOverzichtController(new DomeinController());
         Scene scene = new Scene(sc, 1280, 720, Color.web("#ffffff"));
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
