@@ -59,7 +59,6 @@ public class DomeinController {
 
     public void setHuidigeOefening(IOefening huidigeOefening) {
         this.huidigeOefening = (Oefening)huidigeOefening;
-        System.out.println(this.huidigeOefening.getNaam());
         this.huidigeOefening.setHuidig();
     }
     

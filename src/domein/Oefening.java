@@ -3,6 +3,10 @@ package domein;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,14 +20,20 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity
+@Access(AccessType.FIELD)
 @NamedQueries({
-    @NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e.naam = :oefeningnaam")
+    //@NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e.naam = :oefeningnaam")
 })
 public class Oefening implements IOefening, Serializable, Subject {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String naam;
+    
+    @Transient
+    private final StringProperty naam = new SimpleStringProperty();
+    
+    //private String naam;
     @OneToOne
     private PDF opgave;
     private String antwoord;
@@ -41,19 +51,24 @@ public class Oefening implements IOefening, Serializable, Subject {
     }
 
     public Oefening(String naam, String antwoord, Vak vak) {
-        this.naam = naam;
+        setNaam(naam);
         this.antwoord = antwoord;
         this.vak = vak;
     }
-
+    
     @Override
+    @Access(AccessType.PROPERTY)
     public String getNaam() {
-        return naam;
+        return naam.get();
     }
 
-    public void setNaam(String naam) {
-        this.naam = naam;
+    public void setNaam(String value) {
+        naam.set(value);
         notifyObservers();
+    }
+
+    public StringProperty naamProperty() {
+        return naam;
     }
 
     @Override
@@ -107,7 +122,7 @@ public class Oefening implements IOefening, Serializable, Subject {
     
     private void notifyObservers() {
         for (OefeningObserver observer : observers) {
-            observer.update(naam, antwoord, vak);
+            observer.update(getNaam(), antwoord, vak);
         }
     }
 

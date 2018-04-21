@@ -77,9 +77,8 @@
                </children></HBox>
             <TableView fx:id="tbvOefeningen" prefHeight="508.0" prefWidth="450.0">
               <columns>
-                <TableColumn fx:id="colNaam" prefWidth="100.0" text="Naam" />
-                <TableColumn fx:id="colVak" prefWidth="150.0" text="Vak" />
-                  <TableColumn fx:id="colOmschrijving" minWidth="0.0" prefWidth="200.0" text="Omschrijving" />
+                <TableColumn fx:id="colNaam" maxWidth="-1.0" minWidth="200.0" prefWidth="-1.0" text="Naam" />
+                <TableColumn fx:id="colVak" maxWidth="-1.0" minWidth="150.0" prefWidth="-1.0" text="Vak" />
               </columns>
             </TableView>
             <HBox prefHeight="135.0" prefWidth="450.0">

@@ -34,9 +34,7 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
     @FXML
     private TableColumn<Oefening, String> colNaam;
     @FXML
-    private TableColumn<Oefening, Vak> colVak;
-    @FXML
-    private TableColumn<Oefening, String> colOmschrijving;
+    private TableColumn<Oefening, String> colVak;
     @FXML
     private Label lblOpgavePadNaam;
     @FXML
@@ -94,12 +92,13 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         tbvOefeningen.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if(newValue != null){
                 dc.setHuidigeOefening(newValue);
-                dc.addOefeningObserver(this); // oorzaak van IndexOutOfBoundsException ...
-                setHuidigeOefening();
+                //dc.addOefeningObserver(this); // oorzaak van IndexOutOfBoundsException ...
+                displayHuidigeOefening();
             }
         });
         
         setAllItems();
+        
         
         
         //init file chooser
@@ -111,19 +110,6 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         //default layout
         btnOpgavePreview.setDisable(true);
         btnFeedbackPreview.setDisable(true);
-
-        // default "alles" in choise box
-//        this.vakkenlijst = new ArrayList(/*dc.geefAlleVakken()*/);
-//        this.vakkenlijstFilter = new ArrayList<>();
-//
-//        vakkenlijstFilter.add(new Vak("Alles"));
-//        vakkenlijstFilter.addAll(vakkenlijst);
-//        // choice box links
-//        vakKeuzeChoiceBox.setItems(FXCollections.observableArrayList(vakkenlijstFilter));
-//        vakKeuzeChoiceBox.getSelectionModel().selectFirst();
-//        // choice box rechts
-//        vakFilterChoiceBox.setItems(FXCollections.observableArrayList(vakkenlijstFilter));
-//        vakFilterChoiceBox.getSelectionModel().selectFirst();
     }
 
     @FXML
@@ -200,11 +186,14 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
 
     private void setAllItems() {
         tbvOefeningen.setItems(dc.geefOefeningen());
+        colNaam.setCellValueFactory(v->v.getValue().naamProperty());
+        colVak.setCellValueFactory(v->v.getValue().getVak().naamProperty());
+        
         ddlVakken.setItems(dc.geefVakken());
         ddlVakkenFilter.setItems(dc.geefVakken());
     }
 
-    private void setHuidigeOefening() {
+    private void displayHuidigeOefening() {
         txfNaam.setText(dc.getHuidigeOefening().getNaam());
         txfAntwoord.setText(dc.getHuidigeOefening().getAntwoord());
         ddlVakken.getSelectionModel().select(dc.getHuidigeOefening().getVak());
