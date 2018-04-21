@@ -1,9 +1,6 @@
 package startup;
 
 import domein.DomeinController;
-import domeinold.Controller;
-import domeinold.KlasController;
-import domeinold.SessieController;
 import gui.HoofdMenuController;
 import javafx.application.Application;
 import javafx.scene.Scene;

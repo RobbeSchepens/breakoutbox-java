@@ -46,6 +46,7 @@ public class Oefening implements IOefening, Serializable, Subject {
         this.vak = vak;
     }
 
+    @Override
     public String getNaam() {
         return naam;
     }
@@ -55,6 +56,7 @@ public class Oefening implements IOefening, Serializable, Subject {
         notifyObservers();
     }
 
+    @Override
     public PDF getOpgave() {
         return opgave;
     }
@@ -63,6 +65,7 @@ public class Oefening implements IOefening, Serializable, Subject {
         this.opgave = opgave;
     }
 
+    @Override
     public String getAntwoord() {
         return antwoord;
     }
@@ -72,6 +75,7 @@ public class Oefening implements IOefening, Serializable, Subject {
         notifyObservers();
     }
 
+    @Override
     public PDF getFeedback() {
         return feedback;
     }
@@ -80,6 +84,7 @@ public class Oefening implements IOefening, Serializable, Subject {
         this.feedback = feedback;
     }
 
+    @Override
     public Vak getVak() {
         return vak;
     }

@@ -1,3 +1,78 @@
+.bg {
+    -fx-background-color: #fff;
+}
+
+.btnlbl {
+    -fx-text-fill: #fff;
+    -fx-color: #fff;
+}
+
+.hfdmenubtn {
+    /*-fx-padding: 40px 16px 40px 16px;*/
+    -fx-font-size: 1.4em;
+    -fx-font-weight: 500;
+}
+
+.btn-primary {
+  -fx-text-fill: #fff;
+  -fx-background-color: #006fe6;
+}
+
+.btn-secondary {
+  color: #fff;
+  border-color: #5A6169;
+  -fx-background-color: #5A6169;
+}
+
+.btn-success {
+  color: #fff;
+  border-color: #17c671;
+  -fx-background-color: #17c671;
+}
+
+.btn-info {
+  color: #fff;
+  border-color: #00b8d8;
+  background-color: #00b8d8;
+}
+
+.btn-warning {
+  color: #212529;
+  border-color: #ffb400;
+  background-color: #ffb400;
+}
+
+.btn-danger {
+  color: #fff;
+  border-color: #c4183c;
+  -fx-background-color: #c4183c;
+}
+
+.btn-light {
+  color: #212529;
+  border-color: #e9ecef;
+  -fx-background-color: #e9ecef;
+}
+
+.btn-dark {
+  color: #fff;
+  border-color: #212529;
+  -fx-background-color: #212529;
+}
+
+.btn-white {
+  color: #212529;
+  border-color: #fff;
+  -fx-background-color: #fff;
+}
+
+.btn-black {
+  color: #fff;
+  border-color: #000;
+  -fx-background-color: #000;
+}
+
+
 .text-primary {
   color: #007bff !important;
 }
@@ -76,65 +151,4 @@ a.text-black:hover, a.text-black:focus {
 
 .text-muted {
   color: #868e96 !important;
-}
-
-
-.btn-primary {
-  -fx-text-fill: #fff;
-  border-color: #006fe6;
-  -fx-background-color: #006fe6;
-}
-
-.btn-secondary {
-  color: #fff;
-  border-color: #5A6169;
-  -fx-background-color: #5A6169;
-}
-
-.btn-success {
-  color: #fff;
-  border-color: #17c671;
-  -fx-background-color: #17c671;
-}
-
-.btn-info {
-  color: #fff;
-  border-color: #00b8d8;
-  background-color: #00b8d8;
-}
-
-.btn-warning {
-  color: #212529;
-  border-color: #ffb400;
-  background-color: #ffb400;
-}
-
-.btn-danger {
-  color: #fff;
-  border-color: #c4183c;
-  -fx-background-color: #c4183c;
-}
-
-.btn-light {
-  color: #212529;
-  border-color: #e9ecef;
-  -fx-background-color: #e9ecef;
-}
-
-.btn-dark {
-  color: #fff;
-  border-color: #212529;
-  -fx-background-color: #212529;
-}
-
-.btn-white {
-  color: #212529;
-  border-color: #fff;
-  -fx-background-color: #fff;
-}
-
-.btn-black {
-  color: #fff;
-  border-color: #000;
-  -fx-background-color: #000;
 }

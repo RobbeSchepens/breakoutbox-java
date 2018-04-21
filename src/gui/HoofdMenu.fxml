@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -8,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" type="GridPane" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="bg" type="GridPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -22,11 +26,69 @@
                <font>
                   <Font name="System Bold" size="20.0" />
                </font></Label>
-            <Button mnemonicParsing="false" styleClass="btn-primary" text="Acties Beheren" />
-            <Button mnemonicParsing="false" styleClass="btn-primary" text="Klassen Beheren" />
-            <Button mnemonicParsing="false" onAction="#btnBeheerOefOnAction" styleClass="btn-primary" text="Opdrachten Beheren" />
-            <Button mnemonicParsing="false" styleClass="btn-primary" text="BoBs Beheren" />
-            <Button mnemonicParsing="false" styleClass="btn-primary" text="Sessies Beheren" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Button fx:id="btnBeheerBob" minWidth="250.0" mnemonicParsing="false" text="BOBs beheren">
+                     <styleClass>
+                        <String fx:value="btn-primary" />
+                        <String fx:value="hfdmenubtn" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="btnBeheerSessies" minWidth="250.0" mnemonicParsing="false" text="Sessies beheren">
+                     <styleClass>
+                        <String fx:value="btn-primary" />
+                        <String fx:value="hfdmenubtn" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Button fx:id="btnBeheerOef" minWidth="200.0" mnemonicParsing="false" onAction="#btnBeheerOefOnAction" textAlignment="CENTER">
+                     <styleClass>
+                        <String fx:value="btn-primary" />
+                        <String fx:value="hfdmenubtn" />
+                     </styleClass>
+                     <graphic>
+                        <GridPane alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints vgrow="SOMETIMES" />
+                            <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label styleClass="btnlbl" text="Oefeningen beheren" textFill="WHITE" GridPane.halignment="CENTER" />
+                              <Label fx:id="lblAantalOef" styleClass="btnlbl" text="0" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <Label styleClass="btnlbl" text="Aantal oefeningen:" textFill="WHITE">
+                                       <font>
+                                          <Font size="11.0" />
+                                       </font></Label>
+                                 </graphic>
+                                 <font>
+                                    <Font size="11.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnBeheerActies" minWidth="250.0" mnemonicParsing="false" text="Acties beheren">
+                     <styleClass>
+                        <String fx:value="btn-primary" />
+                        <String fx:value="hfdmenubtn" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="btnBeheerKlassen" minWidth="250.0" mnemonicParsing="false" text="Klassen beheren">
+                     <styleClass>
+                        <String fx:value="btn-primary" />
+                        <String fx:value="hfdmenubtn" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

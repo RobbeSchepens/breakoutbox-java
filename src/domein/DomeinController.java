@@ -3,7 +3,6 @@ package domein;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 public class DomeinController {
@@ -27,6 +26,10 @@ public class DomeinController {
 
     public boolean noOefeningen() {
         return oefeningLijst.isEmpty();
+    }
+    
+    public int geefAantalOefeningen() {
+        return getOefeningList().size();
     }
     
     public List<String> geefOefeningNaamLijst(){

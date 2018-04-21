@@ -6,12 +6,26 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class HoofdMenuController extends GridPane {
     private DomeinController dc;
+    @FXML
+    private Button btnBeheerBob;
+    @FXML
+    private Button btnBeheerSessies;
+    @FXML
+    private Button btnBeheerOef;
+    @FXML
+    private Button btnBeheerActies;
+    @FXML
+    private Button btnBeheerKlassen;
+    @FXML
+    private Label lblAantalOef;
     
     public HoofdMenuController(DomeinController dc) {
         this.dc = dc;
@@ -25,7 +39,8 @@ public class HoofdMenuController extends GridPane {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-
+        
+        laadAantallen();
     }
 
     @FXML
@@ -34,7 +49,9 @@ public class HoofdMenuController extends GridPane {
         Scene scene = new Scene(sc, 1280, 720, Color.web("#ffffff"));
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
-
     }
 
+    private void laadAantallen() {
+        lblAantalOef.setText(String.valueOf(dc.geefAantalOefeningen()));
+    }
 }
