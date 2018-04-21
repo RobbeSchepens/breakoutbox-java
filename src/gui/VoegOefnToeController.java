@@ -30,7 +30,7 @@ public class VoegOefnToeController extends AnchorPane {
     @FXML
     public void btnTerugNaarOverzichtOefnOnAction(ActionEvent event) {
         OefeningenOverzichtController sc = new OefeningenOverzichtController(dc);
-        Scene scene = new Scene(sc, 1280, 720, Color.web("#ffffff"));
+        Scene scene = new Scene(sc, 1280, 720);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage)this.getScene().getWindow()).setScene(scene);
     }
