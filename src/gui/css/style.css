@@ -15,13 +15,14 @@
     -fx-text-fill: white;
     -fx-border-width: 0;
     -fx-background-color: #006fe6;
+    -fx-background-radius: 6;
 }
 
 .label {
     -fx-text-fill: rgb(90, 97, 105);
 }
 
-.choice-box {
+.choice-box, .text-field {
     -fx-background-color: white;
     -fx-border-width: 1;
     -fx-border-color: rgb(190, 202, 214);
@@ -73,6 +74,17 @@
     -fx-text-fill: white;
 }
 
+.btn-big-action {
+    -fx-font-size: 16px;
+    -fx-padding: 10 16 10 16;
+}
+
+
+
+
+
+
+
 
 
 
@@ -107,7 +119,7 @@
 
 .btn-danger {
   color: #fff;
-  border-color: #c4183c;
+  -fx-border-color: #c4183c;
   -fx-background-color: #c4183c;
 }
 
