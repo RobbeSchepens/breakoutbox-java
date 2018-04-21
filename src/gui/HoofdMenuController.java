@@ -26,6 +26,14 @@ public class HoofdMenuController extends GridPane {
     private Button btnBeheerKlassen;
     @FXML
     private Label lblAantalOef;
+    @FXML
+    private Label lblAantalBoxes;
+    @FXML
+    private Label lblAantalSessies;
+    @FXML
+    private Label lblAantalActies;
+    @FXML
+    private Label lblAantalKlassen;
     
     public HoofdMenuController(DomeinController dc) {
         this.dc = dc;

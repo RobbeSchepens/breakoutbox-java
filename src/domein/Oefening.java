@@ -96,7 +96,8 @@ public class Oefening implements IOefening, Serializable, Subject {
 
     @Override
     public void addObserver(OefeningObserver o) {
-        observers.add(o);
+        if (!observers.contains(o))
+            observers.add(o);
     }
 
     @Override

@@ -16,14 +16,20 @@ public final class OefeningBeheerder {
     private EntityManagerFactory emf;
     private Map<String, Oefening> oefeningenMap = new HashMap<>();
     private GenericDao<Oefening> oefRepo;
+    private GenericDao<Vak> vakRepo;
 
     public OefeningBeheerder() {
         initializePersistentie();
         setOefRepo(new GenericDaoJpa<>(Oefening.class));
+        setVakRepo(new GenericDaoJpa<>(Vak.class));
     }
     
     public void setOefRepo(GenericDao<Oefening> mock){
         oefRepo = mock;
+    }
+    
+    public void setVakRepo(GenericDao<Vak> mock){
+        vakRepo = mock;
     }
     
     private void initializePersistentie() {
@@ -46,7 +52,7 @@ public final class OefeningBeheerder {
     // Voor meer voorbeelden, zie OOPIII_JPA_Garage 
     
     public void addOefening(Oefening o) {
-        oefeningenMap.put(o.getNaam(), o);
+        //oefeningenMap.put(o.getNaam(), o);
         em.getTransaction().begin();
         em.persist(o);
         em.getTransaction().commit();
@@ -54,5 +60,9 @@ public final class OefeningBeheerder {
 
     public List<Oefening> geefOefeningenJPA() {
         return oefRepo.findAll();
+    }
+
+    public List<Vak> geefVakkenJPA() {
+        return vakRepo.findAll();
     }
 }

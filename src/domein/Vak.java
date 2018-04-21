@@ -30,6 +30,6 @@ public class Vak implements Serializable {
 
     @Override
     public String toString() {
-        return naam.substring(0, 1).toUpperCase() + naam.substring(0);
+        return naam.substring(0, 1).toUpperCase() + naam.substring(1);
     }
 }

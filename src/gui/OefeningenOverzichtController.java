@@ -1,6 +1,7 @@
 package gui;
 
 import domein.DomeinController;
+import domein.IOefening;
 import domein.OefeningObserver;
 import domein.Oefening;
 import domein.Vak;
@@ -20,6 +21,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -30,17 +32,11 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
 
     //FXML
     @FXML
-    private TableView<Oefening> oefeningenTable;
-    @FXML
     private TableColumn<Oefening, String> colNaam;
     @FXML
     private TableColumn<Oefening, Vak> colVak;
     @FXML
     private TableColumn<Oefening, String> colOmschrijving;
-    @FXML
-    private ChoiceBox<Vak> vakFilterChoiceBox;
-    @FXML
-    private ChoiceBox<Vak> vakKeuzeChoiceBox;
     @FXML
     private Label lblOpgavePadNaam;
     @FXML
@@ -49,6 +45,22 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
     private Button btnOpgavePreview;
     @FXML
     private Button btnFeedbackPreview;
+    @FXML
+    private AnchorPane AnchorPane;
+    @FXML
+    private ChoiceBox<Vak> ddlVakkenFilter;
+    @FXML
+    private TableView<IOefening> tbvOefeningen;
+    @FXML
+    private TextField txfNaam;
+    @FXML
+    private ChoiceBox<Vak> ddlVakken;
+    @FXML
+    private TextField txfAntwoord;
+    @FXML
+    private Button btnAddOefening;
+    @FXML
+    private Button btnVerwijderOefening;
 
     //Attributes
     //doelstellingen ??
@@ -61,7 +73,7 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
     private File opgave;
     private File feedback;
     
-    // huidigeOefening
+    // huidigeOefening update Observer
     private String naam;
     private String antwoord;
     private Vak vak;
@@ -76,6 +88,20 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+        
+        this.dc = dc;
+
+        tbvOefeningen.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if(newValue != null){
+                dc.setHuidigeOefening(newValue);
+                dc.addOefeningObserver(this); // oorzaak van IndexOutOfBoundsException ...
+                setHuidigeOefening();
+            }
+        });
+        
+        setAllItems();
+        
+        
         //init file chooser
         this.opgaveChooser = new FileChooser();
         opgaveChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
@@ -86,41 +112,24 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         btnOpgavePreview.setDisable(true);
         btnFeedbackPreview.setDisable(true);
 
-        // initialize
-        this.dc = dc;
-
         // default "alles" in choise box
-        this.vakkenlijst = new ArrayList(/*dc.geefAlleVakken()*/);
-        this.vakkenlijstFilter = new ArrayList<>();
-
-        vakkenlijstFilter.add(new Vak("Alles"));
-        vakkenlijstFilter.addAll(vakkenlijst);
-        // choice box links
-        vakKeuzeChoiceBox.setItems(FXCollections.observableArrayList(vakkenlijstFilter));
-        vakKeuzeChoiceBox.getSelectionModel().selectFirst();
-        // choice box rechts
-        vakFilterChoiceBox.setItems(FXCollections.observableArrayList(vakkenlijstFilter));
-        vakFilterChoiceBox.getSelectionModel().selectFirst();
-
-        oefeningenTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            if(newValue != null){
-                dc.setHuidigeOefening(newValue);
-            }
-        });
+//        this.vakkenlijst = new ArrayList(/*dc.geefAlleVakken()*/);
+//        this.vakkenlijstFilter = new ArrayList<>();
+//
+//        vakkenlijstFilter.add(new Vak("Alles"));
+//        vakkenlijstFilter.addAll(vakkenlijst);
+//        // choice box links
+//        vakKeuzeChoiceBox.setItems(FXCollections.observableArrayList(vakkenlijstFilter));
+//        vakKeuzeChoiceBox.getSelectionModel().selectFirst();
+//        // choice box rechts
+//        vakFilterChoiceBox.setItems(FXCollections.observableArrayList(vakkenlijstFilter));
+//        vakFilterChoiceBox.getSelectionModel().selectFirst();
     }
 
     @FXML
     private void btnHoofdmenuOnAction(ActionEvent event) {
         HoofdMenuController sc = new HoofdMenuController(dc);
         Scene scene = new Scene(sc, 1280, 720);
-        scene.getStylesheets().add("gui/css/style.css");
-        ((Stage) this.getScene().getWindow()).setScene(scene);
-    }
-
-    @FXML
-    private void btnVoegOefeningToeOnAction(ActionEvent event) {
-        VoegOefnToeController sc = new VoegOefnToeController(dc);
-        Scene scene = new Scene(sc, 1280, 720, Color.web("#ffffff"));
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
@@ -186,6 +195,30 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
 
     public void display() {
         System.out.printf(naam +" "+ antwoord +" "+ vak.toString());
+        tbvOefeningen.setItems(dc.geefOefeningen());
+    }
+
+    private void setAllItems() {
+        tbvOefeningen.setItems(dc.geefOefeningen());
+        ddlVakken.setItems(dc.geefVakken());
+        ddlVakkenFilter.setItems(dc.geefVakken());
+    }
+
+    private void setHuidigeOefening() {
+        txfNaam.setText(dc.getHuidigeOefening().getNaam());
+        txfAntwoord.setText(dc.getHuidigeOefening().getAntwoord());
+        ddlVakken.getSelectionModel().select(dc.getHuidigeOefening().getVak());
+    }
+
+    @FXML
+    private void btnAddOefeningOnAction(ActionEvent event) {
+        dc.voegNieuweOefeningToe(txfNaam.getText(), txfAntwoord.getText(), 
+                ddlVakken.getSelectionModel().getSelectedItem());
+        setAllItems();
+    }
+
+    @FXML
+    private void btnVerwijderOefeningOnAction(ActionEvent event) {
     }
 
 }

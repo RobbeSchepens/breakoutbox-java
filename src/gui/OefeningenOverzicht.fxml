@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -16,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="36.0" layoutY="21.0" prefHeight="30.0" prefWidth="1224.0">
         <columnConstraints>
@@ -64,13 +69,13 @@
                         <Insets top="25.0" />
                      </padding>
                   </Label>
-                  <ChoiceBox fx:id="vakFilterChoiceBox" prefWidth="150.0">
+                  <ChoiceBox fx:id="ddlVakkenFilter" prefWidth="150.0">
                      <HBox.margin>
                         <Insets left="10.0" top="22.0" />
                      </HBox.margin>
                   </ChoiceBox>
                </children></HBox>
-            <TableView fx:id="oefeningenTable" prefHeight="508.0" prefWidth="450.0">
+            <TableView fx:id="tbvOefeningen" prefHeight="508.0" prefWidth="450.0">
               <columns>
                 <TableColumn fx:id="colNaam" prefWidth="100.0" text="Naam" />
                 <TableColumn fx:id="colVak" prefWidth="150.0" text="Vak" />
@@ -81,7 +86,7 @@
                <children>
                   <VBox prefHeight="134.0" prefWidth="455.0">
                      <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="140.0" styleClass="btn-primary" text="Verwijder Oefening">
+                        <Button fx:id="btnVerwijderOefening" alignment="CENTER" mnemonicParsing="false" onAction="#btnVerwijderOefeningOnAction" prefHeight="40.0" prefWidth="140.0" styleClass="btn-primary" text="Verwijder Oefening">
                            <VBox.margin>
                               <Insets left="140.0" top="50.0" />
                            </VBox.margin>
@@ -124,7 +129,7 @@
                                     <Insets left="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <TextField maxWidth="180.0" GridPane.halignment="CENTER">
+                              <TextField fx:id="txfNaam" maxWidth="180.0" GridPane.halignment="CENTER">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -148,7 +153,7 @@
                                     <Insets left="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <ChoiceBox fx:id="vakKeuzeChoiceBox" prefWidth="180.0" GridPane.halignment="CENTER" />
+                              <ChoiceBox fx:id="ddlVakken" prefWidth="180.0" GridPane.halignment="CENTER" />
                            </children>
                         </GridPane>
                      </children>
@@ -168,7 +173,7 @@
                                     <Insets left="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <TextField maxWidth="180.0" GridPane.halignment="CENTER">
+                              <TextField fx:id="txfAntwoord" maxWidth="180.0" GridPane.halignment="CENTER">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -232,6 +237,9 @@
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
+                     <children>
+                        <Button fx:id="btnAddOefening" mnemonicParsing="false" onAction="#btnAddOefeningOnAction" styleClass="btn-primary" text="Voeg toe | bewerk" GridPane.halignment="CENTER" />
+                     </children>
                   </GridPane>
                </children>
             </VBox>

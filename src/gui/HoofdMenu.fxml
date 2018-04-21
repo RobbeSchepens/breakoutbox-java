@@ -33,7 +33,7 @@
                         <GridPane alignment="CENTER">
                            <children>
                               <Label styleClass="btnlbl" text="BOB's beheren" textFill="WHITE" GridPane.halignment="CENTER" />
-                              <Label fx:id="lblAantalOef12" styleClass="btnlbl" text="0" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                              <Label fx:id="lblAantalBoxes" styleClass="btnlbl" text="0" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -65,7 +65,7 @@
                         <GridPane alignment="CENTER">
                            <children>
                               <Label styleClass="btnlbl" text="Sessies beheren" textFill="WHITE" GridPane.halignment="CENTER" />
-                              <Label fx:id="lblAantalOef11" styleClass="btnlbl" text="0" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                              <Label fx:id="lblAantalSessies" styleClass="btnlbl" text="0" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -132,7 +132,7 @@
                         <GridPane alignment="CENTER">
                            <children>
                               <Label styleClass="btnlbl" text="Acties beheren" textFill="WHITE" GridPane.halignment="CENTER" />
-                              <Label fx:id="lblAantalOef1" styleClass="btnlbl" text="0" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                              <Label fx:id="lblAantalActies" styleClass="btnlbl" text="0" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
@@ -164,7 +164,7 @@
                         <GridPane alignment="CENTER">
                            <children>
                               <Label styleClass="btnlbl" text="Klassen beheren" textFill="WHITE" GridPane.halignment="CENTER" />
-                              <Label fx:id="lblAantalOef2" styleClass="btnlbl" text="0" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                              <Label fx:id="lblAantalKlassen" styleClass="btnlbl" text="0" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="11.0" />
                                  </font>
