@@ -1,6 +1,8 @@
 package gui;
 
+import domein.Doelstelling;
 import domein.DomeinController;
+import domein.Groepsbewerking;
 import domein.IOefening;
 import domein.OefeningObserver;
 import domein.Vak;
@@ -9,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -28,10 +33,22 @@ import javafx.stage.Stage;
 public class OefeningenOverzichtController extends AnchorPane implements OefeningObserver {
 
     //FXML
+    //tableview oefeningen
     @FXML
     private TableColumn<IOefening, String> colNaam;
     @FXML
     private TableColumn<IOefening, String> colVak;
+    // listviews groepsbewerkingen
+    @FXML
+    private ListView<Groepsbewerking> lsvBeschikbareBewerkingen;
+    @FXML
+    private ListView<Groepsbewerking> lsvGeselecteerdeBewerkingen;
+    // listviews doelstellingen
+    @FXML
+    private ListView<Doelstelling> lsvBeschikbareDoelstellingen;
+    @FXML
+    private ListView<Doelstelling> lsvGeselecteerdeDoelstellingen;
+
     @FXML
     private Label lblOpgavePadNaam;
     @FXML
@@ -204,10 +221,34 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         vakkenListInSetAllItemsObservable.add(0, new Vak("Alles"));
         ddlVakkenFilter.setItems(vakkenListInSetAllItemsObservable);
         ddlVakkenFilter.getSelectionModel().selectFirst();
-
         //ddlVakken opvullen
         ddlVakken.setItems(dc.geefVakken());
 
+        //listviews
+        //groepsbewerkingen
+        lsvBeschikbareBewerkingen.setItems(dc.geefGroepsbewerkingen());
+        lsvBeschikbareBewerkingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                Groepsbewerking gbw = lsvBeschikbareBewerkingen.getSelectionModel().getSelectedItem();
+                lsvGeselecteerdeBewerkingen.getItems().add(gbw);
+
+                //lsvBeschikbareBewerkingen.getItems().remove(gbw); Deze geeft error (maar geeft niet)
+            }
+
+        });
+
+        //doelstellingen
+        lsvBeschikbareDoelstellingen.setItems(dc.geefDoelstellingen());
+        lsvBeschikbareDoelstellingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                Doelstelling dsl = lsvBeschikbareDoelstellingen.getSelectionModel().getSelectedItem();
+                lsvGeselecteerdeDoelstellingen.getItems().add(dsl);
+
+            }
+
+        });
     }
 
     private void displayHuidigeOefening() {
@@ -238,32 +279,72 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
 
     @FXML
     private void btnVerwijderOefeningOnAction(ActionEvent event) {
+        dc.verwijderOef(tbvOefeningen.getSelectionModel().getSelectedItem().getNaam());
 
+        // dit weg ?
+        tbvOefeningen.setItems(dc.geefOefeningen());
+        colNaam.setCellValueFactory(v -> v.getValue().naamProperty());
+        colVak.setCellValueFactory(v -> v.getValue().getVak().naamProperty());
+        //resetScherm();
     }
 
     private void OefeningToevoegen() {
-        /* try {
-            dc.voegOefeningToe(
+        try { //naam, vak, opgave, groepsbewerkingen, antwoord, feedback, doelstelling);
+            dc.voegNieuweOefeningToe(
                     txfNaam.getText(),
                     ddlVakken.getValue(),
                     opgave,
-                    //geselecteerdeBewerkingenList.getItems(),
+                    lsvGeselecteerdeBewerkingen.getItems(),
                     txfAntwoord.getText(),
-                    feedback
-                    //geselecteerdeDoelstellingenList.getItems()
+                    feedback,
+                    lsvGeselecteerdeDoelstellingen.getItems()
             );
-            resetDetails();
-            oefeningenTable.setItems(dc.getOefeningLijst());
-            dc.changeFilter(vakChoiceBox.getSelectionModel().getSelectedItem().toString(), doelstellingFilter.getText());
+            resetScherm();
+
+            tbvOefeningen.setItems(dc.geefOefeningen());
+            colNaam.setCellValueFactory(v -> v.getValue().naamProperty());
+            colVak.setCellValueFactory(v -> v.getValue().getVak().naamProperty());
+
         } catch (NumberFormatException ex) {
-            alertVenster("Antwoord moet een getal zijn");
+            System.out.println("exception oefening toevoegen: antwoord moet een getal zijn");
         } catch (IllegalArgumentException ex) {
-            alertVenster(ex.getMessage());
-        }*/
+            System.out.println(ex);
+        }
     }
 
     private void OefeningBewerken() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void resetScherm() {
+        lblToevOfBewerken.setText("Oefening Toevoegen");
+        txfNaam.setText("");
+        txfAntwoord.setText("");
+        ddlVakken.getSelectionModel().clearSelection();
+        lsvGeselecteerdeBewerkingen.getItems().clear();
+        lsvGeselecteerdeDoelstellingen.getItems().clear();
+        lblFeedbackPadNaam.setText("");
+        lblOpgavePadNaam.setText("");
+
+        //opgave chooser reset
+        opgaveChooser = new FileChooser();
+        opgaveChooser.setTitle("Open Opgave Bestand");
+        opgaveChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        opgaveChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+        //feedback chooser reset
+        feedbackChooser = new FileChooser();
+        feedbackChooser.setTitle("Open Feedback Bestand");
+        feedbackChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        feedbackChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+
+        lblOpgavePadNaam.setText("");
+        lblFeedbackPadNaam.setText("");
+
+        btnFeedbackPreview.disableProperty().setValue(true);
+        btnOpgavePreview.disableProperty().setValue(true);
+        opgave = null;
+        feedback = null;
+
     }
 
 }

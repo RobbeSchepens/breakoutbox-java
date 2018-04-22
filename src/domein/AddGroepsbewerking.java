@@ -8,6 +8,7 @@ package domein;
 import java.io.Serializable;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import static jdk.nashorn.internal.objects.NativeMath.round;
 
 /**
  *
@@ -27,7 +28,18 @@ public class AddGroepsbewerking extends Groepsbewerking<Double> implements Seria
 
     @Override
     public String toString() {
-        return super.getOmschrijving();
+
+        String[] omschrijvingArray = super.getOmschrijving().split(" ");
+
+        double teBewerken = super.getTeBewerken();
+        int getalIfRound = 0;
+
+        if (teBewerken % 1 == 0) {
+            return omschrijvingArray[0] + " " + (int) teBewerken + " " + omschrijvingArray[1];
+        } else {
+            return omschrijvingArray[0] + " " + teBewerken + " " + omschrijvingArray[1];
+        }
+
     }
 
     @Override

@@ -24,8 +24,8 @@ public class OefeningData {
 
         List<Groepsbewerking> bewerkingenDatabankLijst = new ArrayList();
         for (double i = 1; i < 15; i++) { // 20 bewerkingen maken
-            bewerkingenDatabankLijst.add(new AddGroepsbewerking("Voeg 1 toe", i));
-            bewerkingenDatabankLijst.add(new SubstractGroepsbewerking("Trek 1 af", i));
+            bewerkingenDatabankLijst.add(new AddGroepsbewerking("Voeg toe", i));
+            bewerkingenDatabankLijst.add(new SubstractGroepsbewerking("Trek af", i));
         }
 
         List<Doelstelling> doelstellingenArray = new ArrayList();

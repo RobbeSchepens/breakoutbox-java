@@ -268,10 +268,10 @@
                <children>
                   <Label text="Beschikbare bewerkingen" />
                   <Label text="Geselecteerde bewerkingen" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                  <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-                  <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
-                  <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <ListView fx:id="lsvBeschikbareBewerkingen" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                  <ListView fx:id="lsvGeselecteerdeBewerkingen" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                  <ListView fx:id="lsvBeschikbareDoelstellingen" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <ListView fx:id="lsvGeselecteerdeDoelstellingen" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <Label text="Beschikbare doelstellingen" GridPane.columnIndex="2" />
                   <Label text="Geselecteerde doelstellingen" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
                </children>

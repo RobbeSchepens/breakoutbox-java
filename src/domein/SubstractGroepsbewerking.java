@@ -8,6 +8,7 @@ package domein;
 import java.io.Serializable;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import static jdk.nashorn.internal.objects.NativeMath.round;
 
 /**
  *
@@ -27,7 +28,16 @@ public class SubstractGroepsbewerking extends Groepsbewerking<Double> implements
 
     @Override
     public String toString() {
-        return super.getOmschrijving();
+
+        String[] omschrijvingArray = super.getOmschrijving().split(" ");
+
+        double teBewerken = super.getTeBewerken();
+        if (teBewerken % 1 == 0) {
+            teBewerken = (int) teBewerken;
+        }
+
+        return omschrijvingArray[0] + " " + (int) teBewerken + " " + omschrijvingArray[1];
+
     }
 
     @Override

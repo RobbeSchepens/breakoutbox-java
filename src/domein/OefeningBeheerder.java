@@ -36,7 +36,8 @@ public final class OefeningBeheerder {
 
         setVakRepo(vakDoa);
         setGroepsbewerkingRepo(groepsbewerkingDoa);
-        setGroepsbewerkingRepo(doeslstellingDoa);
+
+        setDoeslstellingRepo(doeslstellingDoa);
 
     }
 
@@ -50,6 +51,7 @@ public final class OefeningBeheerder {
 
     public void setGroepsbewerkingRepo(GenericDao<Groepsbewerking> mock) {
         groepsbewerkingRepo = mock;
+
     }
 
     public void setDoeslstellingRepo(GenericDao<Doelstelling> mock) {

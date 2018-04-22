@@ -1,12 +1,15 @@
 package domein;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import repository.GenericDaoJpa;
 
 public class DomeinController {
@@ -29,6 +32,14 @@ public class DomeinController {
         this.vakkenLijst = ob.geefVakkenJPA();
         this.groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
         this.doelstellingenLijst = ob.geefDoelstellingenJPA();
+
+        sortAllLists();
+    }
+
+    private void sortAllLists() {
+        Collections.sort(vakkenLijst, Comparator.comparing(Vak::getNaam));
+        Collections.sort(groepsbewerkingenLijst, Comparator.comparing(Groepsbewerking::toString));
+        Collections.sort(doelstellingenLijst, Comparator.comparing(Doelstelling::getDoelstelling));
 
     }
 
@@ -90,22 +101,6 @@ public class DomeinController {
         });
     }
 
-    public void voegNieuweOefeningToe(String naam, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<Doelstelling> doelstelling) {
-        /* if ( de naam van deze oefening al in gebruik is dan) {
-            throw new IllegalArgumentException("Er bestaat al een oefening met deze naam");
-        }*/
-        if (groepsbewerkingen != null && groepsbewerkingen.isEmpty()) {
-            throw new IllegalArgumentException("er moeten bewerkingen zijn");
-        }
-        if (doelstelling != null && doelstelling.isEmpty()) {
-            throw new IllegalArgumentException("er moeten doelstellingen zijn");
-        }
-
-        Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
-        oefeningLijst.add(oefening);
-        ob.addOefening(oefening);
-    }
-
     // ================
     // == Vakken ======
     // ================
@@ -129,7 +124,7 @@ public class DomeinController {
         return groepsbewerkingenLijst;
     }
 
-    public ObservableList<Groepsbewerking> geefDoelstellingen() {
+    public ObservableList<Groepsbewerking> geefGroepsbewerkingen() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(groepsbewerkingenLijst));
     }
 
@@ -140,8 +135,40 @@ public class DomeinController {
         return doelstellingenLijst;
     }
 
-    public ObservableList<Doelstelling> geefGroepsbewerkingen() {
+    public ObservableList<Doelstelling> geefDoelstellingen() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(doelstellingenLijst));
+    }
+
+    public void voegNieuweOefeningToe(String naam, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<Doelstelling> doelstelling) {
+        /* if ( de naam van deze oefening al in gebruik is dan) {
+            throw new IllegalArgumentException("Er bestaat al een oefening met deze naam");
+        }*/
+        if (groepsbewerkingen != null && groepsbewerkingen.isEmpty()) {
+            throw new IllegalArgumentException("er moeten bewerkingen zijn");
+        }
+        if (doelstelling != null && doelstelling.isEmpty()) {
+            throw new IllegalArgumentException("er moeten doelstellingen zijn");
+        }
+
+        Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
+        oefeningLijst.add(oefening);
+        ob.addOefening(oefening);
+    }
+
+    public void bewerkOefening(String naam, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<Doelstelling> doelstelling) {
+
+    }
+
+    public void verwijderOef(String naam) {
+        Oefening oefn = filteredOefeningList.stream().filter(oef -> oef.getNaam().equals(naam)).findFirst().get();
+        filteredOefeningList.remove(oefn);
+        ob.getOefRepo().delete(oefn);
+        laadOefeningen();
+    }
+
+    public void laadOefeningen() {
+        oefeningLijst = ob.getOefRepo().findAll();
+
     }
 
     public <T> void verwijderObject(T object) {
