@@ -1,32 +1,37 @@
 package gui;
 
 import domein.DomeinController;
-import javafx.event.ActionEvent;
+import domein.IOefening;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
 
-public class OefeningOverzichtPanelController extends OverzichtPanelController {
+public class OefeningOverzichtPanelController<T extends IOefening> extends OverzichtPanelController {
 
+    private DomeinController dc;
+    
     public OefeningOverzichtPanelController(DomeinController dcon) {
         super(dcon);
+        this.dc = dcon;
     }
-
+    
     @Override
-    void btnDeleteSelectedOnAction(ActionEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    void implementTableviewListener() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    void implementTableviewListener(Object newValue) {
+        dc.setHuidigeOefening((T)newValue);
+        //dc.addOefeningObserver(this); // oorzaak van IndexOutOfBoundsException ...
+        renderContent();
     }
 
     @Override
     void renderContent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getTbvOverzicht().setItems(dc.geefOefeningen());
+//        getTbvOverzichtCol1().setCellValueFactory(v->v.getValue().naamProperty());
+//        colNaam.setCellValueFactory(v->v.getValue().naamProperty());
+//        getTbvOverzichtCol2().setCellValueFactory(v->v.getValue().getVak().naamProperty());
     }
 
     @Override
     void setTableColumnObjects() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //super.setTbvOverzicht(new TableView<IOefening>());
+//        super.getTbvOverzicht().setItems((ObservableList<Object>)dc.geefOefeningen());
     }
-
 }
