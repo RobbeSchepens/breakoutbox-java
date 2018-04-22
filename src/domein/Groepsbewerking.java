@@ -1,26 +1,30 @@
 package domein;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "GROEPSBEWERKINGEN")
+@Table(name = "Groepsbewerkingen")
 @Inheritance
 @DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 public abstract class Groepsbewerking<T> implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
+    @Column
     private String omschrijving;
+    @Column
     private T teBewerken;
 
     // Op deze klasse Strategy Pattern toepassen en 
@@ -34,11 +38,11 @@ public abstract class Groepsbewerking<T> implements Serializable {
         this.teBewerken = teBewerken;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

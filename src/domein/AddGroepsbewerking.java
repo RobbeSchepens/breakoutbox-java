@@ -16,6 +16,10 @@ import javax.persistence.Entity;
 @DiscriminatorValue("AddGroepsbewerking")
 public class AddGroepsbewerking extends Groepsbewerking<Double> {
 
+    public AddGroepsbewerking() {
+        super();
+    }
+
     public AddGroepsbewerking(String omschrijving, Double teBewerken) {
         super(omschrijving, teBewerken);
     }

@@ -55,7 +55,7 @@ public class DomeinController {
     public ObservableList<IOefening> geefOefeningen() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(oefeningLijst));
     }
-    
+
     // Deze dient om aan GUI te geven. 
     // Voor gebruik in andere domeinmethodes, gebruik: ob.geefOefeningByNaamJpa(naam);
     public IOefening geefOefeningByNaam(String naam) {
@@ -84,7 +84,7 @@ public class DomeinController {
         });
     }
 
-    public void voegNieuweOefeningToe(String naam, Vak vak, File opgave, Set<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<String> doelstelling) {
+    public void voegNieuweOefeningToe(String naam, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<String> doelstelling) {
         /* if ( de naam van deze oefening al in gebruik is dan) {
             throw new IllegalArgumentException("Er bestaat al een oefening met deze naam");
         }*/

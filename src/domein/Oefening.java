@@ -31,6 +31,7 @@ import javax.persistence.Transient;
 public class Oefening implements IOefening, Serializable, Subject {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -39,26 +40,28 @@ public class Oefening implements IOefening, Serializable, Subject {
     private final StringProperty _naam = new SimpleStringProperty();
     private String naam;
 
+    private String antwoord;
+
     @OneToOne
     private PDF opgave;
-    private String antwoord;
 
     @OneToOne
     private PDF feedback;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Vak vak;
 
-    //@Transient
+    //@ManyToMany(cascade = CascadeType.PERSIST)
     //List<String> doelstellingen;
-    @ManyToMany
-    private Set<Groepsbewerking> groepsbewerkingen = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<Groepsbewerking> groepsbewerkingen;
+
     @Transient
     private Set<OefeningObserver> observers = new HashSet<>();
 
     public Oefening() {
     }
 
-    public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, Set<Groepsbewerking> groepsbewerkingen, List<String> doelstellingen) {
+    public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, List<Groepsbewerking> groepsbewerkingen, List<String> doelstellingen) {
         if (opgave == null) {
             throw new IllegalArgumentException("er moeten een opgave zijn");
         }
@@ -149,13 +152,13 @@ public class Oefening implements IOefening, Serializable, Subject {
         notifyObservers();
     }
 
-    public Set<Groepsbewerking> getGroepsbewerkingen() {
+    public List<Groepsbewerking> getGroepsbewerkingen() {
         return groepsbewerkingen;
     }
 
-    public void setGroepsbewerkingen(Set<Groepsbewerking> groepsbewerkingen) {
+    public void setGroepsbewerkingen(List<Groepsbewerking> groepsbewerkingen) {
         if (groepsbewerkingen == null) {
-            throw new IllegalArgumentException("er moeten groepsbewerkingen zijn");
+            throw new IllegalArgumentException("je moet bewerkingen geven");
         }
         this.groepsbewerkingen = groepsbewerkingen;
     }
@@ -180,6 +183,11 @@ public class Oefening implements IOefening, Serializable, Subject {
 
     public void setHuidig() {
         notifyObservers();
+    }
+
+    @Override
+    public String toString() {
+        return naam;
     }
 
 }
