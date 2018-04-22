@@ -11,20 +11,20 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public abstract class OverzichtPanelController {
+public abstract class OverzichtPanelController <T> {
 
     @FXML private Label lblTitleLeft, lblFilterOp;
     @FXML private TextField txfFilterOp;
-    @FXML private TableView<?> tbvOverzicht;
-    @FXML private TableColumn<?, ?> col1;
-    @FXML private TableColumn<?, ?> col2;
+    @FXML private TableView<T> tbvOverzicht;
+    @FXML private TableColumn<T, String> tbvOverzichtCol1;
+    @FXML private TableColumn<T, String> tbvOverzichtCol2;
     @FXML private Button btnDeleteSelected; 
     
     private DomeinController dc;
 
     public OverzichtPanelController(DomeinController dcon) {
         FXMLLoader loader
-                = new FXMLLoader(getClass().getResource("DetailPanel.fxml"));
+                = new FXMLLoader(getClass().getResource("OverzichtPanel.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -37,15 +37,48 @@ public abstract class OverzichtPanelController {
         
         tbvOverzicht.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if(newValue != null){
-                implementTableviewListener();
+                implementTableviewListener(newValue);
             }
         });
         
         renderContent();
+        
     }
 
-    @FXML abstract void btnDeleteSelectedOnAction(ActionEvent event);
-    abstract void implementTableviewListener();
+    public void setLblTitleLeft(Label lblTitleLeft) {
+        this.lblTitleLeft = lblTitleLeft;
+    }
+
+    public void setLblFilterOp(Label lblFilterOp) {
+        this.lblFilterOp = lblFilterOp;
+    }
+
+    public TableView<T> getTbvOverzicht() {
+        return tbvOverzicht;
+    }
+
+    public TableColumn<T, String> getTbvOverzichtCol1() {
+        return tbvOverzichtCol1;
+    }
+
+    public TableColumn<T, String> getTbvOverzichtCol2() {
+        return tbvOverzichtCol2;
+    }
+
+    public void setTbvOverzichtCol1(TableColumn<T, String> tbvOverzichtCol1) {
+        this.tbvOverzichtCol1 = tbvOverzichtCol1;
+    }
+    
+    
+    
+    
+
+    @FXML private void btnDeleteSelectedOnAction(ActionEvent event){
+        if (tbvOverzicht.getSelectionModel().getSelectedItem() != null)
+            dc.verwijderObject(tbvOverzicht.getSelectionModel().getSelectedItem());
+    }
+    //@FXML abstract void btnDeleteSelectedOnAction(ActionEvent event);
+    abstract void implementTableviewListener(T   newValue);
     abstract void renderContent();
     abstract void setTableColumnObjects();
 }

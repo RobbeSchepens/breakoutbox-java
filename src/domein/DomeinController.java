@@ -97,4 +97,9 @@ public class DomeinController {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(vakkenLijst));
     }
     
+    
+    public <T> void verwijderObject(T object){
+        
+    }
+    
 }
