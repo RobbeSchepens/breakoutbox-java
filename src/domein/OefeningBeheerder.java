@@ -11,6 +11,7 @@ import repository.GenericDao;
 import repository.GenericDaoJpa;
 
 public final class OefeningBeheerder {
+
     public final String PERSISTENCE_UNIT_NAME = "breakoutboxPU";
     private EntityManager em;
     private EntityManagerFactory emf;
@@ -23,34 +24,33 @@ public final class OefeningBeheerder {
         setOefRepo(new GenericDaoJpa<>(Oefening.class));
         setVakRepo(new GenericDaoJpa<>(Vak.class));
     }
-    
-    public void setOefRepo(GenericDao<Oefening> mock){
+
+    public void setOefRepo(GenericDao<Oefening> mock) {
         oefRepo = mock;
     }
-    
-    public void setVakRepo(GenericDao<Vak> mock){
+
+    public void setVakRepo(GenericDao<Vak> mock) {
         vakRepo = mock;
     }
-    
+
     private void initializePersistentie() {
         openPersistentie();
         OefeningData od = new OefeningData(this);
         od.populeerData();
     }
-    
+
     private void openPersistentie() {
         emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         em = emf.createEntityManager();
     }
 
-    public void closePersistentie(){
-         em.close();
-         emf.close();
+    public void closePersistentie() {
+        em.close();
+        emf.close();
     }
-    
+
     // Methodes voor oefening op te halen, zoals gefilterd etc
     // Voor meer voorbeelden, zie OOPIII_JPA_Garage 
-    
     public void addOefening(Oefening o) {
         //oefeningenMap.put(o.getNaam(), o);
         em.getTransaction().begin();
@@ -60,6 +60,10 @@ public final class OefeningBeheerder {
 
     public List<Oefening> geefOefeningenJPA() {
         return oefRepo.findAll();
+    }
+
+    public GenericDao<Oefening> getOefRepo() {
+        return oefRepo;
     }
 
     public List<Vak> geefVakkenJPA() {

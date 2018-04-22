@@ -1,38 +1,41 @@
 package domein;
 
+import java.io.File;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
 public class DomeinController {
+
     // Oefening
     private OefeningBeheerder ob = new OefeningBeheerder();
     private List<Oefening> oefeningLijst;
     private List<Vak> vakkenLijst;
     private Oefening huidigeOefening;
     private FilteredList<Oefening> filteredOefeningList;
-    
+
     // Box
     //private Box huidigeBox;
-
     // Sessie
     //private Sessie huidigeSessie;
-
     public DomeinController() {
         this.oefeningLijst = ob.geefOefeningenJPA();
         this.vakkenLijst = ob.geefVakkenJPA();
     }
-    
+
     // ================
     // == Oefeningen ==
     // ================
     private List<Oefening> getOefeningList() {
-        if (oefeningLijst == null) oefeningLijst = ob.geefOefeningenJPA();
+        if (oefeningLijst == null) {
+            oefeningLijst = ob.geefOefeningenJPA();
+        }
         return oefeningLijst;
     }
-    
+
     public IOefening getHuidigeOefening() {
         return huidigeOefening;
     }
@@ -40,32 +43,32 @@ public class DomeinController {
     public boolean noOefeningen() {
         return oefeningLijst.isEmpty();
     }
-    
+
     public int geefAantalOefeningen() {
         return oefeningLijst.size();
     }
-    
-    public List<String> geefOefeningNaamLijst(){
+
+    public List<String> geefOefeningNaamLijst() {
         return getOefeningList().stream().map(Oefening::getNaam).collect(Collectors.toList());
     }
-    
-    public ObservableList<IOefening> geefOefeningen(){
+
+    public ObservableList<IOefening> geefOefeningen() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(oefeningLijst));
     }
-    
-    public ObservableList<Oefening> geefOefeningen1(){
+
+    public ObservableList<Oefening> geefOefeningen1() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(oefeningLijst));
     }
 
     public void setHuidigeOefening(IOefening huidigeOefening) {
-        this.huidigeOefening = (Oefening)huidigeOefening;
+        this.huidigeOefening = (Oefening) huidigeOefening;
         this.huidigeOefening.setHuidig();
     }
-    
+
     public void addOefeningObserver(OefeningObserver o) {
         huidigeOefening.addObserver(o);
     }
-    
+
     public void changeFilter(String filterValue) {
         filteredOefeningList.setPredicate(oefening -> {
             // If filter text is empty, display all persons.
@@ -78,28 +81,39 @@ public class DomeinController {
             return oefening.getNaam().toLowerCase().contains(lowerCaseValue);
         });
     }
-    
-    public void voegNieuweOefeningToe(String naam, String antwoord, Vak vak) {
-        Oefening oef = new Oefening(naam, antwoord, vak);
-        oefeningLijst.add(oef);
-        ob.addOefening(oef);
+
+    public void voegNieuweOefeningToe(String naam, Vak vak, File opgave, Set<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<String> doelstelling) {
+        /* if ( de naam van deze oefening al in gebruik is dan) {
+            throw new IllegalArgumentException("Er bestaat al een oefening met deze naam");
+        }*/
+        if (groepsbewerkingen != null && groepsbewerkingen.isEmpty()) {
+            throw new IllegalArgumentException("er moeten bewerkingen zijn");
+        }
+        if (doelstelling != null && doelstelling.isEmpty()) {
+            throw new IllegalArgumentException("er moeten doelstellingen zijn");
+        }
+
+        Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
+        oefeningLijst.add(oefening);
+        ob.addOefening(oefening);
     }
-    
+
     // ================
     // == Vakken ======
     // ================
     public List<Vak> getVakkenList() {
-        if (vakkenLijst == null) vakkenLijst = ob.geefVakkenJPA();
+        if (vakkenLijst == null) {
+            vakkenLijst = ob.geefVakkenJPA();
+        }
         return vakkenLijst;
     }
-    
-    public ObservableList<Vak> geefVakken(){
+
+    public ObservableList<Vak> geefVakken() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(vakkenLijst));
     }
-    
-    
-    public <T> void verwijderObject(T object){
-        
+
+    public <T> void verwijderObject(T object) {
+
     }
-    
+
 }

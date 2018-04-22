@@ -3,6 +3,7 @@ package repository;
 import domein.Oefening;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import static repository.GenericDaoJpa.em;
 
 public class OefeningDaoJpa extends GenericDaoJpa<Oefening> implements OefeningDao {
@@ -10,7 +11,7 @@ public class OefeningDaoJpa extends GenericDaoJpa<Oefening> implements OefeningD
     public OefeningDaoJpa() {
         super(Oefening.class);
     }
-    
+
     @Override
     public Oefening getOefeningByName(String oefeningnaam) throws EntityNotFoundException {
         try {
@@ -21,4 +22,5 @@ public class OefeningDaoJpa extends GenericDaoJpa<Oefening> implements OefeningD
             throw new EntityNotFoundException();
         }
     }
+
 }

@@ -59,10 +59,10 @@ public class Oefening implements IOefening, Serializable, Subject {
 
     public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, Set<Groepsbewerking> groepsbewerkingen, List<String> doelstellingen) {
         if (opgave == null) {
-            throw new IllegalArgumentException("Opgave mag niet leeg zijn");
+            throw new IllegalArgumentException("er moeten een opgave zijn");
         }
         if (feedback == null) {
-            throw new IllegalArgumentException("Feedback mag niet leeg zijn");
+            throw new IllegalArgumentException("er moet feedback zijn");
         }
 
         setGroepsbewerkingen(groepsbewerkingen);
