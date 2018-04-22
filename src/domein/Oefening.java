@@ -47,8 +47,8 @@ public class Oefening implements IOefening, Serializable, Subject {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Vak vak;
 
-    private SimpleObjectProperty<List<String>> doelstellingen = new SimpleObjectProperty();
-
+    //@Transient
+    //List<String> doelstellingen;
     @ManyToMany
     private Set<Groepsbewerking> groepsbewerkingen = new HashSet<>();
     @Transient
@@ -73,7 +73,7 @@ public class Oefening implements IOefening, Serializable, Subject {
         pdfName = String.format("%s_%s_%s", "Feedback", naam, opgave.getName());
         setFeedback(new PDF(feedback, pdfName));
         setNaam(naam);
-        setDoelstelling(doelstellingen);
+        //setDoelstelling(doelstellingen);
 
     }
 
@@ -93,10 +93,6 @@ public class Oefening implements IOefening, Serializable, Subject {
 
     public StringProperty naamProperty() {
         return naam;
-    }
-
-    public ObjectProperty<List<String>> doelstellingenProperty() {
-        return doelstellingen;
     }
 
     @Override
@@ -159,17 +155,6 @@ public class Oefening implements IOefening, Serializable, Subject {
             throw new IllegalArgumentException("er moeten groepsbewerkingen zijn");
         }
         this.groepsbewerkingen = groepsbewerkingen;
-    }
-
-    public List<String> getDoelstellingen() {
-        return this.doelstellingen.get();
-    }
-
-    public void setDoelstelling(List<String> doelstellingen) {
-        if (doelstellingen == null) {
-            throw new IllegalArgumentException("er moeten doelstellingen zijn");
-        }
-        this.doelstellingen.set(doelstellingen);
     }
 
     @Override

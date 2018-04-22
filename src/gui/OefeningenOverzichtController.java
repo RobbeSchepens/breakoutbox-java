@@ -50,7 +50,14 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
     @FXML
     private TextField txfAntwoord;
     @FXML
-    private Button btnAddOefening;
+    private Label lblToevOfBewerken;
+
+    // @FXML
+    // private Button btnBewerkOefening;
+    @FXML
+    private Button btnVoegOefeningToe;
+    @FXML
+    private Button btnBewerkOefening;
     @FXML
     private Button btnVerwijderOefening;
 
@@ -64,7 +71,7 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
     private FileChooser feedbackChooser;
     private File opgave;
     private File feedback;
-    
+
     // huidigeOefening update Observer
     private String naam;
     private String antwoord;
@@ -80,21 +87,19 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-        
+
         this.dc = dc;
 
         tbvOefeningen.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            if(newValue != null){
+            if (newValue != null) {
                 dc.setHuidigeOefening(newValue);
                 //dc.addOefeningObserver(this); // oorzaak van IndexOutOfBoundsException ...
                 displayHuidigeOefening();
             }
         });
-        
+
         setAllItems();
-        
-        
-        
+
         //init file chooser
         this.opgaveChooser = new FileChooser();
         opgaveChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
@@ -104,6 +109,8 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         //default layout
         btnOpgavePreview.setDisable(true);
         btnFeedbackPreview.setDisable(true);
+        lblToevOfBewerken.setText("Oefening Toevoegen");
+
     }
 
     @FXML
@@ -174,15 +181,15 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
     }
 
     public void display() {
-        System.out.printf(naam +" "+ antwoord +" "+ vak.toString());
+        System.out.printf(naam + " " + antwoord + " " + vak.toString());
         tbvOefeningen.setItems(dc.geefOefeningen());
     }
 
     private void setAllItems() {
         tbvOefeningen.setItems(dc.geefOefeningen());
-        colNaam.setCellValueFactory(v->v.getValue().naamProperty());
-        colVak.setCellValueFactory(v->v.getValue().getVak().naamProperty());
-        
+        colNaam.setCellValueFactory(v -> v.getValue().naamProperty());
+        colVak.setCellValueFactory(v -> v.getValue().getVak().naamProperty());
+
         ddlVakken.setItems(dc.geefVakken());
         ddlVakkenFilter.setItems(dc.geefVakken());
     }
@@ -193,11 +200,17 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         ddlVakken.getSelectionModel().select(dc.getHuidigeOefening().getVak());
     }
 
+    //@FXML
+    //private void btnAddOefeningOnAction(ActionEvent event) { // btnaddoe
+    //dc.voegNieuweOefeningToe(txfNaam.getText(), txfAntwoord.getText(), ddlVakken.getSelectionModel().getSelectedItem());
+    //setAllItems();
+    //}
     @FXML
-    private void btnAddOefeningOnAction(ActionEvent event) {
-        dc.voegNieuweOefeningToe(txfNaam.getText(), txfAntwoord.getText(), 
-                ddlVakken.getSelectionModel().getSelectedItem());
-        setAllItems();
+    private void btnVoegOefeningToeOnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnBewerkOefeningOnAction(ActionEvent event) {
     }
 
     @FXML
