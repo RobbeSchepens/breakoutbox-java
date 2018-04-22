@@ -186,12 +186,13 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
     }
 
     private void setAllItems() {
-        tbvOefeningen.setItems(dc.geefOefeningen());
+        // hier is het probleem
+        /*tbvOefeningen.setItems(dc.geefOefeningen());
         colNaam.setCellValueFactory(v -> v.getValue().naamProperty());
         colVak.setCellValueFactory(v -> v.getValue().getVak().naamProperty());
 
         ddlVakken.setItems(dc.geefVakken());
-        ddlVakkenFilter.setItems(dc.geefVakken());
+        ddlVakkenFilter.setItems(dc.geefVakken());*/
     }
 
     private void displayHuidigeOefening() {

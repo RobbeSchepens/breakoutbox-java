@@ -84,7 +84,7 @@ public class DomeinController {
         });
     }
 
-    public void voegNieuweOefeningToe(String naam, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<String> doelstelling) {
+    public void voegNieuweOefeningToe(String naam, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<Doelstelling> doelstelling) {
         /* if ( de naam van deze oefening al in gebruik is dan) {
             throw new IllegalArgumentException("Er bestaat al een oefening met deze naam");
         }*/

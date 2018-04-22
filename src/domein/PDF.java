@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -19,11 +21,20 @@ import javax.persistence.Lob;
 import javax.persistence.Transient;
 
 @Entity
+@Access(AccessType.FIELD)
 public class PDF implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String name;
+    @Transient
     private File file;
     public static String FOLDERLOCATIE = System.getProperty("user.dir") + "/PDFs/";
+    @Lob
+    @Column
+    byte[] DBFile;
 
     public PDF() {
     }
@@ -34,7 +45,6 @@ public class PDF implements Serializable {
 
     }
 
-    @Id
     public String getName() {
         return name;
     }
@@ -43,8 +53,6 @@ public class PDF implements Serializable {
         this.name = name;
     }
 
-    @Lob
-    @Column
     public byte[] getDBFile() {
         byte[] fileInBytes = null;
         try {
@@ -65,7 +73,6 @@ public class PDF implements Serializable {
         }
     }
 
-    @Transient
     public File getFile() {
         return file;
     }
@@ -73,4 +80,5 @@ public class PDF implements Serializable {
     public void setFile(File file) {
         this.file = file;
     }
+
 }

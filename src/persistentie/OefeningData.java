@@ -1,6 +1,7 @@
 package persistentie;
 
 import domein.AddGroepsbewerking;
+import domein.Doelstelling;
 import domein.Groepsbewerking;
 import domein.Oefening;
 import domein.OefeningBeheerder;
@@ -27,9 +28,9 @@ public class OefeningData {
             bewerkingenDatabankLijst.add(new SubstractGroepsbewerking("Trek 1 af", i));
         }
 
-        List<String> doelstellingenArray = new ArrayList();
+        List<Doelstelling> doelstellingenArray = new ArrayList();
         for (int i = 1; i < 12; i++) { // 12 doelstellingen maken
-            doelstellingenArray.add(("Doelstelling" + i));
+            doelstellingenArray.add(new Doelstelling("Doelstelling" + i));
         }
 
         List<Vak> vakken = new ArrayList();

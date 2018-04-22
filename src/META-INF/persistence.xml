@@ -7,6 +7,9 @@
     <class>domein.Vak</class>
     <class>domein.Antwoord</class>
     <class>domein.Groepsbewerking</class>
+    <class>domein.AddGroepsbewerking</class>
+    <class>domein.SubstractGroepsbewerking</class>
+    <class>domein.Doelstelling</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/breakoutbox"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

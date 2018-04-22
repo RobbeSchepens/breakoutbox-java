@@ -44,14 +44,15 @@ public class Oefening implements IOefening, Serializable, Subject {
 
     @OneToOne
     private PDF opgave;
-
     @OneToOne
     private PDF feedback;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Vak vak;
 
-    //@ManyToMany(cascade = CascadeType.PERSIST)
-    //List<String> doelstellingen;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    List<Doelstelling> doelstellingen;
+
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Groepsbewerking> groepsbewerkingen;
 
@@ -61,7 +62,7 @@ public class Oefening implements IOefening, Serializable, Subject {
     public Oefening() {
     }
 
-    public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, List<Groepsbewerking> groepsbewerkingen, List<String> doelstellingen) {
+    public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
         if (opgave == null) {
             throw new IllegalArgumentException("er moeten een opgave zijn");
         }
@@ -77,8 +78,16 @@ public class Oefening implements IOefening, Serializable, Subject {
         pdfName = String.format("%s_%s_%s", "Feedback", naam, opgave.getName());
         setFeedback(new PDF(feedback, pdfName));
         setNaam(naam);
-        //setDoelstelling(doelstellingen);
+        setDoelstellingen(doelstellingen);
 
+    }
+
+    public List<Doelstelling> getDoelstellingen() {
+        return doelstellingen;
+    }
+
+    public void setDoelstellingen(List<Doelstelling> doelstellingen) {
+        this.doelstellingen = doelstellingen;
     }
 
     @Override
