@@ -25,8 +25,8 @@ import javax.persistence.Transient;
 
 @Entity
 @Access(AccessType.FIELD)
-@NamedQueries({ 
-    @NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e._naam = :oefeningnaam")
+@NamedQueries({
+    @NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e.naam = :oefeningnaam")
 })
 public class Oefening implements IOefening, Serializable, Subject {
 
@@ -95,7 +95,7 @@ public class Oefening implements IOefening, Serializable, Subject {
 
     @Override
     public StringProperty naamProperty() {
-        return naam;
+        return _naam;
     }
 
     @Override

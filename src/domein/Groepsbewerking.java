@@ -19,6 +19,9 @@ public abstract class Groepsbewerking<T> implements Serializable {
     // Op deze klasse Strategy Pattern toepassen en 
     // krijgt dan niet-generieke subklassen voor de bewerking concreet te maken voor double/string
     // zoals: Rotate, Switch, Add, Multiply
+    public Groepsbewerking() {
+    }
+
     public Groepsbewerking(String omschrijving, T teBewerken) {
         this.omschrijving = omschrijving;
         this.teBewerken = teBewerken;
