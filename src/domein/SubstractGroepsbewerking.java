@@ -5,10 +5,15 @@
  */
 package domein;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 /**
  *
  * @author Daan
  */
+@Entity
+@DiscriminatorValue("SubstractGroepsbewerking")
 public class SubstractGroepsbewerking extends Groepsbewerking<Double> {
 
     public SubstractGroepsbewerking(String omschrijving, Double teBewerken) {

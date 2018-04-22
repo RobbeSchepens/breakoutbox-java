@@ -1,12 +1,19 @@
 package domein;
 
 import java.io.Serializable;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "GROEPSBEWERKINGEN")
+@Inheritance
+@DiscriminatorColumn(name = "discriminator", discriminatorType = DiscriminatorType.STRING)
 public abstract class Groepsbewerking<T> implements Serializable {
 
     @Id
