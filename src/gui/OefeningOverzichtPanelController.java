@@ -4,6 +4,7 @@ import domein.DomeinController;
 import domein.IOefening;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class OefeningOverzichtPanelController<T extends IOefening> extends OverzichtPanelController {
 
@@ -23,15 +24,10 @@ public class OefeningOverzichtPanelController<T extends IOefening> extends Overz
 
     @Override
     void renderContent() {
+        
         getTbvOverzicht().setItems(dc.geefOefeningen());
-//        getTbvOverzichtCol1().setCellValueFactory(v->v.getValue().naamProperty());
-//        colNaam.setCellValueFactory(v->v.getValue().naamProperty());
+        getTbvOverzichtCol1().setCellValueFactory(new PropertyValueFactory<>("Naam"));
+        getTbvOverzichtCol2().setCellValueFactory(new PropertyValueFactory<>("Vak"));
 //        getTbvOverzichtCol2().setCellValueFactory(v->v.getValue().getVak().naamProperty());
-    }
-
-    @Override
-    void setTableColumnObjects() {
-        //super.setTbvOverzicht(new TableView<IOefening>());
-//        super.getTbvOverzicht().setItems((ObservableList<Object>)dc.geefOefeningen());
     }
 }

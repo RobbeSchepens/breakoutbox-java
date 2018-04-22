@@ -5,16 +5,16 @@ import javafx.scene.layout.GridPane;
 
 public class OefeningFrameController extends GridPane {
     private DomeinController dc;
-//    private OverzichtPanelController overzichtPanel;
-//    private DetailPanelController detailPanelController;
-//    
-//    public OefeningFrameController(DomeinController dc) {
-//        this.dc = dc;    
-//        overzichtPanel = new OverzichtPanelController(dc);
-//        detailPanelController = new DetailPanelController(dc);
-//        
-//        dc.addObserver(detailPanelController);
-//        
-//        getChildren().addAll(overzichtPanel, detailPanelController);
-//    }
+    private OverzichtPanelController overzichtPanel;
+    private OefeningDetailPanelController oefeningDetailPanelController;
+    
+    public OefeningFrameController(DomeinController dc) {
+        this.dc = dc;    
+        overzichtPanel = new OefeningOverzichtPanelController(dc);
+        oefeningDetailPanelController = new OefeningDetailPanelController(dc);
+        
+        //dc.addObserver(oefeningDetailPanelController);
+        
+        //getChildren().addAll(overzichtPanel, oefeningDetailPanelController);
+    }
 }

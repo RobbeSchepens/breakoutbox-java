@@ -42,15 +42,14 @@ public abstract class OverzichtPanelController <T> {
         });
         
         renderContent();
-        
     }
 
-    public void setLblTitleLeft(Label lblTitleLeft) {
-        this.lblTitleLeft = lblTitleLeft;
+    public void setLblTitleLeftText(String lblTitleLeftText) {
+        this.lblTitleLeft.setText(lblTitleLeftText);
     }
 
-    public void setLblFilterOp(Label lblFilterOp) {
-        this.lblFilterOp = lblFilterOp;
+    public void setLblFilterOpText(String lblFilterOpText) {
+        this.lblFilterOp.setText(lblFilterOpText);
     }
 
     public TableView<T> getTbvOverzicht() {
@@ -64,10 +63,6 @@ public abstract class OverzichtPanelController <T> {
     public TableColumn<T, String> getTbvOverzichtCol2() {
         return tbvOverzichtCol2;
     }
-
-    public void setTbvOverzichtCol1(TableColumn<T, String> tbvOverzichtCol1) {
-        this.tbvOverzichtCol1 = tbvOverzichtCol1;
-    }
     
     
     
@@ -78,7 +73,6 @@ public abstract class OverzichtPanelController <T> {
             dc.verwijderObject(tbvOverzicht.getSelectionModel().getSelectedItem());
     }
     //@FXML abstract void btnDeleteSelectedOnAction(ActionEvent event);
-    abstract void implementTableviewListener(T   newValue);
+    abstract void implementTableviewListener(T newValue);
     abstract void renderContent();
-    abstract void setTableColumnObjects();
 }

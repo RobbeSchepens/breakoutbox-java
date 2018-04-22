@@ -15,7 +15,7 @@ public class StartUpGuiClientApp extends Application {
 
         HoofdMenuController root = new HoofdMenuController(new DomeinController());
 
-        Scene scene = new Scene(root, 1280, 720, Color.web("#ffffff"));
+        Scene scene = new Scene(root, 1280, 720);
         scene.getStylesheets().add("gui/css/style.css");
 
         primaryStage.getIcons().add(new Image("gui/img/favicon.png"));
