@@ -1,53 +1,76 @@
 package domein;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.Lob;
+import javax.persistence.Transient;
 
 @Entity
 public class PDF implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Basic(fetch=LAZY)
-    @Lob
-    private byte[] pdf;
+
+    private String name;
+    private File file;
+    public static String FOLDERLOCATIE = System.getProperty("user.dir") + "/PDFs/";
 
     public PDF() {
     }
 
-    public PDF(byte[] pdf) {
-        this.pdf = pdf;
+    public PDF(File file, String name) {
+        this.file = file;
+        this.name = name;
+
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Arrays.hashCode(this.pdf);
-        return hash;
+    @Id
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Lob
+    @Column
+    public byte[] getDBFile() {
+        byte[] fileInBytes = null;
+        try {
+            fileInBytes = Files.readAllBytes(file.toPath());
+        } catch (IOException ex) {
+            Logger.getLogger(PDF.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (obj == null) {
-            return false;
+        return fileInBytes;
+    }
+
+    public void setDBFile(byte[] bytearray) {
+        try {
+            String path = String.format("%s%s", FOLDERLOCATIE, getName());
+            Files.write(Paths.get(path), bytearray).toFile();
+            this.file = new File(String.format("%s%s", FOLDERLOCATIE, getName()));
+        } catch (IOException ex) {
+            Logger.getLogger(PDF.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final PDF other = (PDF) obj;
-        if (!Arrays.equals(this.pdf, other.pdf)) {
-            return false;
-        }
-        return true;
+    }
+
+    @Transient
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 }

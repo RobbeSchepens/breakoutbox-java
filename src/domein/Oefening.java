@@ -21,18 +21,18 @@ import javax.persistence.Transient;
 
 @Entity
 @Access(AccessType.FIELD)
-@NamedQueries({
-    //@NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e.naam = :oefeningnaam")
+@NamedQueries({ //@NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e.naam = :oefeningnaam")
 })
 public class Oefening implements IOefening, Serializable, Subject {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @Transient
     private final StringProperty naam = new SimpleStringProperty();
-    
+
     //private String naam;
     @OneToOne
     private PDF opgave;
@@ -46,8 +46,8 @@ public class Oefening implements IOefening, Serializable, Subject {
     private Set<Groepsbewerking> groepsbewerkingen = new HashSet<>();
     @Transient
     private Set<OefeningObserver> observers = new HashSet<>();
-    
-    public Oefening() { 
+
+    public Oefening() {
     }
 
     public Oefening(String naam, String antwoord, Vak vak) {
@@ -55,7 +55,7 @@ public class Oefening implements IOefening, Serializable, Subject {
         this.antwoord = antwoord;
         this.vak = vak;
     }
-    
+
     @Override
     @Access(AccessType.PROPERTY)
     public String getNaam() {
@@ -77,15 +77,20 @@ public class Oefening implements IOefening, Serializable, Subject {
     }
 
     public void setOpgave(PDF opgave) {
+
         this.opgave = opgave;
     }
 
     @Override
     public String getAntwoord() {
+
         return antwoord;
     }
 
     public void setAntwoord(String antwoord) {
+        if (antwoord == null) {
+            throw new IllegalArgumentException("Er moet een antwoord zijn");
+        }
         this.antwoord = antwoord;
         notifyObservers();
     }
@@ -96,6 +101,9 @@ public class Oefening implements IOefening, Serializable, Subject {
     }
 
     public void setFeedback(PDF feedback) {
+        if (feedback == null) {
+            throw new IllegalArgumentException("Er moet feedback zijn");
+        }
         this.feedback = feedback;
     }
 
@@ -111,15 +119,16 @@ public class Oefening implements IOefening, Serializable, Subject {
 
     @Override
     public void addObserver(OefeningObserver o) {
-        if (!observers.contains(o))
+        if (!observers.contains(o)) {
             observers.add(o);
+        }
     }
 
     @Override
     public void removeObserver(OefeningObserver o) {
         observers.remove(o);
     }
-    
+
     private void notifyObservers() {
         for (OefeningObserver observer : observers) {
             observer.update(getNaam(), antwoord, vak);
