@@ -9,6 +9,8 @@ import javax.persistence.Persistence;
 import persistentie.OefeningData;
 import repository.GenericDao;
 import repository.GenericDaoJpa;
+import repository.OefeningDao;
+import repository.OefeningDaoJpa;
 
 public final class OefeningBeheerder {
 
@@ -16,16 +18,16 @@ public final class OefeningBeheerder {
     private EntityManager em;
     private EntityManagerFactory emf;
     private Map<String, Oefening> oefeningenMap = new HashMap<>();
-    private GenericDao<Oefening> oefRepo;
+    private OefeningDao oefRepo;
     private GenericDao<Vak> vakRepo;
 
     public OefeningBeheerder() {
         initializePersistentie();
-        setOefRepo(new GenericDaoJpa<>(Oefening.class));
+        setOefRepo(new OefeningDaoJpa());
         setVakRepo(new GenericDaoJpa<>(Vak.class));
     }
 
-    public void setOefRepo(GenericDao<Oefening> mock) {
+    public void setOefRepo(OefeningDao mock) {
         oefRepo = mock;
     }
 
@@ -68,5 +70,9 @@ public final class OefeningBeheerder {
 
     public List<Vak> geefVakkenJPA() {
         return vakRepo.findAll();
+    }
+    
+    public Oefening geefOefeningByNaamJpa(String naam) {
+        return oefRepo.getOefeningByName(naam);
     }
 }

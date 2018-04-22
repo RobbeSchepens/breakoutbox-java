@@ -55,9 +55,11 @@ public class DomeinController {
     public ObservableList<IOefening> geefOefeningen() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(oefeningLijst));
     }
-
-    public ObservableList<Oefening> geefOefeningen1() {
-        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(oefeningLijst));
+    
+    // Deze dient om aan GUI te geven. 
+    // Voor gebruik in andere domeinmethodes, gebruik: ob.geefOefeningByNaamJpa(naam);
+    public IOefening geefOefeningByNaam(String naam) {
+        return ob.geefOefeningByNaamJpa(naam);
     }
 
     public void setHuidigeOefening(IOefening huidigeOefening) {
