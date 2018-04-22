@@ -3,28 +3,22 @@ package gui;
 import domein.DomeinController;
 import domein.IOefening;
 import domein.OefeningObserver;
-import domein.Oefening;
 import domein.Vak;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -32,9 +26,9 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
 
     //FXML
     @FXML
-    private TableColumn<Oefening, String> colNaam;
+    private TableColumn<IOefening, String> colNaam;
     @FXML
-    private TableColumn<Oefening, String> colVak;
+    private TableColumn<IOefening, String> colVak;
     @FXML
     private Label lblOpgavePadNaam;
     @FXML
