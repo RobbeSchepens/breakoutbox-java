@@ -1,8 +1,12 @@
 package domein;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javax.persistence.Access;
@@ -37,11 +41,14 @@ public class Oefening implements IOefening, Serializable, Subject {
     @OneToOne
     private PDF opgave;
     private String antwoord;
+
     @OneToOne
     private PDF feedback;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Vak vak;
-    //private Set<String> doelstellingen = new HashSet<>();
+
+    private SimpleObjectProperty<List<String>> doelstellingen = new SimpleObjectProperty();
+
     @ManyToMany
     private Set<Groepsbewerking> groepsbewerkingen = new HashSet<>();
     @Transient
@@ -50,10 +57,24 @@ public class Oefening implements IOefening, Serializable, Subject {
     public Oefening() {
     }
 
-    public Oefening(String naam, String antwoord, Vak vak) {
+    public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, Set<Groepsbewerking> groepsbewerkingen, List<String> doelstellingen) {
+        if (opgave == null) {
+            throw new IllegalArgumentException("Opgave mag niet leeg zijn");
+        }
+        if (feedback == null) {
+            throw new IllegalArgumentException("Feedback mag niet leeg zijn");
+        }
+
+        setGroepsbewerkingen(groepsbewerkingen);
+        setVak(vak);
+        String pdfName = String.format("%s_%s_%s", "Opgave", naam, opgave.getName());
+        setOpgave(new PDF(opgave, pdfName));
+        setAntwoord(antwoord);
+        pdfName = String.format("%s_%s_%s", "Feedback", naam, opgave.getName());
+        setFeedback(new PDF(feedback, pdfName));
         setNaam(naam);
-        this.antwoord = antwoord;
-        this.vak = vak;
+        setDoelstelling(doelstellingen);
+
     }
 
     @Override
@@ -63,6 +84,9 @@ public class Oefening implements IOefening, Serializable, Subject {
     }
 
     public void setNaam(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException("Er moet een naam zijn");
+        }
         naam.set(value);
         notifyObservers();
     }
@@ -71,13 +95,19 @@ public class Oefening implements IOefening, Serializable, Subject {
         return naam;
     }
 
+    public ObjectProperty<List<String>> doelstellingenProperty() {
+        return doelstellingen;
+    }
+
     @Override
     public PDF getOpgave() {
         return opgave;
     }
 
     public void setOpgave(PDF opgave) {
-
+        if (opgave == null) {
+            throw new IllegalArgumentException("Er moet een opgave zijn");
+        }
         this.opgave = opgave;
     }
 
@@ -113,8 +143,33 @@ public class Oefening implements IOefening, Serializable, Subject {
     }
 
     public void setVak(Vak vak) {
+        if (vak == null) {
+            throw new IllegalArgumentException("er moet een vak geselcteerd zijn");
+        }
         this.vak = vak;
         notifyObservers();
+    }
+
+    public Set<Groepsbewerking> getGroepsbewerkingen() {
+        return groepsbewerkingen;
+    }
+
+    public void setGroepsbewerkingen(Set<Groepsbewerking> groepsbewerkingen) {
+        if (groepsbewerkingen == null) {
+            throw new IllegalArgumentException("er moeten groepsbewerkingen zijn");
+        }
+        this.groepsbewerkingen = groepsbewerkingen;
+    }
+
+    public List<String> getDoelstellingen() {
+        return this.doelstellingen.get();
+    }
+
+    public void setDoelstelling(List<String> doelstellingen) {
+        if (doelstellingen == null) {
+            throw new IllegalArgumentException("er moeten doelstellingen zijn");
+        }
+        this.doelstellingen.set(doelstellingen);
     }
 
     @Override
@@ -138,4 +193,5 @@ public class Oefening implements IOefening, Serializable, Subject {
     public void setHuidig() {
         notifyObservers();
     }
+
 }

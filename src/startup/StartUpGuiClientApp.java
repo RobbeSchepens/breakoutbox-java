@@ -1,7 +1,10 @@
 package startup;
 
 import domein.DomeinController;
+import domein.PDF;
 import gui.HoofdMenuController;
+import java.io.File;
+import java.util.Arrays;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -12,6 +15,18 @@ public class StartUpGuiClientApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+        ///// folder aanmaken waar pdfs inkomen
+        File pdfLocation = new File(PDF.FOLDERLOCATIE);
+        if (!pdfLocation.exists()) {
+            try {
+                pdfLocation.mkdir();
+            } catch (SecurityException se) {
+                System.out.println(se.getMessage());
+            }
+        }
+        Arrays.stream(pdfLocation.listFiles()).forEach(File::delete);
+        /////////
 
         HoofdMenuController root = new HoofdMenuController(new DomeinController());
 
@@ -30,6 +45,6 @@ public class StartUpGuiClientApp extends Application {
     }
 
     private static void testconsole() {
-        
+
     }
 }
