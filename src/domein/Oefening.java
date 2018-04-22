@@ -26,7 +26,7 @@ import javax.persistence.Transient;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries({ 
-    //@NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e.naam = :oefeningnaam")
+    @NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e._naam = :oefeningnaam")
 })
 public class Oefening implements IOefening, Serializable, Subject {
 
@@ -36,7 +36,8 @@ public class Oefening implements IOefening, Serializable, Subject {
     private long id;
 
     @Transient
-    private final StringProperty naam = new SimpleStringProperty();
+    private final StringProperty _naam = new SimpleStringProperty();
+    private String naam;
 
     @OneToOne
     private PDF opgave;
@@ -78,21 +79,23 @@ public class Oefening implements IOefening, Serializable, Subject {
     }
 
     @Override
-    @Access(AccessType.PROPERTY)
+    //@Access(AccessType.PROPERTY)
     public String getNaam() {
-        return naam.get();
+        return _naam.get();
     }
 
     public void setNaam(String value) {
         if (value == null || value.trim().isEmpty()) {
             throw new IllegalArgumentException("Er moet een naam zijn");
         }
-        naam.set(value);
+        _naam.set(value);
+        naam = value;
         notifyObservers();
     }
 
+    @Override
     public StringProperty naamProperty() {
-        return naam;
+        return _naam;
     }
 
     public ObjectProperty<List<String>> doelstellingenProperty() {
