@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import repository.GenericDaoJpa;
 
 public class DomeinController {
 
@@ -14,6 +15,8 @@ public class DomeinController {
     private OefeningBeheerder ob = new OefeningBeheerder();
     private List<Oefening> oefeningLijst;
     private List<Vak> vakkenLijst;
+    private List<Groepsbewerking> groepsbewerkingenLijst;
+    private List<Doelstelling> doelstellingenLijst;
     private Oefening huidigeOefening;
     private FilteredList<Oefening> filteredOefeningList;
 
@@ -24,6 +27,9 @@ public class DomeinController {
     public DomeinController() {
         this.oefeningLijst = ob.geefOefeningenJPA();
         this.vakkenLijst = ob.geefVakkenJPA();
+        this.groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
+        this.doelstellingenLijst = ob.geefDoelstellingenJPA();
+
     }
 
     // ================
@@ -104,6 +110,8 @@ public class DomeinController {
     // == Vakken ======
     // ================
     public List<Vak> getVakkenList() {
+        //return new GenericDaoJpa<>(Vak.class).findAll();
+
         if (vakkenLijst == null) {
             vakkenLijst = ob.geefVakkenJPA();
         }
@@ -112,6 +120,28 @@ public class DomeinController {
 
     public ObservableList<Vak> geefVakken() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(vakkenLijst));
+    }
+
+    public List<Groepsbewerking> getGroepsbewerkingenList() {
+        if (groepsbewerkingenLijst == null) {
+            groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
+        }
+        return groepsbewerkingenLijst;
+    }
+
+    public ObservableList<Groepsbewerking> geefDoelstellingen() {
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(groepsbewerkingenLijst));
+    }
+
+    public List<Doelstelling> getDoelstellingenList() {
+        if (doelstellingenLijst == null) {
+            doelstellingenLijst = ob.geefDoelstellingenJPA();
+        }
+        return doelstellingenLijst;
+    }
+
+    public ObservableList<Doelstelling> geefGroepsbewerkingen() {
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(doelstellingenLijst));
     }
 
     public <T> void verwijderObject(T object) {

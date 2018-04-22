@@ -5,6 +5,7 @@
  */
 package domein;
 
+import java.io.Serializable;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -14,7 +15,7 @@ import javax.persistence.Entity;
  */
 @Entity
 @DiscriminatorValue("SubstractGroepsbewerking")
-public class SubstractGroepsbewerking extends Groepsbewerking<Double> {
+public class SubstractGroepsbewerking extends Groepsbewerking<Double> implements Serializable {
 
     public SubstractGroepsbewerking() {
         super();

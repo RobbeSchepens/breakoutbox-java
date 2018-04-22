@@ -19,12 +19,25 @@ public final class OefeningBeheerder {
     private EntityManagerFactory emf;
     private Map<String, Oefening> oefeningenMap = new HashMap<>();
     private OefeningDao oefRepo;
+
+    //extra repos
     private GenericDao<Vak> vakRepo;
+    private GenericDao<Groepsbewerking> groepsbewerkingRepo;
+    private GenericDao<Doelstelling> doeslstellingRepo;
 
     public OefeningBeheerder() {
+
         initializePersistentie();
         setOefRepo(new OefeningDaoJpa());
-        setVakRepo(new GenericDaoJpa<>(Vak.class));
+
+        GenericDaoJpa vakDoa = new GenericDaoJpa(Vak.class);
+        GenericDaoJpa groepsbewerkingDoa = new GenericDaoJpa(Groepsbewerking.class);
+        GenericDaoJpa doeslstellingDoa = new GenericDaoJpa(Doelstelling.class);
+
+        setVakRepo(vakDoa);
+        setGroepsbewerkingRepo(groepsbewerkingDoa);
+        setGroepsbewerkingRepo(doeslstellingDoa);
+
     }
 
     public void setOefRepo(OefeningDao mock) {
@@ -33,6 +46,14 @@ public final class OefeningBeheerder {
 
     public void setVakRepo(GenericDao<Vak> mock) {
         vakRepo = mock;
+    }
+
+    public void setGroepsbewerkingRepo(GenericDao<Groepsbewerking> mock) {
+        groepsbewerkingRepo = mock;
+    }
+
+    public void setDoeslstellingRepo(GenericDao<Doelstelling> mock) {
+        doeslstellingRepo = mock;
     }
 
     private void initializePersistentie() {
@@ -71,8 +92,36 @@ public final class OefeningBeheerder {
     public List<Vak> geefVakkenJPA() {
         return vakRepo.findAll();
     }
-    
+
+    public List<Groepsbewerking> geefGroepsbewerkingenJPA() {
+        return groepsbewerkingRepo.findAll();
+    }
+
+    public List<Doelstelling> geefDoelstellingenJPA() {
+        return doeslstellingRepo.findAll();
+    }
+
     public Oefening geefOefeningByNaamJpa(String naam) {
         return oefRepo.getOefeningByName(naam);
     }
+/////////////
+
+    public void addVak(Vak o) {
+        em.getTransaction().begin();
+        em.persist(o);
+        em.getTransaction().commit();
+    }
+
+    public void addGroepsbewerking(Groepsbewerking o) {
+        em.getTransaction().begin();
+        em.persist(o);
+        em.getTransaction().commit();
+    }
+
+    public void addDoelstelling(Doelstelling o) {
+        em.getTransaction().begin();
+        em.persist(o);
+        em.getTransaction().commit();
+    }
+
 }

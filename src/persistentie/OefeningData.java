@@ -40,14 +40,19 @@ public class OefeningData {
         vakken.add(new Vak("Natuurkunde"));
         vakken.add(new Vak("Nederalnds"));
 
-        GenericDaoJpa bewerkingDoa = new GenericDaoJpa(Groepsbewerking.class);
+        vakken.forEach(vak -> ob.addVak(vak));
+        bewerkingenDatabankLijst.forEach(bw -> ob.addGroepsbewerking(bw));
+        doelstellingenArray.forEach(dls -> ob.addDoelstelling(dls));
+
+        /*GenericDaoJpa bewerkingDoa = new GenericDaoJpa(Groepsbewerking.class);
         GenericDaoJpa doelstellingDoa = new GenericDaoJpa(String.class);
         GenericDaoJpa vakDoa = new GenericDaoJpa(Vak.class);
-
         bewerkingenDatabankLijst.forEach(bew -> bewerkingDoa.insert(bew));
-        vakken.forEach(vak -> vakDoa.insert(vak));
-        doelstellingenArray.forEach(doel -> doelstellingDoa.insert(doel));
-
+        vakken.forEach(vak -> {
+            vakDoa.insert(vak);
+            //System.out.println(vak);
+        });
+        doelstellingenArray.forEach(doel -> doelstellingDoa.insert(doel));*/
         //public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, Set<Groepsbewerking> groepsbewerkingen, List<String> doelstellingen) {
         //ob.addOefening(new Oefening("Hoofdstad VK", "London", new Vak("Aardrijkskunde")));
         //ob.addOefening(new Oefening("Optelsommen", "1", new Vak("Wiskunde")));

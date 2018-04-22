@@ -21,20 +21,13 @@ import javax.persistence.Lob;
 import javax.persistence.Transient;
 
 @Entity
-@Access(AccessType.FIELD)
+@Access(AccessType.PROPERTY)
 public class PDF implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
     private String name;
-    @Transient
+
     private File file;
     public static String FOLDERLOCATIE = System.getProperty("user.dir") + "/PDFs/";
-    @Lob
-    @Column
-    byte[] DBFile;
 
     public PDF() {
     }
@@ -45,6 +38,7 @@ public class PDF implements Serializable {
 
     }
 
+    @Id
     public String getName() {
         return name;
     }
@@ -53,6 +47,8 @@ public class PDF implements Serializable {
         this.name = name;
     }
 
+    @Lob
+    @Column
     public byte[] getDBFile() {
         byte[] fileInBytes = null;
         try {
@@ -73,6 +69,7 @@ public class PDF implements Serializable {
         }
     }
 
+    @Transient
     public File getFile() {
         return file;
     }
