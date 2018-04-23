@@ -225,8 +225,10 @@ public class DomeinController extends Observable {
         oefeningLijst = ob.getOefRepo().findAll();
     }
 
-    public <T> void verwijderObject(T object) {
-
+    public void verwijderOefening(IOefening o) {
+        //ob.deleteOefening(ob.geefOefeningByNaamJpa(o.getNaam()));
+        ob.deleteOefening((Oefening)o);
+        oefeningLijst.remove((Oefening)o);
     }
 
 }

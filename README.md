@@ -4,15 +4,15 @@
 
 * Daan Dedecker
 * Robbe Schepens
-* Michael Vermassen
-* Bjorn Hoffmann
+* ~~Michael Vermassen~~
+* ~~Bjorn Hoffmann~~
 
 ## Technologie
 
 * Java 8
 * Java JPA
 * Java FX
-* Mockito
+* Mockito :tropical_drink:
 
 ## Info
 
