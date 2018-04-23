@@ -240,9 +240,9 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
 
         //listviews
         //groepsbewerkingen beschikbaar
-        lsvBeschikbareBewerkingen.setItems(dc.geefGroepsbewerkingen());
-        setLblListViewGroepsbewerkingen();
-        lsvBeschikbareBewerkingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        /*lsvBeschikbareBewerkingen.setItems(dc.geefGroepsbewerkingen());
+        setLblListViewGroepsbewerkingen();*/
+ /*lsvBeschikbareBewerkingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 Groepsbewerking gbw = lsvBeschikbareBewerkingen.getSelectionModel().getSelectedItem();
@@ -255,22 +255,21 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
                     System.out.println("Je kan niet meer dan 10 selecteren");
                 }
             }
-        });
+        });*/
         //groepsbewerkingen geselecteerd
-        lsvGeselecteerdeBewerkingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        /*lsvGeselecteerdeBewerkingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 Groepsbewerking gbw = lsvGeselecteerdeBewerkingen.getSelectionModel().getSelectedItem();
-                //lsvBeschikbareBewerkingen.getItems().add(gbw);
+                lsvBeschikbareBewerkingen.getItems().add(gbw);
                 //lsvGeselecteerdeBewerkingen.getItems().remove(gbw);
                 setLblListViewGroepsbewerkingen();
             }
-        });
-
+        });*/
         //doelstellingen alle
-        lsvBeschikbareDoelstellingen.setItems(dc.geefDoelstellingen());
-        setLblListViewDoelstellingen();
-        lsvBeschikbareDoelstellingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        /*lsvBeschikbareDoelstellingen.setItems(dc.geefDoelstellingen());
+        setLblListViewDoelstellingen();/
+       /* lsvBeschikbareDoelstellingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 Doelstelling dsl = lsvBeschikbareDoelstellingen.getSelectionModel().getSelectedItem();
@@ -278,23 +277,22 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
                 //lsvBeschikbareBewerkingen.getItems().remove(gbw); Deze geeft error (maar geeft niet)
                 setLblListViewDoelstellingen();
             }
-        });
-
+        });*/
         //doelstellingen geselecteerd
-        lsvGeselecteerdeDoelstellingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        /* lsvGeselecteerdeDoelstellingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 Doelstelling gbw = lsvGeselecteerdeDoelstellingen.getSelectionModel().getSelectedItem();
 
-                //lsvGeselecteerdeDoelstellingen.getItems().add(gbw);
+                lsvGeselecteerdeDoelstellingen.getItems().add(gbw);
                 //lsvGeselecteerdeDoelstellingen.getItems().remove(gbw);
                 setLblListViewDoelstellingen();
             }
-        });
-
+        });*/
     }
 
     private void displayHuidigeOefening() {
+
         btnSwitchNaarMaakNieuweOefening.visibleProperty().setValue(true);
 
         btnaddOpgave.setText("Replace");
@@ -313,9 +311,12 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         System.out.println(oefUitDc.getGroepsBewerkingen()); //werkt nog niet bij nieuwe oefening maken
         System.out.println(oefUitDc.getDoelstellingen());
 
+        /*lsvBeschikbareBewerkingen.setItems(FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(dc.groepsbewerkingenZonderGeseleceerd())));
+        lsvBeschikbareDoelstellingen.setItems(FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(dc.doelstellingenZonderGeseleceerd())));
+
         //// werkt nog niet
         lsvGeselecteerdeBewerkingen.setItems(FXCollections.observableArrayList(oefUitDc.getGroepsBewerkingen()));
-        lsvGeselecteerdeDoelstellingen.setItems(FXCollections.observableArrayList(oefUitDc.getDoelstellingen()));
+        lsvGeselecteerdeDoelstellingen.setItems(FXCollections.observableArrayList(oefUitDc.getDoelstellingen()));*/
         ////
         lblFeedbackPadNaam.setText(oefUitDc.getOpgave().getName());
         lblOpgavePadNaam.setText(oefUitDc.getFeedback().getName());
@@ -377,8 +378,8 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
                     opgave,
                     feedback,
                     ddlVakken.getValue(),
-                    lsvGeselecteerdeBewerkingen.getItems(),
-                    lsvGeselecteerdeDoelstellingen.getItems()
+                    /*lsvGeselecteerdeBewerkingen.getItems()*/ null,
+                    /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
             );
             resetScherm();
 
@@ -402,10 +403,10 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
             dc.bewerkOefening(txfNaam.getText(),
                     ddlVakken.getValue(),
                     opgave,
-                    lsvGeselecteerdeBewerkingen.getItems(),
+                    /*lsvGeselecteerdeBewerkingen.getItems()*/ null,
                     txfAntwoord.getText(),
                     feedback,
-                    lsvGeselecteerdeDoelstellingen.getItems()
+                    /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
             );
         } catch (NumberFormatException ex) {
             System.out.println("vul een getal in");
@@ -424,13 +425,16 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         txfNaam.setText("");
         txfAntwoord.setText("");
         ddlVakken.getSelectionModel().clearSelection();
-        lsvGeselecteerdeBewerkingen.getItems().clear();
-        lsvGeselecteerdeDoelstellingen.getItems().clear();
+        /*lsvGeselecteerdeBewerkingen.getItems().clear();
+        lsvGeselecteerdeDoelstellingen.getItems().clear();*/
         lblFeedbackPadNaam.setText("");
         lblOpgavePadNaam.setText("");
         lblAantalGroepsbewerkingenGeselecteerd.setText("");
         lblAantalDoelstellingenGeselecteerd.setText("");
 
+        //lsvBeschikbareBewerkingen
+        /*lsvBeschikbareBewerkingen.setItems(dc.geefGroepsbewerkingen());
+        lsvBeschikbareDoelstellingen.setItems(dc.geefDoelstellingen());*/
         //opgave chooser reset
         opgaveChooser = new FileChooser();
         opgaveChooser.setTitle("Open Opgave Bestand");
