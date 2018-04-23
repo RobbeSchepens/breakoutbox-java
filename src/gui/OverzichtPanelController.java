@@ -2,6 +2,7 @@ package gui;
 
 import domein.DomeinController;
 import java.io.IOException;
+import java.util.Observer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,14 +13,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public abstract class OverzichtPanelController <T> extends VBox {
+public abstract class OverzichtPanelController <T> extends VBox implements Observer {
 
     @FXML private Label lblTitleLeft, lblFilterOp;
     @FXML private TextField txfFilterOp;
     @FXML private TableView<T> tbvOverzicht;
     @FXML private TableColumn<T, String> tbvOverzichtCol1;
     @FXML private TableColumn<T, String> tbvOverzichtCol2;
-    @FXML private Button btnDeleteSelected; 
+    @FXML private Button btnDeleteSelected;
     
     private DomeinController dc;
 
@@ -41,8 +42,6 @@ public abstract class OverzichtPanelController <T> extends VBox {
                 implementTableviewListener(newValue);
             }
         });
-        
-        renderContent();
     }
 
     public void setLblTitleLeftText(String lblTitleLeftText) {
@@ -64,10 +63,6 @@ public abstract class OverzichtPanelController <T> extends VBox {
     public TableColumn<T, String> getTbvOverzichtCol2() {
         return tbvOverzichtCol2;
     }
-    
-    
-    
-    
 
     @FXML private void btnDeleteSelectedOnAction(ActionEvent event){
         if (tbvOverzicht.getSelectionModel().getSelectedItem() != null)

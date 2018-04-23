@@ -3,12 +3,12 @@ package startup;
 import domein.DomeinController;
 import domein.PDF;
 import gui.HoofdMenuController;
+import gui.OefeningFrameController;
 import java.io.File;
 import java.util.Arrays;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class StartUpGuiClientApp extends Application {

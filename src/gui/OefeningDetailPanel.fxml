@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="640.0" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.OefeningDetailPanelController">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="640.0" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER_LEFT">
          <children>
@@ -56,12 +56,7 @@
             <Insets bottom="15.0" />
          </padding>
          <children>
-            <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#btnAddOnAction" text="Voeg toe">
-               <styleClass>
-                  <String fx:value="btn-big-action" />
-                  <String fx:value="btn-danger" />
-               </styleClass>
-            </Button>
+            <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#btnAddOnAction" styleClass="btn-big-action" text="Voeg toe" />
          </children>
       </HBox>
    </children>

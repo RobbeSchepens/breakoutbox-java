@@ -373,11 +373,11 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         try { //naam, vak, opgave, groepsbewerkingen, antwoord, feedback, doelstelling);
             dc.voegNieuweOefeningToe(
                     txfNaam.getText(),
-                    ddlVakken.getValue(),
-                    opgave,
-                    lsvGeselecteerdeBewerkingen.getItems(),
                     txfAntwoord.getText(),
+                    opgave,
                     feedback,
+                    ddlVakken.getValue(),
+                    lsvGeselecteerdeBewerkingen.getItems(),
                     lsvGeselecteerdeDoelstellingen.getItems()
             );
             resetScherm();

@@ -2,9 +2,7 @@ package domein;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javax.persistence.Access;
@@ -33,9 +31,8 @@ public class Oefening implements IOefening, Serializable {
 
     // De ID is gewijzigd naar een getter getId nadat naam een SimpleProperty moest worden en 
     // @Basic moet zijn om aanspreekbaar te zijn in de named query.
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private long id;
+    @Transient
+    private Long id;
 
     @Transient
     private final StringProperty naam = new SimpleStringProperty();
@@ -56,20 +53,10 @@ public class Oefening implements IOefening, Serializable {
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Groepsbewerking> groepsbewerkingen;
 
-    @Transient
-    private Set<OefeningObserver> observers = new HashSet<>();
-    private Long id;
-
     public Oefening() {}
 
     public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, 
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
-        if (opgave == null) {
-            throw new IllegalArgumentException("er moeten een opgave zijn");
-        }
-        if (feedback == null) {
-            throw new IllegalArgumentException("er moet feedback zijn");
-        }
         setGroepsbewerkingen(groepsbewerkingen);
         setVak(vak);
         String pdfName = String.format("%s_%s_%s_%s", "Opgave", naam, getVak(), opgave.getName());
@@ -79,7 +66,6 @@ public class Oefening implements IOefening, Serializable {
         setFeedback(new PDF(feedback, pdfName));
         setNaam(naam);
         setDoelstellingen(doelstellingen);
-
     }
     
     @Id

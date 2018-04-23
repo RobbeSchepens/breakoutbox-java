@@ -4,15 +4,13 @@ import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
+import java.util.Observable;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
-import repository.GenericDaoJpa;
 
-public class DomeinController {
+public class DomeinController extends Observable {
 
     // Oefening
     private Oefening huidigeOefening;
@@ -29,29 +27,26 @@ public class DomeinController {
     //private Sessie huidigeSessie;
     
     public DomeinController() {
-        this.oefeningLijst = ob.geefOefeningenJPA();
         this.vakkenLijst = ob.geefVakkenJPA();
         this.groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
         this.doelstellingenLijst = ob.geefDoelstellingenJPA();
 
         sortAllLists();
-        laadOefeningen();
+        //laadOefeningen();
     }
 
     private void sortAllLists() {
         Collections.sort(vakkenLijst, Comparator.comparing(Vak::getNaam));
         Collections.sort(groepsbewerkingenLijst, Comparator.comparing(Groepsbewerking::toString));
         Collections.sort(doelstellingenLijst, Comparator.comparing(Doelstelling::getDoelstelling));
-
     }
 
     // ================
     // == Oefeningen ==
     // ================
     private List<Oefening> getOefeningList() {
-        if (oefeningLijst == null) {
+        if (oefeningLijst == null) 
             oefeningLijst = ob.geefOefeningenJPA();
-        }
         return oefeningLijst;
     }
 
@@ -60,11 +55,11 @@ public class DomeinController {
     }
 
     public boolean noOefeningen() {
-        return oefeningLijst.isEmpty();
+        return getOefeningList().isEmpty();
     }
 
     public int geefAantalOefeningen() {
-        return oefeningLijst.size();
+        return getOefeningList().size();
     }
 
     public List<String> geefOefeningNaamLijst() {
@@ -72,7 +67,7 @@ public class DomeinController {
     }
 
     public ObservableList<IOefening> geefOefeningen() {
-        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(oefeningLijst));
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getOefeningList()));
     }
 
     // Deze dient om aan GUI te geven. 
@@ -90,7 +85,7 @@ public class DomeinController {
         //huidigeOefening.addObserver(o);
     }
 
-    public void changeFilter(String filterValue) {
+    public void veranderFilter(String filterValue) {
         filteredOefeningList.setPredicate(oefening -> {
             // If filter text is empty, display all persons.
             if (filterValue == null || filterValue.isEmpty()) {;
@@ -107,25 +102,20 @@ public class DomeinController {
     // == Vakken ======
     // ================
     public List<Vak> getVakkenList() {
-        //return new GenericDaoJpa<>(Vak.class).findAll();
-
-        if (vakkenLijst == null) {
+        if (vakkenLijst == null) 
             vakkenLijst = ob.geefVakkenJPA();
-        }
         return vakkenLijst;
     }
 
     public List<Groepsbewerking> getGroepsbewerkingenLijst() {
-        if (groepsbewerkingenLijst == null) {
+        if (groepsbewerkingenLijst == null) 
             groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
-        }
         return groepsbewerkingenLijst;
     }
 
     public List<Doelstelling> getDoelstellingenLijst() {
-        if (doelstellingenLijst == null) {
+        if (doelstellingenLijst == null) 
             doelstellingenLijst = ob.geefDoelstellingenJPA();
-        }
         return doelstellingenLijst;
     }
 
@@ -134,9 +124,8 @@ public class DomeinController {
     }
 
     public List<Groepsbewerking> getGroepsbewerkingenList() {
-        if (groepsbewerkingenLijst == null) {
+        if (groepsbewerkingenLijst == null) 
             groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
-        }
         return groepsbewerkingenLijst;
     }
 
@@ -145,9 +134,8 @@ public class DomeinController {
     }
 
     public List<Doelstelling> getDoelstellingenList() {
-        if (doelstellingenLijst == null) {
+        if (doelstellingenLijst == null)
             doelstellingenLijst = ob.geefDoelstellingenJPA();
-        }
         return doelstellingenLijst;
     }
 
@@ -155,19 +143,13 @@ public class DomeinController {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(doelstellingenLijst));
     }
 
-    public void voegNieuweOefeningToe(String naam, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<Doelstelling> doelstelling) {
+    public void voegNieuweOefeningToe(String naam, String antwoord, File opgave, File feedback, Vak vak,
+            List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstelling) {
         /* if ( de naam van deze oefening al in gebruik is dan) {
             throw new IllegalArgumentException("Er bestaat al een oefening met deze naam");
         }*/
-        if (groepsbewerkingen != null && groepsbewerkingen.isEmpty()) {
-            throw new IllegalArgumentException("er moeten bewerkingen zijn");
-        }
-        if (doelstelling != null && doelstelling.isEmpty()) {
-            throw new IllegalArgumentException("er moeten doelstellingen zijn");
-        }
-
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
-        oefeningLijst.add(oefening);
+        getOefeningList().add(oefening);
         ob.addOefening(oefening);
     }
 
@@ -184,7 +166,7 @@ public class DomeinController {
         System.out.println("1");
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
         System.out.println("2");
-        oefeningLijst.add(oefening);
+        getOefeningList().add(oefening);
         System.out.println("3");
         ob.getOefRepo().insert(oefening);
         System.out.println("4");
@@ -201,7 +183,6 @@ public class DomeinController {
 
     public void laadOefeningen() {
         oefeningLijst = ob.getOefRepo().findAll();
-
     }
 
     public <T> void verwijderObject(T object) {
