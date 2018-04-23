@@ -34,6 +34,7 @@ public class DomeinController {
         this.doelstellingenLijst = ob.geefDoelstellingenJPA();
 
         sortAllLists();
+        laadOefeningen();
     }
 
     private void sortAllLists() {
@@ -113,6 +114,20 @@ public class DomeinController {
         return vakkenLijst;
     }
 
+    public List<Groepsbewerking> getGroepsbewerkingenLijst() {
+        if (groepsbewerkingenLijst == null) {
+            groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
+        }
+        return groepsbewerkingenLijst;
+    }
+
+    public List<Doelstelling> getDoelstellingenLijst() {
+        if (doelstellingenLijst == null) {
+            doelstellingenLijst = ob.geefDoelstellingenJPA();
+        }
+        return doelstellingenLijst;
+    }
+
     public ObservableList<Vak> geefVakken() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(vakkenLijst));
     }
@@ -156,6 +171,23 @@ public class DomeinController {
     }
 
     public void bewerkOefening(String naam, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<Doelstelling> doelstelling) {
+        if (ob.getOefRepo().exists(naam)) {
+            throw new IllegalArgumentException("Er bestaan al oefeningen met deze naam");
+        }
+        if (groepsbewerkingen != null && groepsbewerkingen.isEmpty()) {
+            throw new IllegalArgumentException("Je moet bewerkingen geven");
+        }
+        if (doelstelling != null && doelstelling.isEmpty()) {
+            throw new IllegalArgumentException("Je moet doelsteliingen geven");
+        }
+        System.out.println("1");
+        Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
+        System.out.println("2");
+        oefeningLijst.add(oefening);
+        System.out.println("3");
+        ob.getOefRepo().insert(oefening);
+        System.out.println("4");
+        laadOefeningen();
 
     }
 

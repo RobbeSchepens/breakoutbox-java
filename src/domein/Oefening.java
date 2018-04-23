@@ -42,16 +42,16 @@ public class Oefening implements IOefening, Serializable, Subject {
 
     private String antwoord;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private PDF opgave;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private PDF feedback;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Vak vak;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    List<Doelstelling> doelstellingen;
+    private List<Doelstelling> doelstellingen;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Groepsbewerking> groepsbewerkingen;
@@ -69,19 +69,19 @@ public class Oefening implements IOefening, Serializable, Subject {
         if (feedback == null) {
             throw new IllegalArgumentException("er moet feedback zijn");
         }
-
         setGroepsbewerkingen(groepsbewerkingen);
         setVak(vak);
-        String pdfName = String.format("%s_%s_%s", "Opgave", naam, opgave.getName());
+        String pdfName = String.format("%s_%s_%s_%s", "Opgave", naam, getVak(), opgave.getName());
         setOpgave(new PDF(opgave, pdfName));
         setAntwoord(antwoord);
-        pdfName = String.format("%s_%s_%s", "Feedback", naam, opgave.getName());
+        pdfName = String.format("%s_%s_%s_%s", "Feedback", naam, getVak(), opgave.getName());
         setFeedback(new PDF(feedback, pdfName));
         setNaam(naam);
         setDoelstellingen(doelstellingen);
 
     }
 
+    @Override
     public List<Doelstelling> getDoelstellingen() {
         return doelstellingen;
     }
@@ -161,10 +161,6 @@ public class Oefening implements IOefening, Serializable, Subject {
         notifyObservers();
     }
 
-    public List<Groepsbewerking> getGroepsbewerkingen() {
-        return groepsbewerkingen;
-    }
-
     public void setGroepsbewerkingen(List<Groepsbewerking> groepsbewerkingen) {
         if (groepsbewerkingen == null) {
             throw new IllegalArgumentException("je moet bewerkingen geven");
@@ -186,7 +182,7 @@ public class Oefening implements IOefening, Serializable, Subject {
 
     private void notifyObservers() {
         for (OefeningObserver observer : observers) {
-            observer.update(getNaam(), antwoord, vak);
+            observer.update(naam, antwoord, vak, groepsbewerkingen, doelstellingen);
         }
     }
 
@@ -197,6 +193,11 @@ public class Oefening implements IOefening, Serializable, Subject {
     @Override
     public String toString() {
         return naam;
+    }
+
+    @Override
+    public List<Groepsbewerking> getGroepsBewerkingen() {
+        return groepsbewerkingen;
     }
 
 }

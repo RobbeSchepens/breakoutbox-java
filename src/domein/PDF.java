@@ -27,7 +27,7 @@ public class PDF implements Serializable {
     private String name;
 
     private File file;
-    public static String FOLDERLOCATIE = System.getProperty("user.dir") + "/PDFs/";
+    public static String FOLDERLOCATIE = System.getProperty("user.dir") + "\\PDFs\\";
 
     public PDF() {
     }
@@ -76,6 +76,12 @@ public class PDF implements Serializable {
 
     public void setFile(File file) {
         this.file = file;
+    }
+
+    @Override
+    public String toString() {
+
+        return name;
     }
 
 }

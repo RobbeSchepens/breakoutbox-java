@@ -1,5 +1,8 @@
 package domein;
 
+import java.util.List;
+
 public interface OefeningObserver {
-    void update(String naam, String antwoord, Vak vak);
+
+    public void update(String naam, String antwoord, Vak vak, List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen);
 }

@@ -48,7 +48,7 @@
                   </Label>
                </children>
             </VBox>
-            <Label text="Bewerkingen" GridPane.columnIndex="4" GridPane.halignment="CENTER">
+            <Label text="Bewerkingen/doelstellingen" GridPane.columnIndex="4" GridPane.halignment="CENTER">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -104,6 +104,9 @@
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
+                           <children>
+                              <Button fx:id="btnSwitchNaarMaakNieuweOefening" mnemonicParsing="false" onAction="#btnSwitchNaarMaakNieuweOefeningOnAction" text="switch naar maak nieuwe oefening" GridPane.halignment="CENTER" />
+                           </children>
                         </GridPane>
                      </children>
                   </HBox>
@@ -192,7 +195,7 @@
                                     <Insets left="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Button maxWidth="70.0" mnemonicParsing="false" onAction="#addOpgaveOnAction" text="Add file" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <Button fx:id="btnaddOpgave" maxWidth="70.0" mnemonicParsing="false" onAction="#addOpgaveOnAction" text="Add file" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                               <Label fx:id="lblOpgavePadNaam" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
                               <Button fx:id="btnOpgavePreview" mnemonicParsing="false" onAction="#btnOpgavePreviewOnAction" text="Preview" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
                            </children>
@@ -216,7 +219,7 @@
                                     <Insets left="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Button maxWidth="70.0" mnemonicParsing="false" onAction="#addFeedbackOnAction" text="Add file" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <Button fx:id="btnaddFeedback" maxWidth="70.0" mnemonicParsing="false" onAction="#addFeedbackOnAction" text="Add file" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                               <Label fx:id="lblFeedbackPadNaam" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
                               <Button fx:id="btnFeedbackPreview" mnemonicParsing="false" onAction="#btnFeedbackPreviewOnAction" text="Preview" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
                            </children>
@@ -255,9 +258,9 @@
          <children>
             <GridPane prefHeight="574.0" prefWidth="462.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="10.0" prefWidth="181.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="185.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.5" minWidth="10.0" prefWidth="80.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="10.0" prefWidth="183.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="185.0" />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints maxHeight="221.5" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
@@ -266,14 +269,40 @@
                 <RowConstraints maxHeight="272.5" minHeight="10.0" prefHeight="272.5" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Beschikbare bewerkingen" />
-                  <Label text="Geselecteerde bewerkingen" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label text="Beschikbare groepsbewerkingen" />
                   <ListView fx:id="lsvBeschikbareBewerkingen" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
                   <ListView fx:id="lsvGeselecteerdeBewerkingen" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
                   <ListView fx:id="lsvBeschikbareDoelstellingen" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <ListView fx:id="lsvGeselecteerdeDoelstellingen" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <Label text="Beschikbare doelstellingen" GridPane.columnIndex="2" />
-                  <Label text="Geselecteerde doelstellingen" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <GridPane GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Geselecteerde doelstellingen" GridPane.rowIndex="2" />
+                        <Label fx:id="lblAantalDoelstellingenGeselecteerd" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+                  <GridPane GridPane.rowIndex="2">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Geselecteerde groepsbewerkingen" GridPane.rowIndex="2" />
+                        <Label fx:id="lblAantalGroepsbewerkingenGeselecteerd" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
                </children>
             </GridPane>
          </children>

@@ -21,7 +21,7 @@ public abstract class Groepsbewerking<T> implements Serializable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private long id;
     @Column
     private String omschrijving;
     @Column
@@ -38,7 +38,7 @@ public abstract class Groepsbewerking<T> implements Serializable {
         this.teBewerken = teBewerken;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
