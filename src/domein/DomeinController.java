@@ -117,39 +117,37 @@ public class DomeinController extends Observable {
         return groepsbewerkingenLijst;
     }
 
-    public List<Doelstelling> getDoelstellingenLijst() {
+    /*public List<Doelstelling> getDoelstellingenLijst() {
         if (doelstellingenLijst == null) {
             doelstellingenLijst = ob.geefDoelstellingenJPA();
         }
         return doelstellingenLijst;
-    }
-
+    }*/
     public ObservableList<Vak> geefVakken() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(vakkenLijst));
     }
 
-    public List<Groepsbewerking> getGroepsbewerkingenList() {
+    /* public List<Groepsbewerking> getGroepsbewerkingenList() {
         if (groepsbewerkingenLijst == null) {
             groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
         }
         return groepsbewerkingenLijst;
-    }
+    }*/
 
-    public ObservableList<Groepsbewerking> geefGroepsbewerkingen() {
+ /*public ObservableList<Groepsbewerking> geefGroepsbewerkingen() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(groepsbewerkingenLijst));
-    }
+    }*/
 
-    public List<Doelstelling> getDoelstellingenList() {
+ /* public List<Doelstelling> getDoelstellingenList() {
         if (doelstellingenLijst == null) {
             doelstellingenLijst = ob.geefDoelstellingenJPA();
         }
         return doelstellingenLijst;
-    }
+    }*/
 
-    public ObservableList<Doelstelling> geefDoelstellingen() {
+ /* public ObservableList<Doelstelling> geefDoelstellingen() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(doelstellingenLijst));
-    }
-
+    }*/
     public void voegNieuweOefeningToe(String naam, String antwoord, File opgave, File feedback, Vak vak,
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstelling) {
         /* if ( de naam van deze oefening al in gebruik is dan) {
@@ -181,7 +179,7 @@ public class DomeinController extends Observable {
 
     }
 
-    public List<Groepsbewerking> groepsbewerkingenZonderGeseleceerd() {
+    /* public List<Groepsbewerking> groepsbewerkingenZonderGeseleceerd() {
 
         if (groepsbewerkingenLijst == null) {
             groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
@@ -198,9 +196,9 @@ public class DomeinController extends Observable {
         } else {
             return getGroepsbewerkingenLijst();
         }
-    }
+    }*/
 
-    public List<Doelstelling> doelstellingenZonderGeseleceerd() {
+ /* public List<Doelstelling> doelstellingenZonderGeseleceerd() {
 
         if (doelstellingenLijst == null) {
             doelstellingenLijst = ob.geefDoelstellingenJPA();
@@ -215,8 +213,7 @@ public class DomeinController extends Observable {
         } else {
             return getDoelstellingenLijst();
         }
-    }
-
+    }*/
     public void verwijderOef(String naam) {
         Oefening oefn = filteredOefeningList.stream().filter(oef -> oef.getNaam().equals(naam)).findFirst().get();
         filteredOefeningList.remove(oefn);
