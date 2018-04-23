@@ -15,18 +15,19 @@ import repository.GenericDaoJpa;
 public class DomeinController {
 
     // Oefening
+    private Oefening huidigeOefening;
     private OefeningBeheerder ob = new OefeningBeheerder();
     private List<Oefening> oefeningLijst;
     private List<Vak> vakkenLijst;
     private List<Groepsbewerking> groepsbewerkingenLijst;
     private List<Doelstelling> doelstellingenLijst;
-    private Oefening huidigeOefening;
     private FilteredList<Oefening> filteredOefeningList;
 
     // Box
     //private Box huidigeBox;
     // Sessie
     //private Sessie huidigeSessie;
+    
     public DomeinController() {
         this.oefeningLijst = ob.geefOefeningenJPA();
         this.vakkenLijst = ob.geefVakkenJPA();
@@ -82,11 +83,11 @@ public class DomeinController {
 
     public void setHuidigeOefening(IOefening huidigeOefening) {
         this.huidigeOefening = (Oefening) huidigeOefening;
-        this.huidigeOefening.setHuidig();
+        //this.huidigeOefening.setHuidig();
     }
 
     public void addOefeningObserver(OefeningObserver o) {
-        huidigeOefening.addObserver(o);
+        //huidigeOefening.addObserver(o);
     }
 
     public void changeFilter(String filterValue) {

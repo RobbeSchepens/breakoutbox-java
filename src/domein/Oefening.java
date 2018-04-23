@@ -5,12 +5,11 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,19 +25,20 @@ import javax.persistence.Transient;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries({
-    @NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e.naam = :oefeningnaam")
+    @NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e.naam = :oefeningnaam"),
 })
-public class Oefening implements IOefening, Serializable, Subject {
+public class Oefening implements IOefening, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    // De ID is gewijzigd naar een getter getId nadat naam een SimpleProperty moest worden en 
+    // @Basic moet zijn om aanspreekbaar te zijn in de named query.
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //private long id;
 
     @Transient
-    private final StringProperty _naam = new SimpleStringProperty();
-    private String naam;
+    private final StringProperty naam = new SimpleStringProperty();
 
     private String antwoord;
 
@@ -58,11 +58,12 @@ public class Oefening implements IOefening, Serializable, Subject {
 
     @Transient
     private Set<OefeningObserver> observers = new HashSet<>();
+    private Long id;
 
-    public Oefening() {
-    }
+    public Oefening() {}
 
-    public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
+    public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, 
+            List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
         if (opgave == null) {
             throw new IllegalArgumentException("er moeten een opgave zijn");
         }
@@ -80,46 +81,36 @@ public class Oefening implements IOefening, Serializable, Subject {
         setDoelstellingen(doelstellingen);
 
     }
-
-    @Override
-    public List<Doelstelling> getDoelstellingen() {
-        return doelstellingen;
+    
+    @Id
+    @Access(AccessType.PROPERTY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getId() {
+        return id;
     }
 
-    public void setDoelstellingen(List<Doelstelling> doelstellingen) {
-        this.doelstellingen = doelstellingen;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
-    //@Access(AccessType.PROPERTY)
+    @Basic
+    @Access(AccessType.PROPERTY)
     public String getNaam() {
-        return _naam.get();
+        return naam.get();
     }
 
     public void setNaam(String value) {
         if (value == null || value.trim().isEmpty()) {
             throw new IllegalArgumentException("Er moet een naam zijn");
         }
-        _naam.set(value);
-        naam = value;
-        notifyObservers();
+        naam.set(value);
+        //notifyObservers();
     }
 
     @Override
     public StringProperty naamProperty() {
-        return _naam;
-    }
-
-    @Override
-    public PDF getOpgave() {
-        return opgave;
-    }
-
-    public void setOpgave(PDF opgave) {
-        if (opgave == null) {
-            throw new IllegalArgumentException("Er moet een opgave zijn");
-        }
-        this.opgave = opgave;
+        return naam;
     }
 
     @Override
@@ -133,7 +124,19 @@ public class Oefening implements IOefening, Serializable, Subject {
             throw new IllegalArgumentException("Er moet een antwoord zijn");
         }
         this.antwoord = antwoord;
-        notifyObservers();
+        //notifyObservers();
+    }
+
+    @Override
+    public PDF getOpgave() {
+        return opgave;
+    }
+
+    public void setOpgave(PDF opgave) {
+        if (opgave == null) {
+            throw new IllegalArgumentException("Er moet een opgave zijn");
+        }
+        this.opgave = opgave;
     }
 
     @Override
@@ -158,7 +161,12 @@ public class Oefening implements IOefening, Serializable, Subject {
             throw new IllegalArgumentException("er moet een vak geselcteerd zijn");
         }
         this.vak = vak;
-        notifyObservers();
+        //notifyObservers();
+    }
+
+    @Override
+    public List<Groepsbewerking> getGroepsBewerkingen() {
+        return groepsbewerkingen;
     }
 
     public void setGroepsbewerkingen(List<Groepsbewerking> groepsbewerkingen) {
@@ -169,35 +177,38 @@ public class Oefening implements IOefening, Serializable, Subject {
     }
 
     @Override
-    public void addObserver(OefeningObserver o) {
-        if (!observers.contains(o)) {
-            observers.add(o);
-        }
+    public List<Doelstelling> getDoelstellingen() {
+        return doelstellingen;
     }
 
-    @Override
-    public void removeObserver(OefeningObserver o) {
-        observers.remove(o);
-    }
-
-    private void notifyObservers() {
-        for (OefeningObserver observer : observers) {
-            observer.update(naam, antwoord, vak, groepsbewerkingen, doelstellingen);
-        }
-    }
-
-    public void setHuidig() {
-        notifyObservers();
+    public void setDoelstellingen(List<Doelstelling> doelstellingen) {
+        this.doelstellingen = doelstellingen;
     }
 
     @Override
     public String toString() {
-        return naam;
+        return getNaam();
     }
 
-    @Override
-    public List<Groepsbewerking> getGroepsBewerkingen() {
-        return groepsbewerkingen;
-    }
-
+//    @Override
+//    public void addObserver(OefeningObserver o) {
+//        if (!observers.contains(o)) {
+//            observers.add(o);
+//        }
+//    }
+//
+//    @Override
+//    public void removeObserver(OefeningObserver o) {
+//        observers.remove(o);
+//    }
+//
+//    private void notifyObservers() {
+//        for (OefeningObserver observer : observers) {
+//            observer.update(getNaam(), antwoord, vak, groepsbewerkingen, doelstellingen);
+//        }
+//    }
+//
+//    public void setHuidig() {
+//        notifyObservers();
+//    }
 }
