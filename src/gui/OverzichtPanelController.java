@@ -10,8 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
-public abstract class OverzichtPanelController <T> {
+public abstract class OverzichtPanelController <T> extends VBox {
 
     @FXML private Label lblTitleLeft, lblFilterOp;
     @FXML private TextField txfFilterOp;
