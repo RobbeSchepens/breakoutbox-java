@@ -323,6 +323,8 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         String pathNaarOef = PDF.FOLDERLOCATIE;
 
         File opgaveHuidig = new File(pathNaarOef + oefUitDc.getOpgave());
+        System.out.println(pathNaarOef);
+        System.out.println(oefUitDc.getOpgave());
         File feedbackHuidig = new File(pathNaarOef + oefUitDc.getFeedback());
 
         this.opgaveChooser = new FileChooser();
@@ -357,12 +359,7 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
 
     @FXML
     private void btnVerwijderOefeningOnAction(ActionEvent event) {
-        /*dc.verwijderOef(tbvOefeningen.getSelectionModel().getSelectedItem().getNaam());
-
-        // dit weg ?
-        tbvOefeningen.setItems(dc.geefOefeningen());
-        colNaam.setCellValueFactory(v -> v.getValue().naamProperty());
-        colVak.setCellValueFactory(v -> v.getValue().getVak().naamProperty());*/
+        //dc.verwijderOef(tbvOefeningen.getSelectionModel().getSelectedItem().getNaam());
         resetScherm();
     }
 

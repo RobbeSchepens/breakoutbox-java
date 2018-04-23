@@ -47,18 +47,18 @@ public class OefeningData {
         doelstellingenArray.forEach(dls -> ob.addDoelstelling(dls));
 
         // public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
-        File opgave1 = new File(System.getProperty("user.dir") + "\\voorMockOefn\\" + "Opgave_groep1opdracht1_Geschiedenis_WordBesGroep1Opdr1pdf.pdf");
-        File feedback1 = new File(System.getProperty("user.dir") + "\\voorMockOefn\\" + "Feedback_groep1opdracht1_Geschiedenis_WordBesGroep1Opdr1pdf.pdf");
+        File opgave1 = new File(System.getProperty("user.dir") +File.separator+ "PDFinit" +File.separator+ "Optelsommen_Opgave.pdf");
+        File feedback1 = new File(System.getProperty("user.dir") +File.separator+ "PDFinit" +File.separator+ "Optelsommen_Feedback.pdf");
 
-        ob.addOefening(new Oefening("groep1opdracht1", "40", vakken.get(2), opgave1, feedback1, bewerkingenDatabankLijst.subList(8, 13), doelstellingenArray.subList(0, 3)));
+        ob.addOefening(new Oefening("Optelsommen", "40", vakken.get(2), opgave1, feedback1, bewerkingenDatabankLijst.subList(8, 13), doelstellingenArray.subList(0, 3)));
 
-        File opgave2 = new File(System.getProperty("user.dir") + "\\voorMockOefn\\" + "Opgave_groep1opdracht2_Wiskunde_WordBesGroep1Opdr2pdf.pdf");
-        File feedback2 = new File(System.getProperty("user.dir") + "\\voorMockOefn\\" + "Feedback_groep1opdracht2_Wiskunde_WordBesGroep1Opdr2pdf.pdf");
-        ob.addOefening(new Oefening("groep1opdracht2", "70", vakken.get(1), opgave2, feedback2, bewerkingenDatabankLijst.subList(0, 7), doelstellingenArray.subList(6, 10)));
+        File opgave2 = new File(System.getProperty("user.dir") +File.separator+ "PDFinit" +File.separator+ "Vermenigvuldigingen_Opgave.pdf");
+        File feedback2 = new File(System.getProperty("user.dir") +File.separator+ "PDFinit" +File.separator+ "Vermenigvuldigingen_Feedback.pdf");
+        ob.addOefening(new Oefening("Vermenigvuldigingen", "70", vakken.get(1), opgave2, feedback2, bewerkingenDatabankLijst.subList(0, 7), doelstellingenArray.subList(6, 10)));
 
-        File opgave3 = new File(System.getProperty("user.dir") + "\\voorMockOefn\\" + "Opgave_groep2opdracht1_Nederlands_WordBesGroep2Opdr1pdf.pdf");
-        File feedback3 = new File(System.getProperty("user.dir") + "\\voorMockOefn\\" + "Feedback_groep2opdracht1_Nederlands_WordBesGroep2Opdr1pdf.pdf");
-        ob.addOefening(new Oefening("groep2opdracht1", "90", vakken.get(4), opgave3, feedback3, bewerkingenDatabankLijst.subList(3, 10), doelstellingenArray.subList(5, 7)));
+        File opgave3 = new File(System.getProperty("user.dir") +File.separator+ "PDFinit" +File.separator+ "Hoofdstad VK_Opgave.pdf");
+        File feedback3 = new File(System.getProperty("user.dir") +File.separator+ "PDFinit" +File.separator+ "Hoofdstad VK_Feedback.pdf");
+        ob.addOefening(new Oefening("Hoofdstad VK", "Londen", vakken.get(4), opgave3, feedback3, bewerkingenDatabankLijst.subList(3, 10), doelstellingenArray.subList(5, 7)));
         /*GenericDaoJpa bewerkingDoa = new GenericDaoJpa(Groepsbewerking.class);
         GenericDaoJpa doelstellingDoa = new GenericDaoJpa(String.class);
         GenericDaoJpa vakDoa = new GenericDaoJpa(Vak.class);
