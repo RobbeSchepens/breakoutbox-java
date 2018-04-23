@@ -126,4 +126,13 @@ public final class OefeningBeheerder {
         em.getTransaction().commit();
     }
 
+    public void deleteOefening(Oefening o) {
+        em.getTransaction().begin();
+        if (!em.contains(o)) {
+            o = em.merge(o);
+        }
+        em.remove(o);
+        em.getTransaction().commit();
+    }
+
 }

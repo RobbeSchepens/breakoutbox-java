@@ -1,8 +1,10 @@
 package gui;
 
 import domein.DomeinController;
+import domein.IOefening;
 import java.io.IOException;
 import java.util.Observer;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 public abstract class OverzichtPanelController <T> extends VBox implements Observer {
 
@@ -56,19 +60,7 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
         return tbvOverzicht;
     }
 
-    public TableColumn<T, String> getTbvOverzichtCol1() {
-        return tbvOverzichtCol1;
-    }
-
-    public TableColumn<T, String> getTbvOverzichtCol2() {
-        return tbvOverzichtCol2;
-    }
-
-    @FXML private void btnDeleteSelectedOnAction(ActionEvent event){
-        if (tbvOverzicht.getSelectionModel().getSelectedItem() != null)
-            dc.verwijderObject(tbvOverzicht.getSelectionModel().getSelectedItem());
-    }
-    //@FXML abstract void btnDeleteSelectedOnAction(ActionEvent event);
-    abstract void implementTableviewListener(T newValue);
+    @FXML abstract void btnDeleteSelectedOnAction(ActionEvent event);
+    abstract <T> void implementTableviewListener(T newValue);
     abstract void renderContent();
 }
