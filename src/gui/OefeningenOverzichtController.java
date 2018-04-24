@@ -368,8 +368,13 @@ public class OefeningenOverzichtController extends AnchorPane {
 
     @FXML
     private void btnVerwijderOefeningOnAction(ActionEvent event) {
-        //dc.verwijderOef(tbvOefeningen.getSelectionModel().getSelectedItem().getNaam());
+
+        dc.verwijderOef(tbvOefeningen.getSelectionModel().getSelectedItem());
+
+        tbvOefeningen.setItems(dc.geefOefeningen());
+
         resetScherm();
+
     }
 
     @FXML

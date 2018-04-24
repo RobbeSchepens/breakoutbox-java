@@ -144,31 +144,40 @@ public class DomeinController extends Observable {
         if (doelstelling != null && doelstelling.isEmpty()) {
             throw new IllegalArgumentException("Je moet doelsteliingen geven");
         }
-        System.out.println(naam + " " + antwoord + " " + vak);
-        System.out.println(groepsbewerkingen);
-        System.out.println(doelstelling);
-        Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
 
-        getOefeningList().add(oefening);
-
-        ob.getOefRepo().insert(oefening);
-
+        Oefening oefening = oefeningLijst.stream().filter(oef -> oef.getNaam().equals(naam)).findFirst().get();
+        oefening.setNaam(naam);
+        oefening.setVak(vak);
+        oefening.setOpgave(new PDF(feedback, naam));
+        oefening.setFeedback(new PDF(feedback, naam));
+        oefening.setAntwoord(antwoord);
+        oefening.setDoelstellingen(doelstelling);
+        oefening.setGroepsbewerkingen(groepsbewerkingen);
+        ob.getOefRepo().update(oefening);
         laadOefeningen();
 
     }
 
-    public void verwijderOef(String naam) {
-        Oefening oefn = filteredOefeningList.stream().filter(oef -> oef.getNaam().equals(naam)).findFirst().get();
-        filteredOefeningList.remove(oefn);
-        ob.getOefRepo().delete(oefn);
+    public void verwijderOef(IOefening oefn) {
+
+        Oefening oefening = oefeningLijst.stream().filter(oef -> oef.getNaam().equals(oefn.getNaam())).findFirst().get();
+        System.out.println(oefening);
+        System.out.println(oefeningLijst);
+        oefeningLijst.remove(oefening);
+        System.out.println("oef lijst after delete");
+        System.out.println(oefeningLijst);
+        ob.deleteOefening(oefening);
         laadOefeningen();
+
     }
 
     public void laadOefeningen() {
         oefeningLijst = ob.getOefRepo().findAll();
+
     }
 
     public void verwijderOefening(IOefening o) {
+
         ob.deleteOefening((Oefening) o);
         oefeningLijst.remove((Oefening) o);
         setChanged();
