@@ -1,6 +1,7 @@
 package gui;
 
 import domein.DomeinController;
+import domein.OefeningObserver;
 import java.io.IOException;
 import java.util.Observer;
 import javafx.event.ActionEvent;

@@ -32,7 +32,6 @@ public class StartUpGuiClientApp extends Application {
 
         Scene scene = new Scene(root, 1280, 720, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
-        System.out.println(scene.getAntiAliasing().toString());
 
         primaryStage.getIcons().add(new Image("gui/img/favicon.png"));
         primaryStage.setTitle("Break Out Box");

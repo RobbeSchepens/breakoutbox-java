@@ -1,8 +1,6 @@
 package domein;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -12,7 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
-public class DomeinController extends Observable {
+public class DomeinController extends Observable implements OefeningSubject {
 
     // Oefening
     private Oefening huidigeOefening;
@@ -25,8 +23,10 @@ public class DomeinController extends Observable {
 
     // Box
     //private Box huidigeBox;
+    
     // Sessie
     //private Sessie huidigeSessie;
+    
     public DomeinController() {
         this.vakkenLijst = ob.geefVakkenJPA();
         this.groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
@@ -46,9 +46,8 @@ public class DomeinController extends Observable {
     // == Oefeningen ==
     // ================
     private List<Oefening> getOefeningList() {
-        if (oefeningLijst == null) {
+        if (oefeningLijst == null)
             oefeningLijst = ob.geefOefeningenJPA();
-        }
         return oefeningLijst;
     }
 
@@ -72,25 +71,23 @@ public class DomeinController extends Observable {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getOefeningList()));
     }
 
-    // Deze dient om aan GUI te geven. 
-    // Voor gebruik in andere domeinmethodes, gebruik: ob.geefOefeningByNaamJpa(naam);
     public IOefening geefOefeningByNaam(String naam) {
         return ob.geefOefeningByNaamJpa(naam);
     }
 
     public void setHuidigeOefening(IOefening huidigeOefening) {
-        this.huidigeOefening = (Oefening) huidigeOefening;
+//        if (this.huidigeOefening != null)
+//            this.huidigeOefening.removeAllObservers();
+        this.huidigeOefening = (Oefening)huidigeOefening;
+//        setChanged();
+//        notifyObservers(this.huidigeOefening);
         //this.huidigeOefening.setHuidig();
-    }
-
-    public void addOefeningObserver(OefeningObserver o) {
-        //huidigeOefening.addObserver(o);
     }
 
     public void veranderFilter(String filterValue) {
         filteredOefeningList.setPredicate(oefening -> {
             // If filter text is empty, display all persons.
-            if (filterValue == null || filterValue.isEmpty()) {;
+            if (filterValue == null || filterValue.isEmpty()) {
                 return true;
             }
             // Compare first name and last name of every person with   
@@ -100,27 +97,34 @@ public class DomeinController extends Observable {
         });
     }
 
+    @Override
+    public void addOefeningObserver(OefeningObserver o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeOefeningObserver(OefeningObserver o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     // ================
     // == Vakken ======
     // ================
     public List<Vak> getVakkenList() {
-        if (vakkenLijst == null) {
+        if (vakkenLijst == null)
             vakkenLijst = ob.geefVakkenJPA();
-        }
         return vakkenLijst;
     }
 
     public List<Groepsbewerking> getGroepsbewerkingenLijst() {
-        if (groepsbewerkingenLijst == null) {
+        if (groepsbewerkingenLijst == null)
             groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
-        }
         return groepsbewerkingenLijst;
     }
 
     /*public List<Doelstelling> getDoelstellingenLijst() {
-        if (doelstellingenLijst == null) {
+        if (doelstellingenLijst == null)
             doelstellingenLijst = ob.geefDoelstellingenJPA();
-        }
         return doelstellingenLijst;
     }*/
     public ObservableList<Vak> geefVakken() {
@@ -128,9 +132,8 @@ public class DomeinController extends Observable {
     }
 
     /* public List<Groepsbewerking> getGroepsbewerkingenList() {
-        if (groepsbewerkingenLijst == null) {
+        if (groepsbewerkingenLijst == null)
             groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
-        }
         return groepsbewerkingenLijst;
     }*/
 
@@ -139,9 +142,8 @@ public class DomeinController extends Observable {
     }*/
 
  /* public List<Doelstelling> getDoelstellingenList() {
-        if (doelstellingenLijst == null) {
+        if (doelstellingenLijst == null)
             doelstellingenLijst = ob.geefDoelstellingenJPA();
-        }
         return doelstellingenLijst;
     }*/
 
@@ -181,9 +183,9 @@ public class DomeinController extends Observable {
 
     /* public List<Groepsbewerking> groepsbewerkingenZonderGeseleceerd() {
 
-        if (groepsbewerkingenLijst == null) {
+        if (groepsbewerkingenLijst == null)
             groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
-        }
+    
         List<Groepsbewerking> lijstZonderGesleceerd = new ArrayList<>(groepsbewerkingenLijst);
         if (!(getHuidigeOefening() == null)) {
             IOefening oefn = getHuidigeOefening();
@@ -200,9 +202,9 @@ public class DomeinController extends Observable {
 
  /* public List<Doelstelling> doelstellingenZonderGeseleceerd() {
 
-        if (doelstellingenLijst == null) {
+        if (doelstellingenLijst == null)
             doelstellingenLijst = ob.geefDoelstellingenJPA();
-        }
+    
         List<Doelstelling> lijstZonderGesleceerd = new ArrayList<>(doelstellingenLijst);
         if (!(getHuidigeOefening() == null)) {
             IOefening oefn = getHuidigeOefening();
@@ -226,9 +228,10 @@ public class DomeinController extends Observable {
     }
 
     public void verwijderOefening(IOefening o) {
-        //ob.deleteOefening(ob.geefOefeningByNaamJpa(o.getNaam()));
         ob.deleteOefening((Oefening)o);
         oefeningLijst.remove((Oefening)o);
+        setChanged();
+        notifyObservers(oefeningLijst);
     }
 
 }

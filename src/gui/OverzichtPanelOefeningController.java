@@ -10,11 +10,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-public class OefeningOverzichtPanelController extends OverzichtPanelController<IOefening> {
+public class OverzichtPanelOefeningController extends OverzichtPanelController<IOefening> {
 
     private DomeinController dc;
     
-    public OefeningOverzichtPanelController(DomeinController dcon) {
+    public OverzichtPanelOefeningController(DomeinController dcon) {
         super(dcon);
         this.dc = dcon;
         renderContent();
@@ -29,18 +29,26 @@ public class OefeningOverzichtPanelController extends OverzichtPanelController<I
     void renderContent() {
         setLblTitleLeftText("Overzicht oefeningen");
         setLblFilterOpText("Filter op naam:");
+        renderTable();
+    }
+    
+    private void renderTable() {
+        // Set items for tableview
         getTbvOverzicht().setItems(dc.geefOefeningen());
         
+        // Create new columns based on current class
         TableColumn<IOefening, String> col1 = new TableColumn<>("Naam");
         col1.setCellValueFactory(v -> v.getValue().naamProperty());
         TableColumn<IOefening, String> col2 = new TableColumn<>("Vak");
         col2.setCellValueFactory(v -> v.getValue().getVak().naamProperty());
+        
+        // Add the columns to the tableview
         getTbvOverzicht().getColumns().setAll(col1, col2);
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        renderContent();
+        renderTable();
     }
 
     @Override
@@ -57,7 +65,6 @@ public class OefeningOverzichtPanelController extends OverzichtPanelController<I
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
                 dc.verwijderOefening(getTbvOverzicht().getSelectionModel().getSelectedItem());
-                renderContent();
             }
         }
     }

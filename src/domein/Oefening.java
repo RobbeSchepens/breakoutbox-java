@@ -3,6 +3,7 @@ package domein;
 import java.io.File;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javax.persistence.Access;
@@ -52,6 +53,9 @@ public class Oefening implements IOefening, Serializable {
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Groepsbewerking> groepsbewerkingen;
+    
+//    @Transient
+//    private Set<OefeningObserver> observers;
 
     public Oefening() {}
 
@@ -178,9 +182,8 @@ public class Oefening implements IOefening, Serializable {
 
 //    @Override
 //    public void addObserver(OefeningObserver o) {
-//        if (!observers.contains(o)) {
+//        if (!observers.contains(o))
 //            observers.add(o);
-//        }
 //    }
 //
 //    @Override
@@ -188,10 +191,14 @@ public class Oefening implements IOefening, Serializable {
 //        observers.remove(o);
 //    }
 //
-//    private void notifyObservers() {
-//        for (OefeningObserver observer : observers) {
+//    public void removeAllObservers() {
+//        observers.clear();
+//    }
+//
+//    public void notifyObservers() {
+//        observers.forEach((observer) -> {
 //            observer.update(getNaam(), antwoord, vak, groepsbewerkingen, doelstellingen);
-//        }
+//        });
 //    }
 //
 //    public void setHuidig() {

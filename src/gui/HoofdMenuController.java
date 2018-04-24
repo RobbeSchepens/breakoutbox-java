@@ -54,7 +54,7 @@ public class HoofdMenuController extends GridPane {
 
     @FXML
     private void btnNieuweOefViewOnAction(ActionEvent event) {
-        OefeningFrameController sc = new OefeningFrameController(dc);
+        FrameOefeningController sc = new FrameOefeningController(dc);
         Scene scene = new Scene(sc, 1280, 720, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
