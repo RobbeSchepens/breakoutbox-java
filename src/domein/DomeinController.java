@@ -1,6 +1,7 @@
 package domein;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -17,16 +18,12 @@ public class DomeinController extends Observable {
     private OefeningBeheerder ob = new OefeningBeheerder();
     private List<Oefening> oefeningLijst;
     private List<Vak> vakkenLijst;
+
     private List<Groepsbewerking> groepsbewerkingenLijst;
+
     private List<Doelstelling> doelstellingenLijst;
     private FilteredList<Oefening> filteredOefeningList;
 
-    // Box
-    //private Box huidigeBox;
-    
-    // Sessie
-    //private Sessie huidigeSessie;
-    
     public DomeinController() {
         this.vakkenLijst = ob.geefVakkenJPA();
         this.groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
@@ -46,8 +43,9 @@ public class DomeinController extends Observable {
     // == Oefeningen ==
     // ================
     private List<Oefening> getOefeningList() {
-        if (oefeningLijst == null)
+        if (oefeningLijst == null) {
             oefeningLijst = ob.geefOefeningenJPA();
+        }
         return oefeningLijst;
     }
 
@@ -133,15 +131,10 @@ public class DomeinController extends Observable {
     // == Vakken ======
     // ================
     public List<Vak> getVakkenList() {
-        if (vakkenLijst == null)
+        if (vakkenLijst == null) {
             vakkenLijst = ob.geefVakkenJPA();
+        }
         return vakkenLijst;
-    }
-
-    public List<Groepsbewerking> getGroepsbewerkingenLijst() {
-        if (groepsbewerkingenLijst == null)
-            groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
-        return groepsbewerkingenLijst;
     }
 
     /*public List<Doelstelling> getDoelstellingenLijst() {
@@ -153,25 +146,16 @@ public class DomeinController extends Observable {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(vakkenLijst));
     }
 
-    /* public List<Groepsbewerking> getGroepsbewerkingenList() {
-        if (groepsbewerkingenLijst == null)
-            groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
-        return groepsbewerkingenLijst;
-    }*/
+    //////////////////////// doelstellingen en bewerkingen lists //////////////////////////////
+    public List<Groepsbewerking> geefAlleBewerkingen() {
+        return ob.geefGroepsbewerkingenJPA();
+    }
 
- /*public ObservableList<Groepsbewerking> geefGroepsbewerkingen() {
-        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(groepsbewerkingenLijst));
-    }*/
+    public List<Doelstelling> geefAlleDoelstellingen() {
+        return ob.geefDoelstellingenJPA();
+    }
 
- /* public List<Doelstelling> getDoelstellingenList() {
-        if (doelstellingenLijst == null)
-            doelstellingenLijst = ob.geefDoelstellingenJPA();
-        return doelstellingenLijst;
-    }*/
-
- /* public ObservableList<Doelstelling> geefDoelstellingen() {
-        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(doelstellingenLijst));
-    }*/
+    ////////////////////////////////////////////
     public void voegNieuweOefeningToe(String naam, String antwoord, File opgave, File feedback, Vak vak,
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstelling) {
         /* if ( de naam van deze oefening al in gebruik is dan) {
@@ -192,57 +176,31 @@ public class DomeinController extends Observable {
         if (doelstelling != null && doelstelling.isEmpty()) {
             throw new IllegalArgumentException("Je moet doelsteliingen geven");
         }
-        System.out.println("1");
-        Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
-        System.out.println("2");
-        getOefeningList().add(oefening);
-        System.out.println("3");
-        ob.getOefRepo().insert(oefening);
-        System.out.println("4");
+
+        Oefening oefening = oefeningLijst.stream().filter(oef -> oef.getNaam().equals(naam)).findFirst().get();
+        oefening.setNaam(naam);
+        oefening.setVak(vak);
+        oefening.setOpgave(new PDF(feedback, naam));
+        oefening.setFeedback(new PDF(feedback, naam));
+        oefening.setAntwoord(antwoord);
+        oefening.setDoelstellingen(doelstelling);
+        oefening.setGroepsbewerkingen(groepsbewerkingen);
+        ob.getOefRepo().update(oefening);
         laadOefeningen();
 
     }
 
-    /* public List<Groepsbewerking> groepsbewerkingenZonderGeseleceerd() {
+    public void verwijderOef(IOefening oefn) {
 
-        if (groepsbewerkingenLijst == null)
-            groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
-    
-        List<Groepsbewerking> lijstZonderGesleceerd = new ArrayList<>(groepsbewerkingenLijst);
-        if (!(getHuidigeOefening() == null)) {
-            IOefening oefn = getHuidigeOefening();
-            System.out.println(oefn.getGroepsBewerkingen());
-            for (Groepsbewerking gbew : oefn.getGroepsBewerkingen()) {
-                lijstZonderGesleceerd.remove(gbew);
-            }
-
-            return lijstZonderGesleceerd;
-        } else {
-            return getGroepsbewerkingenLijst();
-        }
-    }*/
-
- /* public List<Doelstelling> doelstellingenZonderGeseleceerd() {
-
-        if (doelstellingenLijst == null)
-            doelstellingenLijst = ob.geefDoelstellingenJPA();
-    
-        List<Doelstelling> lijstZonderGesleceerd = new ArrayList<>(doelstellingenLijst);
-        if (!(getHuidigeOefening() == null)) {
-            IOefening oefn = getHuidigeOefening();
-            for (Doelstelling doel : oefn.getDoelstellingen()) {
-                lijstZonderGesleceerd.remove(doel);
-            }
-            return lijstZonderGesleceerd;
-        } else {
-            return getDoelstellingenLijst();
-        }
-    }*/
-    public void verwijderOef(String naam) {
-        Oefening oefn = filteredOefeningList.stream().filter(oef -> oef.getNaam().equals(naam)).findFirst().get();
-        filteredOefeningList.remove(oefn);
-        ob.getOefRepo().delete(oefn);
+        Oefening oefening = oefeningLijst.stream().filter(oef -> oef.getNaam().equals(oefn.getNaam())).findFirst().get();
+        System.out.println(oefening);
+        System.out.println(oefeningLijst);
+        oefeningLijst.remove(oefening);
+        System.out.println("oef lijst after delete");
+        System.out.println(oefeningLijst);
+        ob.deleteOefening(oefening);
         laadOefeningen();
+
     }
 
     public void laadOefeningen() {
