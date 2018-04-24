@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
+import javafx.scene.image.ImageView;
 
 public class OefeningOverzichtPanelController extends OverzichtPanelController<IOefening> {
 
@@ -44,15 +45,20 @@ public class OefeningOverzichtPanelController extends OverzichtPanelController<I
 
     @Override
     void btnDeleteSelectedOnAction(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Verwijder oefening");
-        alert.setHeaderText("Verwijder oefening");
-        alert.setContentText("Bent u zeker dat u de oefening wilt verwijderen?");
+        if (getTbvOverzicht().getSelectionModel().getSelectedItem() != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Verwijder oefening");
+            alert.setHeaderText("Bent u zeker dat u de oefening wilt verwijderen?");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-            dc.verwijderOefening(getTbvOverzicht().getSelectionModel().getSelectedItem());
-            renderContent();
+            // Volgende regel zorgt ervoor dat het icoontje en de stylesheet meegenomen worden
+            alert.initOwner(this.getScene().getWindow());
+            alert.setGraphic(new ImageView(this.getClass().getResource("/gui/img/favicon.png").toString()));
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                dc.verwijderOefening(getTbvOverzicht().getSelectionModel().getSelectedItem());
+                renderContent();
+            }
         }
     }
 }
