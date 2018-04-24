@@ -3,7 +3,10 @@ package gui;
 import domein.DomeinController;
 import domein.IOefening;
 import java.util.Observable;
+import java.util.Optional;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 
 public class OefeningOverzichtPanelController extends OverzichtPanelController<IOefening> {
@@ -41,7 +44,15 @@ public class OefeningOverzichtPanelController extends OverzichtPanelController<I
 
     @Override
     void btnDeleteSelectedOnAction(ActionEvent event) {
-        dc.verwijderOefening(getTbvOverzicht().getSelectionModel().getSelectedItem());
-        renderContent();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Verwijder oefening");
+        alert.setHeaderText("Verwijder oefening");
+        alert.setContentText("Bent u zeker dat u de oefening wilt verwijderen?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            dc.verwijderOefening(getTbvOverzicht().getSelectionModel().getSelectedItem());
+            renderContent();
+        }
     }
 }
