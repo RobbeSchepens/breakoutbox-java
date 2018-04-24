@@ -144,13 +144,15 @@ public class DomeinController extends Observable {
         if (doelstelling != null && doelstelling.isEmpty()) {
             throw new IllegalArgumentException("Je moet doelsteliingen geven");
         }
-        System.out.println("1");
+        System.out.println(naam + " " + antwoord + " " + vak);
+        System.out.println(groepsbewerkingen);
+        System.out.println(doelstelling);
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
-        System.out.println("2");
+
         getOefeningList().add(oefening);
-        System.out.println("3");
+
         ob.getOefRepo().insert(oefening);
-        System.out.println("4");
+
         laadOefeningen();
 
     }
