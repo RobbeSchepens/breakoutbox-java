@@ -109,6 +109,8 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
     private Vak vak;
     private List<Doelstelling> doelstellingen;
     private List<Groepsbewerking> groepsbewerkingen;
+    private List<Groepsbewerking> groepsbewerkingenGeselecteerd = new ArrayList<>();
+    private List<Doelstelling> doelstellingenGeselecteerd = new ArrayList<>();
 
     public OefeningenOverzichtController(DomeinController dc) {
         //scene loaden
@@ -241,55 +243,69 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
 
         //listviews
         //groepsbewerkingen beschikbaar
-        /*lsvBeschikbareBewerkingen.setItems(dc.geefGroepsbewerkingen());
-        setLblListViewGroepsbewerkingen();*/
- /*lsvBeschikbareBewerkingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        groepsbewerkingen = dc.geefAlleBewerkingen();
+        doelstellingen = dc.geefAlleDoelstellingen();
+
+        lsvBeschikbareBewerkingen.setItems(FXCollections.observableArrayList(groepsbewerkingen));
+        lsvBeschikbareDoelstellingen.setItems(FXCollections.observableArrayList(doelstellingen));
+
+        setLblListViewGroepsbewerkingen();
+        lsvBeschikbareBewerkingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                Groepsbewerking gbw = lsvBeschikbareBewerkingen.getSelectionModel().getSelectedItem();
-                if (!(lsvGeselecteerdeBewerkingen.getItems().size() >= 10)) {
-                    lsvGeselecteerdeBewerkingen.getItems().add(gbw);
-                    //lsvBeschikbareBewerkingen.getItems().remove(gbw); Deze geeft error (maar geeft niet)
-                    setLblListViewGroepsbewerkingen();
 
+                if (!(lsvGeselecteerdeBewerkingen.getItems().size() >= 10)) {
+                    Groepsbewerking bew = lsvBeschikbareBewerkingen.getSelectionModel().getSelectedItem();
+                    groepsbewerkingenGeselecteerd.add(bew);
+                    lsvGeselecteerdeBewerkingen.setItems(FXCollections.observableArrayList(groepsbewerkingenGeselecteerd));
+                    groepsbewerkingen.remove(bew);
+                    lsvBeschikbareBewerkingen.setItems(FXCollections.observableArrayList(groepsbewerkingen));
+                    setLblListViewGroepsbewerkingen();
                 } else {
                     System.out.println("Je kan niet meer dan 10 selecteren");
+                    ;
                 }
             }
-        });*/
+        });
         //groepsbewerkingen geselecteerd
-        /*lsvGeselecteerdeBewerkingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        lsvGeselecteerdeBewerkingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 Groepsbewerking gbw = lsvGeselecteerdeBewerkingen.getSelectionModel().getSelectedItem();
-                lsvBeschikbareBewerkingen.getItems().add(gbw);
-                //lsvGeselecteerdeBewerkingen.getItems().remove(gbw);
+                groepsbewerkingen.add(gbw);
+                lsvBeschikbareBewerkingen.setItems(FXCollections.observableArrayList(groepsbewerkingen));
+                groepsbewerkingenGeselecteerd.remove(gbw);
+                lsvGeselecteerdeBewerkingen.setItems(FXCollections.observableArrayList(groepsbewerkingenGeselecteerd));
                 setLblListViewGroepsbewerkingen();
             }
-        });*/
+        });
         //doelstellingen alle
-        /*lsvBeschikbareDoelstellingen.setItems(dc.geefDoelstellingen());
-        setLblListViewDoelstellingen();/
-       /* lsvBeschikbareDoelstellingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        setLblListViewDoelstellingen();
+        lsvBeschikbareDoelstellingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                Doelstelling dsl = lsvBeschikbareDoelstellingen.getSelectionModel().getSelectedItem();
-                lsvGeselecteerdeDoelstellingen.getItems().add(dsl);
-                //lsvBeschikbareBewerkingen.getItems().remove(gbw); Deze geeft error (maar geeft niet)
+                Doelstelling dls = lsvBeschikbareDoelstellingen.getSelectionModel().getSelectedItem();
+                doelstellingenGeselecteerd.add(dls);
+                lsvGeselecteerdeDoelstellingen.setItems(FXCollections.observableArrayList(doelstellingenGeselecteerd));
+                doelstellingen.remove(dls);
+                lsvBeschikbareDoelstellingen.setItems(FXCollections.observableArrayList(doelstellingen));
                 setLblListViewDoelstellingen();
             }
-        });*/
+        });
         //doelstellingen geselecteerd
-        /* lsvGeselecteerdeDoelstellingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        lsvGeselecteerdeDoelstellingen.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                Doelstelling gbw = lsvGeselecteerdeDoelstellingen.getSelectionModel().getSelectedItem();
+                Doelstelling dls = lsvGeselecteerdeDoelstellingen.getSelectionModel().getSelectedItem();
 
-                lsvGeselecteerdeDoelstellingen.getItems().add(gbw);
-                //lsvGeselecteerdeDoelstellingen.getItems().remove(gbw);
+                doelstellingen.add(dls);
+                lsvBeschikbareDoelstellingen.setItems(FXCollections.observableArrayList(doelstellingen));
+                doelstellingenGeselecteerd.remove(dls);
+                lsvGeselecteerdeDoelstellingen.setItems(FXCollections.observableArrayList(doelstellingenGeselecteerd));
+
                 setLblListViewDoelstellingen();
             }
-        });*/
+        });
     }
 
     private void displayHuidigeOefening() {
@@ -312,13 +328,12 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         System.out.println(oefUitDc.getGroepsBewerkingen()); //werkt nog niet bij nieuwe oefening maken
         System.out.println(oefUitDc.getDoelstellingen());
 
-        /*lsvBeschikbareBewerkingen.setItems(FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(dc.groepsbewerkingenZonderGeseleceerd())));
-        lsvBeschikbareDoelstellingen.setItems(FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(dc.doelstellingenZonderGeseleceerd())));
+        groepsbewerkingenGeselecteerd = dc.getHuidigeOefening().getGroepsBewerkingen();
+        doelstellingenGeselecteerd = dc.getHuidigeOefening().getDoelstellingen();
 
-        //// werkt nog niet
-        lsvGeselecteerdeBewerkingen.setItems(FXCollections.observableArrayList(oefUitDc.getGroepsBewerkingen()));
-        lsvGeselecteerdeDoelstellingen.setItems(FXCollections.observableArrayList(oefUitDc.getDoelstellingen()));*/
-        ////
+        lsvGeselecteerdeBewerkingen.setItems(FXCollections.observableArrayList(groepsbewerkingenGeselecteerd));
+        lsvGeselecteerdeDoelstellingen.setItems(FXCollections.observableArrayList(doelstellingenGeselecteerd));
+
         lblFeedbackPadNaam.setText(oefUitDc.getOpgave().getName());
         lblOpgavePadNaam.setText(oefUitDc.getFeedback().getName());
 
@@ -372,15 +387,15 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
     }
 
     private void OefeningToevoegen() {
-        try { //naam, vak, opgave, groepsbewerkingen, antwoord, feedback, doelstelling);
+        try {
             dc.voegNieuweOefeningToe(
                     txfNaam.getText(),
                     txfAntwoord.getText(),
                     opgave,
                     feedback,
                     ddlVakken.getValue(),
-                    /*lsvGeselecteerdeBewerkingen.getItems()*/ null,
-                    /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
+                    groepsbewerkingenGeselecteerd,
+                    doelstellingenGeselecteerd
             );
             resetScherm();
 
@@ -404,10 +419,10 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
             dc.bewerkOefening(txfNaam.getText(),
                     ddlVakken.getValue(),
                     opgave,
-                    /*lsvGeselecteerdeBewerkingen.getItems()*/ null,
+                    groepsbewerkingenGeselecteerd,
                     txfAntwoord.getText(),
                     feedback,
-                    /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
+                    doelstellingenGeselecteerd
             );
         } catch (NumberFormatException ex) {
             System.out.println("vul een getal in");
@@ -417,6 +432,7 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
     }
 
     private void resetScherm() {
+
         tbvOefeningen.getSelectionModel().clearSelection();
         btnSwitchNaarMaakNieuweOefening.visibleProperty().setValue(false);
         btnVoegOefeningToe.setText("Voeg oefening toe");
@@ -426,16 +442,21 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         txfNaam.setText("");
         txfAntwoord.setText("");
         ddlVakken.getSelectionModel().clearSelection();
-        /*lsvGeselecteerdeBewerkingen.getItems().clear();
-        lsvGeselecteerdeDoelstellingen.getItems().clear();*/
         lblFeedbackPadNaam.setText("");
         lblOpgavePadNaam.setText("");
         lblAantalGroepsbewerkingenGeselecteerd.setText("");
         lblAantalDoelstellingenGeselecteerd.setText("");
 
-        //lsvBeschikbareBewerkingen
-        /*lsvBeschikbareBewerkingen.setItems(dc.geefGroepsbewerkingen());
-        lsvBeschikbareDoelstellingen.setItems(dc.geefDoelstellingen());*/
+        //reset listviews
+        groepsbewerkingenGeselecteerd = new ArrayList<>();
+        groepsbewerkingen = dc.geefAlleBewerkingen();
+        doelstellingenGeselecteerd = new ArrayList<>();
+        doelstellingen = dc.geefAlleDoelstellingen();
+        lsvBeschikbareBewerkingen.setItems(FXCollections.observableArrayList(groepsbewerkingen));
+        lsvBeschikbareDoelstellingen.setItems(FXCollections.observableArrayList(doelstellingen));
+        lsvGeselecteerdeBewerkingen.getItems().clear();
+        lsvGeselecteerdeDoelstellingen.getItems().clear();
+
         //opgave chooser reset
         opgaveChooser = new FileChooser();
         opgaveChooser.setTitle("Open Opgave Bestand");
