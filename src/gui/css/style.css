@@ -8,6 +8,8 @@
     -fx-font-family: "Poppins Light";
     -fx-background: white;
     -fx-text-fill: rgb(90, 97, 105);
+    -fx-focus-color: #006fe6;
+    -fx-accent: #006fe6;
 }
 
 .button{
@@ -38,7 +40,6 @@
 .choice-box .menu-item > .label { -fx-text-fill: rgba(0,0,0,0.9); }
 /* Text color of focused item in the list */
 .choice-box .menu-item:focused > .label { -fx-text-fill: white; }
-
 
 .btn-card {
     -fx-background-radius: 12;
@@ -73,6 +74,10 @@
     -fx-text-fill: white;
 }
 
+.table-row-cell:selected .text {
+    -fx-fill: white;
+}
+
 .btn-big-action {
     -fx-font-size: 16px;
     -fx-padding: 10 16 10 16;
@@ -88,61 +93,43 @@
 
 
 .btn-primary {
-  -fx-text-fill: #fff;
   -fx-background-color: #006fe6;
 }
 
 .btn-secondary {
-  color: #fff;
-  border-color: #5A6169;
   -fx-background-color: #5A6169;
 }
 
 .btn-success {
-  color: #fff;
-  border-color: #17c671;
   -fx-background-color: #17c671;
 }
 
 .btn-info {
-  color: #fff;
-  border-color: #00b8d8;
   background-color: #00b8d8;
 }
 
 .btn-warning {
-  color: #212529;
-  border-color: #ffb400;
   background-color: #ffb400;
 }
 
 .btn-danger {
-  color: #fff;
   -fx-border-color: #c4183c;
   -fx-background-color: #c4183c;
 }
 
 .btn-light {
-  color: #212529;
-  border-color: #e9ecef;
   -fx-background-color: #e9ecef;
 }
 
 .btn-dark {
-  color: #fff;
-  border-color: #212529;
   -fx-background-color: #212529;
 }
 
 .btn-white {
-  color: #212529;
-  border-color: #fff;
   -fx-background-color: #fff;
 }
 
 .btn-black {
-  color: #fff;
-  border-color: #000;
   -fx-background-color: #000;
 }
 
