@@ -19,7 +19,8 @@ public class OefeningDaoJpa extends GenericDaoJpa<Oefening> implements OefeningD
                     .setParameter("oefeningnaam", oefeningnaam)
                     .getSingleResult();
         } catch (NoResultException ex) {
-            throw new EntityNotFoundException();
+            //throw new EntityNotFoundException();
+            return null;
         }
     }
 

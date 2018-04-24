@@ -159,7 +159,7 @@ public class DomeinController extends Observable {
     }
 
     public void bewerkOefening(String naam, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<Doelstelling> doelstelling) {
-        if (ob.getOefRepo().exists(naam)) {
+        if (ob.getOefRepo().getOefeningByName(naam) != null) {
             throw new IllegalArgumentException("Er bestaan al oefeningen met deze naam");
         }
         if (groepsbewerkingen != null && groepsbewerkingen.isEmpty()) {
@@ -227,8 +227,8 @@ public class DomeinController extends Observable {
 
     public void verwijderOefening(IOefening o) {
         //ob.deleteOefening(ob.geefOefeningByNaamJpa(o.getNaam()));
-        ob.deleteOefening((Oefening)o);
-        oefeningLijst.remove((Oefening)o);
+        ob.deleteOefening((Oefening) o);
+        oefeningLijst.remove((Oefening) o);
     }
 
 }

@@ -87,7 +87,7 @@ public final class OefeningBeheerder {
         return oefRepo.findAll();
     }
 
-    public GenericDao<Oefening> getOefRepo() {
+    public OefeningDao getOefRepo() {
         return oefRepo;
     }
 
