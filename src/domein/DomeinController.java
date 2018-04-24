@@ -178,7 +178,7 @@ public class DomeinController extends Observable {
                  oefening = oefeningLijst.get(i);
             }
         }
-       
+      
         oefening.setNaam(naam);
         oefening.setVak(vak);
         oefening.setOpgave(new PDF(feedback, naam));

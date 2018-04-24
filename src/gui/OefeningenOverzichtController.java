@@ -247,11 +247,13 @@ public class OefeningenOverzichtController extends AnchorPane {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 
                 if (!(lsvGeselecteerdeBewerkingen.getItems().size() >= 10)) {
+                    
                     Groepsbewerking bew = lsvBeschikbareBewerkingen.getSelectionModel().getSelectedItem();
                     groepsbewerkingenGeselecteerd.add(bew);
                     lsvGeselecteerdeBewerkingen.setItems(FXCollections.observableArrayList(groepsbewerkingenGeselecteerd));
                     groepsbewerkingen.remove(bew);
                     lsvBeschikbareBewerkingen.setItems(FXCollections.observableArrayList(groepsbewerkingen));
+                    
                     setLblListViewGroepsbewerkingen();
                 } else {
                     System.out.println("Je kan niet meer dan 10 selecteren");
