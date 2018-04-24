@@ -4,6 +4,8 @@ import domein.DomeinController;
 import domein.IOefening;
 import domein.OefeningObserver;
 import domein.Vak;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,10 +15,17 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class DetailPanelOefeningController extends VBox implements OefeningObserver {
 
     private DomeinController dc;
+    private FileChooser fileChooserOpgave;
+    private FileChooser fileChooserFeedback;
+    private File fileOpgave;
+    private File fileFeedback;
+    
     @FXML private Label lblTitleRight;
     @FXML private TextField txfNaam;
     @FXML private Button btnAdd;
@@ -48,25 +57,48 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
         
         this.dc = dcon;
         
-        // Init nieuwe oefening
+        this.fileChooserOpgave = new FileChooser();
+        fileChooserOpgave.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+        this.fileChooserFeedback = new FileChooser();
+        fileChooserFeedback.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+        
         ddlVak.setItems(dc.geefVakken());
-        btnNieuweOefening.setVisible(false);
-        btnEdit.setManaged(false);
-        btnEdit.setVisible(false);
+        initButtons(true);
+    }
+    
+    private void initButtons(boolean isNew) {
+        btnNieuweOefening.setVisible(!isNew);
+        btnAdd.setManaged(isNew);
+        btnAdd.setVisible(isNew);
+        btnEdit.setManaged(!isNew);
+        btnEdit.setVisible(!isNew);
+        btnOpenOpgave.setDisable(isNew);
+        btnOpenFeedback.setDisable(isNew);
+    }
+    
+    private void clearRender() {
+        initButtons(true);
+        txfNaam.setText("");
+        txfAntwoord.setText("");
+        ddlVak.setItems(dc.geefVakken());
+        ddlVak.getSelectionModel().clearSelection();
+        fileOpgave = null;
+        fileFeedback = null;
+        lblOpgave.setText("");
+        lblFeedback.setText("");
+        lblGroepsbewerkingenCount.setText("0 bewerkingen geselecteerd");
+        lblDoelstellingenCount.setText("0 doelstellingen geselecteerd");
     }
 
     @Override
     public void update(IOefening o) {
-        btnNieuweOefening.setVisible(true);
-        btnAdd.setManaged(false);
-        btnAdd.setVisible(false);
-        btnEdit.setManaged(true);
-        btnEdit.setVisible(true);
-        
+        initButtons(false);
         txfNaam.setText(o.getNaam());
         txfAntwoord.setText(o.getAntwoord());
         ddlVak.setItems(dc.geefVakken());
         ddlVak.getSelectionModel().select(o.getVak());
+        fileOpgave = null;
+        fileFeedback = null;
         lblOpgave.setText("naam.pdf");
         lblFeedback.setText("naam.pdf");
         lblGroepsbewerkingenCount.setText(o.getGroepsBewerkingen().size() + " bewerkingen geselecteerd");
@@ -75,36 +107,53 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
 
     @FXML
     private void btnNieuweOefeningOnAction(ActionEvent event) {
-        btnNieuweOefening.setVisible(false);
-        btnAdd.setManaged(true);
-        btnAdd.setVisible(true);
-        btnEdit.setManaged(false);
-        btnEdit.setVisible(false);
-        
-        txfNaam.setText("");
-        txfAntwoord.setText("");
-        ddlVak.setItems(dc.geefVakken());
-        ddlVak.getSelectionModel().clearSelection();
-        lblOpgave.setText("");
-        lblFeedback.setText("");
-        lblGroepsbewerkingenCount.setText("0 bewerkingen geselecteerd");
-        lblDoelstellingenCount.setText("0 doelstellingen geselecteerd");
+        clearRender();
     }
 
     @FXML
     private void btnOpenOpgaveOnAction(ActionEvent event) {
+        try {
+            if (fileOpgave.toString().endsWith(".pdf")) {
+                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + fileOpgave);
+            } else {
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(fileOpgave);
+            }
+        } catch (IOException ioe) {
+            System.out.println(ioe);
+        }
     }
 
     @FXML
     private void btnFileOpgaveOnAction(ActionEvent event) {
+        fileOpgave = fileChooserOpgave.showOpenDialog((Stage)(this.getScene().getWindow()));
+        if (fileOpgave != null) {
+            lblOpgave.setText(fileOpgave.getName());
+            btnOpenOpgave.setDisable(false);
+        }
     }
 
     @FXML
     private void btnOpenFeedbackOnAction(ActionEvent event) {
+        try {
+            if (fileFeedback.toString().endsWith(".pdf")) {
+                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + fileFeedback);
+            } else {
+                Desktop desktop = Desktop.getDesktop();
+                desktop.open(fileFeedback);
+            }
+        } catch (IOException ioe) {
+            System.out.println(ioe);
+        }
     }
 
     @FXML
     private void btnFileFeedbackOnAction(ActionEvent event) {
+        fileFeedback = fileChooserFeedback.showOpenDialog((Stage)(this.getScene().getWindow()));
+        if (fileFeedback != null) {
+            lblFeedback.setText(fileFeedback.getName());
+            btnOpenFeedback.setDisable(false);
+        }
     }
 
     @FXML
@@ -117,12 +166,40 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
 
     @FXML
     private void btnAddOnAction(ActionEvent event) {
-        //dc.voegNieuweOefeningToe(txfNaam.getText(), txfAntwoord.getText(), opgave, feedback, vak, groepsbewerkingen, doelstelling);
+        try {
+            dc.voegNieuweOefeningToe(
+                    txfNaam.getText(),
+                    txfAntwoord.getText(),
+                    ddlVak.getSelectionModel().getSelectedItem(),
+                    fileOpgave,
+                    fileFeedback,
+                    /*lsvGeselecteerdeBewerkingen.getItems()*/ null,
+                    /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
+            );
+            clearRender();
+        } catch (NumberFormatException ex) {
+            System.out.println("exception oefening toevoegen: antwoord moet een getal zijn");
+        } catch (IllegalArgumentException ex) {
+            System.out.println(ex);
+        }
     }
 
     @FXML
     private void btnEditOnAction(ActionEvent event) {
-        System.out.println("test");
+        try {
+//            dc.bewerkOefening(txfNaam.getText(),
+//                    ddlVakken.getValue(),
+//                    opgave,
+//                    /*lsvGeselecteerdeBewerkingen.getItems()*/ null,
+//                    txfAntwoord.getText(),
+//                    feedback,
+//                    /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
+//            );
+        } catch (NumberFormatException ex) {
+            System.out.println("vul een getal in");
+        } catch (IllegalArgumentException ex) {
+            System.out.println("illegal exception in oefeningbewerken: " + ex);
+        }
     }
     
 }

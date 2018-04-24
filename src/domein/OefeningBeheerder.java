@@ -77,7 +77,6 @@ public final class OefeningBeheerder {
     // Methodes voor oefening op te halen, zoals gefilterd etc
     // Voor meer voorbeelden, zie OOPIII_JPA_Garage 
     public void addOefening(Oefening o) {
-        //oefeningenMap.put(o.getNaam(), o);
         em.getTransaction().begin();
         em.persist(o);
         em.getTransaction().commit();
@@ -106,8 +105,14 @@ public final class OefeningBeheerder {
     public Oefening geefOefeningByNaamJpa(String naam) {
         return oefRepo.getOefeningByName(naam);
     }
-/////////////
+    
+    public void pasOefeningAan(Oefening o) {
+        em.getTransaction().begin();
+        em.persist(o);
+        em.getTransaction().commit();
+    }
 
+    /////////////
     public void addVak(Vak o) {
         em.getTransaction().begin();
         em.persist(o);

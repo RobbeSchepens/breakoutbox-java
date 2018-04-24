@@ -69,6 +69,15 @@
             <Insets bottom="15.0" />
          </padding>
          <children>
+            <Button fx:id="btnDeselect" mnemonicParsing="false" onAction="#btnDeselectOnAction" text="Deselecteer">
+               <styleClass>
+                  <String fx:value="btn-big-action" />
+                  <String fx:value="btn-secondary" />
+               </styleClass>
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+            </Button>
             <Button fx:id="btnDeleteSelected" mnemonicParsing="false" onAction="#btnDeleteSelectedOnAction" text="Verwijder">
                <styleClass>
                   <String fx:value="btn-big-action" />

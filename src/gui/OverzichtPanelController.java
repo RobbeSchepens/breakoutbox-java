@@ -23,6 +23,7 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
     @FXML private TableView<T> tbvOverzicht;
     @FXML private Button btnDeleteSelected;
     @FXML private Button btnHome;
+    @FXML private Button btnDeselect;
 
     public OverzichtPanelController(DomeinController dcon) {
         FXMLLoader loader
@@ -67,4 +68,9 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
     @FXML abstract void btnDeleteSelectedOnAction(ActionEvent event);
     abstract <T> void implementTableviewListener(T newValue);
     abstract void renderContent();
+
+    @FXML
+    private void btnDeselectOnAction(ActionEvent event) {
+        tbvOverzicht.getSelectionModel().clearSelection();
+    }
 }

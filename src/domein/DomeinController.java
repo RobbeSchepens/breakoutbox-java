@@ -76,12 +76,7 @@ public class DomeinController extends Observable {
     }
 
     public void setHuidigeOefening(IOefening huidigeOefening) {
-//        if (this.huidigeOefening != null)
-//            this.huidigeOefening.removeAllObservers();
         this.huidigeOefening = (Oefening)huidigeOefening;
-//        setChanged();
-//        notifyObservers(this.huidigeOefening);
-        //this.huidigeOefening.setHuidig();
     }
 
     public void veranderFilter(String filterValue) {
@@ -95,6 +90,43 @@ public class DomeinController extends Observable {
             String lowerCaseValue = filterValue.toLowerCase();
             return oefening.getNaam().toLowerCase().contains(lowerCaseValue);
         });
+    }
+
+    public void verwijderOefening(IOefening o) {
+        ob.deleteOefening((Oefening)o);
+        oefeningLijst.remove((Oefening)o);
+        setChanged();
+        notifyObservers(oefeningLijst);
+    }
+    
+    public void voegNieuweOefeningToe(String naam, String antwoord, Vak vak, File opgave, File feedback, 
+            List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstelling) {
+        if (ob.geefOefeningByNaamJpa(naam) != null)
+            throw new IllegalArgumentException("Er bestaat al een oefening met deze naam");
+        
+        Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
+        getOefeningList().add(oefening);
+        ob.addOefening(oefening);
+        setChanged();
+        notifyObservers();
+    }
+    
+    public void pasOefeningAan(String naam, String antwoord, Vak vak, File opgave, File feedback, 
+            List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstelling) {
+        
+        
+        setChanged();
+        notifyObservers();
+        
+        System.out.println("1");
+        Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
+        System.out.println("2");
+        getOefeningList().add(oefening);
+        System.out.println("3");
+        ob.getOefRepo().insert(oefening);
+        System.out.println("4");
+        laadOefeningen();
+
     }
 
     // ================
@@ -215,13 +247,6 @@ public class DomeinController extends Observable {
 
     public void laadOefeningen() {
         oefeningLijst = ob.getOefRepo().findAll();
-    }
-
-    public void verwijderOefening(IOefening o) {
-        ob.deleteOefening((Oefening)o);
-        oefeningLijst.remove((Oefening)o);
-        setChanged();
-        notifyObservers(oefeningLijst);
     }
 
 }
