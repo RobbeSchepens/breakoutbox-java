@@ -125,7 +125,7 @@ public class OefeningenOverzichtController extends AnchorPane {
         }
 
         this.dc = dc;
-        dc.laadOefeningen();
+       
         /*
         ddlVakkenFilter.setItems(FXCollections.observableArrayList(new Vak("Vak1Test"), new Vak("Vak2Test")));
         ddlVakkenFilter.setItems(FXCollections.observableArrayList(new Vak("Vak1Test"), new Vak("Vak2Test")));
@@ -413,7 +413,7 @@ public class OefeningenOverzichtController extends AnchorPane {
         btnSwitchNaarMaakNieuweOefening.disableProperty().setValue(false);
 
         try {
-            dc.bewerkOefening(tbvOefeningen.getSelectionModel().getSelectedItem().getNaam(), txfNaam.getText(),
+            dc.bewerkOefening(txfNaam.getText(),tbvOefeningen.getSelectionModel().getSelectedItem(), 
                     ddlVakken.getValue(),
                     opgave,
                     groepsbewerkingenGeselecteerd,

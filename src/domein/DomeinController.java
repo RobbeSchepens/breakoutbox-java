@@ -115,15 +115,10 @@ public class DomeinController extends Observable {
 
         setChanged();
         notifyObservers();
-
-        System.out.println("1");
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
-        System.out.println("2");
         getOefeningList().add(oefening);
-        System.out.println("3");
         ob.getOefRepo().insert(oefening);
-        System.out.println("4");
-        laadOefeningen();
+        
 
     }
 
@@ -166,7 +161,7 @@ public class DomeinController extends Observable {
         ob.addOefening(oefening);
     }
 
-    public void bewerkOefening(String naam, String naamUpdated, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<Doelstelling> doelstelling) {
+    public void bewerkOefening(String naam, IOefening oefeningOud, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<Doelstelling> doelstelling) {
         System.out.println("hiiiii");
         /*if (ob.getOefRepo().getOefeningByName(naam) != null) {
             throw new IllegalArgumentException("Er bestaan al oefeningen met deze naam");
@@ -177,10 +172,14 @@ public class DomeinController extends Observable {
         if (doelstelling != null && doelstelling.isEmpty()) {
             throw new IllegalArgumentException("Je moet doelsteliingen geven");
         }
-
-        Oefening oefening = oefeningLijst.stream().filter(oef -> oef.getNaam().equals(naam)).findFirst().get();
-        System.out.println("hiiiii");
-        oefening.setNaam(naamUpdated);
+        Oefening oefening = null;
+        for(int i = 0; i < oefeningLijst.size(); i++){
+            if(oefeningOud == oefeningLijst.get(i)){
+                 oefening = oefeningLijst.get(i);
+            }
+        }
+       
+        oefening.setNaam(naam);
         oefening.setVak(vak);
         oefening.setOpgave(new PDF(feedback, naam));
         oefening.setFeedback(new PDF(feedback, naam));
@@ -188,10 +187,7 @@ public class DomeinController extends Observable {
         oefening.setDoelstellingen(doelstelling);
         oefening.setGroepsbewerkingen(groepsbewerkingen);
         ob.getOefRepo().update(oefening);
-        System.out.println("hiiiii");
-        laadOefeningen();
-        System.out.println("hiiiii");
-
+   
     }
 
     public void verwijderOef(IOefening oefn) {
@@ -203,12 +199,10 @@ public class DomeinController extends Observable {
         System.out.println("oef lijst after delete");
         System.out.println(oefeningLijst);
         ob.deleteOefening(oefening);
-        laadOefeningen();
+     
 
     }
 
-    public void laadOefeningen() {
-        oefeningLijst = ob.getOefRepo().findAll();
-    }
+ 
 
 }
