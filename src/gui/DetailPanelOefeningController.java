@@ -25,7 +25,7 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
 
     public DetailPanelOefeningController(DomeinController dcon) {
         FXMLLoader loader
-                = new FXMLLoader(getClass().getResource("OefeningDetailPanel.fxml"));
+                = new FXMLLoader(getClass().getResource("DetailPanelOefening.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -43,7 +43,9 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
 
     @Override
     public void update(String naam, String antwoord, Vak vak, List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(naam);
+        System.out.println(antwoord);
+        txfNaam.setText(naam);
     }
     
 }

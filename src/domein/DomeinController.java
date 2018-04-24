@@ -10,7 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
-public class DomeinController extends Observable implements OefeningSubject {
+public class DomeinController extends Observable {
 
     // Oefening
     private Oefening huidigeOefening;
@@ -95,16 +95,6 @@ public class DomeinController extends Observable implements OefeningSubject {
             String lowerCaseValue = filterValue.toLowerCase();
             return oefening.getNaam().toLowerCase().contains(lowerCaseValue);
         });
-    }
-
-    @Override
-    public void addOefeningObserver(OefeningObserver o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeOefeningObserver(OefeningObserver o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     // ================

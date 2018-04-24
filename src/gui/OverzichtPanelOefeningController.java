@@ -2,20 +2,26 @@ package gui;
 
 import domein.DomeinController;
 import domein.IOefening;
+import domein.OefeningObserver;
+import domein.OefeningSubject;
+import java.util.HashSet;
 import java.util.Observable;
 import java.util.Optional;
+import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-public class OverzichtPanelOefeningController extends OverzichtPanelController<IOefening> {
+public class OverzichtPanelOefeningController extends OverzichtPanelController<IOefening> implements OefeningSubject {
 
     private DomeinController dc;
+    private Set<OefeningObserver> observers;
     
     public OverzichtPanelOefeningController(DomeinController dcon) {
         super(dcon);
+        this.observers = new HashSet<>();
         this.dc = dcon;
         renderContent();
     }
@@ -23,6 +29,7 @@ public class OverzichtPanelOefeningController extends OverzichtPanelController<I
     @Override
     void implementTableviewListener(Object newValue) {
         dc.setHuidigeOefening((IOefening)newValue);
+        notifyObservers();
     }
 
     @Override
@@ -67,5 +74,23 @@ public class OverzichtPanelOefeningController extends OverzichtPanelController<I
                 dc.verwijderOefening(getTbvOverzicht().getSelectionModel().getSelectedItem());
             }
         }
+    }
+
+    @Override
+    public void addOefeningObserver(OefeningObserver o) {
+        if (!observers.contains(o))
+            observers.add(o);
+    }
+
+    @Override
+    public void removeOefeningObserver(OefeningObserver o) {
+        observers.remove(o);
+    }
+    
+    public void notifyObservers() {
+        IOefening oef = getTbvOverzicht().getSelectionModel().getSelectedItem();
+        observers.forEach((observer) -> {
+            observer.update(oef.getNaam(), oef.getAntwoord(), oef.getVak(), oef.getGroepsBewerkingen(), oef.getDoelstellingen());
+        });
     }
 }
