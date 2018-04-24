@@ -24,8 +24,7 @@ import javax.persistence.Transient;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries({
-    @NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e.naam = :oefeningnaam"),
-})
+    @NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e.naam = :oefeningnaam"),})
 public class Oefening implements IOefening, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,9 +56,10 @@ public class Oefening implements IOefening, Serializable {
 //    @Transient
 //    private Set<OefeningObserver> observers;
 
-    public Oefening() {}
+    public Oefening() {
+    }
 
-    public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, 
+    public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback,
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
         setGroepsbewerkingen(groepsbewerkingen);
         setVak(vak);
@@ -71,7 +71,7 @@ public class Oefening implements IOefening, Serializable {
         setNaam(naam);
         setDoelstellingen(doelstellingen);
     }
-    
+
     @Id
     @Access(AccessType.PROPERTY)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

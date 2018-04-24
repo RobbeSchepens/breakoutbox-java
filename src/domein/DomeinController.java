@@ -161,7 +161,7 @@ public class DomeinController extends Observable implements OefeningSubject {
     }
 
     public void bewerkOefening(String naam, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<Doelstelling> doelstelling) {
-        if (ob.getOefRepo().exists(naam)) {
+        if (ob.getOefRepo().getOefeningByName(naam) != null) {
             throw new IllegalArgumentException("Er bestaan al oefeningen met deze naam");
         }
         if (groepsbewerkingen != null && groepsbewerkingen.isEmpty()) {
