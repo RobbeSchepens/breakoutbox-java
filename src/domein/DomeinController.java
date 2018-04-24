@@ -74,7 +74,7 @@ public class DomeinController extends Observable {
     }
 
     public void setHuidigeOefening(IOefening huidigeOefening) {
-        this.huidigeOefening = (Oefening)huidigeOefening;
+        this.huidigeOefening = (Oefening) huidigeOefening;
     }
 
     public void veranderFilter(String filterValue) {
@@ -91,31 +91,31 @@ public class DomeinController extends Observable {
     }
 
     public void verwijderOefening(IOefening o) {
-        ob.deleteOefening((Oefening)o);
-        oefeningLijst.remove((Oefening)o);
+        ob.deleteOefening((Oefening) o);
+        oefeningLijst.remove((Oefening) o);
         setChanged();
         notifyObservers(oefeningLijst);
     }
-    
-    public void voegNieuweOefeningToe(String naam, String antwoord, Vak vak, File opgave, File feedback, 
+
+    public void voegNieuweOefeningToe(String naam, String antwoord, Vak vak, File opgave, File feedback,
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstelling) {
-        if (ob.geefOefeningByNaamJpa(naam) != null)
+        if (ob.geefOefeningByNaamJpa(naam) != null) {
             throw new IllegalArgumentException("Er bestaat al een oefening met deze naam");
-        
+        }
+
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
         getOefeningList().add(oefening);
         ob.addOefening(oefening);
         setChanged();
         notifyObservers();
     }
-    
-    public void pasOefeningAan(String naam, String antwoord, Vak vak, File opgave, File feedback, 
+
+    public void pasOefeningAan(String naam, String antwoord, Vak vak, File opgave, File feedback,
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstelling) {
-        
-        
+
         setChanged();
         notifyObservers();
-        
+
         System.out.println("1");
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
         System.out.println("2");
@@ -166,10 +166,11 @@ public class DomeinController extends Observable {
         ob.addOefening(oefening);
     }
 
-    public void bewerkOefening(String naam, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<Doelstelling> doelstelling) {
-        if (ob.getOefRepo().getOefeningByName(naam) != null) {
+    public void bewerkOefening(String naam, String naamUpdated, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<Doelstelling> doelstelling) {
+        System.out.println("hiiiii");
+        /*if (ob.getOefRepo().getOefeningByName(naam) != null) {
             throw new IllegalArgumentException("Er bestaan al oefeningen met deze naam");
-        }
+        }*/
         if (groepsbewerkingen != null && groepsbewerkingen.isEmpty()) {
             throw new IllegalArgumentException("Je moet bewerkingen geven");
         }
@@ -178,7 +179,8 @@ public class DomeinController extends Observable {
         }
 
         Oefening oefening = oefeningLijst.stream().filter(oef -> oef.getNaam().equals(naam)).findFirst().get();
-        oefening.setNaam(naam);
+        System.out.println("hiiiii");
+        oefening.setNaam(naamUpdated);
         oefening.setVak(vak);
         oefening.setOpgave(new PDF(feedback, naam));
         oefening.setFeedback(new PDF(feedback, naam));
@@ -186,7 +188,9 @@ public class DomeinController extends Observable {
         oefening.setDoelstellingen(doelstelling);
         oefening.setGroepsbewerkingen(groepsbewerkingen);
         ob.getOefRepo().update(oefening);
+        System.out.println("hiiiii");
         laadOefeningen();
+        System.out.println("hiiiii");
 
     }
 

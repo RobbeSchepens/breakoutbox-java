@@ -413,7 +413,7 @@ public class OefeningenOverzichtController extends AnchorPane {
         btnSwitchNaarMaakNieuweOefening.disableProperty().setValue(false);
 
         try {
-            dc.bewerkOefening(txfNaam.getText(),
+            dc.bewerkOefening(tbvOefeningen.getSelectionModel().getSelectedItem().getNaam(), txfNaam.getText(),
                     ddlVakken.getValue(),
                     opgave,
                     groepsbewerkingenGeselecteerd,
