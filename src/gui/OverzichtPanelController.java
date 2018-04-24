@@ -1,32 +1,28 @@
 package gui;
 
 import domein.DomeinController;
-import domein.IOefening;
 import java.io.IOException;
 import java.util.Observer;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.SceneAntialiasing;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
+import javafx.stage.Stage;
 
 public abstract class OverzichtPanelController <T> extends VBox implements Observer {
 
+    private DomeinController dc;
     @FXML private Label lblTitleLeft, lblFilterOp;
     @FXML private TextField txfFilterOp;
     @FXML private TableView<T> tbvOverzicht;
-    @FXML private TableColumn<T, String> tbvOverzichtCol1;
-    @FXML private TableColumn<T, String> tbvOverzichtCol2;
     @FXML private Button btnDeleteSelected;
-    
-    private DomeinController dc;
+    @FXML private Button btnHome;
 
     public OverzichtPanelController(DomeinController dcon) {
         FXMLLoader loader
@@ -58,6 +54,14 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
 
     public TableView<T> getTbvOverzicht() {
         return tbvOverzicht;
+    }
+
+    @FXML
+    private void btnHomeOnAction(ActionEvent event) {
+        HoofdMenuController sc = new HoofdMenuController(dc);
+        Scene scene = new Scene(sc, 1280, 720, false, SceneAntialiasing.BALANCED);
+        scene.getStylesheets().add("gui/css/style.css");
+        ((Stage) this.getScene().getWindow()).setScene(scene);
     }
 
     @FXML abstract void btnDeleteSelectedOnAction(ActionEvent event);

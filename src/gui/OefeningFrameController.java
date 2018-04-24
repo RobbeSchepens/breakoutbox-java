@@ -11,6 +11,7 @@ public class OefeningFrameController extends GridPane {
                 = new OefeningDetailPanelController(dc);
         
         dc.addObserver(overzichtPanelController);
-        getChildren().addAll(overzichtPanelController);
+        add(overzichtPanelController, 0, 0);
+        add(oefeningDetailPanelController, 1, 0);
     }
 }

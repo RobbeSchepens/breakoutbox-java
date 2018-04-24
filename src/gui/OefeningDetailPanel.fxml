@@ -27,7 +27,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="lblTitleRight" styleClass="h1" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="lblTitleRight" styleClass="h1" text="Oefening" GridPane.columnIndex="1" />
                </children>
             </GridPane>
          </children>

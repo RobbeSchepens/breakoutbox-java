@@ -3,11 +3,11 @@ package startup;
 import domein.DomeinController;
 import domein.PDF;
 import gui.HoofdMenuController;
-import gui.OefeningFrameController;
 import java.io.File;
 import java.util.Arrays;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.SceneAntialiasing;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -30,8 +30,9 @@ public class StartUpGuiClientApp extends Application {
 
         HoofdMenuController root = new HoofdMenuController(new DomeinController());
 
-        Scene scene = new Scene(root, 1280, 720);
+        Scene scene = new Scene(root, 1280, 720, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
+        System.out.println(scene.getAntiAliasing().toString());
 
         primaryStage.getIcons().add(new Image("gui/img/favicon.png"));
         primaryStage.setTitle("Break Out Box");

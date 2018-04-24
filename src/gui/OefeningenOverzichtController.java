@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.SceneAntialiasing;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -153,7 +154,7 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
     @FXML
     private void btnHoofdmenuOnAction(ActionEvent event) {
         HoofdMenuController sc = new HoofdMenuController(dc);
-        Scene scene = new Scene(sc, 1280, 720);
+        Scene scene = new Scene(sc, 1280, 720, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }

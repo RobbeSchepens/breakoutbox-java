@@ -97,5 +97,6 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" />
          </children>
       </VBox>
+      <Button fx:id="btnNieuweOefView" mnemonicParsing="false" onAction="#btnNieuweOefViewOnAction" text="Button" />
    </children>
 </fx:root>

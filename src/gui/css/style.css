@@ -6,7 +6,6 @@
 .root{
     -fx-font-size: 12px;
     -fx-font-family: "Poppins Light";
-/*    -fx-base: #006fe6;*/
     -fx-background: white;
     -fx-text-fill: rgb(90, 97, 105);
 }

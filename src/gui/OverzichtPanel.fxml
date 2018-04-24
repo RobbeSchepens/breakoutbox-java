@@ -28,6 +28,7 @@
               </rowConstraints>
                <children>
                   <Label fx:id="lblTitleLeft" styleClass="h1" text="Label" GridPane.columnIndex="1" />
+                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#btnHomeOnAction" text="Terug naar home" />
                </children>
             </GridPane>
          </children>
@@ -53,8 +54,8 @@
       </HBox>
       <TableView fx:id="tbvOverzicht" prefHeight="520.0">
         <columns>
-          <TableColumn fx:id="col1" prefWidth="-1.0" text="C1" />
-          <TableColumn fx:id="col2" prefWidth="-1.0" text="C2" />
+          <TableColumn prefWidth="-1.0" text="C1" />
+          <TableColumn prefWidth="-1.0" text="C2" />
         </columns>
          <VBox.margin>
             <Insets bottom="15.0" />
@@ -63,7 +64,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <HBox alignment="CENTER_LEFT">
+      <HBox alignment="CENTER">
          <padding>
             <Insets bottom="15.0" />
          </padding>
