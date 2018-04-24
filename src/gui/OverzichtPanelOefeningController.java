@@ -88,9 +88,9 @@ public class OverzichtPanelOefeningController extends OverzichtPanelController<I
     }
     
     public void notifyObservers() {
-        IOefening oef = getTbvOverzicht().getSelectionModel().getSelectedItem();
+        IOefening o = getTbvOverzicht().getSelectionModel().getSelectedItem();
         observers.forEach((observer) -> {
-            observer.update(oef.getNaam(), oef.getAntwoord(), oef.getVak(), oef.getGroepsBewerkingen(), oef.getDoelstellingen());
+            observer.update(o);
         });
     }
 }

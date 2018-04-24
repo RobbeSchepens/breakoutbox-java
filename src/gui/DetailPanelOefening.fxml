@@ -27,36 +27,109 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="lblTitleRight" styleClass="h1" text="Oefening" GridPane.columnIndex="1" />
+                  <Label fx:id="lblTitleRight" focusTraversable="false" styleClass="h1" text="Oefening" GridPane.columnIndex="1" />
                </children>
             </GridPane>
          </children>
          <VBox.margin>
-            <Insets />
+            <Insets bottom="15.0" />
          </VBox.margin>
-         <padding>
-            <Insets bottom="15.0" />
-         </padding>
       </HBox>
-      <HBox alignment="CENTER_LEFT">
+      <HBox alignment="CENTER">
          <children>
-            <Label fx:id="lblNaam" text="Naam:">
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-            </Label>
-            <TextField fx:id="txfNaam" />
+            <Button fx:id="btnNieuweOefening" mnemonicParsing="false" onAction="#btnNieuweOefeningOnAction" styleClass="btn-secondary" text="Leeg velden en maak een nieuwe oefening aan" />
          </children>
-         <padding>
+         <VBox.margin>
             <Insets bottom="15.0" />
-         </padding>
+         </VBox.margin>
       </HBox>
-      <HBox alignment="CENTER_LEFT">
+      <GridPane hgap="15.0" vgap="15.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label focusTraversable="false" text="Naam oefening" />
+            <Label focusTraversable="false" text="Antwoord" GridPane.rowIndex="1" />
+            <TextField fx:id="txfNaam" GridPane.columnIndex="1" />
+            <TextField fx:id="txfAntwoord" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label focusTraversable="false" text="Vak" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="ddlVak" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label focusTraversable="false" text="Groepsbewerkingen" GridPane.rowIndex="5" />
+            <Label focusTraversable="false" text="Doelstellingen" GridPane.rowIndex="6" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <children>
+                  <Button fx:id="btnGroepsbewerkingen" mnemonicParsing="false" onAction="#btnGroepsbewerkingenOnAction" text="Toon lijst">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Label fx:id="lblGroepsbewerkingenCount" text="0 bewerkingen geselecteerd" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <children>
+                  <Button fx:id="btnDoelstellingen" mnemonicParsing="false" onAction="#btnDoelstellingenOnAction" text="Toon lijst">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Label fx:id="lblDoelstellingenCount" text="0 doelstellingen geselecteerd" />
+               </children>
+            </HBox>
+            <Label focusTraversable="false" text="Opgave" GridPane.rowIndex="3" />
+            <Label focusTraversable="false" text="Feedback" GridPane.rowIndex="4" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <children>
+                  <Button fx:id="btnOpenFeedback" mnemonicParsing="false" onAction="#btnOpenFeedbackOnAction" text="Open">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnFileFeedback" mnemonicParsing="false" onAction="#btnFileFeedbackOnAction" text="File...">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Label fx:id="lblFeedback" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Button fx:id="btnOpenOpgave" mnemonicParsing="false" onAction="#btnOpenOpgaveOnAction" text="Open">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnFileOpgave" mnemonicParsing="false" onAction="#btnFileOpgaveOnAction" text="File...">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Label fx:id="lblOpgave" />
+               </children>
+            </HBox>
+         </children>
+         <VBox.margin>
+            <Insets bottom="30.0" />
+         </VBox.margin>
+      </GridPane>
+      <HBox alignment="CENTER">
          <padding>
             <Insets bottom="15.0" />
          </padding>
          <children>
             <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#btnAddOnAction" styleClass="btn-big-action" text="Voeg toe" />
+            <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#btnEditOnAction" styleClass="btn-big-action" text="Pas aan" />
          </children>
       </HBox>
    </children>

@@ -4,6 +4,7 @@ import domein.Doelstelling;
 import domein.DomeinController;
 import domein.Groepsbewerking;
 import domein.IOefening;
+import domein.Oefening;
 import domein.OefeningObserver;
 import domein.PDF;
 import domein.Vak;
@@ -32,7 +33,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class OefeningenOverzichtController extends AnchorPane implements OefeningObserver {
+public class OefeningenOverzichtController extends AnchorPane {
 
     //FXML
     //tableview oefeningen
@@ -210,15 +211,6 @@ public class OefeningenOverzichtController extends AnchorPane implements Oefenin
         } catch (IOException ioe) {
             System.out.println("fout");
         }
-    }
-
-    @Override
-    public void update(String naam, String antwoord, Vak vak, List<Groepsbewerking> groepsbewerkings, List<Doelstelling> doelstellingen) {
-        this.naam = naam;
-        this.antwoord = antwoord;
-        this.vak = vak;
-
-        display();
     }
 
     public void display() {
