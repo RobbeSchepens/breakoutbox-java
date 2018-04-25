@@ -31,6 +31,18 @@ public class SidebarNavPanelController extends VBox {
         }
         
         this.dc = dcon;
+        
+        String nonactiveCss = "-fx-border-width: 0 2 1 0; -fx-background-color: white; -fx-border-color: #ccc;";
+        String activeCss = "-fx-border-width: 0 2 1 0; -fx-background-color: #006fe6; -fx-border-color: #006fe6;";
+        
+        hbxOef.setStyle(activeCss);
+        hbxOef.getChildren().get(0).setStyle("-fx-text-fill: white;");
+        hbxSessies.setStyle(nonactiveCss);
+        hbxSessies.getChildren().get(0).setStyle("-fx-text-fill: #333;");
+        hbxBoxes.setStyle(nonactiveCss);
+        hbxBoxes.getChildren().get(0).setStyle("-fx-text-fill: #333;");
+        hbxHome.setStyle(nonactiveCss);
+        hbxHome.getChildren().get(0).setStyle("-fx-text-fill: #333;");
     }  
 
     @FXML
@@ -39,9 +51,6 @@ public class SidebarNavPanelController extends VBox {
         Scene scene = new Scene(sc, 1430, 720, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
-        hbxOef.setStyle(".activenav");
-        hbxSessies.setStyle("");
-        hbxBoxes.setStyle("");
     }
 
     @FXML

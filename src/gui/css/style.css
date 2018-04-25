@@ -79,7 +79,8 @@
 }
 
 .menutext {
-    -fx-font-size: 1.4em;
+    -fx-font-family: "Poppins Medium";
+    -fx-font-size: 1.3em;
 }
 
 .activenav {
