@@ -51,10 +51,6 @@ public class DomeinController extends Observable {
         return oefeningLijst;
     }
 
-    public IOefening getHuidigeOefening() {
-        return huidigeOefening;
-    }
-
     public boolean noOefeningen() {
         return getOefeningList().isEmpty();
     }
@@ -71,8 +67,17 @@ public class DomeinController extends Observable {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getOefeningList()));
     }
 
+    public FilteredList<IOefening> geefOefeningenFiltered() {
+        return filteredOefeningList;
+    }
+
     public IOefening geefOefeningByNaam(String naam) {
         return ob.geefOefeningByNaamJpa(naam);
+    }
+
+    // Weg na refactor
+    public IOefening getHuidigeOefening() {
+        return huidigeOefening;
     }
 
     public void setHuidigeOefening(IOefening huidigeOefening) {

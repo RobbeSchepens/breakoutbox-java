@@ -46,7 +46,11 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="txfFilterOp" />
+            <TextField fx:id="txfFilterOp" onKeyReleased="#txfFilterOpOnKeyReleased">
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin></TextField>
+            <Button fx:id="btnClearFilter" mnemonicParsing="false" onAction="#btnClearFilterOnAction" text="Wis" />
          </children>
          <padding>
             <Insets bottom="15.0" />

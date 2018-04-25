@@ -41,7 +41,7 @@ public class OverzichtPanelOefeningController extends OverzichtPanelController<I
     
     private void renderTable() {
         // Set items for tableview
-        getTbvOverzicht().setItems(dc.geefOefeningen());
+        getTbvOverzicht().setItems(dc.geefOefeningenFiltered());
         
         // Create new columns based on current class
         TableColumn<IOefening, String> col1 = new TableColumn<>("Naam");
@@ -92,5 +92,10 @@ public class OverzichtPanelOefeningController extends OverzichtPanelController<I
         observers.forEach((observer) -> {
             observer.update(o);
         });
+    }
+
+    @Override
+    void filter(String newValue) {
+        dc.veranderFilter(newValue);
     }
 }

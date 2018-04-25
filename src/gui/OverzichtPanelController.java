@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -24,6 +25,7 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
     @FXML private Button btnDeleteSelected;
     @FXML private Button btnHome;
     @FXML private Button btnDeselect;
+    @FXML private Button btnClearFilter;
 
     public OverzichtPanelController(DomeinController dcon) {
         FXMLLoader loader
@@ -64,13 +66,27 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
+    
+    @FXML
+    private void btnDeselectOnAction(ActionEvent event) {
+        tbvOverzicht.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    private void txfFilterOpOnKeyReleased(KeyEvent event) {
+        String newValue = txfFilterOp.getText();
+        filter(newValue);
+    }
 
     @FXML abstract void btnDeleteSelectedOnAction(ActionEvent event);
     abstract <T> void implementTableviewListener(T newValue);
     abstract void renderContent();
+    abstract void filter(String newValue);
 
     @FXML
-    private void btnDeselectOnAction(ActionEvent event) {
-        tbvOverzicht.getSelectionModel().clearSelection();
+    private void btnClearFilterOnAction(ActionEvent event) {
+        txfFilterOp.setText("");
+        txfFilterOp.requestFocus();
+        filter("");
     }
 }
