@@ -191,7 +191,7 @@ public class DomeinController extends Observable {
     }
 
     public void bewerkOefening(String naam, IOefening oefeningOud, Vak vak, File opgave, List<Groepsbewerking> groepsbewerkingen, String antwoord, File feedback, List<Doelstelling> doelstelling) {
-        System.out.println("hiiiii");
+
         /*if (ob.getOefRepo().getOefeningByName(naam) != null) {
             throw new IllegalArgumentException("Er bestaan al oefeningen met deze naam");
         }*/
@@ -220,16 +220,13 @@ public class DomeinController extends Observable {
 
     public void verwijderOef(IOefening oefn) {
         Oefening oefening = oefeningLijst.stream().filter(oef -> oef.getNaam().equals(oefn.getNaam())).findFirst().get();
-        System.out.println(oefening);
-        System.out.println(oefeningLijst);
         oefeningLijst.remove(oefening);
-        System.out.println("oef lijst after delete");
-        System.out.println(oefeningLijst);
         ob.deleteOefening(oefening);
     }
 
     public void setGroepsbewerkingenOefening(ObservableList<Groepsbewerking> selectedItems) {
         //selectedItems.
     }
+
 
 }
