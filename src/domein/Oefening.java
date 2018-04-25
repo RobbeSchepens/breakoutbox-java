@@ -71,10 +71,10 @@ public class Oefening implements IOefening, Serializable {
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
         setGroepsbewerkingen(groepsbewerkingen);
         setVak(vak);
-        String pdfName = String.format("%s_%s_%s_%s", "Opgave", naam, getVak(), opgave.getName());
+        String pdfName = String.format("%s", opgave.getName());
         setOpgave(new PDF(opgave, pdfName));
         setAntwoord(antwoord);
-        pdfName = String.format("%s_%s_%s_%s", "Feedback", naam, getVak(), opgave.getName());
+        pdfName = String.format("%s",  feedback.getName());
         setFeedback(new PDF(feedback, pdfName));
         setNaam(naam);
         setDoelstellingen(doelstellingen);

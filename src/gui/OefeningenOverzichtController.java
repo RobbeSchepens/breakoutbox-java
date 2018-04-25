@@ -220,6 +220,9 @@ public class OefeningenOverzichtController extends AnchorPane {
 
     private void setAllItems() {
 
+        //opgave = dc.getHuidigeOefening().getOpgave().getFile();
+        //opgave = dc.getHuidigeOefening().getFeedback().getFile();
+                
         btnSwitchNaarMaakNieuweOefening.visibleProperty().setValue(false);
         tbvOefeningen.setItems(dc.geefOefeningen());
         colNaam.setCellValueFactory(v -> v.getValue().naamProperty());
@@ -303,7 +306,7 @@ public class OefeningenOverzichtController extends AnchorPane {
     }
 
     private void displayHuidigeOefening() {
-
+        
         btnSwitchNaarMaakNieuweOefening.visibleProperty().setValue(true);
 
         btnaddOpgave.setText("Replace");
@@ -332,18 +335,21 @@ public class OefeningenOverzichtController extends AnchorPane {
         lblOpgavePadNaam.setText(oefUitDc.getOpgave().getName());
 
         String pathNaarOef = PDF.FOLDERLOCATIE;
-
-        File opgaveHuidig = new File(pathNaarOef + oefUitDc.getOpgave());
-        System.out.println(pathNaarOef);
+        /*
+        opgave = dc.getHuidigeOefening().getOpgave().getFile();
+        feedback = dc.getHuidigeOefening().getFeedback().getFile();*/
+        
+        System.out.println("hier");
         System.out.println(oefUitDc.getOpgave());
+        File opgaveHuidig = new File(pathNaarOef + oefUitDc.getOpgave());
         File feedbackHuidig = new File(pathNaarOef + oefUitDc.getFeedback());
-
+        
         this.opgaveChooser = new FileChooser();
         opgaveChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
         this.feedbackChooser = new FileChooser();
         feedbackChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
 
-        opgave = opgaveHuidig;
+        opgave = dc.getHuidigeOefening().getOpgave().getFile();
         feedback = feedbackHuidig;
 
     }
