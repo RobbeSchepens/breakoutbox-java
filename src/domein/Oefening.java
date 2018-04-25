@@ -131,7 +131,7 @@ public class Oefening implements IOefening, Serializable {
     }
 
     private void controleerAntwoord(String antwoord) {
-        if (antwoord == null) {
+        if (antwoord == null || antwoord.equals("")) {
             throw new IllegalArgumentException("Er werd geen antwoord opgegeven.");
         }
         

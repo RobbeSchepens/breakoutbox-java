@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -82,9 +83,35 @@ public class OefeningTest {
         oef.setNaam("oefen§ing");
     }
 
+    @Test(expected = Exception.class)
+    public void naamIsTeLang() {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < 40; i++) {
+            Random r = new Random();
+            char c = (char) (r.nextInt(26) + 'a');
+            sb.append(c);
+        }
+        oef.setNaam(sb.toString());
+    }
+
+    @Test(expected = Exception.class)
+    public void naamIsTeKort() {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < 1; i++) {
+            Random r = new Random();
+            char c = (char) (r.nextInt(26) + 'a');
+            sb.append(c);
+        }
+        oef.setNaam(sb.toString());
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void antwoordIsNull() {
         oef.setAntwoord(null);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void antwoordIsLeeg() {
+        oef.setAntwoord("");
     }
 
     @Test(expected = SpecialeTekensInNaamException.class)
@@ -117,6 +144,7 @@ public class OefeningTest {
     public void doelstellingenIsNull() {
         oef.setDoelstellingen(null);
     }
+
 
     
 
