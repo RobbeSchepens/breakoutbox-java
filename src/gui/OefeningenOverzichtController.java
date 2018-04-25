@@ -187,6 +187,8 @@ public class OefeningenOverzichtController extends AnchorPane {
 
     @FXML
     private void btnOpgavePreviewOnAction(ActionEvent event) {
+        
+        
         try {
             if (opgave.toString().endsWith(".pdf")) {
                 Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + opgave);
@@ -349,7 +351,7 @@ public class OefeningenOverzichtController extends AnchorPane {
         this.feedbackChooser = new FileChooser();
         feedbackChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
 
-        opgave = dc.getHuidigeOefening().getOpgave().getFile();
+        opgave = opgaveHuidig;
         feedback = feedbackHuidig;
 
     }

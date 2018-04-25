@@ -59,7 +59,7 @@ public class PDF implements Serializable {
     }
 
     public void setDBFile(byte[] bytearray) {
-        System.out.println("gqfniejng");
+     
         try {
             String path = String.format("%s%s", FOLDERLOCATIE, getName());
             Files.write(Paths.get(path), bytearray).toFile();
