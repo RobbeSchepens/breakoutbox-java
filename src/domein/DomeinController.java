@@ -163,6 +163,10 @@ public class DomeinController extends Observable {
     public ObservableList<Groepsbewerking> geefGroepsbewerkingen() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getGroepsbewerkingenList()));
     }
+    
+    public ObservableList<Groepsbewerking> geefGroepsbewerkingenHuidigeOefening() {
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(huidigeOefening.getGroepsBewerkingen()));
+    }
 
     public List<Doelstelling> getDoelstellingenList() {
         if (doelstellingenLijst == null) {
@@ -222,6 +226,10 @@ public class DomeinController extends Observable {
         System.out.println("oef lijst after delete");
         System.out.println(oefeningLijst);
         ob.deleteOefening(oefening);
+    }
+
+    public void setGroepsbewerkingenOefening(ObservableList<Groepsbewerking> selectedItems) {
+        //selectedItems.
     }
 
 }

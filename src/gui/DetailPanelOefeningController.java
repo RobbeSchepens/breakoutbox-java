@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 public class DetailPanelOefeningController extends VBox implements OefeningObserver {
 
     private DomeinController dc;
+    private FrameOefeningController fc;
     private FileChooser fileChooserOpgave;
     private FileChooser fileChooserFeedback;
     private File fileOpgave;
@@ -49,7 +50,7 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     @FXML private Label lblError;
     @FXML private Label lblSuccess;
 
-    public DetailPanelOefeningController(DomeinController dcon) {
+    public DetailPanelOefeningController(DomeinController dcon, FrameOefeningController fc) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("DetailPanelOefening.fxml"));
         loader.setRoot(this);
@@ -60,10 +61,8 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
             throw new RuntimeException(ex);
         }
         
-        System.out.println(loader.getController().toString());
-        
-        
         this.dc = dcon;
+        this.fc = fc; // parent controller for showing listview bewerkingen en doelstellingen
         
         this.fileChooserOpgave = new FileChooser();
         fileChooserOpgave.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
@@ -167,10 +166,12 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
 
     @FXML
     private void btnGroepsbewerkingenOnAction(ActionEvent event) {
+        fc.toonListview(true);
     }
 
     @FXML
     private void btnDoelstellingenOnAction(ActionEvent event) {
+        fc.toonListview(true);
     }
 
     @FXML

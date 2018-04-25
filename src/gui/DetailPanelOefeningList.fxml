@@ -38,7 +38,7 @@
       </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
-            <Label fx:id="lblAantalGeselecteerd" text="Geselecteerde groepsbewerkingen: 0" />
+            <Label fx:id="lblAantalGeselecteerd" prefHeight="25.0" text="Geselecteerde groepsbewerkingen: 0" />
          </children>
          <padding>
             <Insets bottom="15.0" />
@@ -58,6 +58,24 @@
                <styleClass>
                   <String fx:value="btn-big-action" />
                   <String fx:value="btn-danger" />
+               </styleClass>
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#btnCancelOnAction" text="Annuleer">
+               <styleClass>
+                  <String fx:value="btn-big-action" />
+                  <String fx:value="btn-secondary" />
+               </styleClass>
+               <HBox.margin>
+                  <Insets right="15.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#btnSubmitOnAction" text="Bevestig">
+               <styleClass>
+                  <String fx:value="btn-big-action" />
+                  <String fx:value="btn-success" />
                </styleClass>
             </Button>
          </children>

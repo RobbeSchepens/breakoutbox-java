@@ -11,8 +11,8 @@ public class FrameOefeningController extends GridPane {
     
     public FrameOefeningController(DomeinController dc) {
         overzichtPanelController = new OverzichtPanelOefeningController(dc);
-        oefeningDetailPanelController = new DetailPanelOefeningController(dc);
-        oefeningDetailPanelListController = new DetailPanelOefeningListController(dc);
+        oefeningDetailPanelController = new DetailPanelOefeningController(dc, this);
+        oefeningDetailPanelListController = new DetailPanelOefeningListController(dc, this);
         
         dc.addObserver(overzichtPanelController);
         overzichtPanelController.addOefeningObserver(oefeningDetailPanelController);
@@ -20,10 +20,11 @@ public class FrameOefeningController extends GridPane {
         add(overzichtPanelController, 0, 0);
         add(oefeningDetailPanelController, 1, 0);
         add(oefeningDetailPanelListController, 0, 0);
-        toonGroepsbewerkingen(false);
+        toonListview(false);
     }
     
-    public void toonGroepsbewerkingen(boolean flag) {
+    public void toonListview(boolean flag) {
+        overzichtPanelController.setVisible(!flag);
         oefeningDetailPanelListController.setVisible(flag);
     }
 }
