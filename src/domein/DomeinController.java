@@ -92,9 +92,9 @@ public class DomeinController extends Observable {
 
     public void verwijderOefening(IOefening o) {
         ob.deleteOefening((Oefening) o);
-        oefeningLijst.remove((Oefening) o);
+        getOefeningList().remove((Oefening) o);
         setChanged();
-        notifyObservers(oefeningLijst);
+        notifyObservers(getOefeningList());
     }
 
     public void voegNieuweOefeningToe(String naam, String antwoord, Vak vak, File opgave, File feedback,
@@ -111,15 +111,12 @@ public class DomeinController extends Observable {
     }
 
     public void pasOefeningAan(String naam, String antwoord, Vak vak, File opgave, File feedback,
-            List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstelling) {
-
+            List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
+        this.huidigeOefening.pasOefeningAan(naam, antwoord, vak, 
+                opgave, feedback, groepsbewerkingen, doelstellingen);
+        ob.updateOefening(this.huidigeOefening);
         setChanged();
         notifyObservers();
-        Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
-        getOefeningList().add(oefening);
-        ob.getOefRepo().insert(oefening);
-        
-
     }
 
     // ================

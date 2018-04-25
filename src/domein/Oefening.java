@@ -36,25 +36,21 @@ public class Oefening implements IOefening, Serializable {
 
     @Transient
     private final StringProperty naam = new SimpleStringProperty();
-
     private String antwoord;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Vak vak;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private PDF opgave;
     @OneToOne(cascade = CascadeType.PERSIST)
     private PDF feedback;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Vak vak;
-
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Doelstelling> doelstellingen;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Groepsbewerking> groepsbewerkingen;
-    
-//    @Transient
-//    private Set<OefeningObserver> observers;
 
     public Oefening() {
     }
@@ -63,11 +59,11 @@ public class Oefening implements IOefening, Serializable {
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
         setGroepsbewerkingen(groepsbewerkingen);
         setVak(vak);
-        String pdfName = String.format("%s_%s_%s_%s", "Opgave", naam, getVak(), opgave.getName());
-        setOpgave(new PDF(opgave, pdfName));
+        //String pdfName = String.format("%s_%s_%s_%s", "Opgave", naam, getVak(), opgave.getName());
+        //setOpgave(new PDF(opgave, pdfName));
         setAntwoord(antwoord);
-        pdfName = String.format("%s_%s_%s_%s", "Feedback", naam, getVak(), opgave.getName());
-        setFeedback(new PDF(feedback, pdfName));
+        //pdfName = String.format("%s_%s_%s_%s", "Feedback", naam, getVak(), opgave.getName());
+        //setFeedback(new PDF(feedback, pdfName));
         setNaam(naam);
         setDoelstellingen(doelstellingen);
     }
@@ -95,7 +91,6 @@ public class Oefening implements IOefening, Serializable {
             throw new IllegalArgumentException("Er moet een naam zijn");
         }
         naam.set(value);
-        //notifyObservers();
     }
 
     @Override
@@ -114,7 +109,6 @@ public class Oefening implements IOefening, Serializable {
             throw new IllegalArgumentException("Er moet een antwoord zijn");
         }
         this.antwoord = antwoord;
-        //notifyObservers();
     }
 
     @Override
@@ -151,7 +145,6 @@ public class Oefening implements IOefening, Serializable {
             throw new IllegalArgumentException("er moet een vak geselcteerd zijn");
         }
         this.vak = vak;
-        //notifyObservers();
     }
 
     @Override
@@ -180,28 +173,13 @@ public class Oefening implements IOefening, Serializable {
         return getNaam();
     }
 
-//    @Override
-//    public void addObserver(OefeningObserver o) {
-//        if (!observers.contains(o))
-//            observers.add(o);
-//    }
-//
-//    @Override
-//    public void removeObserver(OefeningObserver o) {
-//        observers.remove(o);
-//    }
-//
-//    public void removeAllObservers() {
-//        observers.clear();
-//    }
-//
-//    public void notifyObservers() {
-//        observers.forEach((observer) -> {
-//            observer.update(getNaam(), antwoord, vak, groepsbewerkingen, doelstellingen);
-//        });
-//    }
-//
-//    public void setHuidig() {
-//        notifyObservers();
-//    }
+    void pasOefeningAan(String naam, String antwoord, Vak vak, File opgave, File feedback, List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
+        setNaam(naam);
+        setAntwoord(antwoord);
+        setVak(vak);
+        //setOpgave(opgave);
+        //setFeedback(feedback);
+        setGroepsbewerkingen(groepsbewerkingen);
+        setDoelstellingen(doelstellingen);
+    }
 }

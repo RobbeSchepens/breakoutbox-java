@@ -140,4 +140,10 @@ public final class OefeningBeheerder {
         em.getTransaction().commit();
     }
 
+    void updateOefening(Oefening o) {
+        em.getTransaction().begin();
+        em.merge(o);
+        em.getTransaction().commit();
+    }
+
 }
