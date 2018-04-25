@@ -1,6 +1,9 @@
 package domein;
 
+import exceptions.SpecialeTekensInNaamException;
 import java.io.Serializable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javax.persistence.Access;
@@ -34,7 +37,16 @@ public class Vak implements Serializable {
     }
 
     public void setNaam(String value) {
+        controleerNaam(value);
         naam.set(value);
+    }
+    
+    private void controleerNaam(String naam) {
+        // Deze karakters mogen, alle andere niet. 
+        Pattern p = Pattern.compile("[^A-Za-z0-9&@]");
+        Matcher m = p.matcher(naam);
+        if (m.find())
+            throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in de naam van het vak. Enkel A tot Z, 0 tot 9, & of @.");
     }
 
     public StringProperty naamProperty() {

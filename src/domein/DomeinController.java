@@ -100,7 +100,7 @@ public class DomeinController extends Observable {
     public void voegNieuweOefeningToe(String naam, String antwoord, Vak vak, File opgave, File feedback,
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstelling) {
         if (ob.geefOefeningByNaamJpa(naam) != null) {
-            throw new IllegalArgumentException("Er bestaat al een oefening met deze naam");
+            throw new IllegalArgumentException("Er bestaat al een oefening met deze naam.");
         }
 
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
@@ -112,8 +112,11 @@ public class DomeinController extends Observable {
 
     public void pasOefeningAan(String naam, String antwoord, Vak vak, File opgave, File feedback,
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
+        if (!this.huidigeOefening.getNaam().equals(naam) && ob.geefOefeningByNaamJpa(naam) != null) {
+            throw new IllegalArgumentException("Er bestaat al een oefening met deze naam.");
+        }
         this.huidigeOefening.pasOefeningAan(naam, antwoord, vak, 
-                opgave, feedback, groepsbewerkingen, doelstellingen);
+                opgave, feedback, this.huidigeOefening.getGroepsBewerkingen(), this.huidigeOefening.getDoelstellingen());
         ob.updateOefening(this.huidigeOefening);
         setChanged();
         notifyObservers();

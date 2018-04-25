@@ -4,6 +4,7 @@ import domein.DomeinController;
 import domein.IOefening;
 import domein.OefeningObserver;
 import domein.Vak;
+import exceptions.SpecialeTekensInNaamException;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -43,6 +44,9 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     @FXML private Button btnOpenOpgave;
     @FXML private Button btnFileOpgave;
     @FXML private Label lblOpgave;
+    @FXML private Label lblError;
+    @FXML
+    private Label lblSuccess;
 
     public DetailPanelOefeningController(DomeinController dcon) {
         FXMLLoader loader
@@ -177,28 +181,27 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
                     /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
             );
             clearRender();
-        } catch (NumberFormatException ex) {
-            System.out.println("exception oefening toevoegen: antwoord moet een getal zijn");
-        } catch (IllegalArgumentException ex) {
-            System.out.println(ex);
+            lblSuccess.setText("De oefening werd succesvol toegevoegd.");
+        } catch (SpecialeTekensInNaamException | IllegalArgumentException ex) {
+            lblError.setText(ex.getMessage());
         }
     }
 
     @FXML
     private void btnEditOnAction(ActionEvent event) {
         try {
-//            dc.bewerkOefening(txfNaam.getText(),
-//                    ddlVakken.getValue(),
-//                    opgave,
-//                    /*lsvGeselecteerdeBewerkingen.getItems()*/ null,
-//                    txfAntwoord.getText(),
-//                    feedback,
-//                    /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
-//            );
-        } catch (NumberFormatException ex) {
-            System.out.println("vul een getal in");
-        } catch (IllegalArgumentException ex) {
-            System.out.println("illegal exception in oefeningbewerken: " + ex);
+            dc.pasOefeningAan(
+                    txfNaam.getText(),
+                    txfAntwoord.getText(),
+                    ddlVak.getSelectionModel().getSelectedItem(),
+                    fileOpgave,
+                    fileFeedback,
+                    /*lsvGeselecteerdeBewerkingen.getItems()*/ null,
+                    /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
+            );
+            lblSuccess.setText("De oefening werd succesvol aangepast.");
+        } catch (SpecialeTekensInNaamException | IllegalArgumentException ex) {
+            lblError.setText(ex.getMessage());
         }
     }
     

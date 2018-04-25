@@ -83,15 +83,6 @@
     -fx-padding: 10 16 10 16;
 }
 
-
-
-
-
-
-
-
-
-
 .btn-primary {
   -fx-background-color: #006fe6;
 }
@@ -135,81 +126,81 @@
 
 
 .text-primary {
-  color: #007bff !important;
+  -fx-text-fill: #007bff;
 }
 
 a.text-primary:hover, a.text-primary:focus {
-  color: #0062cc !important;
+  -fx-text-fill: #0062cc;
 }
 
 .text-secondary {
-  color: #5A6169 !important;
+  -fx-text-fill: #5A6169;
 }
 
 a.text-secondary:hover, a.text-secondary:focus {
-  color: #42484e !important;
+  -fx-text-fill: #42484e;
 }
 
 .text-success {
-  color: #17c671 !important;
+  -fx-text-fill: #17c671;
 }
 
 a.text-success:hover, a.text-success:focus {
-  color: #129857 !important;
+  -fx-text-fill: #129857;
 }
 
 .text-info {
-  color: #00b8d8 !important;
+  -fx-text-fill: #00b8d8;
 }
 
 a.text-info:hover, a.text-info:focus {
-  color: #008da5 !important;
+  -fx-text-fill: #008da5;
 }
 
 .text-warning {
-  color: #ffb400 !important;
+  -fx-text-fill: #ffb400;
 }
 
 a.text-warning:hover, a.text-warning:focus {
-  color: #cc9000 !important;
+  -fx-text-fill: #cc9000;
 }
 
 .text-danger {
-  color: #c4183c !important;
+  -fx-text-fill: #c4183c;
 }
 
 a.text-danger:hover, a.text-danger:focus {
-  color: #97122e !important;
+  -fx-text-fill: #97122e;
 }
 
 .text-light {
-  color: #e9ecef !important;
+  -fx-text-fill: #e9ecef;
 }
 
 a.text-light:hover, a.text-light:focus {
-  color: #cbd3da !important;
+  -fx-text-fill: #cbd3da;
 }
 
 .text-dark {
-  color: #212529 !important;
+  -fx-text-fill: #212529;
 }
 
 a.text-dark:hover, a.text-dark:focus {
-  color: #0a0c0d !important;
+  -fx-text-fill: #0a0c0d;
 }
 
 a.text-white:hover, a.text-white:focus {
-  color: #e6e6e6 !important;
+  -fx-text-fill: #e6e6e6;
 }
 
 .text-black {
-  color: #000;
+  -fx-text-fill: #000;
 }
 
 a.text-black:hover, a.text-black:focus {
-  color: black !important;
+  -fx-text-fill: black;
 }
 
 .text-muted {
-  color: #868e96 !important;
+  -fx-text-fill: #868e96;
 }

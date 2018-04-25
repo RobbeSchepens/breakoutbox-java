@@ -132,6 +132,15 @@
             <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#btnEditOnAction" styleClass="btn-big-action" text="Pas aan" />
          </children>
       </HBox>
+      <HBox alignment="CENTER">
+         <padding>
+            <Insets bottom="15.0" />
+         </padding>
+         <children>
+            <Label fx:id="lblError" styleClass="text-danger" />
+            <Label fx:id="lblSuccess" styleClass="text-success" />
+         </children>
+      </HBox>
    </children>
    <padding>
       <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

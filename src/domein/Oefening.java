@@ -1,9 +1,11 @@
 package domein;
 
+import exceptions.SpecialeTekensInNaamException;
 import java.io.File;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javax.persistence.Access;
@@ -59,11 +61,11 @@ public class Oefening implements IOefening, Serializable {
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
         setGroepsbewerkingen(groepsbewerkingen);
         setVak(vak);
-        //String pdfName = String.format("%s_%s_%s_%s", "Opgave", naam, getVak(), opgave.getName());
-        //setOpgave(new PDF(opgave, pdfName));
+        String pdfName = String.format("%s_%s_%s_%s", "Opgave", naam, getVak(), opgave.getName());
+        setOpgave(new PDF(opgave, pdfName));
         setAntwoord(antwoord);
-        //pdfName = String.format("%s_%s_%s_%s", "Feedback", naam, getVak(), opgave.getName());
-        //setFeedback(new PDF(feedback, pdfName));
+        pdfName = String.format("%s_%s_%s_%s", "Feedback", naam, getVak(), opgave.getName());
+        setFeedback(new PDF(feedback, pdfName));
         setNaam(naam);
         setDoelstellingen(doelstellingen);
     }
@@ -87,9 +89,7 @@ public class Oefening implements IOefening, Serializable {
     }
 
     public void setNaam(String value) {
-        if (value == null || value.trim().isEmpty()) {
-            throw new IllegalArgumentException("Er moet een naam zijn");
-        }
+        controleerNaam(value);
         naam.set(value);
     }
 
@@ -98,17 +98,39 @@ public class Oefening implements IOefening, Serializable {
         return naam;
     }
 
+    private void controleerNaam(String naam) {
+        if (naam == null || naam.trim().isEmpty()) {
+            throw new IllegalArgumentException("Er werd geen naam opgegeven.");
+        }
+        
+        // Deze karakters mogen, alle andere niet. 
+        Pattern p = Pattern.compile("[^A-Za-z0-9._\\-<>+?!=$%&*()| ]");
+        Matcher m = p.matcher(naam);
+        if (m.find())
+            throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in de naam van de oefening. Deze mogen wel: spatie ._-<>+?!=$%&*()|");
+    }
+
     @Override
     public String getAntwoord() {
-
         return antwoord;
     }
 
     public void setAntwoord(String antwoord) {
-        if (antwoord == null) {
-            throw new IllegalArgumentException("Er moet een antwoord zijn");
-        }
+        
+        controleerAntwoord(antwoord);
         this.antwoord = antwoord;
+    }
+
+    private void controleerAntwoord(String antwoord) {
+        if (antwoord == null) {
+            throw new IllegalArgumentException("Er werd geen antwoord opgegeven.");
+        }
+        
+        // Deze karakters mogen, alle andere niet. 
+        Pattern p = Pattern.compile("[^A-Za-z0-9/=+\\-$%&*()| €£]");
+        Matcher m = p.matcher(antwoord);
+        if (m.find())
+            throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in het antwoord van de oefening. Deze mogen wel: spatie /=+\\-$%&*()|€£");
     }
 
     @Override
@@ -118,7 +140,7 @@ public class Oefening implements IOefening, Serializable {
 
     public void setOpgave(PDF opgave) {
         if (opgave == null) {
-            throw new IllegalArgumentException("Er moet een opgave zijn");
+            throw new IllegalArgumentException("Selecteer een PDF om toe te voegen als opgave.");
         }
         this.opgave = opgave;
     }
@@ -130,7 +152,7 @@ public class Oefening implements IOefening, Serializable {
 
     public void setFeedback(PDF feedback) {
         if (feedback == null) {
-            throw new IllegalArgumentException("Er moet feedback zijn");
+            throw new IllegalArgumentException("Selecteer een PDF om toe te voegen als feedback.");
         }
         this.feedback = feedback;
     }
@@ -142,7 +164,7 @@ public class Oefening implements IOefening, Serializable {
 
     public void setVak(Vak vak) {
         if (vak == null) {
-            throw new IllegalArgumentException("er moet een vak geselcteerd zijn");
+            throw new IllegalArgumentException("Selecteer een vak voor de oefening.");
         }
         this.vak = vak;
     }
@@ -154,7 +176,7 @@ public class Oefening implements IOefening, Serializable {
 
     public void setGroepsbewerkingen(List<Groepsbewerking> groepsbewerkingen) {
         if (groepsbewerkingen == null) {
-            throw new IllegalArgumentException("je moet bewerkingen geven");
+            throw new IllegalArgumentException("Er werden geen groepsbewerkingen geselecteerd.");
         }
         this.groepsbewerkingen = groepsbewerkingen;
     }
@@ -165,6 +187,9 @@ public class Oefening implements IOefening, Serializable {
     }
 
     public void setDoelstellingen(List<Doelstelling> doelstellingen) {
+        if (groepsbewerkingen == null) {
+            throw new IllegalArgumentException("Er werden geen doelstellingen geselecteerd.");
+        }
         this.doelstellingen = doelstellingen;
     }
 
