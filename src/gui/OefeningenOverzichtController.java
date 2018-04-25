@@ -328,8 +328,8 @@ public class OefeningenOverzichtController extends AnchorPane {
         lsvGeselecteerdeBewerkingen.setItems(FXCollections.observableArrayList(groepsbewerkingenGeselecteerd));
         lsvGeselecteerdeDoelstellingen.setItems(FXCollections.observableArrayList(doelstellingenGeselecteerd));
 
-        lblFeedbackPadNaam.setText(oefUitDc.getOpgave().getName());
-        lblOpgavePadNaam.setText(oefUitDc.getFeedback().getName());
+        lblFeedbackPadNaam.setText(oefUitDc.getFeedback().getName());
+        lblOpgavePadNaam.setText(oefUitDc.getOpgave().getName());
 
         String pathNaarOef = PDF.FOLDERLOCATIE;
 

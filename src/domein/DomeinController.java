@@ -198,8 +198,8 @@ public class DomeinController extends Observable {
       
         oefening.setNaam(naam);
         oefening.setVak(vak);
-        oefening.setOpgave(new PDF(feedback, naam));
-        oefening.setFeedback(new PDF(feedback, naam));
+        oefening.setOpgave(new PDF(feedback, opgave.getName()));
+        oefening.setFeedback(new PDF(feedback, feedback.getName()));
         oefening.setAntwoord(antwoord);
         oefening.setDoelstellingen(doelstelling);
         oefening.setGroepsbewerkingen(groepsbewerkingen);
