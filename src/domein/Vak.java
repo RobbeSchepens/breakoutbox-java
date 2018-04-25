@@ -1,5 +1,7 @@
 package domein;
 
+import exceptions.NaamTeKortException;
+import exceptions.NaamTeLangException;
 import exceptions.SpecialeTekensInNaamException;
 import java.io.Serializable;
 import java.util.regex.Matcher;
@@ -42,6 +44,11 @@ public class Vak implements Serializable {
     }
     
     private void controleerNaam(String naam) {
+        if(naam.length() < 1)
+            throw new NaamTeKortException("Het vak moet minstens 3 tekens lang zijn!");
+        if(naam.length() > 40)
+            throw new NaamTeLangException("Het vak mag maximum 40 karakters bevatten!");
+        
         // Deze karakters mogen, alle andere niet. 
         Pattern p = Pattern.compile("[^A-Za-z0-9&@]");
         Matcher m = p.matcher(naam);

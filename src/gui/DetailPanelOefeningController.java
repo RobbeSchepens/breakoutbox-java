@@ -4,6 +4,8 @@ import domein.DomeinController;
 import domein.IOefening;
 import domein.OefeningObserver;
 import domein.Vak;
+import exceptions.NaamTeKortException;
+import exceptions.NaamTeLangException;
 import exceptions.SpecialeTekensInNaamException;
 import java.awt.Desktop;
 import java.io.File;
@@ -190,7 +192,7 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
             );
             clearRender();
             lblSuccess.setText("De oefening werd succesvol toegevoegd.");
-        } catch (SpecialeTekensInNaamException | IllegalArgumentException ex) {
+        } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblError.setText(ex.getMessage());
         }
     }
@@ -210,7 +212,7 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
                     /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
             );
             lblSuccess.setText("De oefening werd succesvol aangepast.");
-        } catch (SpecialeTekensInNaamException | IllegalArgumentException ex) {
+        } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblError.setText(ex.getMessage());
         }
     }

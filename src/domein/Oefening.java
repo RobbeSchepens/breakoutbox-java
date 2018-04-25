@@ -1,5 +1,7 @@
 package domein;
 
+import exceptions.NaamTeKortException;
+import exceptions.NaamTeLangException;
 import exceptions.SpecialeTekensInNaamException;
 import java.io.File;
 import java.io.Serializable;
@@ -109,9 +111,12 @@ public class Oefening implements IOefening, Serializable {
     }
 
     private void controleerNaam(String naam) {
-        if (naam == null || naam.trim().isEmpty()) {
+        if (naam == null || naam.trim().isEmpty())
             throw new IllegalArgumentException("Er werd geen naam opgegeven.");
-        }
+        if(naam.length() < 3)
+            throw new NaamTeKortException("Naam moet minstens 3 tekens lang zijn!");
+        if(naam.length() > 40)
+            throw new NaamTeLangException("Naam mag maximum 40 karakters bevatten!");
         
         // Deze karakters mogen, alle andere niet. 
         Pattern p = Pattern.compile("[^A-Za-z0-9._\\-<>+?!=$%&*()| ]");
@@ -131,9 +136,12 @@ public class Oefening implements IOefening, Serializable {
     }
 
     private void controleerAntwoord(String antwoord) {
-        if (antwoord == null || antwoord.equals("")) {
+        if (antwoord == null || antwoord.equals(""))
             throw new IllegalArgumentException("Er werd geen antwoord opgegeven.");
-        }
+        if(antwoord.length() < 1)
+            throw new NaamTeKortException("Antwoord moet minstens 3 tekens lang zijn!");
+        if(antwoord.length() > 40)
+            throw new NaamTeLangException("Antwoord mag maximum 40 karakters bevatten!");
         
         // Deze karakters mogen, alle andere niet. 
         Pattern p = Pattern.compile("[^A-Za-z0-9/=+\\-$%&*()| €£]");
