@@ -5,11 +5,17 @@
  */
 package testen;
 
+import domein.AddGroepsbewerking;
 import domein.Doelstelling;
 import domein.Groepsbewerking;
 import domein.Oefening;
+import domein.SubstractGroepsbewerking;
 import domein.Vak;
+import exceptions.SpecialeTekensInNaamException;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,6 +25,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 /**
  *
@@ -26,21 +33,94 @@ import org.junit.runners.Parameterized;
  */
 @RunWith(value = Parameterized.class)
 public class OefeningTest {
-    
-    private String naam;
     private Oefening oef;
-    private List<Groepsbewerking> bewerkingList;
-    private List<Doelstelling> doelstellingsLijst;
+    private String naam;
+    private String antwoord;
+    private Vak vak;
     private File opgaveFile;
     private File feedbackFile;
-    private Vak vak;
+    private List<Groepsbewerking> bewerkingList;
+    private List<Doelstelling> doelstellingsList;
+    boolean resultaat;
+   
+    
 
-    public OefeningTest() {
+    public OefeningTest(String naam, String antwoord, Vak vak, File opgave, File feedback, List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen, boolean resultaat) {
+        oef = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstellingen);
+    } 
 
-        vak = new Vak("Wiskunde");
+    
+    //public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback,List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
+    @Parameters
+    public static Collection getTestParameters() {
+        
+        return Arrays.asList(new Object[][]{{"Optelsommen", "20", new Vak("Wiskunde"), new File("OpgaveFile"), new File("FeedbackFile"),
+            new ArrayList<>(Arrays.asList(
+            new AddGroepsbewerking("tel op", 5.0),
+            new AddGroepsbewerking("tel op", 10.0),
+            new SubstractGroepsbewerking("trek af", 7.00),
+            new SubstractGroepsbewerking("trek af", 12.00)
+            )), new ArrayList<>(Arrays.asList(
+            new Doelstelling("Doelstelling1"),
+            new Doelstelling("Doelstelling2")
+            )), true}});
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void naamIsNull() {
+        oef.setNaam(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void naamIsLeeg() {
+
+        oef.setNaam("");
+    }
+
+    @Test(expected = SpecialeTekensInNaamException.class)
+    public void naamMatchtPatternNiet() {
+        oef.setNaam("oefen§ing");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void antwoordIsNull() {
+        oef.setAntwoord(null);
+    }
+
+    @Test(expected = SpecialeTekensInNaamException.class)
+    public void antwoordMatchtPatternNiet() {
+        oef.setNaam("50\\{");
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void vakIsNull() {
+        oef.setVak(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void opgaveIsNull() {
+        oef.setOpgave(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void feedbackIsNull() {
+        oef.setFeedback(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void groepsbewerkingenIsNull() {
+        oef.setGroepsbewerkingen(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void doelstellingenIsNull() {
+        oef.setDoelstellingen(null);
+    }
+
     
-    
+
+
     
     
     

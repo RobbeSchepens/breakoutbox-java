@@ -196,7 +196,7 @@ public class Oefening implements IOefening, Serializable {
     }
 
     public void setDoelstellingen(List<Doelstelling> doelstellingen) {
-        if (groepsbewerkingen == null) {
+        if (doelstellingen == null) {
             throw new IllegalArgumentException("Er werden geen doelstellingen geselecteerd.");
         }
         this.doelstellingen = doelstellingen;
