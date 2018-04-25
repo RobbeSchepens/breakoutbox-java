@@ -16,6 +16,7 @@ public class FrameOefeningController extends GridPane {
         
         dc.addObserver(overzichtPanelController);
         overzichtPanelController.addOefeningObserver(oefeningDetailPanelController);
+        overzichtPanelController.addOefeningObserver(oefeningDetailPanelListController);
         
         add(overzichtPanelController, 0, 0);
         add(oefeningDetailPanelController, 1, 0);

@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 public class DetailPanelOefeningListController extends VBox implements OefeningObserver {
@@ -21,10 +22,11 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
     private FrameOefeningController fc;
     @FXML private Label lblTitleLeftList;
     @FXML private Label lblAantalGeselecteerd;
-    @FXML private ListView<Groepsbewerking> lsvList;
     @FXML private Button btnDeselectAll;
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
+    @FXML private ListView<Groepsbewerking> lsvListAlle;
+    @FXML private ListView<Groepsbewerking> lsvListGeselecteerde;
 
     public DetailPanelOefeningListController(DomeinController dcon, FrameOefeningController fc) {
         FXMLLoader loader
@@ -40,21 +42,19 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
         this.dc = dcon;
         this.fc = fc;
         lblTitleLeftList.setText("Groepsbewerkingen");
-        lsvList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        lsvListAlle.setItems(dc.geefGroepsbewerkingen());
     }   
 
     @FXML
     private void btnDeselectAllOnAction(ActionEvent event) {
-        lsvList.getSelectionModel().clearSelection();
+        lsvListGeselecteerde.getSelectionModel().clearSelection();
     }
 
     @Override
     public void update(IOefening oefening) {
-        lsvList.setItems(dc.geefGroepsbewerkingen());
-        for (Groepsbewerking gbAll : lsvList.getItems())
-            for (Groepsbewerking gbOef : dc.geefGroepsbewerkingenHuidigeOefening())
-                if (gbOef.equals(gbAll))
-                    lsvList.getSelectionModel().select(gbAll);
+        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " 
+                + dc.geefGroepsbewerkingenHuidigeOefening().size());
+        lsvListGeselecteerde.setItems(dc.geefGroepsbewerkingenHuidigeOefening());
     }
 
     @FXML
@@ -64,6 +64,16 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
 
     @FXML
     private void btnSubmitOnAction(ActionEvent event) {
-        dc.setGroepsbewerkingenOefening(lsvList.getSelectionModel().getSelectedItems());
+        dc.setGroepsbewerkingenOefening(lsvListGeselecteerde.getSelectionModel().getSelectedItems());
+    }
+
+    @FXML
+    private void lsvListAlleOnMouseClicked(MouseEvent event) {
+        
+    }
+
+    @FXML
+    private void lsvListGeselecteerdeOnMouseClicked(MouseEvent event) {
+        
     }
 }
