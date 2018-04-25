@@ -159,12 +159,20 @@ public class DomeinController extends Observable {
         }
         return groepsbewerkingenLijst;
     }
+    
+    public ObservableList<Groepsbewerking> geefGroepsbewerkingen() {
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getGroepsbewerkingenList()));
+    }
 
     public List<Doelstelling> getDoelstellingenList() {
         if (doelstellingenLijst == null) {
             doelstellingenLijst = ob.geefDoelstellingenJPA();
         }
         return doelstellingenLijst;
+    }
+    
+    public ObservableList<Doelstelling> geefDoelstellingen() {
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getDoelstellingenList()));
     }
 
     ////////////////////////////////////////////
