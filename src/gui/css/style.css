@@ -78,6 +78,15 @@
     -fx-fill: white;
 }
 
+.menutext {
+    -fx-font-size: 1.4em;
+}
+
+.activenav {
+    -fx-text-fill: white;
+    -fx-background-color: #006fe6;
+}
+
 .btn-big-action {
     -fx-font-size: 16px;
     -fx-padding: 10 16 10 16;

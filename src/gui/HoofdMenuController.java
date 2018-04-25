@@ -42,8 +42,8 @@ public class HoofdMenuController extends GridPane {
 
     @FXML
     private void btnBeheerOefOnAction(ActionEvent event) {
-        OefeningenOverzichtController sc = new OefeningenOverzichtController(dc);
-        Scene scene = new Scene(sc, 1280, 720, false, SceneAntialiasing.BALANCED);
+        FrameOefeningController sc = new FrameOefeningController(dc);
+        Scene scene = new Scene(sc, 1430, 720, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
@@ -54,7 +54,7 @@ public class HoofdMenuController extends GridPane {
 
     @FXML
     private void btnNieuweOefViewOnAction(ActionEvent event) {
-        FrameOefeningController sc = new FrameOefeningController(dc);
+        OefeningenOverzichtController sc = new OefeningenOverzichtController(dc);
         Scene scene = new Scene(sc, 1280, 720, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);

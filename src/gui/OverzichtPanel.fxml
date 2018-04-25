@@ -28,7 +28,6 @@
               </rowConstraints>
                <children>
                   <Label fx:id="lblTitleLeft" styleClass="h1" text="Label" GridPane.columnIndex="1" />
-                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#btnHomeOnAction" text="Terug naar home" />
                </children>
             </GridPane>
          </children>

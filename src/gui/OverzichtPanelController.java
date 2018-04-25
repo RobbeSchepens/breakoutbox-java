@@ -23,7 +23,6 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
     @FXML private TextField txfFilterOp;
     @FXML private TableView<T> tbvOverzicht;
     @FXML private Button btnDeleteSelected;
-    @FXML private Button btnHome;
     @FXML private Button btnDeselect;
     @FXML private Button btnClearFilter;
 
@@ -58,14 +57,6 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
     public TableView<T> getTbvOverzicht() {
         return tbvOverzicht;
     }
-
-    @FXML
-    private void btnHomeOnAction(ActionEvent event) {
-        HoofdMenuController sc = new HoofdMenuController(dc);
-        Scene scene = new Scene(sc, 1280, 720, false, SceneAntialiasing.BALANCED);
-        scene.getStylesheets().add("gui/css/style.css");
-        ((Stage) this.getScene().getWindow()).setScene(scene);
-    }
     
     @FXML
     private void btnDeselectOnAction(ActionEvent event) {
@@ -78,15 +69,15 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
         filter(newValue);
     }
 
-    @FXML abstract void btnDeleteSelectedOnAction(ActionEvent event);
-    abstract <T> void implementTableviewListener(T newValue);
-    abstract void renderContent();
-    abstract void filter(String newValue);
-
     @FXML
     private void btnClearFilterOnAction(ActionEvent event) {
         txfFilterOp.setText("");
         txfFilterOp.requestFocus();
         filter("");
     }
+
+    @FXML abstract void btnDeleteSelectedOnAction(ActionEvent event);
+    abstract <T> void implementTableviewListener(T newValue);
+    abstract void renderContent();
+    abstract void filter(String newValue);
 }

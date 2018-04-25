@@ -30,7 +30,7 @@ public class StartUpGuiClientApp extends Application {
 
         HoofdMenuController root = new HoofdMenuController(new DomeinController());
 
-        Scene scene = new Scene(root, 1280, 720, false, SceneAntialiasing.BALANCED);
+        Scene scene = new Scene(root, 1430, 720, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
 
         primaryStage.getIcons().add(new Image("gui/img/favicon.png"));

@@ -97,6 +97,10 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" />
          </children>
       </VBox>
-      <Button fx:id="btnNieuweOefView" mnemonicParsing="false" onAction="#btnNieuweOefViewOnAction" text="Button" />
+      <Button fx:id="btnNieuweOefView" mnemonicParsing="false" onAction="#btnNieuweOefViewOnAction" text="oude view oef" GridPane.halignment="CENTER">
+         <GridPane.margin>
+            <Insets top="300.0" />
+         </GridPane.margin>
+      </Button>
    </children>
 </fx:root>
