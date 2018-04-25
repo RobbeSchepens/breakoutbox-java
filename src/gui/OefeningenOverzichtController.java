@@ -235,8 +235,8 @@ public class OefeningenOverzichtController extends AnchorPane {
 
         //listviews
         //groepsbewerkingen beschikbaar
-        groepsbewerkingen = dc.geefAlleBewerkingen();
-        doelstellingen = dc.geefAlleDoelstellingen();
+        groepsbewerkingen = dc.getGroepsbewerkingenList();
+        doelstellingen = dc.getDoelstellingenList();
 
         lsvBeschikbareBewerkingen.setItems(FXCollections.observableArrayList(groepsbewerkingen));
         lsvBeschikbareDoelstellingen.setItems(FXCollections.observableArrayList(doelstellingen));
@@ -448,9 +448,9 @@ public class OefeningenOverzichtController extends AnchorPane {
 
         //reset listviews
         groepsbewerkingenGeselecteerd = new ArrayList<>();
-        groepsbewerkingen = dc.geefAlleBewerkingen();
+        groepsbewerkingen = dc.getGroepsbewerkingenList();
         doelstellingenGeselecteerd = new ArrayList<>();
-        doelstellingen = dc.geefAlleDoelstellingen();
+        doelstellingen = dc.getDoelstellingenList();
         lsvBeschikbareBewerkingen.setItems(FXCollections.observableArrayList(groepsbewerkingen));
         lsvBeschikbareDoelstellingen.setItems(FXCollections.observableArrayList(doelstellingen));
         lsvGeselecteerdeBewerkingen.getItems().clear();

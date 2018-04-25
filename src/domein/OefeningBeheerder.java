@@ -29,16 +29,9 @@ public final class OefeningBeheerder {
 
         initializePersistentie();
         setOefRepo(new OefeningDaoJpa());
-
-        GenericDaoJpa vakDoa = new GenericDaoJpa(Vak.class);
-        GenericDaoJpa groepsbewerkingDoa = new GenericDaoJpa(Groepsbewerking.class);
-        GenericDaoJpa doeslstellingDoa = new GenericDaoJpa(Doelstelling.class);
-
-        setVakRepo(vakDoa);
-        setGroepsbewerkingRepo(groepsbewerkingDoa);
-
-        setDoeslstellingRepo(doeslstellingDoa);
-
+        setVakRepo(new GenericDaoJpa(Vak.class));
+        setGroepsbewerkingRepo(new GenericDaoJpa(Groepsbewerking.class));
+        setDoeslstellingRepo(new GenericDaoJpa(Doelstelling.class));
     }
 
     public void setOefRepo(OefeningDao mock) {
@@ -112,6 +105,21 @@ public final class OefeningBeheerder {
         em.getTransaction().commit();
     }
 
+    public void updateOefening(Oefening o) {
+        em.getTransaction().begin();
+        em.merge(o);
+        em.getTransaction().commit();
+    }
+
+    public void deleteOefening(Oefening o) {
+        em.getTransaction().begin();
+        if (!em.contains(o)) {
+            o = em.merge(o);
+        }
+        em.remove(o);
+        em.getTransaction().commit();
+    }
+
     /////////////
     public void addVak(Vak o) {
         em.getTransaction().begin();
@@ -128,21 +136,6 @@ public final class OefeningBeheerder {
     public void addDoelstelling(Doelstelling o) {
         em.getTransaction().begin();
         em.persist(o);
-        em.getTransaction().commit();
-    }
-
-    public void deleteOefening(Oefening o) {
-        em.getTransaction().begin();
-        if (!em.contains(o)) {
-            o = em.merge(o);
-        }
-        em.remove(o);
-        em.getTransaction().commit();
-    }
-
-    void updateOefening(Oefening o) {
-        em.getTransaction().begin();
-        em.merge(o);
         em.getTransaction().commit();
     }
 

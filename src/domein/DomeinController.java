@@ -1,7 +1,6 @@
 package domein;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -17,20 +16,22 @@ public class DomeinController extends Observable {
     private Oefening huidigeOefening;
     private OefeningBeheerder ob = new OefeningBeheerder();
     private List<Oefening> oefeningLijst;
+    private FilteredList<IOefening> filteredOefeningList;
     private List<Vak> vakkenLijst;
-
     private List<Groepsbewerking> groepsbewerkingenLijst;
-
     private List<Doelstelling> doelstellingenLijst;
-    private FilteredList<Oefening> filteredOefeningList;
+    
+    // Box
+    //private Box huidigeBox;
+    
+    // Sessie
+    //private Sessie huidigeSessie;
 
     public DomeinController() {
         this.vakkenLijst = ob.geefVakkenJPA();
         this.groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
         this.doelstellingenLijst = ob.geefDoelstellingenJPA();
-
         sortAllLists();
-        //laadOefeningen();
     }
 
     private void sortAllLists() {
@@ -45,6 +46,7 @@ public class DomeinController extends Observable {
     private List<Oefening> getOefeningList() {
         if (oefeningLijst == null) {
             oefeningLijst = ob.geefOefeningenJPA();
+            filteredOefeningList = new FilteredList<>(geefOefeningen(), p -> true);
         }
         return oefeningLijst;
     }
@@ -122,32 +124,32 @@ public class DomeinController extends Observable {
         notifyObservers();
     }
 
-    // ================
-    // == Vakken ======
-    // ================
+    // =====================================================
+    // == Vakken, Groepsbewerkingen en Doelstellingen ======
+    // =====================================================
     public List<Vak> getVakkenList() {
         if (vakkenLijst == null) {
             vakkenLijst = ob.geefVakkenJPA();
         }
         return vakkenLijst;
     }
-
-    /*public List<Doelstelling> getDoelstellingenLijst() {
-        if (doelstellingenLijst == null)
-            doelstellingenLijst = ob.geefDoelstellingenJPA();
-        return doelstellingenLijst;
-    }*/
+    
     public ObservableList<Vak> geefVakken() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(vakkenLijst));
     }
 
-    //////////////////////// doelstellingen en bewerkingen lists //////////////////////////////
-    public List<Groepsbewerking> geefAlleBewerkingen() {
-        return ob.geefGroepsbewerkingenJPA();
+    public List<Groepsbewerking> getGroepsbewerkingenList() {
+        if (groepsbewerkingenLijst == null) {
+            groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
+        }
+        return groepsbewerkingenLijst;
     }
 
-    public List<Doelstelling> geefAlleDoelstellingen() {
-        return ob.geefDoelstellingenJPA();
+    public List<Doelstelling> getDoelstellingenList() {
+        if (doelstellingenLijst == null) {
+            doelstellingenLijst = ob.geefDoelstellingenJPA();
+        }
+        return doelstellingenLijst;
     }
 
     ////////////////////////////////////////////
@@ -187,11 +189,9 @@ public class DomeinController extends Observable {
         oefening.setDoelstellingen(doelstelling);
         oefening.setGroepsbewerkingen(groepsbewerkingen);
         ob.getOefRepo().update(oefening);
-   
     }
 
     public void verwijderOef(IOefening oefn) {
-
         Oefening oefening = oefeningLijst.stream().filter(oef -> oef.getNaam().equals(oefn.getNaam())).findFirst().get();
         System.out.println(oefening);
         System.out.println(oefeningLijst);
@@ -199,10 +199,6 @@ public class DomeinController extends Observable {
         System.out.println("oef lijst after delete");
         System.out.println(oefeningLijst);
         ob.deleteOefening(oefening);
-     
-
     }
-
- 
 
 }
