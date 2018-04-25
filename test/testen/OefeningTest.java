@@ -5,41 +5,45 @@
  */
 package testen;
 
+import domein.Doelstelling;
+import domein.Groepsbewerking;
+import domein.Oefening;
+import domein.Vak;
+import java.io.File;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 /**
  *
  * @author Daan
  */
+@RunWith(value = Parameterized.class)
 public class OefeningTest {
     
-    public OefeningTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+    private String naam;
+    private Oefening oef;
+    private List<Groepsbewerking> bewerkingList;
+    private List<Doelstelling> doelstellingsLijst;
+    private File opgaveFile;
+    private File feedbackFile;
+    private Vak vak;
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    public OefeningTest() {
+
+        vak = new Vak("Wiskunde");
+    }
+    
+    
+    
+    
+    
+    
+   
 }
