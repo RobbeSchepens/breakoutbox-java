@@ -60,6 +60,9 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
             throw new RuntimeException(ex);
         }
         
+        System.out.println(loader.getController().toString());
+        
+        
         this.dc = dcon;
         
         this.fileChooserOpgave = new FileChooser();
