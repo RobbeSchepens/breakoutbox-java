@@ -104,27 +104,37 @@ public class DomeinController extends Observable {
         notifyObservers(getOefeningList());
     }
 
-    public void voegNieuweOefeningToe(String naam, String antwoord, Vak vak, File opgave, File feedback,
-            List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstelling) {
+    public void voegNieuweOefeningToe(String naam, String antwoord, Vak vak,
+            File opgave, String opgaveNaam,
+            File feedback, String feedbackNaam,
+            List<Groepsbewerking> groepsbewerkingen,
+            List<Doelstelling> doelstellingen) {
+        
         if (ob.geefOefeningByNaamJpa(naam) != null) {
             throw new IllegalArgumentException("Er bestaat al een oefening met deze naam.");
         }
 
-        Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, groepsbewerkingen, doelstelling);
+        Oefening oefening = new Oefening(naam, antwoord, vak, opgave, opgaveNaam,
+                feedback, feedbackNaam, groepsbewerkingen, doelstellingen);
         getOefeningList().add(oefening);
         ob.addOefening(oefening);
         setChanged();
         notifyObservers();
     }
 
-    public void pasOefeningAan(String naam, String antwoord, Vak vak, File opgave, File feedback,
-            List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
-        if (!this.huidigeOefening.getNaam().equals(naam) && ob.geefOefeningByNaamJpa(naam) != null) {
+    public void pasOefeningAan(String naam, String antwoord, Vak vak,
+            File opgave, String opgaveNaam,
+            File feedback, String feedbackNaam,
+            List<Groepsbewerking> groepsbewerkingen,
+            List<Doelstelling> doelstellingen) {
+        if (!huidigeOefening.getNaam().equals(naam) && ob.geefOefeningByNaamJpa(naam) != null) {
             throw new IllegalArgumentException("Er bestaat al een oefening met deze naam.");
         }
-        this.huidigeOefening.pasOefeningAan(naam, antwoord, vak, 
-                opgave, feedback, this.huidigeOefening.getGroepsBewerkingen(), this.huidigeOefening.getDoelstellingen());
-        ob.updateOefening(this.huidigeOefening);
+        groepsbewerkingen = huidigeOefening.getGroepsBewerkingen();
+        doelstellingen =  huidigeOefening.getDoelstellingen();
+        huidigeOefening.roepSettersAan(naam, antwoord, vak, opgave, opgaveNaam,
+                feedback, feedbackNaam, groepsbewerkingen, doelstellingen);
+        ob.updateOefening(huidigeOefening);
         setChanged();
         notifyObservers();
     }

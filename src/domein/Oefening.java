@@ -26,7 +26,8 @@ import javax.persistence.Transient;
 @Entity
 @Access(AccessType.FIELD)
 @NamedQueries({
-    @NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e.naam = :oefeningnaam"),})
+    @NamedQuery(name = "Oefening.findByName", query = "select e from Oefening e where e.naam = :oefeningnaam")
+})
 public class Oefening implements IOefening, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,11 +51,20 @@ public class Oefening implements IOefening, Serializable {
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Doelstelling> doelstellingen;
-
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Groepsbewerking> groepsbewerkingen;
 
     public Oefening() {
+    }
+    
+    public Oefening(String naam, String antwoord, Vak vak, 
+            File opgave, String opgaveNaam, 
+            File feedback, String feedbackNaam,
+            List<Groepsbewerking> groepsbewerkingen, 
+            List<Doelstelling> doelstellingen) {
+        
+        roepSettersAan(naam, antwoord, vak, opgave, opgaveNaam, 
+                feedback, feedbackNaam, groepsbewerkingen, doelstellingen);
     }
 
     public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback,
@@ -116,7 +126,6 @@ public class Oefening implements IOefening, Serializable {
     }
 
     public void setAntwoord(String antwoord) {
-        
         controleerAntwoord(antwoord);
         this.antwoord = antwoord;
     }
@@ -198,12 +207,16 @@ public class Oefening implements IOefening, Serializable {
         return getNaam();
     }
 
-    void pasOefeningAan(String naam, String antwoord, Vak vak, File opgave, File feedback, List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
+    void roepSettersAan(String naam, String antwoord, Vak vak, 
+            File opgave, String opgaveNaam, 
+            File feedback, String feedbackNaam, 
+            List<Groepsbewerking> groepsbewerkingen, 
+            List<Doelstelling> doelstellingen) {
         setNaam(naam);
         setAntwoord(antwoord);
         setVak(vak);
-        //setOpgave(opgave);
-        //setFeedback(feedback);
+        setOpgave(new PDF(opgave, opgaveNaam));
+        setFeedback(new PDF(feedback, feedbackNaam));
         setGroepsbewerkingen(groepsbewerkingen);
         setDoelstellingen(doelstellingen);
     }

@@ -26,6 +26,8 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     private FileChooser fileChooserFeedback;
     private File fileOpgave;
     private File fileFeedback;
+    private String fileOpgaveNaam;
+    private String fileFeedbackNaam;
     
     @FXML private Label lblTitleRight;
     @FXML private TextField txfNaam;
@@ -45,8 +47,7 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     @FXML private Button btnFileOpgave;
     @FXML private Label lblOpgave;
     @FXML private Label lblError;
-    @FXML
-    private Label lblSuccess;
+    @FXML private Label lblSuccess;
 
     public DetailPanelOefeningController(DomeinController dcon) {
         FXMLLoader loader
@@ -103,8 +104,8 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
         ddlVak.getSelectionModel().select(o.getVak());
         fileOpgave = null;
         fileFeedback = null;
-        lblOpgave.setText("naam.pdf");
-        lblFeedback.setText("naam.pdf");
+        lblOpgave.setText(o.getOpgave().getName());
+        lblFeedback.setText(o.getFeedback().getName());
         lblGroepsbewerkingenCount.setText(o.getGroepsBewerkingen().size() + " bewerkingen geselecteerd");
         lblDoelstellingenCount.setText(o.getDoelstellingen().size() + " doelstellingen geselecteerd");
     }
@@ -132,7 +133,8 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     private void btnFileOpgaveOnAction(ActionEvent event) {
         fileOpgave = fileChooserOpgave.showOpenDialog((Stage)(this.getScene().getWindow()));
         if (fileOpgave != null) {
-            lblOpgave.setText(fileOpgave.getName());
+            fileOpgaveNaam = fileOpgave.getName();
+            lblOpgave.setText(fileOpgaveNaam);
             btnOpenOpgave.setDisable(false);
         }
     }
@@ -176,7 +178,9 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
                     txfAntwoord.getText(),
                     ddlVak.getSelectionModel().getSelectedItem(),
                     fileOpgave,
+                    fileOpgaveNaam,
                     fileFeedback,
+                    fileFeedbackNaam,
                     /*lsvGeselecteerdeBewerkingen.getItems()*/ null,
                     /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
             );
@@ -195,7 +199,9 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
                     txfAntwoord.getText(),
                     ddlVak.getSelectionModel().getSelectedItem(),
                     fileOpgave,
+                    fileOpgaveNaam,
                     fileFeedback,
+                    fileFeedbackNaam,
                     /*lsvGeselecteerdeBewerkingen.getItems()*/ null,
                     /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
             );
