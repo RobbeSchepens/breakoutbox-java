@@ -68,4 +68,10 @@ public class SidebarNavPanelController extends VBox {
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
+
+    @FXML
+    private void hbxhbxActiesOnMouseClicked(MouseEvent event) {
+        System.out.println("hi");
+    }
+    
 }
