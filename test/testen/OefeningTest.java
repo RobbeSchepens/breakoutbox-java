@@ -11,6 +11,8 @@ import domein.Groepsbewerking;
 import domein.Oefening;
 import domein.SubstractGroepsbewerking;
 import domein.Vak;
+import exceptions.NaamTeKortException;
+import exceptions.NaamTeLangException;
 import exceptions.SpecialeTekensInNaamException;
 import java.io.File;
 import java.util.ArrayList;
@@ -83,18 +85,19 @@ public class OefeningTest {
         oef.setNaam("oefen§ing");
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = NaamTeLangException.class)
     public void naamIsTeLang() {
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < 40; i++) {
-            Random r = new Random();
-            char c = (char) (r.nextInt(26) + 'a');
-            sb.append(c);
-        }
-        oef.setNaam(sb.toString());
+//        StringBuffer sb = new StringBuffer();
+//        for (int i = 0; i < 40; i++) {
+//            Random r = new Random();
+//            char c = (char) (r.nextInt(26) + 'a');
+//            sb.append(c);
+//        }
+//        oef.setNaam(sb.toString());
+        oef.setNaam("oefoefoeffoefoefoeffoefoefoeffoefoefoef41");
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = NaamTeKortException.class)
     public void naamIsTeKort() {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < 1; i++) {

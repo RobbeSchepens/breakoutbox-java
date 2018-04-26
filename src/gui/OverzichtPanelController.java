@@ -1,6 +1,7 @@
 package gui;
 
 import domein.DomeinController;
+import domein.Vak;
 import java.io.IOException;
 import java.util.Observer;
 import javafx.event.ActionEvent;
@@ -9,10 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -25,6 +28,7 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
     @FXML private Button btnDeleteSelected;
     @FXML private Button btnDeselect;
     @FXML private Button btnClearFilter;
+    @FXML private HBox hbxFilter;
 
     public OverzichtPanelController(DomeinController dcon) {
         FXMLLoader loader
@@ -56,6 +60,10 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
 
     public TableView<T> getTbvOverzicht() {
         return tbvOverzicht;
+    }
+
+    public HBox getHbxFilter() {
+        return hbxFilter;
     }
     
     @FXML

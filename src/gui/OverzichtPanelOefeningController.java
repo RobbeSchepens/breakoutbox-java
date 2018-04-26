@@ -4,13 +4,17 @@ import domein.DomeinController;
 import domein.IOefening;
 import domein.OefeningObserver;
 import domein.OefeningSubject;
+import domein.Vak;
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Optional;
 import java.util.Set;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
@@ -19,12 +23,24 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
     private DomeinController dc;
     private FrameOefeningController fc;
     private Set<OefeningObserver> observers;
+    private ChoiceBox<Vak> ddlVakken;
     
     public OverzichtPanelOefeningController(DomeinController dcon, FrameOefeningController fc) {
         super(dcon);
         this.observers = new HashSet<>();
         this.dc = dcon;
         this.fc = fc;
+        
+        // Filter Vakken toevoegen
+        ddlVakken = new ChoiceBox<>();
+        super.getHbxFilter().getChildren().add(ddlVakken);
+        
+        ddlVakken.getSelectionModel().selectedItemProperty().addListener(
+                (ObservableValue<? extends Vak> observable, Vak oldValue, Vak newValue) -> {
+            if (!(newValue == null)) {
+                dc.veranderFilter(newValue.getNaam());
+            }
+        });
         renderContent();
     }
     
@@ -38,6 +54,7 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
     void renderContent() {
         setLblTitleLeftText("Overzicht oefeningen");
         setLblFilterOpText("Filter op naam:");
+        ddlVakken.setItems(dc.geefVakken());
         renderTable();
     }
     

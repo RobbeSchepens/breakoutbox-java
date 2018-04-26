@@ -98,7 +98,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <HBox alignment="CENTER_LEFT" prefWidth="330.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="394.0">
                      <children>
                         <Label fx:id="lblFeedback" wrapText="true" />
                      </children>
@@ -117,7 +117,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <HBox alignment="CENTER_LEFT" prefWidth="330.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="393.0">
                      <children>
                         <Label fx:id="lblOpgave" wrapText="true" />
                      </children>
