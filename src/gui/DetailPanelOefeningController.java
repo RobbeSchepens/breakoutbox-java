@@ -98,6 +98,8 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
         lblFeedback.setText("");
         lblGroepsbewerkingenCount.setText("0 bewerkingen geselecteerd");
         lblDoelstellingenCount.setText("0 doelstellingen geselecteerd");
+        lblError.setText("");
+        lblSuccess.setText("");
     }
 
     @Override
@@ -115,7 +117,8 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
         lblFeedback.setText(o.getFeedback().getName());
         lblGroepsbewerkingenCount.setText(o.getGroepsBewerkingen().size() + " bewerkingen geselecteerd");
         lblDoelstellingenCount.setText(o.getDoelstellingen().size() + " doelstellingen geselecteerd");
-
+        lblError.setText("");
+        lblSuccess.setText("");
     }
 
     @FXML
@@ -197,8 +200,10 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
                     lsvGeselecteerdeDoelstellingen.getItems() null
             );*/
             clearRender();
+            lblError.setText("");
             lblSuccess.setText("De oefening werd succesvol toegevoegd.");
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
+            lblSuccess.setText("");
             lblError.setText(ex.getMessage());
         }
     }
@@ -220,8 +225,10 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
                     lsvGeselecteerdeBewerkingen.getItems() null,
                     lsvGeselecteerdeDoelstellingen.getItems() null
             );*/
+            lblError.setText("");
             lblSuccess.setText("De oefening werd succesvol aangepast.");
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
+            lblSuccess.setText("");
             lblError.setText(ex.getMessage());
         }
     }
