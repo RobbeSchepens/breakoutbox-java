@@ -123,6 +123,7 @@ public class DomeinController extends Observable {
         }
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, listGroepsbewerkingenVanOefening, listDoelstellingenVanOefening);
         getOefeningList().add(oefening);
+        System.out.println(getOefeningList());
         ob.addOefening(oefening);
         setChanged();
         notifyObservers();
