@@ -113,9 +113,9 @@ public class DomeinController extends Observable {
     public void verwijderOefening(IOefening o) {
         ob.deleteOefening((Oefening) o);
         getOefeningList().remove((Oefening) o);
-        filteredOefeningList = new FilteredList<>(geefOefeningen(), p -> true);
+        filteredOefeningList = new FilteredList<>(geefOefeningen(), p -> true); // Temp fix for tbv not resetting
         setChanged();
-        notifyObservers(getOefeningList());
+        notifyObservers();
     }
 
     public void voegNieuweOefeningToe(String naam, String antwoord, File opgave, File feedback, Vak vak) {
@@ -125,6 +125,7 @@ public class DomeinController extends Observable {
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, listGroepsbewerkingenVanOefening, listDoelstellingenVanOefening);
         getOefeningList().add(oefening);
         ob.addOefening(oefening);
+        filteredOefeningList = new FilteredList<>(geefOefeningen(), p -> true); // Temp fix for tbv not resetting
         setChanged();
         notifyObservers();
     }
