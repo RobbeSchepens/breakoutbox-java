@@ -3,6 +3,7 @@ package gui;
 import domein.DomeinController;
 import domein.IOefening;
 import domein.OefeningObserver;
+import domein.PDF;
 import domein.Vak;
 import exceptions.NaamTeKortException;
 import exceptions.NaamTeLangException;
@@ -106,12 +107,15 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
         txfAntwoord.setText(o.getAntwoord());
         ddlVak.setItems(dc.geefVakken());
         ddlVak.getSelectionModel().select(o.getVak());
-        fileOpgave = null;
-        fileFeedback = null;
+        /*fileOpgave = o.getOpgave().getFile();   // dit werkt wel maar er is iets fout met de extensies.
+        fileFeedback = o.getFeedback().getFile();*/
+        fileOpgave = new File(PDF.FOLDERLOCATIE + o.getOpgave().getName());
+        fileFeedback = new File(PDF.FOLDERLOCATIE + o.getFeedback().getName());
         lblOpgave.setText(o.getOpgave().getName());
         lblFeedback.setText(o.getFeedback().getName());
         lblGroepsbewerkingenCount.setText(o.getGroepsBewerkingen().size() + " bewerkingen geselecteerd");
         lblDoelstellingenCount.setText(o.getDoelstellingen().size() + " doelstellingen geselecteerd");
+
     }
 
     @FXML
@@ -168,28 +172,30 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
 
     @FXML
     private void btnGroepsbewerkingenOnAction(ActionEvent event) {
-        fc.toonListview(true);
+        fc.toonListview("gbw");
     }
 
     @FXML
     private void btnDoelstellingenOnAction(ActionEvent event) {
-        fc.toonListview(true);
+        fc.toonListview("doels");
     }
 
     @FXML
     private void btnAddOnAction(ActionEvent event) {
         try {
-            dc.voegNieuweOefeningToe(
+            dc.voegNieuweOefeningToe(txfNaam.getText(), txfAntwoord.getText(), fileOpgave, fileFeedback, ddlVak.getSelectionModel().getSelectedItem());
+
+            /*dc.voegNieuweOefeningToe(
                     txfNaam.getText(),
                     txfAntwoord.getText(),
                     ddlVak.getSelectionModel().getSelectedItem(),
                     fileOpgave,
                     fileOpgaveNaam,
                     fileFeedback,
-                    fileFeedbackNaam,
-                    /*lsvGeselecteerdeBewerkingen.getItems()*/ null,
-                    /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
-            );
+                    fileFeedbackNaam
+                    lsvGeselecteerdeBewerkingen.getItems() null,
+                    lsvGeselecteerdeDoelstellingen.getItems() null
+            );*/
             clearRender();
             lblSuccess.setText("De oefening werd succesvol toegevoegd.");
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
@@ -200,6 +206,9 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     @FXML
     private void btnEditOnAction(ActionEvent event) {
         try {
+            dc.pasOefeningAan(txfNaam.getText(), txfAntwoord.getText(), fileOpgave, fileFeedback, ddlVak.getSelectionModel().getSelectedItem());
+
+            /*
             dc.pasOefeningAan(
                     txfNaam.getText(),
                     txfAntwoord.getText(),
@@ -207,10 +216,10 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
                     fileOpgave,
                     fileOpgaveNaam,
                     fileFeedback,
-                    fileFeedbackNaam,
-                    /*lsvGeselecteerdeBewerkingen.getItems()*/ null,
-                    /*lsvGeselecteerdeDoelstellingen.getItems()*/ null
-            );
+                    fileFeedbackNaam/*
+                    lsvGeselecteerdeBewerkingen.getItems() null,
+                    lsvGeselecteerdeDoelstellingen.getItems() null
+            );*/
             lblSuccess.setText("De oefening werd succesvol aangepast.");
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblError.setText(ex.getMessage());

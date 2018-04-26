@@ -119,10 +119,10 @@ public class Oefening implements IOefening, Serializable {
             throw new NaamTeLangException("Naam mag maximum 40 karakters bevatten!");
         
         // Deze karakters mogen, alle andere niet. 
-        Pattern p = Pattern.compile("[^A-Za-z0-9._\\-<>+?!=$%&*()| ]");
+        /*Pattern p = Pattern.compile("[^A-Za-z0-9._\\-<>+?!=$%&*()| ]");
         Matcher m = p.matcher(naam);
         if (m.find())
-            throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in de naam van de oefening. Deze mogen wel: spatie ._-<>+?!=$%&*()|");
+            throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in de naam van de oefening. Deze mogen wel: spatie ._-<>+?!=$%&*()|");*/
     }
 
     @Override
@@ -144,10 +144,10 @@ public class Oefening implements IOefening, Serializable {
             throw new NaamTeLangException("Antwoord mag maximum 40 karakters bevatten!");
         
         // Deze karakters mogen, alle andere niet. 
-        Pattern p = Pattern.compile("[^A-Za-z0-9/=+\\-$%&*()| €£]");
+        /*Pattern p = Pattern.compile("[^A-Za-z0-9/=+\\-$%&*()| €£]");
         Matcher m = p.matcher(antwoord);
         if (m.find())
-            throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in het antwoord van de oefening. Deze mogen wel: spatie /=+\\-$%&*()|€£");
+            throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in het antwoord van de oefening. Deze mogen wel: spatie /=+\\-$%&*()|€£");*/
     }
 
     @Override
@@ -215,7 +215,17 @@ public class Oefening implements IOefening, Serializable {
         return getNaam();
     }
 
-    void roepSettersAan(String naam, String antwoord, Vak vak, 
+    void roepSettersAan(String naam, String antwoord, Vak vak, File opgave, File feedback, List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
+        setNaam(naam);
+        setAntwoord(antwoord);
+        setVak(vak);
+        setOpgave(new PDF(opgave, opgave.getName()));
+        setFeedback(new PDF(feedback, feedback.getName()));
+        setGroepsbewerkingen(groepsbewerkingen);
+        setDoelstellingen(doelstellingen);
+    }
+
+    void roepSettersAan(String naam, String antwoord, Vak vak,
             File opgave, String opgaveNaam, 
             File feedback, String feedbackNaam, 
             List<Groepsbewerking> groepsbewerkingen, 
@@ -228,4 +238,5 @@ public class Oefening implements IOefening, Serializable {
         setGroepsbewerkingen(groepsbewerkingen);
         setDoelstellingen(doelstellingen);
     }
+
 }

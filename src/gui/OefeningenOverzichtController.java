@@ -395,7 +395,7 @@ public class OefeningenOverzichtController extends AnchorPane {
 
     private void OefeningToevoegen() {
         try {
-            dc.voegNieuweOefeningToe(
+            /*dc.voegNieuweOefeningToe(
                     txfNaam.getText(),
                     txfAntwoord.getText(),
                     opgave,
@@ -403,7 +403,7 @@ public class OefeningenOverzichtController extends AnchorPane {
                     ddlVakken.getValue(),
                     groepsbewerkingenGeselecteerd,
                     doelstellingenGeselecteerd
-            );
+            );*/
             resetScherm();
 
             tbvOefeningen.setItems(dc.geefOefeningen());

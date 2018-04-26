@@ -28,7 +28,7 @@ public class OverzichtPanelOefeningController extends OverzichtPanelController<I
     
     @Override
     void implementTableviewListener(Object newValue) {
-        dc.setHuidigeOefening((IOefening)newValue);
+        dc.setHuidigeOefening((IOefening) newValue);
         notifyObservers();
     }
 
@@ -72,6 +72,7 @@ public class OverzichtPanelOefeningController extends OverzichtPanelController<I
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
                 dc.verwijderOefening(getTbvOverzicht().getSelectionModel().getSelectedItem());
+
             }
         }
     }

@@ -66,6 +66,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
                         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
                         listGroepsBewerkingenTempGeselect.add(newValue);
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
+                        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
                     });
                 }
             }
@@ -80,7 +81,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
                         listGroepsBewerkingenTempAlle.add(newValue);
                         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
-
+                        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
                     });
                 }
             }
@@ -88,15 +89,10 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
 
     }   
 
-    @FXML
-    private void btnDeselectAllOnAction(ActionEvent event) {
-        lsvListGeselecteerde.getSelectionModel().clearSelection();
-    }
 
     @Override
     public void update(IOefening oefening) {
-        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " 
-                + dc.geefGroepsbewerkingenHuidigeOefening().size());
+
 
         List<Groepsbewerking> m = dc.geefGroepsbewerkingenHuidigeOefening();
         for (Groepsbewerking item : m) {
@@ -106,17 +102,24 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
         listGroepsBewerkingenTempAlle.removeAll(listGroepsBewerkingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
-
+        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
     }
-
+    @FXML
+    private void btnDeselectAllOnAction(ActionEvent event) {
+        lsvListGeselecteerde.getSelectionModel().clearSelection();
+        System.out.println(listGroepsBewerkingenTempAlle);
+        System.out.println(listGroepsBewerkingenTempGeselect);
+    }
     @FXML
     private void btnCancelOnAction(ActionEvent event) {
-        fc.toonListview(false);
+        fc.toonListview("cancel/init");
     }
 
     @FXML
     private void btnSubmitOnAction(ActionEvent event) {
-        dc.setGroepsbewerkingenOefening(lsvListGeselecteerde.getSelectionModel().getSelectedItems());
+        dc.setListGroepsbewerkingenVanOefening(listGroepsBewerkingenTempGeselect);
+        //Dit crasht bij nieuwe oefening, er bestaat nog geen huidige oefening
+        //dc.setGroepsbewerkingenOefening(lsvListGeselecteerde.getSelectionModel().getSelectedItems());
     }
 
     @FXML
