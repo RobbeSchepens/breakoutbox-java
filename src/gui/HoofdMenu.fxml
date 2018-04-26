@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="bg" type="GridPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="bg" type="GridPane" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -26,11 +22,32 @@
             <Label styleClass="h1" text="Hoofdmenu" textAlignment="CENTER" textFill="#3291ff" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
+                  <Button fx:id="btnBeheerOef" minWidth="250.0" mnemonicParsing="false" onAction="#btnBeheerOefOnAction" styleClass="btn-card" textAlignment="CENTER">
+                     <graphic>
+                        <GridPane alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints vgrow="SOMETIMES" />
+                            <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label styleClass="btn-card-label-main" text="Oefeningen beheren" GridPane.halignment="CENTER" />
+                              <Label fx:id="lblAantalOef" styleClass="label-sub" text="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <Label styleClass="label-sub" text="Aantal oefeningen:" />
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </GridPane>
+                     </graphic>
+                  </Button>
                   <Button fx:id="btnBeheerBob" minWidth="250.0" mnemonicParsing="false" styleClass="btn-card" textAlignment="CENTER">
                      <graphic>
                         <GridPane alignment="CENTER">
                            <children>
-                              <Label styleClass="btn-card-label-main" text="BOB's beheren" GridPane.halignment="CENTER" />
+                              <Label styleClass="btn-card-label-main" text="Boxes beheren" GridPane.halignment="CENTER" />
                               <Label fx:id="lblAantalBoxes" styleClass="btn-card-label" text="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                                  <graphic>
                                     <Label styleClass="btn-card-label" text="Aantal boxes:" />
@@ -54,7 +71,7 @@
                               <Label styleClass="btn-card-label-main" text="Sessies beheren" GridPane.halignment="CENTER" />
                               <Label fx:id="lblAantalSessies" styleClass="btnlbl" text="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                                  <graphic>
-                                    <Label styleClass="btnlbl" text="Aantal sessies:" />
+                                    <Label styleClass="btnlbl" text="Aantal actieve sessies:" />
                                  </graphic>
                               </Label>
                            </children>
@@ -68,33 +85,11 @@
                         </GridPane>
                      </graphic>
                   </Button>
-                  <Button fx:id="btnBeheerOef" minWidth="250.0" mnemonicParsing="false" onAction="#btnBeheerOefOnAction" styleClass="btn-card" textAlignment="CENTER">
-                     <graphic>
-                        <GridPane alignment="CENTER">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints vgrow="SOMETIMES" />
-                            <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label styleClass="btn-card-label-main" text="Oefeningen beheren" GridPane.halignment="CENTER" />
-                              <Label fx:id="lblAantalOef" styleClass="label-sub" text="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                                 <graphic>
-                                    <Label styleClass="label-sub" text="Aantal oefeningen:" />
-                                 </graphic>
-                              </Label>
-                           </children>
-                        </GridPane>
-                     </graphic>
-                  </Button>
                </children>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" />
          </children>
       </VBox>
       <Button fx:id="btnNieuweOefView" mnemonicParsing="false" onAction="#btnNieuweOefViewOnAction" text="oude view oef" GridPane.halignment="CENTER">
