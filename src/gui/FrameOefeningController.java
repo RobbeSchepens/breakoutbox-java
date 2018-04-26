@@ -3,7 +3,7 @@ package gui;
 import domein.DomeinController;
 import javafx.scene.layout.GridPane;
 
-public class FrameOefeningController extends GridPane {
+public final class FrameOefeningController extends GridPane {
     
     SidebarNavPanelController nav;
     OverzichtPanelOefeningController overzichtPanelController;
@@ -13,7 +13,7 @@ public class FrameOefeningController extends GridPane {
     
     public FrameOefeningController(DomeinController dc) {
         nav = new SidebarNavPanelController(dc);
-        overzichtPanelController = new OverzichtPanelOefeningController(dc); // het scherm met de tabelview
+        overzichtPanelController = new OverzichtPanelOefeningController(dc, this); // het scherm met de tabelview
         oefeningDetailPanelController = new DetailPanelOefeningController(dc, this);
         oefeningDetailPanelListController = new DetailPanelOefeningListController(dc, this);
         oefeningDetailPanelListDoelstellingController = new DetailPanelOefeningLisDoelstellingController(dc, this);
@@ -50,5 +50,9 @@ public class FrameOefeningController extends GridPane {
                 break;
 
         }
+    }
+    
+    public void initNieuweOefening() {
+        oefeningDetailPanelController.initNieuweOefening();
     }
 }

@@ -72,10 +72,10 @@
             <Insets bottom="15.0" />
          </padding>
          <children>
-            <Button fx:id="btnDeselect" mnemonicParsing="false" onAction="#btnDeselectOnAction" text="Deselecteer">
+            <Button fx:id="btnDeselect" mnemonicParsing="false" onAction="#btnDeselectOnAction" text="Voeg nieuwe toe">
                <styleClass>
                   <String fx:value="btn-big-action" />
-                  <String fx:value="btn-secondary" />
+                  <String fx:value="btn-success" />
                </styleClass>
                <HBox.margin>
                   <Insets right="15.0" />

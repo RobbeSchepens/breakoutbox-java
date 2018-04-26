@@ -77,13 +77,17 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     }
     
     private void initButtons(boolean isNew) {
-        btnNieuweOefening.setVisible(!isNew);
         btnAdd.setManaged(isNew);
         btnAdd.setVisible(isNew);
         btnEdit.setManaged(!isNew);
         btnEdit.setVisible(!isNew);
         btnOpenOpgave.setDisable(isNew);
         btnOpenFeedback.setDisable(isNew);
+    }
+
+    void initNieuweOefening() {
+        initButtons(true);
+        clearRender();
     }
     
     private void clearRender() {
@@ -100,6 +104,7 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
         lblDoelstellingenCount.setText("0 doelstellingen geselecteerd");
         lblError.setText("");
         lblSuccess.setText("");
+        txfNaam.requestFocus();
     }
 
     @Override

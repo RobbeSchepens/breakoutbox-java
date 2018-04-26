@@ -14,15 +14,17 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-public class OverzichtPanelOefeningController extends OverzichtPanelController<IOefening> implements OefeningSubject {
+public final class OverzichtPanelOefeningController extends OverzichtPanelController<IOefening> implements OefeningSubject {
 
     private DomeinController dc;
+    private FrameOefeningController fc;
     private Set<OefeningObserver> observers;
     
-    public OverzichtPanelOefeningController(DomeinController dcon) {
+    public OverzichtPanelOefeningController(DomeinController dcon, FrameOefeningController fc) {
         super(dcon);
         this.observers = new HashSet<>();
         this.dc = dcon;
+        this.fc = fc;
         renderContent();
     }
     
@@ -72,7 +74,6 @@ public class OverzichtPanelOefeningController extends OverzichtPanelController<I
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
                 dc.verwijderOefening(getTbvOverzicht().getSelectionModel().getSelectedItem());
-
             }
         }
     }
@@ -98,5 +99,10 @@ public class OverzichtPanelOefeningController extends OverzichtPanelController<I
     @Override
     void filter(String newValue) {
         dc.veranderFilter(newValue);
+    }
+
+    @Override
+    void initNieuw() {
+        fc.initNieuweOefening();
     }
 }

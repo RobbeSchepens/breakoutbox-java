@@ -35,7 +35,7 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Button fx:id="btnNieuweOefening" mnemonicParsing="false" onAction="#btnNieuweOefeningOnAction" styleClass="btn-secondary" text="Leeg velden en maak een nieuwe oefening aan" />
+            <Button fx:id="btnNieuweOefening" mnemonicParsing="false" onAction="#btnNieuweOefeningOnAction" styleClass="btn-secondary" text="Leeg velden en maak een nieuwe oefening aan" visible="false" />
          </children>
          <VBox.margin>
             <Insets bottom="15.0" />

@@ -61,6 +61,7 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
     @FXML
     private void btnDeselectOnAction(ActionEvent event) {
         tbvOverzicht.getSelectionModel().clearSelection();
+        initNieuw();
     }
 
     @FXML
@@ -80,4 +81,5 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
     abstract <T> void implementTableviewListener(T newValue);
     abstract void renderContent();
     abstract void filter(String newValue);
+    abstract void initNieuw();
 }
