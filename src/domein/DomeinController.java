@@ -113,6 +113,7 @@ public class DomeinController extends Observable {
     public void verwijderOefening(IOefening o) {
         ob.deleteOefening((Oefening) o);
         getOefeningList().remove((Oefening) o);
+        filteredOefeningList = new FilteredList<>(geefOefeningen(), p -> true);
         setChanged();
         notifyObservers(getOefeningList());
     }
@@ -123,7 +124,6 @@ public class DomeinController extends Observable {
         }
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, listGroepsbewerkingenVanOefening, listDoelstellingenVanOefening);
         getOefeningList().add(oefening);
-        System.out.println(getOefeningList());
         ob.addOefening(oefening);
         setChanged();
         notifyObservers();
