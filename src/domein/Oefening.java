@@ -119,10 +119,10 @@ public class Oefening implements IOefening, Serializable {
             throw new NaamTeLangException("Naam mag maximum 40 karakters bevatten!");
         
         // Deze karakters mogen, alle andere niet. 
-        /*Pattern p = Pattern.compile("[^A-Za-z0-9._\\-<>+?!=$%&*()| ]");
+        Pattern p = Pattern.compile("[^A-Za-z0-9._\\-<>+?!=$%&*()| ]");
         Matcher m = p.matcher(naam);
         if (m.find())
-            throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in de naam van de oefening. Deze mogen wel: spatie ._-<>+?!=$%&*()|");*/
+            throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in de naam van de oefening. Deze mogen wel: spatie ._-<>+?!=$%&*()|");
     }
 
     @Override
@@ -144,10 +144,10 @@ public class Oefening implements IOefening, Serializable {
             throw new NaamTeLangException("Antwoord mag maximum 40 karakters bevatten!");
         
         // Deze karakters mogen, alle andere niet. 
-        /*Pattern p = Pattern.compile("[^A-Za-z0-9/=+\\-$%&*()| €£]");
+        Pattern p = Pattern.compile("[^A-Za-z0-9/=+\\-$%&*()| €£]");
         Matcher m = p.matcher(antwoord);
         if (m.find())
-            throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in het antwoord van de oefening. Deze mogen wel: spatie /=+\\-$%&*()|€£");*/
+            throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in het antwoord van de oefening. Deze mogen wel: spatie /=+\\-$%&*()|€£");
     }
 
     @Override
