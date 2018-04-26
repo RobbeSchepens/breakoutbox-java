@@ -111,14 +111,16 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
 
 
         List<Doelstelling> m = dc.geefDoelstellingenHuidigeOefening();
+        listDoelstellingenTempGeselect = new ArrayList<>();
         for (Doelstelling item : m) {
             listDoelstellingenTempGeselect.add(item);
         }
-
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
         listDoelstellingenTempAlle.removeAll(listDoelstellingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
-        lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+        System.out.println("UpdateDoels");
+        System.out.println("alle " + listDoelstellingenTempAlle);
+        System.out.println("select " + listDoelstellingenTempGeselect);
     }
     @FXML
     private void btnDeselectAllOnAction(ActionEvent event) {
@@ -134,6 +136,7 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
     @FXML
     private void btnSubmitOnAction(ActionEvent event) {
         dc.setListDoelstellingenVanOefening(listDoelstellingenTempGeselect);
+
         //Dit crasht bij nieuwe oefening, er bestaat nog geen huidige oefening
         //dc.setDoelstellingenOefening(lsvListGeselecteerde.getSelectionModel().getSelectedItems());
     }

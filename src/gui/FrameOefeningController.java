@@ -29,7 +29,6 @@ public class FrameOefeningController extends GridPane {
         add(oefeningDetailPanelListController, 1, 0);
         add(oefeningDetailPanelListDoelstellingController, 1, 0);
         toonListview("cancel/init");
-
     }
     
     public void toonListview(String keuze) {
