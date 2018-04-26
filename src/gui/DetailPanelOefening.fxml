@@ -49,7 +49,7 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -57,11 +57,11 @@
         </rowConstraints>
          <children>
             <Label focusTraversable="false" text="Naam oefening" />
-            <Label focusTraversable="false" text="Antwoord" GridPane.rowIndex="1" />
+            <Label focusTraversable="false" text="Antwoord" GridPane.rowIndex="4" />
             <TextField fx:id="txfNaam" GridPane.columnIndex="1" />
-            <TextField fx:id="txfAntwoord" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label focusTraversable="false" text="Vak" GridPane.rowIndex="2" />
-            <ChoiceBox fx:id="ddlVak" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txfAntwoord" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label focusTraversable="false" text="Vak" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="ddlVak" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label focusTraversable="false" text="Groepsbewerkingen" GridPane.rowIndex="5" />
             <Label focusTraversable="false" text="Doelstellingen" GridPane.rowIndex="6" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
@@ -84,9 +84,9 @@
                   <Label fx:id="lblDoelstellingenCount" text="0 doelstellingen geselecteerd" />
                </children>
             </HBox>
-            <Label focusTraversable="false" text="Opgave" GridPane.rowIndex="3" />
-            <Label focusTraversable="false" text="Feedback" GridPane.rowIndex="4" />
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Label focusTraversable="false" text="Opgave" GridPane.rowIndex="2" />
+            <Label focusTraversable="false" text="Feedback" GridPane.rowIndex="3" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
                   <Button fx:id="btnOpenFeedback" mnemonicParsing="false" onAction="#btnOpenFeedbackOnAction" text="Open">
                      <HBox.margin>
@@ -105,7 +105,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <Button fx:id="btnOpenOpgave" mnemonicParsing="false" onAction="#btnOpenOpgaveOnAction" text="Open">
                      <HBox.margin>
