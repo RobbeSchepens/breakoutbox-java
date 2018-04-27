@@ -74,6 +74,7 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
 
     @Override
     public void update(Observable o, Object arg) {
+
         renderTable();
     }
 

@@ -1,6 +1,8 @@
 package gui;
 
+import domein.Doelstelling;
 import domein.DomeinController;
+import domein.Groepsbewerking;
 import domein.IOefening;
 import domein.OefeningObserver;
 import domein.PDF;
@@ -11,6 +13,7 @@ import exceptions.SpecialeTekensInNaamException;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -91,6 +94,10 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     }
     
     private void clearRender() {
+
+        dc.setListDoelstellingenVanOefening(new ArrayList<>());
+        dc.setListGroepsbewerkingenVanOefening(new ArrayList<>());
+
         initButtons(true);
         txfNaam.setText("");
         txfAntwoord.setText("");
@@ -193,20 +200,10 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
         try {
             dc.voegNieuweOefeningToe(txfNaam.getText(), txfAntwoord.getText(), fileOpgave, fileFeedback, ddlVak.getSelectionModel().getSelectedItem());
 
-            /*dc.voegNieuweOefeningToe(
-                    txfNaam.getText(),
-                    txfAntwoord.getText(),
-                    ddlVak.getSelectionModel().getSelectedItem(),
-                    fileOpgave,
-                    fileOpgaveNaam,
-                    fileFeedback,
-                    fileFeedbackNaam
-                    lsvGeselecteerdeBewerkingen.getItems() null,
-                    lsvGeselecteerdeDoelstellingen.getItems() null
-            );*/
             clearRender();
             lblError.setText("");
             lblSuccess.setText("De oefening werd succesvol toegevoegd.");
+            fc.toonListview("cancel/init");
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());
@@ -215,23 +212,14 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
 
     @FXML
     private void btnEditOnAction(ActionEvent event) {
+
         try {
             dc.pasOefeningAan(txfNaam.getText(), txfAntwoord.getText(), fileOpgave, fileFeedback, ddlVak.getSelectionModel().getSelectedItem());
-
-            /*
-            dc.pasOefeningAan(
-                    txfNaam.getText(),
-                    txfAntwoord.getText(),
-                    ddlVak.getSelectionModel().getSelectedItem(),
-                    fileOpgave,
-                    fileOpgaveNaam,
-                    fileFeedback,
-                    fileFeedbackNaam/*
-                    lsvGeselecteerdeBewerkingen.getItems() null,
-                    lsvGeselecteerdeDoelstellingen.getItems() null
-            );*/
             lblError.setText("");
             lblSuccess.setText("De oefening werd succesvol aangepast.");
+            fc.toonListview("cancel/init");
+
+
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());

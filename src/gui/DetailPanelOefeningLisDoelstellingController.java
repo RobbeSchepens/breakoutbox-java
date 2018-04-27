@@ -40,6 +40,7 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
     private FrameOefeningController fc;
     private List<Doelstelling> listDoelstellingenTempAlle = new ArrayList<>();
     private List<Doelstelling> listDoelstellingenTempGeselect = new ArrayList<>();
+    private int geseleceerdeDoelstellingen = 0;
 
     @FXML
     private Label lblTitleLeftList;
@@ -74,8 +75,7 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
         }
 
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
-        lblTitleLeftList.setText("Groepsbewerkingen");
-
+        lblTitleLeftList.setText("Doelstellingen");
         lsvListAlle.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Doelstelling>() {
             @Override
             public void changed(ObservableValue<? extends Doelstelling> observable, Doelstelling oldValue, Doelstelling newValue) {
@@ -85,7 +85,7 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
                         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
                         listDoelstellingenTempGeselect.add(newValue);
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
-                        lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+                        lblAantalGeselecteerd.setText("doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
                     });
                 }
             }
@@ -108,8 +108,12 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
     }
     @Override
     public void update(IOefening oefening) {
-
-
+        System.out.println(oefening);
+        listDoelstellingenTempAlle.clear();
+        List<Doelstelling> p = dc.getDoelstellingenList();
+        for (Doelstelling item : p) {
+            listDoelstellingenTempAlle.add(item);
+        }
         List<Doelstelling> m = dc.geefDoelstellingenHuidigeOefening();
         listDoelstellingenTempGeselect = new ArrayList<>();
         for (Doelstelling item : m) {
@@ -118,9 +122,7 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
         listDoelstellingenTempAlle.removeAll(listDoelstellingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
-        System.out.println("UpdateDoels");
-        System.out.println("alle " + listDoelstellingenTempAlle);
-        System.out.println("select " + listDoelstellingenTempGeselect);
+        lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
     }
     @FXML
     private void btnDeselectAllOnAction(ActionEvent event) {
@@ -129,7 +131,7 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
     }
 
     @FXML
-    private void btnCancelOnAction(ActionEvent event) {
+    private void btnCancelOnAction(ActionEvent event) {//de lijsten blijven behouden, ze zouden moeten gaan naar oorspronkelijk voor je op toon lijst drukt
         fc.toonListview("cancel/init");
     }
 

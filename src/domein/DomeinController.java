@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import jdk.nashorn.internal.objects.NativeRegExp;
 
 public class DomeinController extends Observable {
 
@@ -119,6 +120,10 @@ public class DomeinController extends Observable {
     }
 
     public void voegNieuweOefeningToe(String naam, String antwoord, File opgave, File feedback, Vak vak) {
+        System.out.println("inAddOnAction");
+        System.out.println(listGroepsbewerkingenVanOefening);
+        System.out.println(listDoelstellingenVanOefening);
+
         if (ob.geefOefeningByNaamJpa(naam) != null) {
             throw new IllegalArgumentException("Er bestaat al een oefening met deze naam.");
         }
@@ -134,11 +139,23 @@ public class DomeinController extends Observable {
         if (!huidigeOefening.getNaam().equals(naam) && ob.geefOefeningByNaamJpa(naam) != null) {
             throw new IllegalArgumentException("Er bestaat al een oefening met deze naam.");
         }
-
+        if (listDoelstellingenVanOefening.isEmpty()) {
+            listDoelstellingenVanOefening = huidigeOefening.getDoelstellingen();
+        }
+        if (listGroepsbewerkingenVanOefening.isEmpty()) {
+            listGroepsbewerkingenVanOefening = huidigeOefening.getGroepsBewerkingen();
+        }
         huidigeOefening.roepSettersAan(naam, antwoord, vak, opgave, feedback, listGroepsbewerkingenVanOefening, listDoelstellingenVanOefening);
         ob.updateOefening(huidigeOefening);
+        // hier moet je de oefn resetten ofzo
+
+
         setChanged();
         notifyObservers();
+
+
+
+
     }
 
     /*public void voegNieuweOefeningToe(String naam, String antwoord, Vak vak,
