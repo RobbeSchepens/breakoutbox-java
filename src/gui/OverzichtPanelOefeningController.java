@@ -132,5 +132,6 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
     @Override
     void initNieuw() {
         fc.initNieuweOefening();
+
     }
 }

@@ -55,7 +55,7 @@ public final class FrameOefeningController extends GridPane {
     
     public void initNieuweOefening() {
         oefeningDetailPanelController.initNieuweOefening();
-
+        overzichtPanelController.clearSelectedItem();
         oefeningDetailPanelListController.nieuweOefening();
         oefeningDetailPanelListDoelstellingController.nieuweOefening();
 

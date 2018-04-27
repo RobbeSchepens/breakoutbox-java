@@ -85,6 +85,10 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
         filter("");
     }
 
+    public void clearSelectedItem() {
+        tbvOverzicht.getSelectionModel().clearSelection();
+    }
+
     @FXML abstract void btnDeleteSelectedOnAction(ActionEvent event);
     abstract <T> void implementTableviewListener(T newValue);
     abstract void renderContent();

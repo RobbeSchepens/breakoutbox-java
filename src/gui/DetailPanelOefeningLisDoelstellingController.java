@@ -122,7 +122,8 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
         }
 
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
-        //listDoelstellingenTempAlle.removeAll(listDoelstellingenTempGeselect); werkt niet deftig, idk xd
+        //listDoelstellingenTempAlle.removeAll(listDoelstellingenTempGeselect); //werkt niet deftig, idk xd
+
         ArrayList<Doelstelling> h = new ArrayList<>();
         for (int j = 0; j < listDoelstellingenTempGeselect.size(); j++) {
             for (int i = 0; i < listDoelstellingenTempAlle.size(); i++) {
@@ -151,7 +152,8 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
     @FXML
     private void btnSubmitOnAction(ActionEvent event) {
         dc.setListDoelstellingenVanOefening(listDoelstellingenTempGeselect);
-
+        fc.toonListview("cancel/init");
+        System.out.println("iher");
         //Dit crasht bij nieuwe oefening, er bestaat nog geen huidige oefening
         //dc.setDoelstellingenOefening(lsvListGeselecteerde.getSelectionModel().getSelectedItems());
     }

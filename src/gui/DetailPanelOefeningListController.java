@@ -109,6 +109,8 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
             listGroepsBewerkingenTempGeselect.add(item);
         }
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
+
+        //listGroepsBewerkingenTempAlle.removeAll(listGroepsBewerkingenTempGeselect); //werkt niet deftig xd
         ArrayList<Groepsbewerking> h = new ArrayList<>();
         for (int j = 0; j < listGroepsBewerkingenTempGeselect.size(); j++) {
             for (int i = 0; i < listGroepsBewerkingenTempAlle.size(); i++) {
@@ -136,6 +138,8 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
     @FXML
     private void btnSubmitOnAction(ActionEvent event) {
         dc.setListGroepsbewerkingenVanOefening(listGroepsBewerkingenTempGeselect); // de temp list
+        fc.toonListview("cancel/init");
+        System.out.println("iher");
         //Dit crasht bij nieuwe oefening, er bestaat nog geen huidige oefening
         //dc.setGroepsbewerkingenOefening(lsvListGeselecteerde.getSelectionModel().getSelectedItems());
     }
