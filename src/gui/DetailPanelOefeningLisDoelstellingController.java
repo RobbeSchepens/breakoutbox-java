@@ -153,7 +153,6 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
     private void btnSubmitOnAction(ActionEvent event) {
         dc.setListDoelstellingenVanOefening(listDoelstellingenTempGeselect);
         fc.toonListview("cancel/init");
-        System.out.println("iher");
         //Dit crasht bij nieuwe oefening, er bestaat nog geen huidige oefening
         //dc.setDoelstellingenOefening(lsvListGeselecteerde.getSelectionModel().getSelectedItems());
     }
