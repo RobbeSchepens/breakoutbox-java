@@ -17,7 +17,10 @@ public class SidebarNavPanelController extends VBox {
     @FXML private HBox hbxOef;
     @FXML private HBox hbxSessies;
     @FXML private HBox hbxBoxes;
-    @FXML private HBox hbxHome;
+    @FXML
+    private HBox hbxHome;
+    @FXML
+    private HBox hbxKlassen;
 
     public SidebarNavPanelController(DomeinController dcon) {
         FXMLLoader loader
@@ -43,6 +46,8 @@ public class SidebarNavPanelController extends VBox {
         hbxBoxes.getChildren().get(0).setStyle("-fx-text-fill: #333;");
         hbxHome.setStyle(nonactiveCss);
         hbxHome.getChildren().get(0).setStyle("-fx-text-fill: #333;");
+        hbxKlassen.setStyle(nonactiveCss);
+        hbxKlassen.getChildren().get(0).setStyle("-fx-text-fill: #333;");
     }  
 
     @FXML
@@ -60,6 +65,15 @@ public class SidebarNavPanelController extends VBox {
     @FXML
     private void hbxBoxesOnMouseClicked(MouseEvent event) {
     }
+
+    @FXML
+    private void hbxKlassenOnMouseClicked(MouseEvent event) {
+        FrameKlassenController sc = new FrameKlassenController(dc);
+        Scene scene = new Scene(sc, 1430, 720, false, SceneAntialiasing.BALANCED);
+        scene.getStylesheets().add("gui/css/style.css");
+        ((Stage) this.getScene().getWindow()).setScene(scene);
+    }
+
 
     @FXML
     private void hbxHomeOnMouseClicked(MouseEvent event) {

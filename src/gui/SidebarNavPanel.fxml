@@ -39,7 +39,7 @@
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
       </HBox>
-      <HBox fx:id="hbxActies" alignment="CENTER" onMouseClicked="#hbxhbxActiesOnMouseClicked" prefHeight="120.0" style="-fx-border-width: 0 2 0 0; -fx-border-color: #ccc;">
+      <HBox fx:id="hbxActies" alignment="CENTER" onMouseClicked="#hbxhbxActiesOnMouseClicked" prefHeight="120.0" style="-fx-border-width: 0 2 1 0; -fx-border-color: #ccc;">
          <children>
             <Label styleClass="menutext" text="Acties beheren" textAlignment="CENTER" wrapText="true" />
          </children>
@@ -47,9 +47,9 @@
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER" onMouseClicked="#hbxBoxesOnMouseClicked" prefHeight="120.0" style="-fx-border-width: 0 2 0 0; -fx-border-color: #ccc;">
+      <HBox fx:id="hbxKlassen" alignment="CENTER" onMouseClicked="#hbxKlassenOnMouseClicked" prefHeight="120.0" style="-fx-border-width: 0 2 1 0; -fx-border-color: #ccc;">
          <children>
-            <Label styleClass="menutext" textAlignment="CENTER" wrapText="true" />
+            <Label styleClass="menutext" text="Klassen beheren" textAlignment="CENTER" wrapText="true" />
          </children>
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
