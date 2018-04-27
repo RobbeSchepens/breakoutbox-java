@@ -1,6 +1,7 @@
 package gui;
 
 import domein.DomeinController;
+import domein.KlasController;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 public class SidebarNavPanelController extends VBox {
 
     private DomeinController dc;
+    private KlasController kc;
     @FXML private HBox hbxOef;
     @FXML private HBox hbxSessies;
     @FXML private HBox hbxBoxes;
@@ -21,6 +23,8 @@ public class SidebarNavPanelController extends VBox {
     private HBox hbxHome;
     @FXML
     private HBox hbxKlassen;
+    String nonactiveCss = "-fx-border-width: 0 2 1 0; -fx-background-color: white; -fx-border-color: #ccc;";
+    String activeCss = "-fx-border-width: 0 2 1 0; -fx-background-color: #006fe6; -fx-border-color: #006fe6;";
 
     public SidebarNavPanelController(DomeinController dcon) {
         FXMLLoader loader
@@ -32,20 +36,15 @@ public class SidebarNavPanelController extends VBox {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-        
         this.dc = dcon;
-        
-        String nonactiveCss = "-fx-border-width: 0 2 1 0; -fx-background-color: white; -fx-border-color: #ccc;";
-        String activeCss = "-fx-border-width: 0 2 1 0; -fx-background-color: #006fe6; -fx-border-color: #006fe6;";
-        
-        hbxOef.setStyle(activeCss);
-        hbxOef.getChildren().get(0).setStyle("-fx-text-fill: white;");
+        hbxOef.setStyle(nonactiveCss);
+        hbxOef.getChildren().get(0).setStyle("-fx-text-fill: #333;");
         hbxSessies.setStyle(nonactiveCss);
         hbxSessies.getChildren().get(0).setStyle("-fx-text-fill: #333;");
         hbxBoxes.setStyle(nonactiveCss);
         hbxBoxes.getChildren().get(0).setStyle("-fx-text-fill: #333;");
-        hbxHome.setStyle(nonactiveCss);
-        hbxHome.getChildren().get(0).setStyle("-fx-text-fill: #333;");
+        hbxHome.setStyle(activeCss);
+        hbxHome.getChildren().get(0).setStyle("--fx-text-fill: white;");
         hbxKlassen.setStyle(nonactiveCss);
         hbxKlassen.getChildren().get(0).setStyle("-fx-text-fill: #333;");
     }  

@@ -26,7 +26,7 @@ public class StartUpGuiClientApp extends Application {
             }
         }
         Arrays.stream(pdfLocation.listFiles()).forEach(File::delete);
-        /////////
+
 
         HoofdMenuController root = new HoofdMenuController(new DomeinController());
 
