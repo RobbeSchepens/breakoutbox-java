@@ -50,10 +50,10 @@ public class Vak implements Serializable {
             throw new NaamTeLangException("Het vak mag maximum 40 karakters bevatten!");
         
         // Deze karakters mogen, alle andere niet. 
-        Pattern p = Pattern.compile("[^A-Za-z0-9&@]");
-        Matcher m = p.matcher(naam);
-        if (m.find())
-            throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in de naam van het vak. Enkel A tot Z, 0 tot 9, & of @.");
+    //    Pattern p = Pattern.compile("[^A-Za-z0-9&@]");
+        //    Matcher m = p.matcher(naam);
+        //     if (m.find())
+//            throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in de naam van het vak. Enkel A tot Z, 0 tot 9, & of @.");
     }
 
     public StringProperty naamProperty() {

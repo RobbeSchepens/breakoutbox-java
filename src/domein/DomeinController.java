@@ -101,7 +101,7 @@ public class DomeinController extends Observable {
     public void veranderFilter(String filterValue) {
         filteredOefeningList.setPredicate(oefening -> {
             // If filter text is empty, display all persons.
-            if (filterValue == null || filterValue.isEmpty()) {
+            if (filterValue == null || filterValue.isEmpty() || filterValue.equals("Alle vakken")) {
                 return true;
             }
             // Compare first name and last name of every person with   
