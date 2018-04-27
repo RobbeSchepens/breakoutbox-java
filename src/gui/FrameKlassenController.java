@@ -6,6 +6,7 @@
 package gui;
 
 import domein.DomeinController;
+import domein.KlasController;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -15,11 +16,13 @@ import javafx.scene.layout.GridPane;
 public class FrameKlassenController extends GridPane {
     SidebarNavPanelController nav;
     OverzichtPanelKlasController overzichtPanelController;
+    DomeinController dc;
 
     FrameKlassenController(DomeinController dc) {
+        this.dc = dc;
         nav = new SidebarNavPanelController(dc);
         overzichtPanelController = new OverzichtPanelKlasController(dc, this);
-
+        add(nav, 0, 0);
 
     }
 
