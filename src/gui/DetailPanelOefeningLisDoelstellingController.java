@@ -108,19 +108,32 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
     }
     @Override
     public void update(IOefening oefening) {
-        System.out.println(oefening);
         listDoelstellingenTempAlle.clear();
         List<Doelstelling> p = dc.getDoelstellingenList();
         for (Doelstelling item : p) {
             listDoelstellingenTempAlle.add(item);
         }
+
+
         List<Doelstelling> m = dc.geefDoelstellingenHuidigeOefening();
         listDoelstellingenTempGeselect = new ArrayList<>();
         for (Doelstelling item : m) {
             listDoelstellingenTempGeselect.add(item);
         }
+
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
-        listDoelstellingenTempAlle.removeAll(listDoelstellingenTempGeselect);
+        //listDoelstellingenTempAlle.removeAll(listDoelstellingenTempGeselect); werkt niet deftig, idk xd
+        ArrayList<Doelstelling> h = new ArrayList<>();
+        for (int j = 0; j < listDoelstellingenTempGeselect.size(); j++) {
+            for (int i = 0; i < listDoelstellingenTempAlle.size(); i++) {
+                if (listDoelstellingenTempAlle.get(i).toString().equals(listDoelstellingenTempGeselect.get(j).toString())) {
+                    h.add(listDoelstellingenTempAlle.get(i));
+                }
+            }
+        }
+        listDoelstellingenTempAlle.removeAll(h);
+
+
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
         lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
     }
@@ -151,6 +164,14 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
     private void lsvListGeselecteerdeOnMouseClicked(MouseEvent event) {
     }
 
+    void nieuweOefening() {
+        listDoelstellingenTempGeselect = new ArrayList<>();
+        listDoelstellingenTempAlle = dc.getDoelstellingenList();
+        dc.setListDoelstellingenVanOefening(listDoelstellingenTempGeselect);
+        lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
+        lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
+        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+    }
 
 
 

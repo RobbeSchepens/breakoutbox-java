@@ -10,6 +10,7 @@ public final class FrameOefeningController extends GridPane {
     DetailPanelOefeningController oefeningDetailPanelController;
     DetailPanelOefeningListController oefeningDetailPanelListController;
     DetailPanelOefeningLisDoelstellingController oefeningDetailPanelListDoelstellingController;
+    DomeinController dcc;
     
     public FrameOefeningController(DomeinController dc) {
         nav = new SidebarNavPanelController(dc);
@@ -54,5 +55,9 @@ public final class FrameOefeningController extends GridPane {
     
     public void initNieuweOefening() {
         oefeningDetailPanelController.initNieuweOefening();
+
+        oefeningDetailPanelListController.nieuweOefening();
+        oefeningDetailPanelListDoelstellingController.nieuweOefening();
+
     }
 }

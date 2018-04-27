@@ -63,6 +63,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
         lsvListAlle.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Groepsbewerking>() {
             @Override
             public void changed(ObservableValue<? extends Groepsbewerking> observable, Groepsbewerking oldValue, Groepsbewerking newValue) {
+
                 if (!(newValue == null)) {
                     listGroepsBewerkingenTempAlle.remove(newValue);
                     Platform.runLater(() -> {
@@ -78,6 +79,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
         lsvListGeselecteerde.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Groepsbewerking>() {
             @Override
             public void changed(ObservableValue<? extends Groepsbewerking> observable, Groepsbewerking oldValue, Groepsbewerking newValue) {
+
                 if (!(newValue == null)) {
                     listGroepsBewerkingenTempGeselect.remove(newValue);
                     Platform.runLater(() -> {
@@ -94,6 +96,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
 
     @Override
     public void update(IOefening oefening) {
+
         listGroepsBewerkingenTempAlle.clear();
         List<Groepsbewerking> p = dc.getGroepsbewerkingenList();
         for (Groepsbewerking item : p) {
@@ -106,6 +109,16 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
             listGroepsBewerkingenTempGeselect.add(item);
         }
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
+        ArrayList<Groepsbewerking> h = new ArrayList<>();
+        for (int j = 0; j < listGroepsBewerkingenTempGeselect.size(); j++) {
+            for (int i = 0; i < listGroepsBewerkingenTempAlle.size(); i++) {
+                if (listGroepsBewerkingenTempAlle.get(i).toString().equals(listGroepsBewerkingenTempGeselect.get(j).toString())) {
+                    h.add(listGroepsBewerkingenTempAlle.get(i));
+                }
+            }
+        }
+        listGroepsBewerkingenTempAlle.removeAll(h);
+
         listGroepsBewerkingenTempAlle.removeAll(listGroepsBewerkingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
         lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
@@ -136,4 +149,15 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
     private void lsvListGeselecteerdeOnMouseClicked(MouseEvent event) {
         
     }
+
+    void nieuweOefening() {
+        listGroepsBewerkingenTempGeselect = new ArrayList<>();
+        listGroepsBewerkingenTempAlle = dc.getGroepsbewerkingenList();
+        dc.setListGroepsbewerkingenVanOefening(listGroepsBewerkingenTempGeselect);
+        lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
+        lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
+        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
+
+    }
+
 }

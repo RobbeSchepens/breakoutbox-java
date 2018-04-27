@@ -120,13 +120,11 @@ public class DomeinController extends Observable {
     }
 
     public void voegNieuweOefeningToe(String naam, String antwoord, File opgave, File feedback, Vak vak) {
-        System.out.println("inAddOnAction");
-        System.out.println(listGroepsbewerkingenVanOefening);
-        System.out.println(listDoelstellingenVanOefening);
-
         if (ob.geefOefeningByNaamJpa(naam) != null) {
             throw new IllegalArgumentException("Er bestaat al een oefening met deze naam.");
         }
+        System.out.println("lists nieuwe oef");
+        System.out.println(listGroepsbewerkingenVanOefening);
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, listGroepsbewerkingenVanOefening, listDoelstellingenVanOefening);
         getOefeningList().add(oefening);
         ob.addOefening(oefening);
@@ -149,11 +147,12 @@ public class DomeinController extends Observable {
         ob.updateOefening(huidigeOefening);
         // hier moet je de oefn resetten ofzo
 
+        /*huidigeOefening = null;
+        setListDoelstellingenVanOefening(new ArrayList<>());
+        setListGroepsbewerkingenVanOefening(new ArrayList<>());*/
 
         setChanged();
         notifyObservers();
-
-
 
 
     }
@@ -208,9 +207,7 @@ public class DomeinController extends Observable {
     }
 
     public List<Groepsbewerking> getGroepsbewerkingenList() {
-        if (groepsbewerkingenLijst == null) {
-            groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
-        }
+        groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA(); // niet checken op null geeft fouten
         return groepsbewerkingenLijst;
     }
     public ObservableList<Groepsbewerking> geefGroepsbewerkingen() {
@@ -223,9 +220,7 @@ public class DomeinController extends Observable {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(huidigeOefening.getDoelstellingen()));
     }
     public List<Doelstelling> getDoelstellingenList() {
-        if (doelstellingenLijst == null) {
-            doelstellingenLijst = ob.geefDoelstellingenJPA();
-        }
+        doelstellingenLijst = ob.geefDoelstellingenJPA();// niet checken op null geeft fouten
         return doelstellingenLijst;
     }
     public ObservableList<Doelstelling> geefDoelstellingen() {
