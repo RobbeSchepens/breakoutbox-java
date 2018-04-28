@@ -21,7 +21,6 @@ public class HoofdMenuController extends GridPane {
     @FXML private Label lblAantalOef;
     @FXML private Label lblAantalBoxes;
     @FXML private Label lblAantalSessies;
-    @FXML private Button btnNieuweOefView;
     
     public HoofdMenuController(DomeinControllerOefening dc) {
         this.dc = dc;
@@ -39,23 +38,34 @@ public class HoofdMenuController extends GridPane {
         laadAantallen();
     }
 
+    private void laadAantallen() {
+        lblAantalOef.setText(String.valueOf(dc.geefAantalOefeningen()));
+        //lblAantalBoxes.setText(String.valueOf(dc.geefAantalBoxes()));
+        //lblAantalSessies.setText(String.valueOf(dc.geefAantalSessies()));
+    }
+
     @FXML
     private void btnBeheerOefOnAction(ActionEvent event) {
         FrameOefeningController sc = new FrameOefeningController(dc);
-        Scene scene = new Scene(sc, 1430, 720, false, SceneAntialiasing.BALANCED);
+        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
 
-    private void laadAantallen() {
-        lblAantalOef.setText(String.valueOf(dc.geefAantalOefeningen()));
+    @FXML
+    private void btnBeheerBobOnAction(ActionEvent event) {
+        FrameBoxController sc = new FrameBoxController(dc);
+        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
+        scene.getStylesheets().add("gui/css/style.css");
+        ((Stage) this.getScene().getWindow()).setScene(scene);
     }
 
     @FXML
-    private void btnNieuweOefViewOnAction(ActionEvent event) {
-        /*OefeningenOverzichtController sc = new OefeningenOverzichtController(dc);
-        Scene scene = new Scene(sc, 1280, 720, false, SceneAntialiasing.BALANCED);
-        scene.getStylesheets().add("gui/css/style.css");
-        ((Stage) this.getScene().getWindow()).setScene(scene);*/
+    private void btnBeheerSessiesOnAction(ActionEvent event) {
+//        FrameSessiesController sc = new FrameSessiesController(dc);
+//        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
+//        scene.getStylesheets().add("gui/css/style.css");
+//        ((Stage) this.getScene().getWindow()).setScene(scene);
     }
+
 }

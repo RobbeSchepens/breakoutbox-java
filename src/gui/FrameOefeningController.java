@@ -6,14 +6,14 @@ import javafx.scene.layout.GridPane;
 public final class FrameOefeningController extends GridPane {
     
     DomeinControllerOefening dcc;
-    SidebarNavPanelController nav;
+    MenubarController nav;
     OverzichtPanelOefeningController overzichtPanelController;
     DetailPanelOefeningController oefeningDetailPanelController;
     DetailPanelOefeningListController oefeningDetailPanelListController;
     DetailPanelOefeningListDoelstellingController oefeningDetailPanelListDoelstellingController;
     
     public FrameOefeningController(DomeinControllerOefening dc) {
-        nav = new SidebarNavPanelController(dc);
+        nav = new MenubarController(dc);
         overzichtPanelController = new OverzichtPanelOefeningController(dc, this); // het scherm met de tabelview
         oefeningDetailPanelController = new DetailPanelOefeningController(dc, this);
         oefeningDetailPanelListController = new DetailPanelOefeningListController(dc, this);
@@ -25,10 +25,11 @@ public final class FrameOefeningController extends GridPane {
         overzichtPanelController.addOefeningObserver(oefeningDetailPanelListDoelstellingController); // het scherm met lisviews doels
         
         add(nav, 0, 0);
-        add(overzichtPanelController, 1, 0);
-        add(oefeningDetailPanelController, 2, 0);
-        add(oefeningDetailPanelListController, 1, 0);
-        add(oefeningDetailPanelListDoelstellingController, 1, 0);
+        setColumnSpan(nav, 2);
+        add(overzichtPanelController, 0, 1);
+        add(oefeningDetailPanelController, 1, 1);
+        add(oefeningDetailPanelListController, 0, 1);
+        add(oefeningDetailPanelListDoelstellingController, 0, 1);
         toonListview("cancel/init");
     }
     

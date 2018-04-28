@@ -2,7 +2,7 @@ package startup;
 
 import domein.DomeinControllerOefening;
 import domein.PDF;
-import gui.HoofdMenuController;
+import gui.FrameHomeController;
 import java.io.File;
 import java.util.Arrays;
 import javafx.application.Application;
@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class StartUpGuiClientApp extends Application {
-
+    
     @Override
     public void start(Stage primaryStage) {
 
@@ -27,13 +27,13 @@ public class StartUpGuiClientApp extends Application {
         }
         Arrays.stream(pdfLocation.listFiles()).forEach(File::delete);
 
-        HoofdMenuController root = new HoofdMenuController(new DomeinControllerOefening());
+        FrameHomeController root = new FrameHomeController(new DomeinControllerOefening());
 
-        Scene scene = new Scene(root, 1430, 720, false, SceneAntialiasing.BALANCED);
+        Scene scene = new Scene(root, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
 
         primaryStage.getIcons().add(new Image("gui/img/favicon.png"));
-        primaryStage.setTitle("Break Out Box");
+        primaryStage.setTitle("Break Out Box Applicatie");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

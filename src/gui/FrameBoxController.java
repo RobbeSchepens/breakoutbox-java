@@ -3,12 +3,11 @@ package gui;
 import domein.DomeinControllerOefening;
 import javafx.scene.layout.GridPane;
 
-public class FrameKlassenController extends GridPane {
-    
-    MenubarController nav;
-    OverzichtPanelKlasController overzichtPanelController;
+public class FrameBoxController extends GridPane {
 
-    FrameKlassenController(DomeinControllerOefening dc) {
+    MenubarController nav;
+    
+    public FrameBoxController(DomeinControllerOefening dc) {
         nav = new MenubarController(dc);
         //hoofdmenu = new HoofdMenuController(dc);
         add(nav, 0, 0);
