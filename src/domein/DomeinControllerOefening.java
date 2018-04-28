@@ -45,7 +45,7 @@ public class DomeinControllerOefening extends Observable {
     }
     
     public void delete(IOefening o) {
-        ob.getOefeningen().remove((Oefening) o);
+        ob.delete((Oefening) o);
     }
     
     
