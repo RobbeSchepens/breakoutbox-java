@@ -1,23 +1,23 @@
 package gui;
 
-import domein.DomeinController;
+import domein.DomeinControllerOefening;
 import javafx.scene.layout.GridPane;
 
 public final class FrameOefeningController extends GridPane {
     
+    DomeinControllerOefening dcc;
     SidebarNavPanelController nav;
     OverzichtPanelOefeningController overzichtPanelController;
     DetailPanelOefeningController oefeningDetailPanelController;
     DetailPanelOefeningListController oefeningDetailPanelListController;
-    DetailPanelOefeningLisDoelstellingController oefeningDetailPanelListDoelstellingController;
-    DomeinController dcc;
+    DetailPanelOefeningListDoelstellingController oefeningDetailPanelListDoelstellingController;
     
-    public FrameOefeningController(DomeinController dc) {
+    public FrameOefeningController(DomeinControllerOefening dc) {
         nav = new SidebarNavPanelController(dc);
         overzichtPanelController = new OverzichtPanelOefeningController(dc, this); // het scherm met de tabelview
         oefeningDetailPanelController = new DetailPanelOefeningController(dc, this);
         oefeningDetailPanelListController = new DetailPanelOefeningListController(dc, this);
-        oefeningDetailPanelListDoelstellingController = new DetailPanelOefeningLisDoelstellingController(dc, this);
+        oefeningDetailPanelListDoelstellingController = new DetailPanelOefeningListDoelstellingController(dc, this);
         
         dc.addObserver(overzichtPanelController);
         overzichtPanelController.addOefeningObserver(oefeningDetailPanelController); // het scherm met de datails van oefeningen
@@ -49,7 +49,6 @@ public final class FrameOefeningController extends GridPane {
                 oefeningDetailPanelListDoelstellingController.setVisible(false);
                 overzichtPanelController.setVisible(true);
                 break;
-
         }
     }
     
@@ -58,6 +57,5 @@ public final class FrameOefeningController extends GridPane {
         overzichtPanelController.clearSelectedItem();
         oefeningDetailPanelListController.nieuweOefening();
         oefeningDetailPanelListDoelstellingController.nieuweOefening();
-
     }
 }

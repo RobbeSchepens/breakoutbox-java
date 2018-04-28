@@ -1,6 +1,6 @@
 package gui;
 
-import domein.DomeinController;
+import domein.DomeinControllerOefening;
 import domein.KlasController;
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -14,19 +14,16 @@ import javafx.stage.Stage;
 
 public class SidebarNavPanelController extends VBox {
 
-    private DomeinController dc;
+    private DomeinControllerOefening dc;
     private KlasController kc;
     @FXML private HBox hbxOef;
     @FXML private HBox hbxSessies;
     @FXML private HBox hbxBoxes;
-    @FXML
-    private HBox hbxHome;
-    @FXML
-    private HBox hbxKlassen;
-    String nonactiveCss = "-fx-border-width: 0 2 1 0; -fx-background-color: white; -fx-border-color: #ccc;";
-    String activeCss = "-fx-border-width: 0 2 1 0; -fx-background-color: #006fe6; -fx-border-color: #006fe6;";
+    @FXML private HBox hbxHome;
+    @FXML private HBox hbxActies;
+    @FXML private HBox hbxKlassen;
 
-    public SidebarNavPanelController(DomeinController dcon) {
+    public SidebarNavPanelController(DomeinControllerOefening dcon) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("SidebarNavPanel.fxml"));
         loader.setRoot(this);
@@ -37,14 +34,20 @@ public class SidebarNavPanelController extends VBox {
             throw new RuntimeException(ex);
         }
         this.dc = dcon;
-        hbxOef.setStyle(nonactiveCss);
-        hbxOef.getChildren().get(0).setStyle("-fx-text-fill: #333;");
-        hbxSessies.setStyle(nonactiveCss);
-        hbxSessies.getChildren().get(0).setStyle("-fx-text-fill: #333;");
-        hbxBoxes.setStyle(nonactiveCss);
-        hbxBoxes.getChildren().get(0).setStyle("-fx-text-fill: #333;");
+        
+        String nonactiveCss = "-fx-border-width: 0 2 1 0; -fx-background-color: white; -fx-border-color: #ccc;";
+        String activeCss = "-fx-border-width: 0 2 1 0; -fx-background-color: #006fe6; -fx-border-color: #006fe6;";
+        
         hbxHome.setStyle(activeCss);
         hbxHome.getChildren().get(0).setStyle("--fx-text-fill: white;");
+        hbxOef.setStyle(nonactiveCss);
+        hbxOef.getChildren().get(0).setStyle("-fx-text-fill: #333;");
+        hbxBoxes.setStyle(nonactiveCss);
+        hbxBoxes.getChildren().get(0).setStyle("-fx-text-fill: #333;");
+        hbxSessies.setStyle(nonactiveCss);
+        hbxSessies.getChildren().get(0).setStyle("-fx-text-fill: #333;");
+        hbxActies.setStyle(nonactiveCss);
+        hbxActies.getChildren().get(0).setStyle("-fx-text-fill: #333;");
         hbxKlassen.setStyle(nonactiveCss);
         hbxKlassen.getChildren().get(0).setStyle("-fx-text-fill: #333;");
     }  
@@ -73,7 +76,6 @@ public class SidebarNavPanelController extends VBox {
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
 
-
     @FXML
     private void hbxHomeOnMouseClicked(MouseEvent event) {
         HoofdMenuController sc = new HoofdMenuController(dc);
@@ -86,5 +88,4 @@ public class SidebarNavPanelController extends VBox {
     private void hbxhbxActiesOnMouseClicked(MouseEvent event) {
         System.out.println("hi");
     }
-    
 }

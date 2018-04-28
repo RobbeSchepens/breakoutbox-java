@@ -1,6 +1,6 @@
 package gui;
 
-import domein.DomeinController;
+import domein.DomeinControllerOefening;
 import domein.IOefening;
 import domein.OefeningObserver;
 import domein.OefeningSubject;
@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Optional;
 import java.util.Set;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -23,12 +22,12 @@ import javafx.scene.image.ImageView;
 
 public final class OverzichtPanelOefeningController extends OverzichtPanelController<IOefening> implements OefeningSubject {
 
-    private DomeinController dc;
+    private DomeinControllerOefening dc;
     private FrameOefeningController fc;
     private Set<OefeningObserver> observers;
     private ChoiceBox<Vak> ddlVakken;
     
-    public OverzichtPanelOefeningController(DomeinController dcon, FrameOefeningController fc) {
+    public OverzichtPanelOefeningController(DomeinControllerOefening dcon, FrameOefeningController fc) {
         super(dcon);
         this.observers = new HashSet<>();
         this.dc = dcon;
@@ -125,13 +124,11 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
 
     @Override
     void filter(String newValue) {
-
         dc.veranderFilter(newValue);
     }
 
     @Override
     void initNieuw() {
         fc.initNieuweOefening();
-
     }
 }

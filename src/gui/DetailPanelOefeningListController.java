@@ -1,6 +1,6 @@
 package gui;
 
-import domein.DomeinController;
+import domein.DomeinControllerOefening;
 import domein.Groepsbewerking;
 import domein.IOefening;
 import domein.OefeningObserver;
@@ -11,24 +11,21 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 public class DetailPanelOefeningListController extends VBox implements OefeningObserver {
 
-    private DomeinController dc;
+    private DomeinControllerOefening dc;
     private FrameOefeningController fc;
     private List<Groepsbewerking> listGroepsBewerkingenTempAlle = new ArrayList<>();
     private List<Groepsbewerking> listGroepsBewerkingenTempGeselect = new ArrayList<>();
-
 
     @FXML private Label lblTitleLeftList;
     @FXML private Label lblAantalGeselecteerd;
@@ -38,7 +35,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
     @FXML private ListView<Groepsbewerking> lsvListAlle;
     @FXML private ListView<Groepsbewerking> lsvListGeselecteerde;
 
-    public DetailPanelOefeningListController(DomeinController dcon, FrameOefeningController fc) {
+    public DetailPanelOefeningListController(DomeinControllerOefening dcon, FrameOefeningController fc) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailPanelOefeningList.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -55,7 +52,6 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
         for (Groepsbewerking item : p) {
                 listGroepsBewerkingenTempAlle.add(item);
         }
-
 
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
         lblTitleLeftList.setText("Groepsbewerkingen");
@@ -79,7 +75,6 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
         lsvListGeselecteerde.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Groepsbewerking>() {
             @Override
             public void changed(ObservableValue<? extends Groepsbewerking> observable, Groepsbewerking oldValue, Groepsbewerking newValue) {
-
                 if (!(newValue == null)) {
                     listGroepsBewerkingenTempGeselect.remove(newValue);
                     Platform.runLater(() -> {
@@ -96,7 +91,6 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
 
     @Override
     public void update(IOefening oefening) {
-
         listGroepsBewerkingenTempAlle.clear();
         List<Groepsbewerking> p = dc.getGroepsbewerkingenList();
         for (Groepsbewerking item : p) {
@@ -120,7 +114,6 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
             }
         }
         listGroepsBewerkingenTempAlle.removeAll(h);
-
         listGroepsBewerkingenTempAlle.removeAll(listGroepsBewerkingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
         lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
@@ -131,7 +124,6 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
     }
     @FXML
     private void btnCancelOnAction(ActionEvent event) {
-
         fc.toonListview("cancel/init");
     }
 
@@ -145,12 +137,10 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
 
     @FXML
     private void lsvListAlleOnMouseClicked(MouseEvent event) {
-        
     }
 
     @FXML
     private void lsvListGeselecteerdeOnMouseClicked(MouseEvent event) {
-        
     }
 
     void nieuweOefening() {
@@ -160,7 +150,5 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
         lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
-
     }
-
 }

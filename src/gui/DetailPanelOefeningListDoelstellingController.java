@@ -1,20 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import domein.Doelstelling;
-import domein.DomeinController;
-
+import domein.DomeinControllerOefening;
 import domein.IOefening;
 import domein.OefeningObserver;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,43 +14,30 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-/**
- * FXML Controller class
- *
- * @author Daan
- */
-public class DetailPanelOefeningLisDoelstellingController extends VBox implements OefeningObserver {
+public class DetailPanelOefeningListDoelstellingController extends VBox implements OefeningObserver {
 
-    private DomeinController dc;
+    private DomeinControllerOefening dc;
     private FrameOefeningController fc;
     private List<Doelstelling> listDoelstellingenTempAlle = new ArrayList<>();
     private List<Doelstelling> listDoelstellingenTempGeselect = new ArrayList<>();
     private int geseleceerdeDoelstellingen = 0;
 
-    @FXML
-    private Label lblTitleLeftList;
-    @FXML
-    private Label lblAantalGeselecteerd;
-    @FXML
-    private Button btnDeselectAll;
-    @FXML
-    private Button btnCancel;
-    @FXML
-    private Button btnSubmit;
-    @FXML
-    private ListView<Doelstelling> lsvListAlle;
-    @FXML
-    private ListView<Doelstelling> lsvListGeselecteerde;
+    @FXML private Label lblTitleLeftList;
+    @FXML private Label lblAantalGeselecteerd;
+    @FXML private Button btnDeselectAll;
+    @FXML private Button btnCancel;
+    @FXML private Button btnSubmit;
+    @FXML private ListView<Doelstelling> lsvListAlle;
+    @FXML private ListView<Doelstelling> lsvListGeselecteerde;
 
-    public DetailPanelOefeningLisDoelstellingController(DomeinController dcon, FrameOefeningController fc) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailPanelOefeningLisDoelstelling.fxml"));
+    public DetailPanelOefeningListDoelstellingController(DomeinControllerOefening dcon, FrameOefeningController fc) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailPanelOefeningListDoelstelling.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -106,6 +85,7 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
             }
         });
     }
+    
     @Override
     public void update(IOefening oefening) {
         listDoelstellingenTempAlle.clear();
@@ -138,10 +118,10 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
         lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
     }
+    
     @FXML
     private void btnDeselectAllOnAction(ActionEvent event) {
         lsvListGeselecteerde.getSelectionModel().clearSelection();
-
     }
 
     @FXML
@@ -158,7 +138,6 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
     }
     @FXML
     private void lsvListAlleOnMouseClicked(MouseEvent event) {
-
     }
 
     @FXML
@@ -173,8 +152,4 @@ public class DetailPanelOefeningLisDoelstellingController extends VBox implement
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
         lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listDoelstellingenTempGeselect.size());
     }
-
-
-
-
 }

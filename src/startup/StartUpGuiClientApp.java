@@ -1,6 +1,6 @@
 package startup;
 
-import domein.DomeinController;
+import domein.DomeinControllerOefening;
 import domein.PDF;
 import gui.HoofdMenuController;
 import java.io.File;
@@ -27,8 +27,7 @@ public class StartUpGuiClientApp extends Application {
         }
         Arrays.stream(pdfLocation.listFiles()).forEach(File::delete);
 
-
-        HoofdMenuController root = new HoofdMenuController(new DomeinController());
+        HoofdMenuController root = new HoofdMenuController(new DomeinControllerOefening());
 
         Scene scene = new Scene(root, 1430, 720, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
@@ -40,11 +39,6 @@ public class StartUpGuiClientApp extends Application {
     }
 
     public static void main(String[] args) {
-        testconsole();
         launch(args);
-    }
-
-    private static void testconsole() {
-
     }
 }

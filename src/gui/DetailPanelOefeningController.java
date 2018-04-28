@@ -1,8 +1,6 @@
 package gui;
 
-import domein.Doelstelling;
-import domein.DomeinController;
-import domein.Groepsbewerking;
+import domein.DomeinControllerOefening;
 import domein.IOefening;
 import domein.OefeningObserver;
 import domein.PDF;
@@ -27,7 +25,7 @@ import javafx.stage.Stage;
 
 public class DetailPanelOefeningController extends VBox implements OefeningObserver {
 
-    private DomeinController dc;
+    private DomeinControllerOefening dc;
     private FrameOefeningController fc;
     private FileChooser fileChooserOpgave;
     private FileChooser fileChooserFeedback;
@@ -56,7 +54,7 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     @FXML private Label lblError;
     @FXML private Label lblSuccess;
 
-    public DetailPanelOefeningController(DomeinController dcon, FrameOefeningController fc) {
+    public DetailPanelOefeningController(DomeinControllerOefening dcon, FrameOefeningController fc) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("DetailPanelOefening.fxml"));
         loader.setRoot(this);
@@ -94,7 +92,6 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     }
     
     private void clearRender() {
-
         dc.setListDoelstellingenVanOefening(new ArrayList<>());
         dc.setListGroepsbewerkingenVanOefening(new ArrayList<>());
 
@@ -212,14 +209,11 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
 
     @FXML
     private void btnEditOnAction(ActionEvent event) {
-
         try {
             dc.pasOefeningAan(txfNaam.getText(), txfAntwoord.getText(), fileOpgave, fileFeedback, ddlVak.getSelectionModel().getSelectedItem());
             lblError.setText("");
             lblSuccess.setText("De oefening werd succesvol aangepast.");
             fc.toonListview("cancel/init");
-
-
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());

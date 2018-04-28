@@ -10,9 +10,8 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import jdk.nashorn.internal.objects.NativeRegExp;
 
-public class DomeinController extends Observable {
+public class DomeinControllerOefening extends Observable {
 
     // Oefening
     private Oefening huidigeOefening;
@@ -22,24 +21,22 @@ public class DomeinController extends Observable {
     private List<Vak> vakkenLijst;
     private List<Groepsbewerking> groepsbewerkingenLijst;
     private List<Doelstelling> doelstellingenLijst;
-
     private List<Groepsbewerking> listGroepsbewerkingenVanOefening = new ArrayList<>();
     private List<Doelstelling> listDoelstellingenVanOefening = new ArrayList<>();
-    // Box
-    //private Box huidigeBox; 
-    // Sessie
-    //private Sessie huidigeSessie;
-    public DomeinController() {
+    
+    public DomeinControllerOefening() {
         this.vakkenLijst = ob.geefVakkenJPA();
         this.groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
         this.doelstellingenLijst = ob.geefDoelstellingenJPA();
         sortAllLists();
     }
+    
     private void sortAllLists() {
         Collections.sort(vakkenLijst, Comparator.comparing(Vak::getNaam));
         Collections.sort(groepsbewerkingenLijst, Comparator.comparing(Groepsbewerking::toString));
         Collections.sort(doelstellingenLijst, Comparator.comparing(Doelstelling::getDoelstelling));
     }
+    
     // ================
     // == Oefeningen ==
     // ================
@@ -58,8 +55,7 @@ public class DomeinController extends Observable {
     public void setListDoelstellingenVanOefening(List<Doelstelling> listDoelstellingenVanOefening) {
         this.listDoelstellingenVanOefening = listDoelstellingenVanOefening;
     }
-
-
+    
     public boolean noOefeningen() {
         return getOefeningList().isEmpty();
     }
@@ -143,9 +139,8 @@ public class DomeinController extends Observable {
 
         setChanged();
         notifyObservers();
-
-
     }
+    
     public List<Vak> getVakkenList() {
         if (vakkenLijst == null) {
             vakkenLijst = ob.geefVakkenJPA();
@@ -161,31 +156,33 @@ public class DomeinController extends Observable {
         groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA(); // niet checken op null geeft fouten
         return groepsbewerkingenLijst;
     }
+    
     public ObservableList<Groepsbewerking> geefGroepsbewerkingen() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getGroepsbewerkingenList()));
     }
+    
     public ObservableList<Groepsbewerking> geefGroepsbewerkingenHuidigeOefening() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(huidigeOefening.getGroepsBewerkingen()));
     }
+    
     public ObservableList<Doelstelling> geefDoelstellingenHuidigeOefening() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(huidigeOefening.getDoelstellingen()));
     }
+    
     public List<Doelstelling> getDoelstellingenList() {
         doelstellingenLijst = ob.geefDoelstellingenJPA();// niet checken op null geeft fouten
         return doelstellingenLijst;
     }
+    
     public ObservableList<Doelstelling> geefDoelstellingen() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getDoelstellingenList()));
     }
 
-
     public void setGroepsbewerkingenOefening(ObservableList<Groepsbewerking> selectedItems) {
         huidigeOefening.setGroepsbewerkingen(selectedItems);
-        
     }
 
     public void setDoelstellingenOefening(ObservableList<Doelstelling> selectedItems) {
         huidigeOefening.setDoelstellingen(selectedItems);
     }
-
 }

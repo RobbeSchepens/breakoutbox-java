@@ -5,18 +5,13 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
-import static javax.persistence.FetchType.LAZY;
 import javax.persistence.Lob;
 import javax.persistence.Transient;
 
@@ -35,7 +30,6 @@ public class PDF implements Serializable {
     public PDF(File file, String name) {
         this.file = file;
         this.name = name;
-
     }
 
     @Id
@@ -60,7 +54,6 @@ public class PDF implements Serializable {
     }
 
     public void setDBFile(byte[] bytearray) {
-     
         try {
             String path = String.format("%s%s", FOLDERLOCATIE, getName());
             Files.write(Paths.get(path), bytearray).toFile();
@@ -83,5 +76,4 @@ public class PDF implements Serializable {
     public String toString() {
         return name;
     }
-
 }

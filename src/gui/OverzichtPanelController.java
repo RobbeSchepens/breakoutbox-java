@@ -1,27 +1,22 @@
 package gui;
 
-import domein.DomeinController;
-import domein.Vak;
+import domein.DomeinControllerOefening;
 import java.io.IOException;
 import java.util.Observer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.SceneAntialiasing;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public abstract class OverzichtPanelController <T> extends VBox implements Observer {
 
-    private DomeinController dc;
+    private DomeinControllerOefening dc;
     @FXML private Label lblTitleLeft, lblFilterOp;
     @FXML private TextField txfFilterOp;
     @FXML private TableView<T> tbvOverzicht;
@@ -30,7 +25,7 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
     @FXML private Button btnClearFilter;
     @FXML private HBox hbxFilter;
 
-    public OverzichtPanelController(DomeinController dcon) {
+    public OverzichtPanelController(DomeinControllerOefening dcon) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("OverzichtPanel.fxml"));
         loader.setRoot(this);
