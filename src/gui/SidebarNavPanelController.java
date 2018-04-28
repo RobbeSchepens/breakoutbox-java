@@ -38,10 +38,10 @@ public class SidebarNavPanelController extends VBox {
         String nonactiveCss = "-fx-border-width: 0 2 1 0; -fx-background-color: white; -fx-border-color: #ccc;";
         String activeCss = "-fx-border-width: 0 2 1 0; -fx-background-color: #006fe6; -fx-border-color: #006fe6;";
         
-        hbxHome.setStyle(activeCss);
-        hbxHome.getChildren().get(0).setStyle("--fx-text-fill: white;");
-        hbxOef.setStyle(nonactiveCss);
-        hbxOef.getChildren().get(0).setStyle("-fx-text-fill: #333;");
+        hbxHome.setStyle(nonactiveCss);
+        hbxHome.getChildren().get(0).setStyle("-fx-text-fill: #333;");
+        hbxOef.setStyle(activeCss);
+        hbxOef.getChildren().get(0).setStyle("-fx-text-fill: white;");
         hbxBoxes.setStyle(nonactiveCss);
         hbxBoxes.getChildren().get(0).setStyle("-fx-text-fill: #333;");
         hbxSessies.setStyle(nonactiveCss);
