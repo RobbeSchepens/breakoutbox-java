@@ -73,16 +73,10 @@ public class Oefening implements IOefening, Serializable {
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
         setGroepsbewerkingen(groepsbewerkingen);
         setVak(vak);
-        try {
-            setOpgave(new PDF(opgave, String.format("%s", opgave.getName())));
-        } catch (Exception e) {
-            throw new IllegalArgumentException("selecteer een opgave");
-        }
-        try {
-            setFeedback(new PDF(feedback, String.format("%s", feedback.getName())));
-        } catch (Exception e) {
-            throw new IllegalArgumentException("selecteer een feedback");
-        }
+
+        setOpgave(opgave);
+
+        setFeedback(feedback);
 
         setAntwoord(antwoord);
         setNaam(naam);
@@ -170,11 +164,11 @@ public class Oefening implements IOefening, Serializable {
         return opgave;
     }
 
-    public void setOpgave(PDF opgave) {
+    public void setOpgave(File opgave) {
         if (opgave == null) {
             throw new IllegalArgumentException("Selecteer een PDF om toe te voegen als opgave.");
         }
-        this.opgave = opgave;
+        this.opgave = new PDF(opgave, String.format("%s", opgave.getName()));
     }
 
     @Override
@@ -182,11 +176,11 @@ public class Oefening implements IOefening, Serializable {
         return feedback;
     }
 
-    public void setFeedback(PDF feedback) {
+    public void setFeedback(File feedback) {
         if (feedback == null) {
             throw new IllegalArgumentException("Selecteer een PDF om toe te voegen als feedback.");
         }
-        this.feedback = feedback;
+        this.feedback = new PDF(feedback, String.format("%s", feedback.getName()));
     }
 
     @Override
@@ -234,8 +228,8 @@ public class Oefening implements IOefening, Serializable {
         setNaam(naam);
         setAntwoord(antwoord);
         setVak(vak);
-        setOpgave(new PDF(opgave, opgave.getName()));
-        setFeedback(new PDF(feedback, feedback.getName()));
+        setOpgave(opgave);
+        setFeedback(feedback);
         setGroepsbewerkingen(groepsbewerkingen);
         setDoelstellingen(doelstellingen);
     }
@@ -248,8 +242,8 @@ public class Oefening implements IOefening, Serializable {
         setNaam(naam);
         setAntwoord(antwoord);
         setVak(vak);
-        setOpgave(new PDF(opgave, opgaveNaam));
-        setFeedback(new PDF(feedback, feedbackNaam));
+        setOpgave(opgave);
+        setFeedback(feedback);
         setGroepsbewerkingen(groepsbewerkingen);
         setDoelstellingen(doelstellingen);
     }
