@@ -14,9 +14,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public abstract class OverzichtPanelController <T> extends VBox implements Observer {
+public abstract class OverzichtPanelController<T, E> extends VBox implements Observer {
 
-    private DomeinControllerOefening dc;
+    private E controller;
+
     @FXML private Label lblTitleLeft, lblFilterOp;
     @FXML private TextField txfFilterOp;
     @FXML private TableView<T> tbvOverzicht;
@@ -25,7 +26,7 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
     @FXML private Button btnClearFilter;
     @FXML private HBox hbxFilter;
 
-    public OverzichtPanelController(DomeinControllerOefening dcon) {
+    public OverzichtPanelController(E dcon) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("OverzichtPanel.fxml"));
         loader.setRoot(this);
@@ -36,7 +37,7 @@ public abstract class OverzichtPanelController <T> extends VBox implements Obser
             throw new RuntimeException(ex);
         }
         
-        this.dc = dcon;
+        this.controller = dcon;
         
         tbvOverzicht.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if(newValue != null){

@@ -20,7 +20,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-public final class OverzichtPanelOefeningController extends OverzichtPanelController<IOefening> implements OefeningSubject {
+public final class OverzichtPanelOefeningController extends OverzichtPanelController<IOefening, DomeinControllerOefening> implements OefeningSubject {
 
     private DomeinControllerOefening dc;
     private FrameOefeningController fc;
