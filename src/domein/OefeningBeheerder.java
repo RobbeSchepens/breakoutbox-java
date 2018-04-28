@@ -3,6 +3,8 @@ package domein;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -17,14 +19,15 @@ public final class OefeningBeheerder {
     public final String PERSISTENCE_UNIT_NAME = "breakoutboxPU";
     private EntityManager em;
     private EntityManagerFactory emf;
-    private Map<String, Oefening> oefeningenMap = new HashMap<>();
-    private OefeningDao oefRepo;
+    private OefeningDaoJpa oefRepo;
 
     //extra repos
     private GenericDao<Vak> vakRepo;
     private GenericDao<Groepsbewerking> groepsbewerkingRepo;
     private GenericDao<Doelstelling> doeslstellingRepo;
 
+    ObservableList<? extends IOefening> oefeningen;
+    
     public OefeningBeheerder() {
 
         initializePersistentie();
@@ -33,8 +36,20 @@ public final class OefeningBeheerder {
         setGroepsbewerkingRepo(new GenericDaoJpa(Groepsbewerking.class));
         setDoeslstellingRepo(new GenericDaoJpa(Doelstelling.class));
     }
+    
+    ObservableList<? extends IOefening> getOefeningen() {
+        if (oefeningen == null)
+            oefeningen = FXCollections.observableArrayList(oefRepo.findAll());
+        return oefeningen;
+    }
+    
+    void delete(Oefening o) {
+        oefRepo.startTransaction();
+        getOefeningen().remove(o);
+        oefRepo.commitTransaction();
+    }
 
-    public void setOefRepo(OefeningDao mock) {
+    public void setOefRepo(OefeningDaoJpa mock) {
         oefRepo = mock;
     }
 

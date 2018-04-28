@@ -68,7 +68,7 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
     
     private void renderTable() {
         // Set items for tableview
-        getTbvOverzicht().setItems(dc.geefOefeningenFiltered());
+        getTbvOverzicht().setItems(dc.geefOefeningenNew());
         
         // Create new columns based on current class
         TableColumn<IOefening, String> col1 = new TableColumn<>("Naam");
@@ -99,7 +99,7 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-                dc.verwijderOefening(getTbvOverzicht().getSelectionModel().getSelectedItem());
+                dc.delete(getTbvOverzicht().getSelectionModel().getSelectedItem());
             }
         }
     }

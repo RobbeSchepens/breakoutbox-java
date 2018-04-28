@@ -40,6 +40,16 @@ public class DomeinControllerOefening extends Observable {
     // ================
     // == Oefeningen ==
     // ================
+    public ObservableList<IOefening> geefOefeningenNew() {
+        return (ObservableList<IOefening>)ob.getOefeningen();
+    }
+    
+    public void delete(IOefening o) {
+        ob.getOefeningen().remove((Oefening) o);
+    }
+    
+    
+    
     private List<Oefening> getOefeningList() {
         if (oefeningLijst == null) {
             oefeningLijst = ob.geefOefeningenJPA();

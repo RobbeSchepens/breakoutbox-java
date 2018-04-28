@@ -14,17 +14,17 @@ public class GenericDaoJpa<T> implements GenericDao<T> {
     public GenericDaoJpa(Class<T> type) {
         this.type = type;
     }
-    public static void closePersistency() {
+    public void closePersistency() {
         em.close();
         emf.close();
     }
-    public static void startTransaction() {
+    public void startTransaction() {
         em.getTransaction().begin();
     }
-    public static void commitTransaction() {
+    public void commitTransaction() {
         em.getTransaction().commit();
     }
-    public static void rollbackTransaction() {
+    public void rollbackTransaction() {
         em.getTransaction().rollback();
     }
 
@@ -32,8 +32,6 @@ public class GenericDaoJpa<T> implements GenericDao<T> {
     public List<T> findAll() {
         return em.createQuery("select entity from "
                 + type.getName() + " entity", type).getResultList();
-        /*return em.createNamedQuery(type.getName()+ 
-        ".findAll", type).getResultList();*/
     }
 
     @Override

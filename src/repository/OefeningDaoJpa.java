@@ -3,13 +3,28 @@ package repository;
 import domein.Oefening;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
-import javax.persistence.Query;
-import static repository.GenericDaoJpa.em;
 
 public class OefeningDaoJpa extends GenericDaoJpa<Oefening> implements OefeningDao {
 
     public OefeningDaoJpa() {
         super(Oefening.class);
+    }
+    
+    @Override
+    public void closePersistency() {
+        super.closePersistency();
+    }
+    @Override
+    public void startTransaction() {
+        super.startTransaction();
+    }
+    @Override
+    public void commitTransaction() {
+        super.commitTransaction();
+    }
+    @Override
+    public void rollbackTransaction() {
+        super.rollbackTransaction();
     }
 
     @Override
