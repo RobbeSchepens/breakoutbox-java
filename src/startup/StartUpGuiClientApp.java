@@ -2,6 +2,7 @@ package startup;
 
 import domein.DomeinController;
 import domein.PDF;
+import gui.FrameHomeController;
 import gui.HoofdMenuController;
 import java.io.File;
 import java.util.Arrays;
@@ -28,7 +29,7 @@ public class StartUpGuiClientApp extends Application {
         Arrays.stream(pdfLocation.listFiles()).forEach(File::delete);
 
 
-        HoofdMenuController root = new HoofdMenuController(new DomeinController());
+        FrameHomeController root = new FrameHomeController(new DomeinController());
 
         Scene scene = new Scene(root, 1430, 720, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
