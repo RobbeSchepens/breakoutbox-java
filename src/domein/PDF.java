@@ -30,16 +30,10 @@ public class PDF implements Serializable {
     public PDF() {
     }
 
-    public PDF(File file, String name, String naamOef, String typeOef) {
+    public PDF(File file, String name) {
         this.file = file;
         this.name = name;
         this.naamOef = "_" + naamOef;
-        if (typeOef.toLowerCase().equals("_feedback_")) {
-            typeFile = "Feedback";
-        }
-        if (typeOef.toLowerCase().equals("_opgave")) {
-            typeFile = "Opgave";
-        }
 
     }
 
@@ -67,6 +61,7 @@ public class PDF implements Serializable {
 
     public void setDBFile(byte[] bytearray) {
         try {
+
             String path = String.format("%s%s", FOLDERLOCATIE, getName());
             Files.write(Paths.get(path), bytearray).toFile();
             this.file = new File(String.format("%s%s%s%s", FOLDERLOCATIE, getName(), naamOef, typeFile));
