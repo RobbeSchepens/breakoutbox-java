@@ -58,14 +58,14 @@ public class Oefening implements IOefening, Serializable {
 
     public Oefening() {
     }
-    
-    public Oefening(String naam, String antwoord, Vak vak, 
-            File opgave, String opgaveNaam, 
+
+    public Oefening(String naam, String antwoord, Vak vak,
+            File opgave, String opgaveNaam,
             File feedback, String feedbackNaam,
-            List<Groepsbewerking> groepsbewerkingen, 
+            List<Groepsbewerking> groepsbewerkingen,
             List<Doelstelling> doelstellingen) {
-        
-        roepSettersAan(naam, antwoord, vak, opgave, opgaveNaam, 
+
+        roepSettersAan(naam, antwoord, vak, opgave, opgaveNaam,
                 feedback, feedbackNaam, groepsbewerkingen, doelstellingen);
     }
 
@@ -73,11 +73,18 @@ public class Oefening implements IOefening, Serializable {
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
         setGroepsbewerkingen(groepsbewerkingen);
         setVak(vak);
-        String pdfName = String.format("%s", opgave.getName());
-        setOpgave(new PDF(opgave, pdfName));
+        try {
+            setOpgave(new PDF(opgave, String.format("%s", opgave.getName())));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("selecteer een opgave");
+        }
+        try {
+            setFeedback(new PDF(feedback, String.format("%s", feedback.getName())));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("selecteer een feedback");
+        }
+
         setAntwoord(antwoord);
-        pdfName = String.format("%s",  feedback.getName());
-        setFeedback(new PDF(feedback, pdfName));
         setNaam(naam);
         setDoelstellingen(doelstellingen);
     }
@@ -111,18 +118,22 @@ public class Oefening implements IOefening, Serializable {
     }
 
     private void controleerNaam(String naam) {
-        if (naam == null || naam.trim().isEmpty())
+        if (naam == null || naam.trim().isEmpty()) {
             throw new IllegalArgumentException("Er werd geen naam opgegeven.");
-        if(naam.length() < 3)
+        }
+        if (naam.length() < 3) {
             throw new NaamTeKortException("Naam moet minstens 3 tekens lang zijn!");
-        if(naam.length() > 40)
+        }
+        if (naam.length() > 40) {
             throw new NaamTeLangException("Naam mag maximum 40 karakters bevatten!");
-        
+        }
+
         // Deze karakters mogen, alle andere niet. 
         Pattern p = Pattern.compile("[^A-Za-z0-9._\\-<>+?!=$%&*()| ]");
         Matcher m = p.matcher(naam);
-        if (m.find())
+        if (m.find()) {
             throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in de naam van de oefening. Deze mogen wel: spatie ._-<>+?!=$%&*()|");
+        }
     }
 
     @Override
@@ -136,18 +147,22 @@ public class Oefening implements IOefening, Serializable {
     }
 
     private void controleerAntwoord(String antwoord) {
-        if (antwoord == null || antwoord.equals(""))
+        if (antwoord == null || antwoord.equals("")) {
             throw new IllegalArgumentException("Er werd geen antwoord opgegeven.");
-        if(antwoord.length() < 1)
+        }
+        if (antwoord.length() < 1) {
             throw new NaamTeKortException("Antwoord moet minstens 3 tekens lang zijn!");
-        if(antwoord.length() > 40)
+        }
+        if (antwoord.length() > 40) {
             throw new NaamTeLangException("Antwoord mag maximum 40 karakters bevatten!");
-        
+        }
+
         // Deze karakters mogen, alle andere niet. 
         Pattern p = Pattern.compile("[^A-Za-z0-9/=+\\-$%&*()| €£]");
         Matcher m = p.matcher(antwoord);
-        if (m.find())
+        if (m.find()) {
             throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in het antwoord van de oefening. Deze mogen wel: spatie /=+\\-$%&*()|€£");
+        }
     }
 
     @Override
@@ -192,7 +207,7 @@ public class Oefening implements IOefening, Serializable {
     }
 
     public void setGroepsbewerkingen(List<Groepsbewerking> groepsbewerkingen) {
-        if (groepsbewerkingen == null) {
+        if (groepsbewerkingen == null || groepsbewerkingen.isEmpty()) {
             throw new IllegalArgumentException("Er werden geen groepsbewerkingen geselecteerd.");
         }
         this.groepsbewerkingen = groepsbewerkingen;
@@ -204,7 +219,7 @@ public class Oefening implements IOefening, Serializable {
     }
 
     public void setDoelstellingen(List<Doelstelling> doelstellingen) {
-        if (doelstellingen == null) {
+        if (doelstellingen == null || doelstellingen.isEmpty()) {
             throw new IllegalArgumentException("Er werden geen doelstellingen geselecteerd.");
         }
         this.doelstellingen = doelstellingen;
@@ -226,9 +241,9 @@ public class Oefening implements IOefening, Serializable {
     }
 
     void roepSettersAan(String naam, String antwoord, Vak vak,
-            File opgave, String opgaveNaam, 
-            File feedback, String feedbackNaam, 
-            List<Groepsbewerking> groepsbewerkingen, 
+            File opgave, String opgaveNaam,
+            File feedback, String feedbackNaam,
+            List<Groepsbewerking> groepsbewerkingen,
             List<Doelstelling> doelstellingen) {
         setNaam(naam);
         setAntwoord(antwoord);
