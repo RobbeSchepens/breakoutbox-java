@@ -168,7 +168,7 @@ public class Oefening implements IOefening, Serializable {
         if (opgave == null) {
             throw new IllegalArgumentException("Selecteer een PDF om toe te voegen als opgave.");
         }
-        this.opgave = new PDF(opgave, String.format("%s", opgave.getName()));
+        this.opgave = new PDF(opgave, String.format("%s", opgave.getName()), getNaam(), "opgave");
     }
 
     @Override
@@ -180,7 +180,7 @@ public class Oefening implements IOefening, Serializable {
         if (feedback == null) {
             throw new IllegalArgumentException("Selecteer een PDF om toe te voegen als feedback.");
         }
-        this.feedback = new PDF(feedback, String.format("%s", feedback.getName()));
+        this.feedback = new PDF(feedback, String.format("%s", feedback.getName()), getNaam(), "feedback");
     }
 
     @Override

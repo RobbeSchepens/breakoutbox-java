@@ -21,15 +21,26 @@ public class PDF implements Serializable {
 
     private String name;
 
+    private String naamOef = "";
+    private String typeFile = "";
+
     private File file;
     public static String FOLDERLOCATIE = System.getProperty("user.dir") +File.separator+ "PDFs" +File.separator;
 
     public PDF() {
     }
 
-    public PDF(File file, String name) {
+    public PDF(File file, String name, String naamOef, String typeOef) {
         this.file = file;
         this.name = name;
+        this.naamOef = "_" + naamOef;
+        if (typeOef.toLowerCase().equals("_feedback_")) {
+            typeFile = "Feedback";
+        }
+        if (typeOef.toLowerCase().equals("_opgave")) {
+            typeFile = "Opgave";
+        }
+
     }
 
     @Id
@@ -44,6 +55,7 @@ public class PDF implements Serializable {
     @Lob
     @Column
     public byte[] getDBFile() {
+
         byte[] fileInBytes = null;
         try {
             fileInBytes = Files.readAllBytes(file.toPath());
@@ -57,7 +69,7 @@ public class PDF implements Serializable {
         try {
             String path = String.format("%s%s", FOLDERLOCATIE, getName());
             Files.write(Paths.get(path), bytearray).toFile();
-            this.file = new File(String.format("%s%s", FOLDERLOCATIE, getName()));
+            this.file = new File(String.format("%s%s%s%s", FOLDERLOCATIE, getName(), naamOef, typeFile));
         } catch (IOException ex) {
             Logger.getLogger(PDF.class.getName()).log(Level.SEVERE, null, ex);
         }
