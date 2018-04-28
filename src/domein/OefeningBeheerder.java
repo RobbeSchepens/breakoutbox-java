@@ -26,15 +26,36 @@ public final class OefeningBeheerder {
     private GenericDao<Groepsbewerking> groepsbewerkingRepo;
     private GenericDao<Doelstelling> doeslstellingRepo;
 
-    ObservableList<? extends IOefening> oefeningen;
+    private ObservableList<? extends IOefening> oefeningen;
     
     public OefeningBeheerder() {
-
         initializePersistentie();
         setOefRepo(new OefeningDaoJpa());
         setVakRepo(new GenericDaoJpa(Vak.class));
         setGroepsbewerkingRepo(new GenericDaoJpa(Groepsbewerking.class));
         setDoeslstellingRepo(new GenericDaoJpa(Doelstelling.class));
+    }
+
+    public void setOefRepo(OefeningDaoJpa mock) {
+        oefRepo = mock;
+    }
+
+    public void setVakRepo(GenericDao<Vak> mock) {
+        vakRepo = mock;
+    }
+
+    public void setGroepsbewerkingRepo(GenericDao<Groepsbewerking> mock) {
+        groepsbewerkingRepo = mock;
+    }
+
+    public void setDoeslstellingRepo(GenericDao<Doelstelling> mock) {
+        doeslstellingRepo = mock;
+    }
+
+    private void initializePersistentie() {
+        openPersistentie(); 
+        OefeningData od = new OefeningData(this);
+        od.populeerData();
     }
     
     ObservableList<? extends IOefening> getOefeningen() {
@@ -48,28 +69,11 @@ public final class OefeningBeheerder {
         getOefeningen().remove(o);
         oefRepo.commitTransaction();
     }
-
-    public void setOefRepo(OefeningDaoJpa mock) {
-        oefRepo = mock;
-    }
-
-    public void setVakRepo(GenericDao<Vak> mock) {
-        vakRepo = mock;
-    }
-
-    public void setGroepsbewerkingRepo(GenericDao<Groepsbewerking> mock) {
-        groepsbewerkingRepo = mock;
-
-    }
-
-    public void setDoeslstellingRepo(GenericDao<Doelstelling> mock) {
-        doeslstellingRepo = mock;
-    }
-
-    private void initializePersistentie() {
-        openPersistentie();
-        OefeningData od = new OefeningData(this);
-        od.populeerData();
+    
+    void add(Oefening o) {
+        oefRepo.startTransaction();
+        ((ObservableList<Oefening>)getOefeningen()).add(o);
+        oefRepo.commitTransaction();
     }
 
     private void openPersistentie() {

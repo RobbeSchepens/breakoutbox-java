@@ -14,6 +14,7 @@ public class GenericDaoJpa<T> implements GenericDao<T> {
     public GenericDaoJpa(Class<T> type) {
         this.type = type;
     }
+    
     public void closePersistency() {
         em.close();
         emf.close();
