@@ -6,20 +6,19 @@
 package gui;
 
 import domein.DomeinController;
-import javafx.scene.layout.GridPane;
 
 /**
  *
  * @author Daan
  */
-public class FrameHomeController extends GridPane {
+public class FrameHomeController {
 
     SidebarNavPanelController nav;
 
 
     public FrameHomeController(DomeinController dc) {
         nav = new SidebarNavPanelController(dc);
-        add(nav, 0, 0);
+
     }
 
 }
