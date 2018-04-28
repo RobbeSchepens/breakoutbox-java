@@ -1,8 +1,6 @@
 package domein;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.persistence.EntityManager;
@@ -66,12 +64,14 @@ public final class OefeningBeheerder {
     
     void delete(Oefening o) {
         oefRepo.startTransaction();
+        oefRepo.delete(o);
         getOefeningen().remove(o);
         oefRepo.commitTransaction();
     }
     
     void add(Oefening o) {
         oefRepo.startTransaction();
+        oefRepo.insert(o);
         ((ObservableList<Oefening>)getOefeningen()).add(o);
         oefRepo.commitTransaction();
     }

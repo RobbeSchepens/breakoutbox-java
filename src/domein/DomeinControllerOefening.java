@@ -15,7 +15,7 @@ public class DomeinControllerOefening extends Observable {
 
     // Oefening
     private Oefening huidigeOefening;
-    private OefeningBeheerder ob = new OefeningBeheerder();
+    private OefeningBeheerder ob;
     private List<Oefening> oefeningLijst;
     private FilteredList<IOefening> filteredOefeningList;
     private List<Vak> vakkenLijst;
@@ -25,6 +25,7 @@ public class DomeinControllerOefening extends Observable {
     private List<Doelstelling> listDoelstellingenVanOefening = new ArrayList<>();
     
     public DomeinControllerOefening() {
+        this.ob = new OefeningBeheerder();
         this.vakkenLijst = ob.geefVakkenJPA();
         this.groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();
         this.doelstellingenLijst = ob.geefDoelstellingenJPA();
@@ -124,14 +125,15 @@ public class DomeinControllerOefening extends Observable {
         if (ob.geefOefeningByNaamJpa(naam) != null) {
             throw new IllegalArgumentException("Er bestaat al een oefening met deze naam.");
         }
-        System.out.println("lists nieuwe oef");
-        System.out.println(listGroepsbewerkingenVanOefening);
+        //System.out.println("lists nieuwe oef");
+        //System.out.println(listGroepsbewerkingenVanOefening);
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, listGroepsbewerkingenVanOefening, listDoelstellingenVanOefening);
-        getOefeningList().add(oefening);
-        ob.addOefening(oefening);
-        filteredOefeningList = new FilteredList<>(geefOefeningen(), p -> true); // Temp fix for tbv not resetting
-        setChanged();
-        notifyObservers();
+        //getOefeningList().add(oefening);
+        ob.add(oefening);
+        //ob.addOefening(oefening);
+        //filteredOefeningList = new FilteredList<>(geefOefeningen(), p -> true); // Temp fix for tbv not resetting
+        //setChanged();
+        //notifyObservers();
     }
 
     public void pasOefeningAan(String naam, String antwoord, File opgave, File feedback, Vak vak) {
