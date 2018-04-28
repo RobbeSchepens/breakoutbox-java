@@ -26,7 +26,7 @@ public class SidebarNavPanelController extends VBox {
     String nonactiveCss = "-fx-border-width: 0 2 1 0; -fx-background-color: white; -fx-border-color: #ccc;";
     String activeCss = "-fx-border-width: 0 2 1 0; -fx-background-color: #006fe6; -fx-border-color: #006fe6;";
 
-    public SidebarNavPanelController(DomeinController dc) {
+    public SidebarNavPanelController(DomeinController dcon) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("SidebarNavPanel.fxml"));
         loader.setRoot(this);
@@ -36,7 +36,7 @@ public class SidebarNavPanelController extends VBox {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-        this.dc = dc;
+        this.dc = dcon;
         hbxOef.setStyle(nonactiveCss);
         hbxOef.getChildren().get(0).setStyle("-fx-text-fill: #333;");
         hbxSessies.setStyle(nonactiveCss);
