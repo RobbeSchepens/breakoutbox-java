@@ -54,10 +54,10 @@ public class SidebarNavPanelController extends VBox {
 
     @FXML
     private void hbxOefOnMouseClicked(MouseEvent event) {
-        FrameOefeningController sc = new FrameOefeningController(dc);
+        /*FrameOefeningController sc = new FrameOefeningController(dc);
         Scene scene = new Scene(sc, 1430, 720, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
-        ((Stage) this.getScene().getWindow()).setScene(scene);
+        ((Stage) this.getScene().getWindow()).setScene(scene);*/
     }
 
     @FXML
@@ -70,18 +70,18 @@ public class SidebarNavPanelController extends VBox {
 
     @FXML
     private void hbxKlassenOnMouseClicked(MouseEvent event) {
-        FrameKlassenController sc = new FrameKlassenController(dc);
+        /* FrameKlassenController sc = new FrameKlassenController(dc);
         Scene scene = new Scene(sc, 1430, 720, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
-        ((Stage) this.getScene().getWindow()).setScene(scene);
+        ((Stage) this.getScene().getWindow()).setScene(scene);*/
     }
 
     @FXML
     private void hbxHomeOnMouseClicked(MouseEvent event) {
-        HoofdMenuController sc = new HoofdMenuController(dc);
+        /* HoofdMenuController sc = new HoofdMenuController(dc);
         Scene scene = new Scene(sc, 1430, 720, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
-        ((Stage) this.getScene().getWindow()).setScene(scene);
+        ((Stage) this.getScene().getWindow()).setScene(scene);*/
     }
 
     @FXML

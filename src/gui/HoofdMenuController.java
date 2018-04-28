@@ -46,18 +46,18 @@ public class HoofdMenuController extends GridPane {
 
     @FXML
     private void btnBeheerOefOnAction(ActionEvent event) {
-        FrameOefeningController sc = new FrameOefeningController(dc);
+        /* FrameOefeningController sc = new FrameOefeningController(dc);
         Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
-        ((Stage) this.getScene().getWindow()).setScene(scene);
+        ((Stage) this.getScene().getWindow()).setScene(scene);*/
     }
 
     @FXML
     private void btnBeheerBobOnAction(ActionEvent event) {
-        FrameBoxController sc = new FrameBoxController(dc);
+        /* FrameBoxController sc = new FrameBoxController(dc);
         Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
-        ((Stage) this.getScene().getWindow()).setScene(scene);
+        ((Stage) this.getScene().getWindow()).setScene(scene);*/
     }
 
     @FXML

@@ -1,6 +1,8 @@
 package gui;
 
+import domein.BoxController;
 import domein.DomeinControllerOefening;
+import domein.KlasController;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,8 @@ public class MenubarController extends HBox{
 
     public static EnumMenu nextpage = EnumMenu.HOME;
     private DomeinControllerOefening dc;
+    private BoxController bc;
+    private KlasController kc;
     @FXML private HBox hbxHome;
     @FXML private HBox hbxOef;
     @FXML private HBox hbxBoxes;
@@ -21,7 +25,7 @@ public class MenubarController extends HBox{
     @FXML private HBox hbxActies;
     @FXML private HBox hbxKlassen;
     
-    public MenubarController(DomeinControllerOefening dcon) {
+    public MenubarController(DomeinControllerOefening dcon, KlasController kc, BoxController bc) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("Menubar.fxml"));
         loader.setRoot(this);
@@ -32,6 +36,8 @@ public class MenubarController extends HBox{
             throw new RuntimeException(ex);
         }
         this.dc = dcon;
+        this.bc = bc;
+        this.kc = kc;
         
         String nonactiveCss = "-fx-background-color: white; -fx-border-color: #ccc;";
         String nonactiveCssLabel = "-fx-text-fill: #333;";
@@ -75,8 +81,12 @@ public class MenubarController extends HBox{
     
     @FXML
     private void hbxHomeOnMouseClicked(MouseEvent event) {
+        if (dc == null) { // gebeurt nooit momenteel
+            new DomeinControllerOefening();
+        }
+
         nextpage = EnumMenu.HOME;
-        FrameHomeController sc = new FrameHomeController(dc);
+        FrameHomeController sc = new FrameHomeController(dc, kc, bc);
         Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
@@ -84,8 +94,11 @@ public class MenubarController extends HBox{
 
     @FXML
     private void hbxOefOnMouseClicked(MouseEvent event) {
+        if (dc == null) { // gebeurt nooit momenteel
+            new DomeinControllerOefening();
+        }
         nextpage = EnumMenu.OEFENING;
-        FrameOefeningController sc = new FrameOefeningController(dc);
+        FrameOefeningController sc = new FrameOefeningController(dc, kc, bc);
         Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
@@ -93,8 +106,11 @@ public class MenubarController extends HBox{
 
     @FXML
     private void hbxBoxesOnMouseClicked(MouseEvent event) {
+        if (bc == null) {
+            new BoxController();
+        }
         nextpage = EnumMenu.BOX;
-        FrameBoxController sc = new FrameBoxController(dc);
+        FrameBoxController sc = new FrameBoxController(dc, kc, bc);
         Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
@@ -110,8 +126,11 @@ public class MenubarController extends HBox{
 
     @FXML
     private void hbxKlassenOnMouseClicked(MouseEvent event) {
+        if (kc == null) {
+            new KlasController();
+        }
         nextpage = EnumMenu.KLAS;
-        FrameKlassenController sc = new FrameKlassenController(dc);
+        FrameKlassenController sc = new FrameKlassenController(dc, kc, bc);
         Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);

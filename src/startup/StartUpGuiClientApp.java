@@ -27,7 +27,7 @@ public class StartUpGuiClientApp extends Application {
         }
         Arrays.stream(pdfLocation.listFiles()).forEach(File::delete);
 
-        FrameHomeController root = new FrameHomeController(new DomeinControllerOefening());
+        FrameHomeController root = new FrameHomeController(new DomeinControllerOefening(), null, null);
 
         Scene scene = new Scene(root, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
