@@ -1,12 +1,9 @@
 package gui;
 
-import domein.DomeinControllerOefening;
 import domein.KlasController;
 import domein.IKlas;
-import domein.IOefening;
-import java.util.Observable;
 import javafx.event.ActionEvent;
-
+import javafx.scene.control.TableColumn;
 
 public class OverzichtPanelKlasController extends OverzichtPanelController<IKlas, KlasController> {
 
@@ -27,14 +24,27 @@ public class OverzichtPanelKlasController extends OverzichtPanelController<IKlas
 
     @Override
     <T> void implementTableviewListener(T newValue) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        kc.setHuidigeKlas((IKlas) newValue);
+        //notifyObservers();
     }
 
     @Override
     void renderContent() {
         setLblTitleLeftText("Overzicht Klassen");
         setLblFilterOpText("Filter op klas:");
-
+        renderTable();
+    }
+    
+    private void renderTable() {
+        // Set items for tableview
+        getTbvOverzicht().setItems(kc.geefKlassen());
+        
+        // Create new columns based on current class
+        TableColumn<IKlas, String> col1 = new TableColumn<>("Naam");
+        col1.setCellValueFactory(v -> v.getValue().naamProperty());
+        
+        // Add the columns to the tableview
+        getTbvOverzicht().getColumns().setAll(col1);
     }
 
     @Override
@@ -46,13 +56,5 @@ public class OverzichtPanelKlasController extends OverzichtPanelController<IKlas
     void initNieuw() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public void update(Observable o, Object o1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-    
     
 }

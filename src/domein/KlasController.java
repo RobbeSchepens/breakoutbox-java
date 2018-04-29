@@ -1,16 +1,22 @@
 package domein;
 
+import javafx.collections.ObservableList;
+
 public class KlasController {
 
+    private Klas huidigeKlas;
     private KlasBeheerder kb = new KlasBeheerder();
 
     public KlasController() {
         this.kb = new KlasBeheerder();
-        test();
+    }
+    
+    public ObservableList<IKlas> geefKlassen() {
+        return (ObservableList<IKlas>)kb.getKlassen();
     }
 
-    private void test() {
-        System.out.println(kb.getKlassen());
+    public void setHuidigeKlas(IKlas klas) {
+        this.huidigeKlas = (Klas) klas;
     }
     
 }
