@@ -6,7 +6,9 @@
 package gui;
 
 import domein.BoxController;
+import domein.DomeinControllerOefening;
 import domein.IBox;
+import domein.KlasController;
 import java.util.Observable;
 import javafx.event.ActionEvent;
 
@@ -16,8 +18,14 @@ import javafx.event.ActionEvent;
  */
 public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, BoxController> {
 
-    public OverzichtPanelBoxController() {
-        super(null);
+    BoxController bc;
+    FrameBoxController fc;
+
+    public OverzichtPanelBoxController(BoxController bc, FrameBoxController fc) {
+        super(bc);
+        this.bc = bc;
+        this.fc = fc;
+        renderContent();
     }
 
     @Override
@@ -32,12 +40,13 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
 
     @Override
     void renderContent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setLblTitleLeftText("Overzicht Boxes");
+        setLblFilterOpText("Filter op box:");
     }
 
     @Override
     void filter(String newValue) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("wis filter"); // aangeroepen als textvak changes
     }
 
     @Override
