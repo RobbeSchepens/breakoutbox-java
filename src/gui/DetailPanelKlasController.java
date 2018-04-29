@@ -70,6 +70,9 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
     private Button btnAdd;
     @FXML
     private Label lblGeselect;
+    @FXML
+    private Label lblToegevoegdBoodschap;
+
 
 
     /**
@@ -102,12 +105,15 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @Override
     public void update(IKlas klas) {
+        clearRender();
         initButtons(false);
+
         txfNaamKlas.setText(klas.getNaam());
         lsvLeerlingen.setItems(FXCollections.observableArrayList(klas.getLeerlingen()));
         lblTitleRight.setText("Overzicht Klas");
         lblUploadExcel.setVisible(false);
         btnFileOpgave.setVisible(false);
+
     }
 
     private void initButtons(boolean isNew) {
@@ -121,13 +127,18 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @FXML
     private void btnVoegLlnToeOnAction(ActionEvent event) {
+        txfNaamLln.setText("");
+        txfVoornaam.setText("");
         Leerling ln = new Leerling(txfNaamLln.getText(), txfVoornaam.getText());
-        if (listLeerlingenTempAlle.contains(ln)) {
-            System.out.println("hetzelfde");
-        } else {
-            System.out.println("niet hetzelfde");
-            lsvLeerlingen.getItems().add(ln);
-        }
+        lsvLeerlingen.getItems().forEach(naam -> {
+            if (naam.getVoornaam().equals(ln.getVoornaam()) && naam.getAchternaam().equals(ln.getAchternaam())) {
+
+                lblToegevoegdBoodschap.setText("leerling bestaat al");
+                return;
+            }
+        });
+        lblToegevoegdBoodschap.setText(ln.toString() + " toegevoegd!");
+        lsvLeerlingen.getItems().add(ln);
     }
 
     @FXML
@@ -162,10 +173,12 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     private void clearRender() {
         initButtons(true);
-        lsvLeerlingen.setItems(FXCollections.observableArrayList(new ArrayList<Leerling>()));
+        listLeerlingenTempAlle = new ArrayList<Leerling>();
+        lsvLeerlingen.setItems(FXCollections.observableArrayList(listLeerlingenTempAlle));
         txfNaamKlas.setText("");
         txfNaamLln.setText("");
         txfVoornaam.setText("");
+        lblToegevoegdBoodschap.setText("");
 
 
     }

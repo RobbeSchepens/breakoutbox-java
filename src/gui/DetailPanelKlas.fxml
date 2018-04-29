@@ -60,6 +60,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
@@ -82,11 +83,12 @@
                               <Label text="Nieuwe leerling toevoegen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label prefHeight="17.0" prefWidth="78.0" text="Voornaam: " GridPane.rowIndex="3" />
                               <Button mnemonicParsing="false" onAction="#btnVoegLlnToeOnAction" prefHeight="25.0" prefWidth="150.0" text="Voeg leerling toe" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Button mnemonicParsing="false" onAction="#btnVerwijderLlnOnAction" prefWidth="150.0" text="Verwijder leerling" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <Label fx:id="lblGeselect" text="Geselecteerd:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+                              <Button mnemonicParsing="false" onAction="#btnVerwijderLlnOnAction" prefWidth="150.0" text="Verwijder leerling" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label fx:id="lblGeselect" styleClass="text-danger" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="BOTTOM">
                                  <GridPane.margin>
                                     <Insets left="2.0" />
                                  </GridPane.margin></Label>
+                              <Label fx:id="lblToegevoegdBoodschap" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="TOP" />
                            </children>
                         </GridPane>
                      </children>
