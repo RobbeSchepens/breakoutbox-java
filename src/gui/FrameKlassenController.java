@@ -12,9 +12,12 @@ public class FrameKlassenController extends GridPane {
 
     FrameKlassenController(DomeinControllerOefening dc, KlasController kc, BoxController bc) {
         nav = new MenubarController(dc, kc, bc);
-        //hoofdmenu = new HoofdMenuController(dc);
+        overzichtPanelController = new OverzichtPanelKlasController(kc, this);
         add(nav, 0, 0);
         setColumnSpan(nav, 2);
-        //add(hoofdmenu, 0, 1);
+        add(overzichtPanelController, 0, 1);
     }
+    
+    
+    
 }

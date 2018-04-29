@@ -5,16 +5,10 @@
  */
 package domein;
 
-import com.sun.media.sound.SoftAbstractResampler;
-
 /**
  *
  * @author Daan
  */
-public class KlasController {
-
-    public KlasController() {
-        System.out.println("hi");
-    }
+public class KlasBeheerder {
 
 }

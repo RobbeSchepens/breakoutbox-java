@@ -57,7 +57,6 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
     void renderContent() {
         setLblTitleLeftText("Overzicht oefeningen");
         setLblFilterOpText("Filter op naam:");
-
         List<Vak> vl = new ArrayList<>();
         vl.add(new Vak("Alle vakken"));
         vl.addAll(dc.geefVakken());

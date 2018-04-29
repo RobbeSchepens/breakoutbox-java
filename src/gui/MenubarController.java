@@ -95,7 +95,7 @@ public class MenubarController extends HBox{
     @FXML
     private void hbxOefOnMouseClicked(MouseEvent event) {
         if (dc == null) { // gebeurt nooit momenteel
-            new DomeinControllerOefening();
+            dc = new DomeinControllerOefening();
         }
         nextpage = EnumMenu.OEFENING;
         FrameOefeningController sc = new FrameOefeningController(dc, kc, bc);
@@ -107,7 +107,7 @@ public class MenubarController extends HBox{
     @FXML
     private void hbxBoxesOnMouseClicked(MouseEvent event) {
         if (bc == null) {
-            new BoxController();
+            bc = new BoxController();
         }
         nextpage = EnumMenu.BOX;
         FrameBoxController sc = new FrameBoxController(dc, kc, bc);
@@ -127,7 +127,8 @@ public class MenubarController extends HBox{
     @FXML
     private void hbxKlassenOnMouseClicked(MouseEvent event) {
         if (kc == null) {
-            new KlasController();
+            System.out.println("kc is null");
+            kc = new KlasController();
         }
         nextpage = EnumMenu.KLAS;
         FrameKlassenController sc = new FrameKlassenController(dc, kc, bc);
