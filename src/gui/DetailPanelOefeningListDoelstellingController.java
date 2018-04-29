@@ -2,6 +2,7 @@ package gui;
 
 import domein.Doelstelling;
 import domein.DomeinControllerOefening;
+import domein.Groepsbewerking;
 import domein.IOefening;
 import domein.OefeningObserver;
 import java.io.IOException;
@@ -117,6 +118,11 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
 
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
         lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+    }
+
+    @Override
+    public void update(List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @FXML

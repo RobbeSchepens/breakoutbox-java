@@ -1,10 +1,11 @@
 package domein;
 
+import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class OefeningNull implements IOefening {
+public class OefeningNull extends Oefening {
 
     private final StringProperty naam = new SimpleStringProperty();
     private String antwoord;
@@ -18,10 +19,10 @@ public class OefeningNull implements IOefening {
         setNaam("");
         antwoord = "";
         vak = null;
-        opgave = null;
-        feedback = null;
-        doelstellingen = null;
-        groepsbewerkingen = null;
+        opgave = new PDF(null, "");
+        feedback = new PDF(null, "");
+        doelstellingen = new ArrayList<>();
+        groepsbewerkingen = new ArrayList<>();
     }
     
     @Override
@@ -29,6 +30,7 @@ public class OefeningNull implements IOefening {
         return naam.get();
     }
 
+    @Override
     public void setNaam(String value) {
         naam.set(value);
     }

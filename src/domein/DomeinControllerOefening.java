@@ -16,7 +16,9 @@ public class DomeinControllerOefening {
     private List<Doelstelling> listDoelstellingenVanOefening = new ArrayList<>();
     
     public DomeinControllerOefening() {
-        this.ob = new OefeningBeheerder();
+        ob = new OefeningBeheerder();
+        huidigeOefening = new OefeningNull();
+        System.out.println(huidigeOefening.getNaam() + " is de lege naam van de nulloefening");
     }
     
     public ObservableList<IOefening> geefOefeningen() {
@@ -59,6 +61,7 @@ public class DomeinControllerOefening {
     
     public void delete(IOefening o) {
         ob.delete((Oefening) o);
+        huidigeOefening = new OefeningNull();
     }
 
     public FilteredList<IOefening> geefOefeningenFiltered() {
@@ -101,6 +104,7 @@ public class DomeinControllerOefening {
     // Wordt niet gebruikt
     public void setGroepsbewerkingenOefening(List<Groepsbewerking> selectedItems) {
         huidigeOefening.setGroepsbewerkingen(selectedItems);
+        System.out.println(huidigeOefening.getGroepsBewerkingen());
     }
 
     // Wordt niet gebruikt
