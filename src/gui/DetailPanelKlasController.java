@@ -175,7 +175,16 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @FXML
     private void btnAddOnAction(ActionEvent event) {
-
+        try {
+            kc.voegKlasToe(txfNaamKlas.getText(), lsvLeerlingen.getItems());
+            clearRender();
+            lblError.setText("");
+            lblSuccess.setText("De oefening werd succesvol toegevoegd.");
+        } catch (IllegalArgumentException ex) {
+            lblSuccess.setText("");
+            System.out.println(ex.getMessage());
+            lblError.setText(ex.getMessage());
+        }
         //lblError
         //lblSuccess
     }

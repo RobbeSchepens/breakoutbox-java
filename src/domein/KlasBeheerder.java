@@ -31,6 +31,10 @@ public class KlasBeheerder {
     }
     
     public void add(Klas o) {
+        /*if (klasRepo.getByToString(o) != null) {
+            throw new IllegalArgumentException("Er bestaat al een klas met deze naam.");
+        }*/
+
         klasRepo.startTransaction();
         ((ObservableList<Klas>)getKlassen()).add(o);
         klasRepo.insert(o);

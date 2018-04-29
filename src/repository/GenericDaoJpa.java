@@ -35,11 +35,18 @@ public class GenericDaoJpa<T> implements GenericDao<T> {
                 + type.getName() + " entity", type).getResultList();
     }
 
+
     @Override
     public <U> T get(U id) {
         T entity = em.find(type, id);
         return entity;
     }
+
+    //@Override
+    /*public T getByToString(T object) {
+        T entity = em.(type, toString());
+        return entity;
+    }*/
 
     @Override
     public T update(T object) {
@@ -61,4 +68,5 @@ public class GenericDaoJpa<T> implements GenericDao<T> {
         T entity = em.find(type, id);
         return entity != null;
     }
+
 }

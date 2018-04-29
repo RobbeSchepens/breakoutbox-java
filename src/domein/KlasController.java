@@ -17,6 +17,15 @@ public class KlasController {
 
     public void setHuidigeKlas(IKlas klas) {
         this.huidigeKlas = (Klas) klas;
+
+    }
+
+    public void voegKlasToe(String naam, ObservableList<Leerling> leerlingen) {
+
+        Klas klas = new Klas(naam, leerlingen);
+        System.out.println("leerlingen");
+        System.out.println(klas.getLeerlingen());
+        kb.add(klas);
     }
     
 }
