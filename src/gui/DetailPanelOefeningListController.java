@@ -48,7 +48,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
         this.dc = dcon;
         this.fc = fc;
 
-        List<Groepsbewerking> p = dc.getGroepsbewerkingenList();
+        List<Groepsbewerking> p = dc.geefGroepsbewerkingen();
         for (Groepsbewerking item : p) {
                 listGroepsBewerkingenTempAlle.add(item);
         }
@@ -92,7 +92,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
     @Override
     public void update(IOefening oefening) {
         listGroepsBewerkingenTempAlle.clear();
-        List<Groepsbewerking> p = dc.getGroepsbewerkingenList();
+        List<Groepsbewerking> p = dc.geefGroepsbewerkingen();
         for (Groepsbewerking item : p) {
             listGroepsBewerkingenTempAlle.add(item);
         }
@@ -145,7 +145,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
 
     void nieuweOefening() {
         listGroepsBewerkingenTempGeselect = new ArrayList<>();
-        listGroepsBewerkingenTempAlle = dc.getGroepsbewerkingenList();
+        listGroepsBewerkingenTempAlle = dc.geefGroepsbewerkingen();
         dc.setListGroepsbewerkingenVanOefening(listGroepsBewerkingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));

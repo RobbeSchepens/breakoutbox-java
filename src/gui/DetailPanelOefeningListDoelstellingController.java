@@ -48,7 +48,7 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
         this.dc = dcon;
         this.fc = fc;
 
-        List<Doelstelling> p = dc.getDoelstellingenList();
+        List<Doelstelling> p = dc.geefDoelstellingen();
         for (Doelstelling item : p) {
             listDoelstellingenTempAlle.add(item);
         }
@@ -89,7 +89,7 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
     @Override
     public void update(IOefening oefening) {
         listDoelstellingenTempAlle.clear();
-        List<Doelstelling> p = dc.getDoelstellingenList();
+        List<Doelstelling> p = dc.geefDoelstellingen();
         for (Doelstelling item : p) {
             listDoelstellingenTempAlle.add(item);
         }
@@ -146,7 +146,7 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
 
     void nieuweOefening() {
         listDoelstellingenTempGeselect = new ArrayList<>();
-        listDoelstellingenTempAlle = dc.getDoelstellingenList();
+        listDoelstellingenTempAlle = dc.geefDoelstellingen();
         dc.setListDoelstellingenVanOefening(listDoelstellingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
