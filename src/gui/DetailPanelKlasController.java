@@ -178,6 +178,7 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
             clearRender();
             lblError.setText("");
             lblSuccess.setText("De oefening werd succesvol toegevoegd.");
+
         } catch (IllegalArgumentException ex) {
             lblSuccess.setText("");
             System.out.println(ex.getMessage());
@@ -195,7 +196,7 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
             clearRender();
             lblError.setText("");
             lblSuccess.setText("De oefening werd succesvol aangepast.");
-
+            fc.notifyChangeVoorAantalLln();
         } catch (IllegalArgumentException ex) {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());

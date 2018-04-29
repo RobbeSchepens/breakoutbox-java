@@ -66,6 +66,7 @@ public class OverzichtPanelKlasController extends OverzichtPanelController<IKlas
     @Override
     void initNieuw() {
         fc.initNieuweOefening();
+        renderTable();
     }
 
     @Override
@@ -84,6 +85,11 @@ public class OverzichtPanelKlasController extends OverzichtPanelController<IKlas
         observers.forEach((observer) -> {
             observer.update(o);
         });
+    }
+
+    void notifyChangeVoorAantalLln() {
+        System.out.println("hi");
+        renderContent();
     }
     
     

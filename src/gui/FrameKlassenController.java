@@ -28,8 +28,10 @@ public class FrameKlassenController extends GridPane {
     void initNieuweOefening() {
         overzichtPanelController.clearSelectedItem();
         klassenDetailPanelController.initNieuweOefening();
+    }
 
-
+    void notifyChangeVoorAantalLln() {
+        overzichtPanelController.notifyChangeVoorAantalLln();
     }
     
     
