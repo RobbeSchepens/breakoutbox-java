@@ -30,6 +30,10 @@ public class DomeinControllerOefening {
     public void setHuidigeOefening(IOefening huidigeOefening) {
         this.huidigeOefening = (Oefening) huidigeOefening;
     }
+
+    public IOefening getHuidigeOefening() {
+        return huidigeOefening;
+    }
     
     public void voegNieuweOefeningToe(String naam, String antwoord, File opgave, File feedback, Vak vak) {
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, listGroepsbewerkingenVanOefening, listDoelstellingenVanOefening);
@@ -95,7 +99,7 @@ public class DomeinControllerOefening {
     }
 
     // Wordt niet gebruikt
-    public void setGroepsbewerkingenOefening(ObservableList<Groepsbewerking> selectedItems) {
+    public void setGroepsbewerkingenOefening(List<Groepsbewerking> selectedItems) {
         huidigeOefening.setGroepsbewerkingen(selectedItems);
     }
 
