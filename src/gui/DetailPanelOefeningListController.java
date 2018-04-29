@@ -4,9 +4,12 @@ import domein.DomeinControllerOefening;
 import domein.Groepsbewerking;
 import domein.IOefening;
 import domein.OefeningObserver;
+import domein.OefeningSubject;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,12 +23,13 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-public class DetailPanelOefeningListController extends VBox implements OefeningObserver {
+public class DetailPanelOefeningListController extends VBox implements OefeningObserver, OefeningSubject {
 
     private DomeinControllerOefening dc;
     private FrameOefeningController fc;
     private List<Groepsbewerking> listGroepsBewerkingenTempAlle = new ArrayList<>();
     private List<Groepsbewerking> listGroepsBewerkingenTempGeselect = new ArrayList<>();
+    private Set<OefeningObserver> observers;
 
     @FXML private Label lblTitleLeftList;
     @FXML private Label lblAantalGeselecteerd;
@@ -45,6 +49,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
             throw new RuntimeException(ex);
         }
         
+        this.observers = new HashSet<>();
         this.dc = dcon;
         this.fc = fc;
 
@@ -129,8 +134,9 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
 
     @FXML
     private void btnSubmitOnAction(ActionEvent event) {
-        dc.setListGroepsbewerkingenVanOefening(listGroepsBewerkingenTempGeselect); // de temp list
+        dc.setGroepsbewerkingenOefening(listGroepsBewerkingenTempGeselect); // de temp list
         fc.toonListview("cancel/init");
+        notifyObservers();
         //Dit crasht bij nieuwe oefening, er bestaat nog geen huidige oefening
         //dc.setGroepsbewerkingenOefening(lsvListGeselecteerde.getSelectionModel().getSelectedItems());
     }
@@ -150,5 +156,22 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
         lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
+    }
+
+    @Override
+    public void addOefeningObserver(OefeningObserver o) {
+        if (!observers.contains(o))
+            observers.add(o);
+    }
+
+    @Override
+    public void removeOefeningObserver(OefeningObserver o) {
+        observers.remove(o);
+    }
+    
+    private void notifyObservers() {
+        observers.forEach((observer) -> {
+            observer.update(dc.getHuidigeOefening());
+        });
     }
 }

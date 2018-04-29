@@ -108,7 +108,7 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
         observers.remove(o);
     }
     
-    public void notifyObservers() {
+    private void notifyObservers() {
         IOefening o = getTbvOverzicht().getSelectionModel().getSelectedItem();
         observers.forEach((observer) -> {
             observer.update(o);
