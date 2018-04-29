@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 public class MenubarController extends HBox{
 
-    public static EnumMenu nextpage = EnumMenu.HOME;
+    private static EnumMenu nextpage = EnumMenu.HOME;
     private DomeinControllerOefening dc;
     private BoxController bc;
     private KlasController kc;
@@ -94,7 +94,8 @@ public class MenubarController extends HBox{
 
     @FXML
     private void hbxOefOnMouseClicked(MouseEvent event) {
-        if (dc == null) { // gebeurt nooit momenteel
+        if (dc == null) {
+            System.out.println("OefeningController was null and is being initialized.");
             dc = new DomeinControllerOefening();
         }
         nextpage = EnumMenu.OEFENING;
@@ -107,6 +108,7 @@ public class MenubarController extends HBox{
     @FXML
     private void hbxBoxesOnMouseClicked(MouseEvent event) {
         if (bc == null) {
+            System.out.println("BoxController was null and is being initialized.");
             bc = new BoxController();
         }
         nextpage = EnumMenu.BOX;
