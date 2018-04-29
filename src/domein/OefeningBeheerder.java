@@ -72,8 +72,8 @@ public final class OefeningBeheerder {
     
     public void add(Oefening o) {
         oefRepo.startTransaction();
-        oefRepo.insert(o);
         ((ObservableList<Oefening>)getOefeningen()).add(o);
+        oefRepo.insert(o);
         oefRepo.commitTransaction();
     }
 
