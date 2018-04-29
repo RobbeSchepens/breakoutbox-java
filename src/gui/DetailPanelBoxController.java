@@ -69,6 +69,15 @@ public class DetailPanelBoxController extends VBox {
         }
         this.bc = bc;
         this.fc = fc;
+        initButtons(true);
+
+    }
+
+    private void initButtons(boolean isNew) {
+        btnAdd.setManaged(isNew);
+        btnAdd.setVisible(isNew);
+        btnEdit.setManaged(!isNew);
+        btnEdit.setVisible(!isNew);
 
     }
 
@@ -95,6 +104,7 @@ public class DetailPanelBoxController extends VBox {
 
     @FXML
     private void btnEditOnAction(ActionEvent event) {
+
     }
 
 }

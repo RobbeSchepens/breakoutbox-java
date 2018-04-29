@@ -14,7 +14,7 @@ public class KlasBeheerder {
     
     public KlasBeheerder() {
         setKlasRepo(new GenericDaoJpa(Klas.class));
-        
+        System.out.println(klasRepo.findAll());
         // Seeden van database
         //OefeningData od = new OefeningData(this);
     }
@@ -26,6 +26,7 @@ public class KlasBeheerder {
     public ObservableList<? extends IKlas> getKlassen() {
         if (klassen == null)
             klassen = FXCollections.observableArrayList(klasRepo.findAll());
+
         return klassen;
     }
     
