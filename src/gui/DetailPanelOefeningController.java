@@ -135,8 +135,6 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
 
     @Override
     public void update(List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
-        System.out.println("In update van groepsbewerkingen");
-        System.out.println(dc.getHuidigeOefening().getGroepsBewerkingen().size());
         lblGroepsbewerkingenCount.setText(dc.getHuidigeOefening().getGroepsBewerkingen().size() + " bewerkingen geselecteerd");
         lblDoelstellingenCount.setText(dc.getHuidigeOefening().getDoelstellingen().size() + " doelstellingen geselecteerd");
     }

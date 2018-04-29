@@ -141,8 +141,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
 
     @FXML
     private void btnSubmitOnAction(ActionEvent event) {
-        System.out.println(listGroepsBewerkingenTempGeselect);
-        dc.setGroepsbewerkingenOefening(listGroepsBewerkingenTempGeselect); // de temp list
+        dc.setListGroepsbewerkingenVanOefening(listGroepsBewerkingenTempGeselect); // de temp list
         fc.toonListview("cancel/init");
         notifyObserversList();
         //Dit crasht bij nieuwe oefening, er bestaat nog geen huidige oefening

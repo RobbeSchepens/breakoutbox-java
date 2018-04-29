@@ -201,13 +201,10 @@ public class Oefening implements IOefening, Serializable {
     }
 
     public void setGroepsbewerkingen(List<Groepsbewerking> groepsbewerkingen) {
-        System.out.println(groepsbewerkingen + " in de setter van oefening");
         if (groepsbewerkingen == null || groepsbewerkingen.isEmpty()) {
             throw new IllegalArgumentException("Er werden geen groepsbewerkingen geselecteerd.");
         }
         this.groepsbewerkingen = groepsbewerkingen;
-        System.out.println(this.groepsbewerkingen + " is attribuut, heeft de juiste objecten"); // Heeft de bewerkingen
-        System.out.println(getGroepsBewerkingen() + " is getter, heeft null"); // Heeft null 
     }
 
     @Override

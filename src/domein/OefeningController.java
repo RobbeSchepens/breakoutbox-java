@@ -18,7 +18,6 @@ public class OefeningController {
     public OefeningController() {
         ob = new OefeningBeheerder();
         huidigeOefening = new OefeningNull();
-        System.out.println(huidigeOefening.getNaam() + " is de lege naam van de nulloefening");
     }
     
     public ObservableList<IOefening> geefOefeningen() {
@@ -104,7 +103,6 @@ public class OefeningController {
     // Wordt niet gebruikt
     public void setGroepsbewerkingenOefening(List<Groepsbewerking> selectedItems) {
         huidigeOefening.setGroepsbewerkingen(selectedItems);
-        System.out.println(huidigeOefening.getGroepsBewerkingen());
     }
 
     // Wordt niet gebruikt
