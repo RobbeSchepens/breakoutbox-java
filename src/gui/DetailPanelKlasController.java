@@ -7,11 +7,10 @@ package gui;
 
 import domein.KlasController;
 import domein.Leerling;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -24,6 +23,8 @@ import javafx.scene.layout.VBox;
  * @author Daan
  */
 public class DetailPanelKlasController extends VBox {
+
+    KlasController kc;
 
     @FXML
     private Label lblTitleRight;
@@ -54,6 +55,17 @@ public class DetailPanelKlasController extends VBox {
      * Initializes the controller class.
      */
     public DetailPanelKlasController(KlasController kc, FrameKlassenController fc) {
+        FXMLLoader loader
+                = new FXMLLoader(getClass().getResource("DetailPanelKlas.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
+        try {
+            loader.load();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        this.kc = kc;
+
     }
 
 

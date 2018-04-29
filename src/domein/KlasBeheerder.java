@@ -40,7 +40,7 @@ public class KlasBeheerder {
     }
 
     public List<Klas> geefKlassenJPA() {
-        System.out.println("alle klassen");
+
         System.out.println(klasRepo.findAll());
         return klasRepo.findAll();
     }
