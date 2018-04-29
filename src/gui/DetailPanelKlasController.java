@@ -105,12 +105,15 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @Override
     public void update(IKlas klas) {
+        clearRender();
         initButtons(false);
+
         txfNaamKlas.setText(klas.getNaam());
         lsvLeerlingen.setItems(FXCollections.observableArrayList(klas.getLeerlingen()));
         lblTitleRight.setText("Overzicht Klas");
         lblUploadExcel.setVisible(false);
         btnFileOpgave.setVisible(false);
+
     }
 
     private void initButtons(boolean isNew) {
@@ -124,13 +127,18 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @FXML
     private void btnVoegLlnToeOnAction(ActionEvent event) {
-        
-        Leerling ln = new Leerling(txfNaamLln.getText(), txfVoornaam.getText());
-        lsvLeerlingen.getItems().add(ln);
-        
         txfNaamLln.setText("");
         txfVoornaam.setText("");
-        lblToegevoegdBoodschap.setText(ln.toString() + "succesvol toegevoegd");
+        Leerling ln = new Leerling(txfNaamLln.getText(), txfVoornaam.getText());
+        lsvLeerlingen.getItems().forEach(naam -> {
+            if (naam.getVoornaam().equals(ln.getVoornaam()) && naam.getAchternaam().equals(ln.getAchternaam())) {
+
+                lblToegevoegdBoodschap.setText("leerling bestaat al");
+                return;
+            }
+        });
+        lblToegevoegdBoodschap.setText(ln.toString() + " toegevoegd!");
+        lsvLeerlingen.getItems().add(ln);
     }
 
     @FXML
