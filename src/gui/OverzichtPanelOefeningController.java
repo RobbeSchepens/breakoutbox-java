@@ -38,12 +38,12 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
 
         super.getHbxFilter().getChildren().add(ddlVakken);
         
-        ddlVakken.getSelectionModel().selectedItemProperty().addListener(
-                (ObservableValue<? extends Vak> observable, Vak oldValue, Vak newValue) -> {
-            if (!(newValue == null)) {
-                dc.veranderFilter(newValue.getNaam());
-            }
-        });
+//        ddlVakken.getSelectionModel().selectedItemProperty().addListener(
+//                (ObservableValue<? extends Vak> observable, Vak oldValue, Vak newValue) -> {
+//            if (!(newValue == null)) {
+//                dc.veranderFilter(newValue.getNaam());
+//            }
+//        });
         renderContent();
     }
     

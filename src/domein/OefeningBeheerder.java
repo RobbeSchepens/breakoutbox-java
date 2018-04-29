@@ -28,11 +28,11 @@ public final class OefeningBeheerder {
     private ObservableList<Doelstelling> doelstellingen;
     
     public OefeningBeheerder() {
-        initializePersistentie();
         setOefRepo(new OefeningDaoJpa());
         setVakRepo(new GenericDaoJpa(Vak.class));
         setGroepsbewerkingRepo(new GenericDaoJpa(Groepsbewerking.class));
         setDoelstellingRepo(new GenericDaoJpa(Doelstelling.class));
+        initializePersistentie();
     }
 
     public void setOefRepo(OefeningDaoJpa mock) {
