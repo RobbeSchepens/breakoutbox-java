@@ -36,7 +36,7 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
     KlasController kc;
     FrameKlassenController fc;
     private FileChooser fileChooserExcel;
-    List<Leerling> listLeerlingenTempAlle;
+
 
     @FXML
     private Label lblTitleRight;
@@ -68,6 +68,7 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
     private Button btnEdit;
     @FXML
     private Button btnAdd;
+
     @FXML
     private Label lblGeselect;
     @FXML
@@ -107,11 +108,10 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
     public void update(IKlas klas) {
         clearRender();
         initButtons(false);
-        List<Leerling> h = klas.getLeerlingen();
-        listLeerlingenTempAlle = h;
+
         txfNaamKlas.setText(klas.getNaam());
 
-        lsvLeerlingen.setItems(FXCollections.observableArrayList(h));
+        lsvLeerlingen.setItems(FXCollections.observableArrayList(klas.getLeerlingen()));
         lblTitleRight.setText("Overzicht Klas");
         lblUploadExcel.setVisible(false);
         btnFileOpgave.setVisible(false);
@@ -138,7 +138,7 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
         txfVoornaam.setText("");
 
         for (Leerling item : lsvLeerlingen.getItems()) {
-            if (item.getVoornaam().equals(ln.getVoornaam()) && item.getAchternaam().equals(ln.getAchternaam())) {
+            if (item.getVoornaam().trim().equals(ln.getVoornaam().trim()) && item.getAchternaam().trim().equals(ln.getAchternaam().trim())) {
                 lblToegevoegdBoodschap.setText("leerling bestaat al");
                 test = true;
             }
@@ -146,7 +146,6 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
         if (test) {
             lblToegevoegdBoodschap.setText("Leerling al in lijst!");
         } else {
-            listLeerlingenTempAlle.add(ln);
             lsvLeerlingen.getItems().add(ln);
             lblToegevoegdBoodschap.setText(ln.getVoornaam() + " toegevoegd!");
         }
@@ -161,8 +160,9 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @FXML
     private void btnVerwijderLlnOnAction(ActionEvent event) {
-
         lsvLeerlingen.getItems().remove(lsvLeerlingen.getSelectionModel().getSelectedItem());
+        lsvLeerlingen.getSelectionModel().clearSelection();
+        lblGeselect.setText("");
 
     }
 
@@ -176,6 +176,8 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
     @FXML
     private void btnAddOnAction(ActionEvent event) {
 
+        //lblError
+        //lblSuccess
     }
 
     @FXML
@@ -196,6 +198,8 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
         txfNaamLln.setText("");
         txfVoornaam.setText("");
         lblToegevoegdBoodschap.setText("");
+        btnFileOpgave.setVisible(true);
+        lblUploadExcel.setVisible(true);
 
 
     }
