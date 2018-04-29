@@ -70,6 +70,9 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
     private Button btnAdd;
     @FXML
     private Label lblGeselect;
+    @FXML
+    private Label lblToegevoegdBoodschap;
+
 
 
     /**
@@ -121,13 +124,13 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @FXML
     private void btnVoegLlnToeOnAction(ActionEvent event) {
+        
         Leerling ln = new Leerling(txfNaamLln.getText(), txfVoornaam.getText());
-        if (listLeerlingenTempAlle.contains(ln)) {
-            System.out.println("hetzelfde");
-        } else {
-            System.out.println("niet hetzelfde");
-            lsvLeerlingen.getItems().add(ln);
-        }
+        lsvLeerlingen.getItems().add(ln);
+        
+        txfNaamLln.setText("");
+        txfVoornaam.setText("");
+        lblToegevoegdBoodschap.setText(ln.toString() + "succesvol toegevoegd");
     }
 
     @FXML
@@ -162,10 +165,12 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     private void clearRender() {
         initButtons(true);
-        lsvLeerlingen.setItems(FXCollections.observableArrayList(new ArrayList<Leerling>()));
+        listLeerlingenTempAlle = new ArrayList<Leerling>();
+        lsvLeerlingen.setItems(FXCollections.observableArrayList(listLeerlingenTempAlle));
         txfNaamKlas.setText("");
         txfNaamLln.setText("");
         txfVoornaam.setText("");
+        lblToegevoegdBoodschap.setText("");
 
 
     }
