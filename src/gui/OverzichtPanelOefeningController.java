@@ -80,12 +80,6 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-
-        renderTable();
-    }
-
-    @Override
     void btnDeleteSelectedOnAction(ActionEvent event) {
         if (getTbvOverzicht().getSelectionModel().getSelectedItem() != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

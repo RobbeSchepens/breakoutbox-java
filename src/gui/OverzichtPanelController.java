@@ -14,7 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public abstract class OverzichtPanelController<T, E> extends VBox implements Observer {
+public abstract class OverzichtPanelController<T, E> extends VBox {
 
     private E controller;
 

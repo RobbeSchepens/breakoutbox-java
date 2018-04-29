@@ -127,7 +127,7 @@ public class MenubarController extends HBox{
     @FXML
     private void hbxKlassenOnMouseClicked(MouseEvent event) {
         if (kc == null) {
-            System.out.println("kc is null");
+            System.out.println("KlasController was null and is being initialized.");
             kc = new KlasController();
         }
         nextpage = EnumMenu.KLAS;

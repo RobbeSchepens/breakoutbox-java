@@ -42,6 +42,7 @@ public class Klas implements IKlas, Serializable {
         this.id = id;
     }
 
+    @Override
     public StringProperty naamProperty() {
         return naam;
     }
