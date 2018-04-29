@@ -13,6 +13,7 @@ public class FrameBoxController extends GridPane {
         nav = new MenubarController(dc, kc, bc);
         //hoofdmenu = new HoofdMenuController(dc);
         add(nav, 0, 0);
+
         setColumnSpan(nav, 2);
         //add(hoofdmenu, 0, 1);
     }
