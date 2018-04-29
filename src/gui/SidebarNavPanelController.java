@@ -1,6 +1,6 @@
 package gui;
 
-import domein.DomeinControllerOefening;
+import domein.OefeningController;
 import domein.KlasController;
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 public class SidebarNavPanelController extends VBox {
 
-    private DomeinControllerOefening dc;
+    private OefeningController dc;
     private KlasController kc;
     @FXML private HBox hbxOef;
     @FXML private HBox hbxSessies;
@@ -23,7 +23,7 @@ public class SidebarNavPanelController extends VBox {
     @FXML private HBox hbxActies;
     @FXML private HBox hbxKlassen;
 
-    public SidebarNavPanelController(DomeinControllerOefening dcon) {
+    public SidebarNavPanelController(OefeningController dcon) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("SidebarNavPanel.fxml"));
         loader.setRoot(this);

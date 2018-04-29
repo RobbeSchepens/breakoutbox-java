@@ -1,5 +1,7 @@
 package domein;
 
+import java.util.Collections;
+import java.util.Comparator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import persistentie.OefeningData;
@@ -47,8 +49,10 @@ public final class OefeningBeheerder {
     }
     
     public ObservableList<? extends IOefening> getOefeningen() {
-        if (oefeningen == null)
+        if (oefeningen == null) {
             oefeningen = FXCollections.observableArrayList(oefRepo.findAll());
+            Collections.sort((ObservableList<Oefening>)oefeningen, Comparator.comparing(Oefening::getNaam));
+        }
         return oefeningen;
     }
     
@@ -80,20 +84,26 @@ public final class OefeningBeheerder {
     }
 
     public ObservableList<Vak> getVakken() {
-        if (vakken == null)
+        if (vakken == null) {
             vakken = FXCollections.observableArrayList(vakRepo.findAll());
+            Collections.sort(vakken, Comparator.comparing(Vak::getNaam));
+        }
         return vakken;
     }
 
     public ObservableList<Groepsbewerking> getGroepsbewerkingen() {
-        if (groepsbewerkingen == null)
+        if (groepsbewerkingen == null) {
             groepsbewerkingen = FXCollections.observableArrayList(groepsbewerkingRepo.findAll());
+            Collections.sort(groepsbewerkingen, Comparator.comparing(Groepsbewerking::toString));
+        }
         return groepsbewerkingen;
     }
 
     public ObservableList<Doelstelling> getDoelstellingen() {
-        if (doelstellingen == null)
+        if (doelstellingen == null) {
             doelstellingen = FXCollections.observableArrayList(doelstellingRepo.findAll());
+            Collections.sort(doelstellingen, Comparator.comparing(Doelstelling::getDoelstelling));
+        }
         return doelstellingen;
     }
     

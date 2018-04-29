@@ -1,7 +1,8 @@
 package gui;
 
 import domein.Doelstelling;
-import domein.DomeinControllerOefening;
+import domein.OefeningController;
+import domein.Groepsbewerking;
 import domein.IOefening;
 import domein.OefeningObserver;
 import java.io.IOException;
@@ -22,7 +23,7 @@ import javafx.scene.layout.VBox;
 
 public class DetailPanelOefeningListDoelstellingController extends VBox implements OefeningObserver {
 
-    private DomeinControllerOefening dc;
+    private OefeningController dc;
     private FrameOefeningController fc;
     private List<Doelstelling> listDoelstellingenTempAlle = new ArrayList<>();
     private List<Doelstelling> listDoelstellingenTempGeselect = new ArrayList<>();
@@ -36,7 +37,7 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
     @FXML private ListView<Doelstelling> lsvListAlle;
     @FXML private ListView<Doelstelling> lsvListGeselecteerde;
 
-    public DetailPanelOefeningListDoelstellingController(DomeinControllerOefening dcon, FrameOefeningController fc) {
+    public DetailPanelOefeningListDoelstellingController(OefeningController dcon, FrameOefeningController fc) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailPanelOefeningListDoelstelling.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -117,6 +118,11 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
 
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
         lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+    }
+
+    @Override
+    public void update(List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @FXML

@@ -1,6 +1,6 @@
 package gui;
 
-import domein.DomeinControllerOefening;
+import domein.OefeningController;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 public class HoofdMenuController extends GridPane {
     
-    private DomeinControllerOefening dc;
+    private OefeningController dc;
     @FXML private Button btnBeheerBob;
     @FXML private Button btnBeheerSessies;
     @FXML private Button btnBeheerOef;
@@ -22,7 +22,7 @@ public class HoofdMenuController extends GridPane {
     @FXML private Label lblAantalBoxes;
     @FXML private Label lblAantalSessies;
     
-    public HoofdMenuController(DomeinControllerOefening dc) {
+    public HoofdMenuController(OefeningController dc) {
         this.dc = dc;
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdMenu.fxml"));

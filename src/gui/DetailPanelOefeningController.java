@@ -1,6 +1,8 @@
 package gui;
 
-import domein.DomeinControllerOefening;
+import domein.Doelstelling;
+import domein.OefeningController;
+import domein.Groepsbewerking;
 import domein.IOefening;
 import domein.OefeningObserver;
 import domein.PDF;
@@ -12,6 +14,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +28,7 @@ import javafx.stage.Stage;
 
 public class DetailPanelOefeningController extends VBox implements OefeningObserver {
 
-    private DomeinControllerOefening dc;
+    private OefeningController dc;
     private FrameOefeningController fc;
     private FileChooser fileChooserOpgave;
     private FileChooser fileChooserFeedback;
@@ -54,7 +57,7 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     @FXML private Label lblError;
     @FXML private Label lblSuccess;
 
-    public DetailPanelOefeningController(DomeinControllerOefening dcon, FrameOefeningController fc) {
+    public DetailPanelOefeningController(OefeningController dcon, FrameOefeningController fc) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("DetailPanelOefening.fxml"));
         loader.setRoot(this);
@@ -128,6 +131,14 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
         lblDoelstellingenCount.setText(o.getDoelstellingen().size() + " doelstellingen geselecteerd");
         lblError.setText("");
         lblSuccess.setText("");
+    }
+
+    @Override
+    public void update(List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
+        System.out.println("In update van groepsbewerkingen");
+        System.out.println(dc.getHuidigeOefening().getGroepsBewerkingen().size());
+        lblGroepsbewerkingenCount.setText(dc.getHuidigeOefening().getGroepsBewerkingen().size() + " bewerkingen geselecteerd");
+        lblDoelstellingenCount.setText(dc.getHuidigeOefening().getDoelstellingen().size() + " doelstellingen geselecteerd");
     }
 
     @FXML

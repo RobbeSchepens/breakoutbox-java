@@ -1,20 +1,20 @@
 package gui;
 
 import domein.BoxController;
-import domein.DomeinControllerOefening;
+import domein.OefeningController;
 import domein.KlasController;
 import javafx.scene.layout.GridPane;
 
 public final class FrameOefeningController extends GridPane {
     
-    DomeinControllerOefening dcc;
+    OefeningController dcc;
     MenubarController nav;
     OverzichtPanelOefeningController overzichtPanelController;
     DetailPanelOefeningController oefeningDetailPanelController;
     DetailPanelOefeningListController oefeningDetailPanelListController;
     DetailPanelOefeningListDoelstellingController oefeningDetailPanelListDoelstellingController;
     
-    public FrameOefeningController(DomeinControllerOefening dc, KlasController kc, BoxController bc) {
+    public FrameOefeningController(OefeningController dc, KlasController kc, BoxController bc) {
         nav = new MenubarController(dc, kc, bc);
         overzichtPanelController = new OverzichtPanelOefeningController(dc, this); // het scherm met de tabelview
         oefeningDetailPanelController = new DetailPanelOefeningController(dc, this);
