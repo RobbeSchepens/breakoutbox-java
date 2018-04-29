@@ -136,7 +136,6 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
         Leerling ln = new Leerling(txfNaamLln.getText(), txfVoornaam.getText());
         txfNaamLln.setText("");
         txfVoornaam.setText("");
-
         for (Leerling item : lsvLeerlingen.getItems()) {
             if (item.getVoornaam().trim().equals(ln.getVoornaam().trim()) && item.getAchternaam().trim().equals(ln.getAchternaam().trim())) {
                 lblToegevoegdBoodschap.setText("leerling bestaat al");
@@ -154,9 +153,6 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     }
 
-    private void doe(boolean flag) {
-
-    }
 
     @FXML
     private void btnVerwijderLlnOnAction(ActionEvent event) {
@@ -191,7 +187,17 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @FXML
     private void btnEditOnAction(ActionEvent event) {
+        try {
+            kc.pasOefeningAan(txfNaamKlas.getText(), lsvLeerlingen.getItems());
 
+            clearRender();
+            lblError.setText("");
+            lblSuccess.setText("De oefening werd succesvol aangepast.");
+
+        } catch (IllegalArgumentException ex) {
+            lblSuccess.setText("");
+            lblError.setText(ex.getMessage());
+        }
     }
 
     void initNieuweOefening() {
