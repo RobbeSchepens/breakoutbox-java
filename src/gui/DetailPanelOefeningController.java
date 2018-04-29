@@ -222,6 +222,7 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     private void btnEditOnAction(ActionEvent event) {
         try {
             dc.pasOefeningAan(txfNaam.getText(), txfAntwoord.getText(), fileOpgave, fileFeedback, ddlVak.getSelectionModel().getSelectedItem());
+            clearRender();
             lblError.setText("");
             lblSuccess.setText("De oefening werd succesvol aangepast.");
             fc.toonListview("cancel/init");

@@ -27,5 +27,9 @@ public class KlasController {
         Klas klas = new Klas(naam, lln);
         kb.add(klas);
     }
+
+    public void pasOefeningAan(String text, ObservableList<Leerling> items) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
