@@ -38,12 +38,12 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
 
         super.getHbxFilter().getChildren().add(ddlVakken);
         
-        ddlVakken.getSelectionModel().selectedItemProperty().addListener(
-                (ObservableValue<? extends Vak> observable, Vak oldValue, Vak newValue) -> {
-            if (!(newValue == null)) {
-                dc.veranderFilter(newValue.getNaam());
-            }
-        });
+//        ddlVakken.getSelectionModel().selectedItemProperty().addListener(
+//                (ObservableValue<? extends Vak> observable, Vak oldValue, Vak newValue) -> {
+//            if (!(newValue == null)) {
+//                dc.veranderFilter(newValue.getNaam());
+//            }
+//        });
         renderContent();
     }
     
@@ -67,7 +67,7 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
     
     private void renderTable() {
         // Set items for tableview
-        getTbvOverzicht().setItems(dc.geefOefeningenNew());
+        getTbvOverzicht().setItems(dc.geefOefeningen());
         
         // Create new columns based on current class
         TableColumn<IOefening, String> col1 = new TableColumn<>("Naam");
