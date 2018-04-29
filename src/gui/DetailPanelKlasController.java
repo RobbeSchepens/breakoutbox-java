@@ -156,9 +156,11 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @FXML
     private void btnVerwijderLlnOnAction(ActionEvent event) {
-        lsvLeerlingen.getItems().remove(lsvLeerlingen.getSelectionModel().getSelectedItem());
+        Leerling g = lsvLeerlingen.getSelectionModel().getSelectedItem();
+        lsvLeerlingen.getItems().remove(g);
+        lblGeselect.setText(g.getVoornaam() + " Verwijderd!");
         lsvLeerlingen.getSelectionModel().clearSelection();
-        lblGeselect.setText("");
+
 
     }
 
@@ -187,9 +189,9 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @FXML
     private void btnEditOnAction(ActionEvent event) {
+
         try {
             kc.pasOefeningAan(txfNaamKlas.getText(), lsvLeerlingen.getItems());
-
             clearRender();
             lblError.setText("");
             lblSuccess.setText("De oefening werd succesvol aangepast.");

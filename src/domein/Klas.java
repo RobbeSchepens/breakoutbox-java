@@ -42,6 +42,7 @@ public class Klas implements IKlas, Serializable {
         this.id = id;
     }
 
+
     @Override
     public StringProperty naamProperty() {
         return naam;
@@ -54,7 +55,7 @@ public class Klas implements IKlas, Serializable {
         return naam.get();
     }
 
-    private void setNaam(String naam) {
+    public void setNaam(String naam) {
         if (naam == null || naam.trim().isEmpty()) {
             throw new IllegalArgumentException("Geen naam voor klas ingegeven");
         }

@@ -42,6 +42,8 @@ public class KlasBeheerder {
     }
 
     public void update(Klas o) {
+
+        System.out.println(o.getLeerlingen());
         klasRepo.startTransaction();
         klasRepo.update(o);
         klasRepo.commitTransaction();

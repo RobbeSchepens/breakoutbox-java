@@ -28,8 +28,12 @@ public class KlasController {
         kb.add(klas);
     }
 
-    public void pasOefeningAan(String text, ObservableList<Leerling> items) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void pasOefeningAan(String naam, ObservableList<Leerling> leerlingen) {
+        ArrayList<Leerling> lln = new ArrayList<>(leerlingen);
+        huidigeKlas.setNaam(naam);
+        huidigeKlas.setLeerlingen(leerlingen);
+        kb.update(huidigeKlas);
+
     }
     
 }
