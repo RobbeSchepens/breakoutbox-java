@@ -2,19 +2,12 @@ package domein;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import persistentie.OefeningData;
 import repository.GenericDaoJpa;
 import repository.OefeningDaoJpa;
 
 public final class OefeningBeheerder {
 
-    public final String PERSISTENCE_UNIT_NAME = "breakoutboxPU";
-    private EntityManager em;
-    private EntityManagerFactory emf;
-    
     //Repositories
     private OefeningDaoJpa oefRepo;
     private GenericDaoJpa<Vak> vakRepo;
@@ -32,7 +25,9 @@ public final class OefeningBeheerder {
         setVakRepo(new GenericDaoJpa(Vak.class));
         setGroepsbewerkingRepo(new GenericDaoJpa(Groepsbewerking.class));
         setDoelstellingRepo(new GenericDaoJpa(Doelstelling.class));
-        initializePersistentie();
+        
+        // Seeden van database
+        OefeningData od = new OefeningData(this);
     }
 
     public void setOefRepo(OefeningDaoJpa mock) {
@@ -50,12 +45,6 @@ public final class OefeningBeheerder {
     public void setDoelstellingRepo(GenericDaoJpa<Doelstelling> mock) {
         doelstellingRepo = mock;
     }
-
-    private void initializePersistentie() {
-        openPersistentie(); 
-        OefeningData od = new OefeningData(this);
-        od.populeerData();
-    }
     
     public ObservableList<? extends IOefening> getOefeningen() {
         if (oefeningen == null)
@@ -63,14 +52,10 @@ public final class OefeningBeheerder {
         return oefeningen;
     }
     
-    public void delete(Oefening o) {
-        oefRepo.startTransaction();
-        oefRepo.delete(o);
-        getOefeningen().remove(o);
-        oefRepo.commitTransaction();
-    }
-    
     public void add(Oefening o) {
+        if (geefOefeningByNaamJpa(o.getNaam()) != null)
+            throw new IllegalArgumentException("Er bestaat al een oefening met deze naam.");
+        
         oefRepo.startTransaction();
         ((ObservableList<Oefening>)getOefeningen()).add(o);
         oefRepo.insert(o);
@@ -80,6 +65,13 @@ public final class OefeningBeheerder {
     public void update(Oefening o) {
         oefRepo.startTransaction();
         oefRepo.update(o);
+        oefRepo.commitTransaction();
+    }
+    
+    public void delete(Oefening o) {
+        oefRepo.startTransaction();
+        oefRepo.delete(o);
+        getOefeningen().remove(o);
         oefRepo.commitTransaction();
     }
     
@@ -121,20 +113,5 @@ public final class OefeningBeheerder {
         doelstellingRepo.startTransaction();
         doelstellingRepo.insert(o);
         doelstellingRepo.commitTransaction();
-    }
-
-    
-    // ================================================
-    // Alle hieronder moeten herwerkt/herbekeken worden
-    // ================================================
-    
-    private void openPersistentie() {
-        emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        em = emf.createEntityManager();
-    }
-
-    public void closePersistentie() {
-        em.close();
-        emf.close();
     }
 }

@@ -3,12 +3,11 @@ package domein;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
-public class DomeinControllerOefening extends Observable {
+public class DomeinControllerOefening {
 
     private Oefening huidigeOefening;
     private OefeningBeheerder ob;
@@ -33,9 +32,6 @@ public class DomeinControllerOefening extends Observable {
     }
     
     public void voegNieuweOefeningToe(String naam, String antwoord, File opgave, File feedback, Vak vak) {
-        if (ob.geefOefeningByNaamJpa(naam) != null) {
-            throw new IllegalArgumentException("Er bestaat al een oefening met deze naam.");
-        }
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, listGroepsbewerkingenVanOefening, listDoelstellingenVanOefening);
         ob.add(oefening);
     }
@@ -115,61 +111,4 @@ public class DomeinControllerOefening extends Observable {
     public ObservableList<Doelstelling> geefDoelstellingenHuidigeOefening() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(huidigeOefening.getDoelstellingen()));
     }
-    
-    
-//    private List<Oefening> getOefeningList() {
-//        if (oefeningLijst == null) {
-//            oefeningLijst = ob.geefOefeningenJPA();
-//            filteredOefeningList = new FilteredList<>(geefOefeningen(), p -> true);
-//        }
-//        return oefeningLijst;
-//    }
-
-    
-//    public boolean noOefeningen() {
-//        return getOefeningList().isEmpty();
-//    }
-//
-
-//    public List<String> geefOefeningNaamLijst() {
-//        return getOefeningList().stream().map(Oefening::getNaam).collect(Collectors.toList());
-//    }
-//
-//    public ObservableList<IOefening> geefOefeningen() {
-//        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(getOefeningList()));
-//    }
-
-    // Weg na refactor
-//    public IOefening getHuidigeOefening() {
-//        return huidigeOefening;
-//    }
-
-
-
-//    public void verwijderOefening(IOefening o) {
-//        ob.deleteOefening((Oefening) o);
-//        getOefeningList().remove((Oefening) o);
-//        filteredOefeningList = new FilteredList<>(geefOefeningen(), p -> true); // Temp fix for tbv not resetting
-//        setChanged();
-//        notifyObservers();
-//    }
-
-    
-//    public ObservableList<Vak> getVakkenList() {
-//        return ob.getVakken();
-//    }
-//    
-//    public ObservableList<Vak> geefVakken() {
-//        return ob.getVakken();
-//    }
-//
-//    public List<Groepsbewerking> getGroepsbewerkingenList() {
-//        groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA(); // niet checken op null geeft fouten
-//        return groepsbewerkingenLijst;
-//    }
-//    
-//    public List<Doelstelling> getDoelstellingenList() {
-//        doelstellingenLijst = ob.geefDoelstellingenJPA();// niet checken op null geeft fouten
-//        return doelstellingenLijst;
-//    }
 }
