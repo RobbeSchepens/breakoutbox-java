@@ -1,8 +1,12 @@
 package persistentie;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import domein.AddGroepsbewerking;
 import domein.Doelstelling;
 import domein.Groepsbewerking;
+import domein.Klas;
+import domein.KlasBeheerder;
+import domein.Leerling;
 import domein.Oefening;
 import domein.OefeningBeheerder;
 import domein.PDF;
@@ -12,14 +16,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.persistence.EntityManager;
 import repository.GenericDaoJpa;
 
 public class OefeningData {
 
     private final OefeningBeheerder ob;
 
+
     public OefeningData(OefeningBeheerder oefeningBeheerder) {
         ob = oefeningBeheerder;
+
     }
 
     public void populeerData() {
@@ -42,6 +49,39 @@ public class OefeningData {
         vakken.add(new Vak("Natuurkunde"));
         vakken.add(new Vak("Nederlands"));
 
+        List<Leerling> leerlingen = new ArrayList<>(Arrays.asList(
+                new Leerling("Andrea", "Van Dijk"),
+                new Leerling("Henk", "Bakker"),
+                new Leerling("Stephanie", "Mulder"),
+                new Leerling("Tom", "De Groot"),
+                new Leerling("Lily", "Bos"),
+                new Leerling("Jayden", "Hendriks"),
+                new Leerling("Pamela", "Dekker"),
+                new Leerling("Luc", "Dijkstra"),
+                new Leerling("Eva", "Jacobs"),
+                new Leerling("Harry", "Vermeulen"),
+                new Leerling("Katy", "Schouten"),
+                new Leerling("Marcel", "Willems"),
+                new Leerling("Rosa", "Hoekstra"),
+                new Leerling("Bob", "Koster"),
+                new Leerling("Sasha", "Verhoeven"),
+                new Leerling("Thijmen", "Prins"),
+                new Leerling("Sam", "Leunens"),
+                new Leerling("Sarah", "VanBossche"),
+                new Leerling("Femke", "Vanhoeke"),
+                new Leerling("Sep", "Jacobs")));
+
+        List<Klas> klassen = new ArrayList<>(Arrays.asList(
+                new Klas("NaamKlas1", leerlingen),
+                new Klas("NaamKlas2", leerlingen.subList(1, 17)),
+                new Klas("NaamKlas3", leerlingen.subList(2, 19))
+        ));
+
+        GenericDaoJpa klasDao = new GenericDaoJpa(Klas.class);
+
+        klassen.forEach(klas -> {
+            klasDao.insert(klas);
+        });
         vakken.forEach(vak -> ob.addVak(vak));
         bewerkingenDatabankLijst.forEach(bw -> ob.addGroepsbewerking(bw));
         doelstellingenArray.forEach(dls -> ob.addDoelstelling(dls));
@@ -59,6 +99,7 @@ public class OefeningData {
         File opgave3 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Hoofdstad VK_Opgave.pdf");
         File feedback3 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Hoofdstad VK_Feedback.pdf");
         ob.addOefening(new Oefening("Hoofdstad VK", "Londen", vakken.get(4), opgave3, feedback3, bewerkingenDatabankLijst.subList(3, 10), doelstellingenArray.subList(5, 7)));
+
         /*GenericDaoJpa bewerkingDoa = new GenericDaoJpa(Groepsbewerking.class);
         GenericDaoJpa doelstellingDoa = new GenericDaoJpa(String.class);
         GenericDaoJpa vakDoa = new GenericDaoJpa(Vak.class);

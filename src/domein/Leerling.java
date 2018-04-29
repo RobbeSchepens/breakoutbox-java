@@ -7,6 +7,7 @@ package domein;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,14 +16,17 @@ import javax.persistence.Id;
  *
  * @author Daan
  */
+@Entity
 @Access(AccessType.FIELD)
-
 public class Leerling {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
     private String voornaam;
     private String achternaam;
+
+    public Leerling() {
+    }
 
     public Leerling(String voornaam, String achternaam) {
         this.voornaam = voornaam;

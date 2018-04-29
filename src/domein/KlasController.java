@@ -6,6 +6,8 @@
 package domein;
 
 import com.sun.media.sound.SoftAbstractResampler;
+import java.util.List;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -13,8 +15,14 @@ import com.sun.media.sound.SoftAbstractResampler;
  */
 public class KlasController {
 
+    private KlasBeheerder kb = new KlasBeheerder();
+    private List<Klas> klassenLijst;
+
     public KlasController() {
-        System.out.println("hi");
+        this.kb = new KlasBeheerder();
+        this.klassenLijst = kb.geefKlassenJPA();
+        System.out.println(klassenLijst);
     }
+
 
 }

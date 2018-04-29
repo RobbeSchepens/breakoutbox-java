@@ -25,7 +25,6 @@ public class DomeinControllerOefening extends Observable {
     private List<Doelstelling> listDoelstellingenVanOefening = new ArrayList<>();
     
     public DomeinControllerOefening() {
-        System.out.println("zo");
         this.ob = new OefeningBeheerder();
         this.vakkenLijst = ob.geefVakkenJPA();
         this.groepsbewerkingenLijst = ob.geefGroepsbewerkingenJPA();

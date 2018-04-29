@@ -158,4 +158,6 @@ public final class OefeningBeheerder {
         em.getTransaction().commit();
     }
 
+    // em is hier gekend dus hier de rest ook toevoegen
+
 }

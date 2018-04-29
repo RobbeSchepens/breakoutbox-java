@@ -5,12 +5,14 @@
  */
 package domein;
 
+import java.io.Serializable;
 import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,23 +26,23 @@ import javax.persistence.Transient;
  * @author Daan
  */
 @Entity
-@Access(AccessType.FIELD)
-public class Klas {
+@Access(AccessType.PROPERTY)
+public class Klas implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Transient
     private SimpleStringProperty naam = new SimpleStringProperty();
-    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Leerling> leerlingen;
+
+    public Klas() {
+    }
 
     public Klas(String naam, List<Leerling> leerlingen) {
         setNaam(naam);
         setLeerlingen(leerlingen);
 
     }
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -54,11 +56,10 @@ public class Klas {
         return naam;
     }
 
-    @Access(AccessType.PROPERTY)
+    @Column(name = "Naam")
     public String getNaam() {
         return naam.get();
     }
-
 
     private void setNaam(String naam) {
         if (naam == null || naam.trim().isEmpty()) {
@@ -67,6 +68,7 @@ public class Klas {
         this.naam.set(naam);
     }
 
+    @ManyToMany(cascade = CascadeType.PERSIST)
     public List<Leerling> getLeerlingen() {
         return leerlingen;
     }
