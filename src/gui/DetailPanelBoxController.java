@@ -5,16 +5,16 @@
  */
 package gui;
 
-import domein.KlasController;
-import domein.Leerling;
+import domein.BoxController;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 /**
@@ -22,42 +22,44 @@ import javafx.scene.layout.VBox;
  *
  * @author Daan
  */
-public class DetailPanelKlasController extends VBox {
-
-    KlasController kc;
-    FrameKlassenController fc;
+public class DetailPanelBoxController extends VBox {
+    FrameBoxController fc;
+    BoxController bc;
 
     @FXML
     private Label lblTitleRight;
+
     @FXML
     private Button btnNieuweOefening;
     @FXML
-    private TextField txfNaamKlas;
+    private Button btnOefeningen;
+
     @FXML
-    private TextField txfNaamLln;
+    private Label lblOefeningenCount;
     @FXML
-    private Label lblOpgave1;
+    private Button btnToegangscodes;
     @FXML
-    private TextField txfVoornaam;
+    private Label lblToegangscodesCount;
     @FXML
-    private ListView<Leerling> lsvLeerlingen;
+    private Label lblFeedback;
+
     @FXML
-    private Label lblOpgave;
+    private Button btnActies;
     @FXML
-    private Button btnFileOpgave;
+    private Label lblActiesCount;
+
     @FXML
-    private Label lblExcelName;
+    private Button btnAdd;
+    @FXML
+    private Button btnEdit;
+
     @FXML
     private Label lblError;
     @FXML
     private Label lblSuccess;
 
-    /**
-     * Initializes the controller class.
-     */
-    public DetailPanelKlasController(KlasController kc, FrameKlassenController fc) {
-        FXMLLoader loader
-                = new FXMLLoader(getClass().getResource("DetailPanelKlas.fxml"));
+    public DetailPanelBoxController(BoxController bc, FrameBoxController fc) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailPanelBox.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -65,7 +67,7 @@ public class DetailPanelKlasController extends VBox {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-        this.kc = kc;
+        this.bc = bc;
         this.fc = fc;
 
     }
@@ -76,11 +78,23 @@ public class DetailPanelKlasController extends VBox {
     }
 
     @FXML
-    private void btnVoegLlnToeOnAction(ActionEvent event) {
+    private void btnOefeningenOnAction(ActionEvent event) {
     }
 
     @FXML
-    private void btnUploadExcelOnAction(ActionEvent event) {
+    private void btnToegangscodesOnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnActiesonAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnAddOnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnEditOnAction(ActionEvent event) {
     }
 
 }

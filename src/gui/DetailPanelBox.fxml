@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="740.0" type="VBox" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="740.0" type="VBox" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <HBox alignment="CENTER">
          <children>
@@ -72,16 +72,17 @@
                   </HBox>
                </children>
             </HBox>
+            <Label focusTraversable="false" text="Acties" GridPane.rowIndex="2" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="393.0">
-                     <children>
-                        <Label fx:id="lblOpgave" wrapText="true" />
-                     </children>
-                  </HBox>
+                  <Button fx:id="btnActies" mnemonicParsing="false" onAction="#btnActiesonAction" text="Toon lijst">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Label fx:id="lblActiesCount" text="0 toegangscodes geselecteerd" />
                </children>
             </HBox>
-            <Label focusTraversable="false" text="Acties" GridPane.rowIndex="2" />
          </children>
          <VBox.margin>
             <Insets bottom="30.0" />

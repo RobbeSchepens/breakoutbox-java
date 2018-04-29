@@ -76,6 +76,7 @@ public class OefeningData {
         klassen.forEach(klas -> {
             klasDao.insert(klas);
         });
+
         vakken.forEach(vak -> ob.addVak(vak));
         bewerkingenDatabankLijst.forEach(bw -> ob.addGroepsbewerking(bw));
         doelstellingenArray.forEach(dls -> ob.addDoelstelling(dls));
