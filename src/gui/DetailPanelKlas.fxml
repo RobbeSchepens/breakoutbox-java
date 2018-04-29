@@ -94,7 +94,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="264.0">
                            <children>
-                              <Label text="Leerkingen in klas :">
+                              <Label text="Leerlingen in klas :">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
