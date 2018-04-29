@@ -1,7 +1,7 @@
 package gui;
 
 import domein.Doelstelling;
-import domein.DomeinControllerOefening;
+import domein.OefeningController;
 import domein.Groepsbewerking;
 import domein.IOefening;
 import domein.OefeningObserver;
@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 
 public class DetailPanelOefeningController extends VBox implements OefeningObserver {
 
-    private DomeinControllerOefening dc;
+    private OefeningController dc;
     private FrameOefeningController fc;
     private FileChooser fileChooserOpgave;
     private FileChooser fileChooserFeedback;
@@ -57,7 +57,7 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     @FXML private Label lblError;
     @FXML private Label lblSuccess;
 
-    public DetailPanelOefeningController(DomeinControllerOefening dcon, FrameOefeningController fc) {
+    public DetailPanelOefeningController(OefeningController dcon, FrameOefeningController fc) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("DetailPanelOefening.fxml"));
         loader.setRoot(this);

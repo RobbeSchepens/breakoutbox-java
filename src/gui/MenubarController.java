@@ -1,7 +1,7 @@
 package gui;
 
 import domein.BoxController;
-import domein.DomeinControllerOefening;
+import domein.OefeningController;
 import domein.KlasController;
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class MenubarController extends HBox{
 
     private static EnumMenu nextpage = EnumMenu.HOME;
-    private DomeinControllerOefening dc;
+    private OefeningController dc;
     private BoxController bc;
     private KlasController kc;
     @FXML private HBox hbxHome;
@@ -25,7 +25,7 @@ public class MenubarController extends HBox{
     @FXML private HBox hbxActies;
     @FXML private HBox hbxKlassen;
     
-    public MenubarController(DomeinControllerOefening dcon, KlasController kc, BoxController bc) {
+    public MenubarController(OefeningController dcon, KlasController kc, BoxController bc) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("Menubar.fxml"));
         loader.setRoot(this);
@@ -82,7 +82,7 @@ public class MenubarController extends HBox{
     @FXML
     private void hbxHomeOnMouseClicked(MouseEvent event) {
         if (dc == null) { // gebeurt nooit momenteel
-            new DomeinControllerOefening();
+            new OefeningController();
         }
 
         nextpage = EnumMenu.HOME;
@@ -96,7 +96,7 @@ public class MenubarController extends HBox{
     private void hbxOefOnMouseClicked(MouseEvent event) {
         if (dc == null) {
             System.out.println("OefeningController was null and is being initialized.");
-            dc = new DomeinControllerOefening();
+            dc = new OefeningController();
         }
         nextpage = EnumMenu.OEFENING;
         FrameOefeningController sc = new FrameOefeningController(dc, kc, bc);

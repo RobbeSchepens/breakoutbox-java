@@ -1,6 +1,6 @@
 package gui;
 
-import domein.DomeinControllerOefening;
+import domein.OefeningController;
 import domein.IOefening;
 import domein.OefeningObserver;
 import domein.OefeningSubject;
@@ -20,14 +20,14 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-public final class OverzichtPanelOefeningController extends OverzichtPanelController<IOefening, DomeinControllerOefening> implements OefeningSubject {
+public final class OverzichtPanelOefeningController extends OverzichtPanelController<IOefening, OefeningController> implements OefeningSubject {
 
-    private DomeinControllerOefening dc;
+    private OefeningController dc;
     private FrameOefeningController fc;
     private Set<OefeningObserver> observers;
     private ChoiceBox<Vak> ddlVakken;
     
-    public OverzichtPanelOefeningController(DomeinControllerOefening dcon, FrameOefeningController fc) {
+    public OverzichtPanelOefeningController(OefeningController dcon, FrameOefeningController fc) {
         super(dcon);
         this.observers = new HashSet<>();
         this.dc = dcon;

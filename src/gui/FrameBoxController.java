@@ -1,7 +1,7 @@
 package gui;
 
 import domein.BoxController;
-import domein.DomeinControllerOefening;
+import domein.OefeningController;
 import domein.KlasController;
 import javafx.scene.layout.GridPane;
 
@@ -11,7 +11,7 @@ public class FrameBoxController extends GridPane {
     OverzichtPanelBoxController overzichtPanelController;
     DetailPanelBoxController boxesDetailPanelController;
     
-    public FrameBoxController(DomeinControllerOefening dc, KlasController kc, BoxController bc) {
+    public FrameBoxController(OefeningController dc, KlasController kc, BoxController bc) {
         nav = new MenubarController(dc, kc, bc);
         overzichtPanelController = new OverzichtPanelBoxController(bc, this);
         boxesDetailPanelController = new DetailPanelBoxController(bc, this);

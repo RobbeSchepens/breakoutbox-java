@@ -7,7 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
-public class DomeinControllerOefening {
+public class OefeningController {
 
     private Oefening huidigeOefening;
     private OefeningBeheerder ob;
@@ -15,7 +15,7 @@ public class DomeinControllerOefening {
     private List<Groepsbewerking> listGroepsbewerkingenVanOefening = new ArrayList<>();
     private List<Doelstelling> listDoelstellingenVanOefening = new ArrayList<>();
     
-    public DomeinControllerOefening() {
+    public OefeningController() {
         ob = new OefeningBeheerder();
         huidigeOefening = new OefeningNull();
         System.out.println(huidigeOefening.getNaam() + " is de lege naam van de nulloefening");

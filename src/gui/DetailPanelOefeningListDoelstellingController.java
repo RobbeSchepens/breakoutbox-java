@@ -1,7 +1,7 @@
 package gui;
 
 import domein.Doelstelling;
-import domein.DomeinControllerOefening;
+import domein.OefeningController;
 import domein.Groepsbewerking;
 import domein.IOefening;
 import domein.OefeningObserver;
@@ -23,7 +23,7 @@ import javafx.scene.layout.VBox;
 
 public class DetailPanelOefeningListDoelstellingController extends VBox implements OefeningObserver {
 
-    private DomeinControllerOefening dc;
+    private OefeningController dc;
     private FrameOefeningController fc;
     private List<Doelstelling> listDoelstellingenTempAlle = new ArrayList<>();
     private List<Doelstelling> listDoelstellingenTempGeselect = new ArrayList<>();
@@ -37,7 +37,7 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
     @FXML private ListView<Doelstelling> lsvListAlle;
     @FXML private ListView<Doelstelling> lsvListGeselecteerde;
 
-    public DetailPanelOefeningListDoelstellingController(DomeinControllerOefening dcon, FrameOefeningController fc) {
+    public DetailPanelOefeningListDoelstellingController(OefeningController dcon, FrameOefeningController fc) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailPanelOefeningListDoelstelling.fxml"));
         loader.setRoot(this);
         loader.setController(this);

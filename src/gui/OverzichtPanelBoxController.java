@@ -6,7 +6,7 @@
 package gui;
 
 import domein.BoxController;
-import domein.DomeinControllerOefening;
+import domein.OefeningController;
 import domein.IBox;
 import domein.KlasController;
 import java.util.Observable;
