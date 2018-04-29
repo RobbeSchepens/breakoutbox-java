@@ -110,10 +110,12 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
         List<Leerling> h = klas.getLeerlingen();
         listLeerlingenTempAlle = h;
         txfNaamKlas.setText(klas.getNaam());
+
         lsvLeerlingen.setItems(FXCollections.observableArrayList(h));
         lblTitleRight.setText("Overzicht Klas");
         lblUploadExcel.setVisible(false);
         btnFileOpgave.setVisible(false);
+
 
 
     }
@@ -190,12 +192,12 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
     private void clearRender() {
         initButtons(true);
         listLeerlingenTempAlle = new ArrayList<Leerling>();
-        lsvLeerlingen.setItems(FXCollections.observableArrayList(listLeerlingenTempAlle));
+        lsvLeerlingen.getItems().clear();
         txfNaamKlas.setText("");
         txfNaamLln.setText("");
         txfVoornaam.setText("");
         lblToegevoegdBoodschap.setText("");
-
+        System.out.println("test");
 
     }
 
