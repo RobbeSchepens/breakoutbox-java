@@ -5,6 +5,7 @@
  */
 package gui;
 
+import domein.KlasController;
 import domein.Leerling;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,13 +16,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
  *
  * @author Daan
  */
-public class DetailPanelKlasController implements Initializable {
+public class DetailPanelKlasController extends VBox {
 
     @FXML
     private Label lblTitleRight;
@@ -51,10 +53,9 @@ public class DetailPanelKlasController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public DetailPanelKlasController(KlasController kc, FrameKlassenController fc) {
     }
+
 
     @FXML
     private void btnNieuweOefeningOnAction(ActionEvent event) {
