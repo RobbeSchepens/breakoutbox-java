@@ -107,12 +107,14 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
     public void update(IKlas klas) {
         clearRender();
         initButtons(false);
-
+        List<Leerling> h = klas.getLeerlingen();
+        listLeerlingenTempAlle = h;
         txfNaamKlas.setText(klas.getNaam());
-        lsvLeerlingen.setItems(FXCollections.observableArrayList(klas.getLeerlingen()));
+        lsvLeerlingen.setItems(FXCollections.observableArrayList(h));
         lblTitleRight.setText("Overzicht Klas");
         lblUploadExcel.setVisible(false);
         btnFileOpgave.setVisible(false);
+
 
     }
 
@@ -127,18 +129,32 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @FXML
     private void btnVoegLlnToeOnAction(ActionEvent event) {
+        int i = 0;
+        boolean test = false;
+        Leerling ln = new Leerling(txfNaamLln.getText(), txfVoornaam.getText());
         txfNaamLln.setText("");
         txfVoornaam.setText("");
-        Leerling ln = new Leerling(txfNaamLln.getText(), txfVoornaam.getText());
-        lsvLeerlingen.getItems().forEach(naam -> {
-            if (naam.getVoornaam().equals(ln.getVoornaam()) && naam.getAchternaam().equals(ln.getAchternaam())) {
 
+        for (Leerling item : lsvLeerlingen.getItems()) {
+            if (item.getVoornaam().equals(ln.getVoornaam()) && item.getAchternaam().equals(ln.getAchternaam())) {
                 lblToegevoegdBoodschap.setText("leerling bestaat al");
-                return;
+                test = true;
             }
-        });
-        lblToegevoegdBoodschap.setText(ln.toString() + " toegevoegd!");
-        lsvLeerlingen.getItems().add(ln);
+        }
+        if (test) {
+            lblToegevoegdBoodschap.setText("Leerling al in lijst!");
+        } else {
+            listLeerlingenTempAlle.add(ln);
+            lsvLeerlingen.getItems().add(ln);
+            lblToegevoegdBoodschap.setText(ln.getVoornaam() + " toegevoegd!");
+        }
+
+
+
+    }
+
+    private void doe(boolean flag) {
+
     }
 
     @FXML
