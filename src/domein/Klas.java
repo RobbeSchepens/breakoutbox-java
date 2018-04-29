@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domein;
 
 import java.io.Serializable;
@@ -21,13 +16,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
-/**
- *
- * @author Daan
- */
 @Entity
 @Access(AccessType.PROPERTY)
-public class Klas implements Serializable {
+public class Klas implements IKlas, Serializable {
 
     private long id;
     private SimpleStringProperty naam = new SimpleStringProperty();
@@ -39,8 +30,8 @@ public class Klas implements Serializable {
     public Klas(String naam, List<Leerling> leerlingen) {
         setNaam(naam);
         setLeerlingen(leerlingen);
-
     }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
@@ -51,12 +42,12 @@ public class Klas implements Serializable {
         this.id = id;
     }
 
-
     public StringProperty naamProperty() {
         return naam;
     }
 
     @Column(name = "Naam")
+    @Override
     public String getNaam() {
         return naam.get();
     }
@@ -69,6 +60,7 @@ public class Klas implements Serializable {
     }
 
     @ManyToMany(cascade = CascadeType.PERSIST)
+    @Override
     public List<Leerling> getLeerlingen() {
         return leerlingen;
     }
@@ -81,6 +73,4 @@ public class Klas implements Serializable {
     public String toString() {
         return naam.get();
     }
-
-
 }
