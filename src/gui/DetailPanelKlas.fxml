@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="740.0" type="VBox" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" >
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="740.0" type="VBox" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER">
          <children>
@@ -23,7 +23,7 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <Button fx:id="btnNieuweOefening" mnemonicParsing="false" onAction="#btnNieuweOefeningOnAction" styleClass="btn-secondary" text="Leeg velden en maak een nieuwe oefening aan" visible="false" />
+            <Button mnemonicParsing="false" styleClass="btn-secondary" text="Leeg velden en maak een nieuwe oefening aan" visible="false" />
          </children>
          <VBox.margin>
             <Insets bottom="15.0" />
@@ -39,13 +39,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="330.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label focusTraversable="false" text="Naam Klas" />
             <TextField fx:id="txfNaamKlas" GridPane.columnIndex="1" />
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label focusTraversable="false" text="Upload excel" GridPane.rowIndex="1" />
+            <Label fx:id="lblUploadExcel" focusTraversable="false" text="Upload excel" GridPane.rowIndex="1" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
                   <VBox prefHeight="330.0" prefWidth="265.0">
@@ -61,7 +59,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
@@ -84,8 +82,11 @@
                               <Label text="Nieuwe leerling toevoegen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label prefHeight="17.0" prefWidth="78.0" text="Voornaam: " GridPane.rowIndex="3" />
                               <Button mnemonicParsing="false" onAction="#btnVoegLlnToeOnAction" prefHeight="25.0" prefWidth="150.0" text="Voeg leerling toe" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Button mnemonicParsing="false" prefWidth="150.0" text="Verwijder leerling" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <Label GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
+                              <Button mnemonicParsing="false" onAction="#btnVerwijderLlnOnAction" prefWidth="150.0" text="Verwijder leerling" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label fx:id="lblGeselect" text="Geselecteerd:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+                                 <GridPane.margin>
+                                    <Insets left="2.0" />
+                                 </GridPane.margin></Label>
                            </children>
                         </GridPane>
                      </children>
@@ -115,7 +116,7 @@
                   </HBox>
                </children>
             </HBox>
-            <Button fx:id="btnFileOpgave" mnemonicParsing="false" onAction="#btnUploadExcelOnAction" text="File..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="btnFileOpgave" mnemonicParsing="false" onAction="#btnUploadExcelOnAction" text="file ..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="lblExcelName" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="50.0" />
@@ -130,6 +131,15 @@
          <padding>
             <Insets bottom="15.0" />
          </padding>
+      </HBox>
+      <HBox alignment="CENTER">
+         <padding>
+            <Insets bottom="15.0" />
+         </padding>
+         <children>
+            <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#btnAddOnAction" styleClass="btn-big-action" text="Voeg toe" />
+            <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#btnEditOnAction" styleClass="btn-big-action" text="Pas aan" />
+         </children>
       </HBox>
       <HBox alignment="CENTER">
          <padding>

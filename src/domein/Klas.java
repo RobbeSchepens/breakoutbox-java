@@ -47,6 +47,7 @@ public class Klas implements IKlas, Serializable {
         return naam;
     }
 
+
     @Column(name = "Naam")
     @Override
     public String getNaam() {
@@ -74,4 +75,5 @@ public class Klas implements IKlas, Serializable {
     public String toString() {
         return naam.get();
     }
+
 }
