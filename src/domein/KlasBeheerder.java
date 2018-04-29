@@ -6,37 +6,36 @@
 package domein;
 
 import java.util.List;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import repository.GenericDaoJpa;
+import repository.KlasDaoJpa;
 
 /**
  *
  * @author Daan
  */
 public class KlasBeheerder {
-    public final String PERSISTENCE_UNIT_NAME = "breakoutboxPU";
-    private EntityManager em;
-    private EntityManagerFactory emf;
-    private GenericDaoJpa<Klas> klasRepo;
-
-
+    private KlasDaoJpa klasRepo;
     private ObservableList<? extends IKlas> klassen;
+    private List<Klas> klassenList;
 
     public KlasBeheerder() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        em = emf.createEntityManager();
 
-        setKlasRepo(new GenericDaoJpa(Klas.class));
+        klasRepo = new KlasDaoJpa();
+        laadKlassen();
+
     }
+
 
     public GenericDaoJpa<Klas> getKlasRepo() {
         return klasRepo;
     }
 
-    public void setKlasRepo(GenericDaoJpa<Klas> klasRepo) {
+    public void setKlasRepo(KlasDaoJpa klasRepo) {
         this.klasRepo = klasRepo;
     }
 
@@ -47,10 +46,13 @@ public class KlasBeheerder {
     }
 
     public void addKlas(Klas klas) {
-        em.getTransaction().begin();
-        em.persist(klas);
-        em.getTransaction().commit();
+        klassenList.add(klas);
+        klasRepo.insert(klas);
+        laadKlassen();
     }
 
+    private void laadKlassen() {
+        klassenList = klasRepo.findAll();
+    }
 
 }

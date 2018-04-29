@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
 import repository.GenericDaoJpa;
+import repository.KlasDaoJpa;
 
 public class OefeningData {
 
@@ -77,7 +78,7 @@ public class OefeningData {
                 new Klas("NaamKlas3", leerlingen.subList(2, 19))
         ));
 
-        GenericDaoJpa klasDao = new GenericDaoJpa(Klas.class);
+        KlasDaoJpa klasDao = new KlasDaoJpa();
 
         klassen.forEach(klas -> {
             klasDao.insert(klas);
