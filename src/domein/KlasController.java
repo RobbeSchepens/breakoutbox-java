@@ -1,5 +1,7 @@
 package domein;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import javafx.collections.ObservableList;
 
 public class KlasController {
@@ -21,10 +23,8 @@ public class KlasController {
     }
 
     public void voegKlasToe(String naam, ObservableList<Leerling> leerlingen) {
-
-        Klas klas = new Klas(naam, leerlingen);
-        System.out.println("leerlingen");
-        System.out.println(klas.getLeerlingen());
+        ArrayList<Leerling> lln = new ArrayList<>(leerlingen);
+        Klas klas = new Klas(naam, lln);
         kb.add(klas);
     }
     
