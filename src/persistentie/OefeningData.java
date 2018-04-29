@@ -21,10 +21,10 @@ public class OefeningData {
 
     public OefeningData(OefeningBeheerder oefeningBeheerder) {
         ob = oefeningBeheerder;
+        populeerData();
     }
 
-    public void populeerData() {
-
+    private void populeerData() {
         List<Groepsbewerking> bewerkingenDatabankLijst = new ArrayList();
         for (double i = 1; i < 7; i++) { // 20 bewerkingen maken
             bewerkingenDatabankLijst.add(new AddGroepsbewerking("Voeg toe", i));

@@ -10,11 +10,19 @@ import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class StartUpGuiClientApp extends Application {
     
+    private final String PERSISTENCE_UNIT_NAME = "breakoutboxPU";
+    private EntityManager em;
+    private EntityManagerFactory emf;
+    
     @Override
     public void start(Stage primaryStage) {
+        openPersistentie();
 
         ///// folder aanmaken waar pdfs inkomen
         File pdfLocation = new File(PDF.FOLDERLOCATIE);
@@ -35,10 +43,24 @@ public class StartUpGuiClientApp extends Application {
         primaryStage.getIcons().add(new Image("gui/img/favicon.png"));
         primaryStage.setTitle("Break Out Box Applicatie");
         primaryStage.setScene(scene);
+        primaryStage.setOnCloseRequest(
+                e -> closePersistentie()
+        );
         primaryStage.show();
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    private void openPersistentie() {
+        emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        em = emf.createEntityManager();
+    }
+
+    public void closePersistentie() {
+        if (em != null) em.close();
+        if (emf != null) emf.close();
+        System.out.println("Entity Manager has been closed.");
     }
 }
