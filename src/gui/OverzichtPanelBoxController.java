@@ -12,6 +12,7 @@ import domein.IBox;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;

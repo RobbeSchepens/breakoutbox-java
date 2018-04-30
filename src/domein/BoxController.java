@@ -7,6 +7,7 @@ package domein;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 
 /**
@@ -75,12 +76,17 @@ public class BoxController {
     }
 
     public int CountlistOefeningenVanBoxTemp() {
+
+        System.out.println("size box oefn " + listOefeningenVanBoxTemp.size());
         return listOefeningenVanBoxTemp.size();
     }
 
     public int CountlistActiesVanBoxTemp() {
+        System.out.println("size box acties " + listActiesVanBoxTemp.size());
         return listActiesVanBoxTemp.size();
+
     }
+
 
 
     public void pasBoxAan(String naam, String omschrijving, Vak vak) {
