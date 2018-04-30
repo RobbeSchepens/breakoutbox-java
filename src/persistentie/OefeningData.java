@@ -106,7 +106,7 @@ public class OefeningData {
 
         List<Box> boxen = new ArrayList<>(Arrays.asList( // geen loop van maken!
                 new Box("box1", "Boxomschrijving1", vakken.get(2), acties.subList(2, 8), oefeningen.subList(0, 2)),
-                new Box("box2", "Boxomschrijving3", vakken.get(0), acties.subList(0, 11), oefeningen.subList(1, 3)),
+                new Box("box2", "Boxomschrijving3", vakken.get(0), acties.subList(0, 11), oefeningen.subList(1, 2)),
                 new Box("box3", "Boxomschrijving2", vakken.get(3), acties.subList(0, 4), oefeningen.subList(0, 1))
         ));
 
@@ -128,10 +128,10 @@ public class OefeningData {
         vakken.forEach(vak -> ob.addVak(vak));
         bewerkingenDatabankLijst.forEach(bw -> ob.addGroepsbewerking(bw));
         doelstellingenArray.forEach(dls -> ob.addDoelstelling(dls));
-        /* ob.add(oefeningen.get(0));
-        ob.add(oefeningen.get(1));
+        // ob.add(oefeningen.get(0));
+        //ob.add(oefeningen.get(1));
         ob.add(oefeningen.get(2));
-*/
+
         /* GenericDaoJpa boxDao = new GenericDaoJpa<>(Box.class);
         boxen.forEach(box -> {
             boxDao.insert(box);

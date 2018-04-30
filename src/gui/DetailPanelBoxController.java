@@ -140,8 +140,16 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
 
     @FXML
     private void btnEditOnAction(ActionEvent event) {
+        try {
+            bc.pasBoxAan(tfxNaam.getText(), txfOmschrijving.getText(), ddlVak.getSelectionModel().getSelectedItem());
+            clearRender();
+            fc.toonListview("cancel/init");
+            lblSuccess.setText("De box werd succesvol aangepast");
+        } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
+            lblSuccess.setText("");
+            lblError.setText(ex.getMessage());
+        }
 
-        fc.toonListview("cancel/init");
     }
 
     @FXML
@@ -178,13 +186,12 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
     @Override
     public void CountlistActiesVanBoxTemp() {
 
-        System.out.println(bc.CountlistActiesVanBoxTemp());
         lblActiesCount.setText(bc.CountlistActiesVanBoxTemp() + " acties geselecteerd");
     }
 
     @Override
     public void CountlistOefeningenVanBoxTemp() {
-        System.out.println(bc.CountlistActiesVanBoxTemp());
+
         lblOefeningenCount.setText(bc.CountlistOefeningenVanBoxTemp() + " oefeningen geselecteerd");
     }
 

@@ -8,17 +8,16 @@ package gui;
 import domein.BoxController;
 import domein.BoxObserver;
 import domein.BoxSubject;
-import domein.OefeningController;
 import domein.IBox;
-import domein.IKlas;
-import domein.KlasController;
-import domein.KlasObserver;
 import java.util.HashSet;
-import java.util.Observable;
+import java.util.Optional;
 import java.util.Set;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -40,7 +39,20 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
 
     @Override
     void btnDeleteSelectedOnAction(ActionEvent event) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (getTbvOverzicht().getSelectionModel().getSelectedItem() != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Verwijder oefening");
+            alert.setHeaderText("Bent u zeker dat u de oefening wilt verwijderen?");
+
+            // Volgende regel zorgt ervoor dat het icoontje en de stylesheet meegenomen worden
+            alert.initOwner(this.getScene().getWindow());
+            alert.setGraphic(new ImageView(this.getClass().getResource("/gui/img/favicon.png").toString()));
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                bc.delete(getTbvOverzicht().getSelectionModel().getSelectedItem());
+            }
+        }
     }
 
     @Override
