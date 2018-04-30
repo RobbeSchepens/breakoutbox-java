@@ -22,6 +22,10 @@ public class FrameBoxController extends GridPane {
         boxenDetailPanelListActiesController = new DetailPanelBoxListActiesController(bc, this);
         boxenDetailPanelListOefeningenController = new DetailPanelBoxListOefeningenController(bc, this);
 
+        overzichtPanelController.addBoxObserver(boxesDetailPanelController);
+        overzichtPanelController.addBoxObserver(boxenDetailPanelListActiesController);
+        overzichtPanelController.addBoxObserver(boxenDetailPanelListOefeningenController);
+
         add(nav, 0, 0);
         setColumnSpan(nav, 2);
         add(overzichtPanelController, 0, 1);
@@ -50,6 +54,10 @@ public class FrameBoxController extends GridPane {
                 overzichtPanelController.setVisible(true);
                 break;
         }
+    }
+
+    public void initNieuweOefening() {
+        overzichtPanelController.clearSelectedItem();
     }
     
 }

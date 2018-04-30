@@ -6,6 +6,8 @@
 package gui;
 
 import domein.BoxController;
+import domein.BoxObserver;
+import domein.IBox;
 import domein.Vak;
 import exceptions.NaamTeKortException;
 import exceptions.NaamTeLangException;
@@ -28,7 +30,7 @@ import javafx.scene.layout.VBox;
  *
  * @author Daan
  */
-public class DetailPanelBoxController extends VBox {
+public class DetailPanelBoxController extends VBox implements BoxObserver {
     private BoxController bc;
     private FrameBoxController fc;
 
@@ -61,6 +63,9 @@ public class DetailPanelBoxController extends VBox {
     @FXML
     private Label lblSuccess;
 
+    @FXML
+    private Button btnAddWithContent;
+
     public DetailPanelBoxController(BoxController bc, FrameBoxController fc) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("DetailPanelBox.fxml"));
@@ -79,9 +84,26 @@ public class DetailPanelBoxController extends VBox {
     private void initButtons(boolean isNew) {
         btnAdd.setManaged(isNew);
         btnAdd.setVisible(isNew);
+
+        btnAddWithContent.setManaged(!isNew);
+        btnAddWithContent.setVisible(!isNew);
         btnEdit.setManaged(!isNew);
         btnEdit.setVisible(!isNew);
 
+    }
+
+    @Override
+    public void update(IBox box) {
+        clearRender();
+        System.out.println("hi");
+        initButtons(false);
+        lblTitleRight.setText("Overzicht Box");
+        tfxNaam.setText(box.getNaam());
+        txfOmschrijving.setText(box.getOmschrijving());
+        ddlVak.setItems(bc.geefVakken());
+        ddlVak.getSelectionModel().select(box.getVak());
+        lblError.setText("");
+        lblSuccess.setText("");
     }
 
     @FXML
@@ -116,6 +138,19 @@ public class DetailPanelBoxController extends VBox {
         fc.toonListview("cancel/init");
     }
 
+    @FXML
+    private void btnAddWithContentOnAction(ActionEvent event) {
+        try {
+            bc.voegBoxToe(tfxNaam.getText(), txfOmschrijving.getText(), ddlVak.getSelectionModel().getSelectedItem(), null, null);
+            clearRender();
+            fc.toonListview("cancel/init");
+        } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
+            lblSuccess.setText("");
+            lblError.setText(ex.getMessage());
+        }
+
+    }
+
     private void clearRender() {
         initButtons(true);
         tfxNaam.setText("");
@@ -127,5 +162,6 @@ public class DetailPanelBoxController extends VBox {
 
 
     }
+
 
 }
