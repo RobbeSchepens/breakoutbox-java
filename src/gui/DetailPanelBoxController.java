@@ -145,6 +145,7 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
             clearRender();
             fc.toonListview("cancel/init");
             lblSuccess.setText("De box werd succesvol aangepast");
+            fc.notifyChangeAantallen();
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());

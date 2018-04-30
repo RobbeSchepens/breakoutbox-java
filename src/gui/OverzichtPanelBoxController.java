@@ -119,4 +119,9 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
     @Override
     void clearAddedFilters() {}
 
+
+    void NotifyChangeAantallen() {
+        renderContent();
+    }
+
 }

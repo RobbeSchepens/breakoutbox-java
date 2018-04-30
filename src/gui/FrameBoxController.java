@@ -64,5 +64,9 @@ public class FrameBoxController extends GridPane {
         boxenDetailPanelListActiesController.nieuweOefening();
         boxenDetailPanelListOefeningenController.nieuweOefening();
     }
+
+    void notifyChangeAantallen() {
+        overzichtPanelController.NotifyChangeAantallen();
+    }
     
 }
