@@ -6,6 +6,7 @@
 package domein;
 
 import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.ObservableList;
 
 /**
@@ -16,6 +17,9 @@ public class BoxController {
 
     private Box huidigeBox;
     private BoxBeheerder bb = new BoxBeheerder();
+
+    private List<Actie> listActiesVanBoxTemp = new ArrayList<>();
+    private List<Oefening> listOefeningenVanBoxTemp = new ArrayList<>();
 
     public BoxController() {
         this.bb = new BoxBeheerder();
@@ -48,21 +52,48 @@ public class BoxController {
         bb.delete((Box) o);
     }
 
-    public void voegBoxToe(String naam, String omschrijving, Vak vak, ObservableList<Actie> acties, ObservableList<Oefening> oefening) {
-        // ArrayList<Actie> act = new ArrayList<>(acties);
-        //ArrayList<Oefening> oef = new ArrayList<>(oefening);
-        Box box = new Box(naam, omschrijving, vak, acties, oefening);
+
+    public void voegBoxToe(String naam, String omschrijving, Vak vak) {
+        Box box = new Box(naam, omschrijving, vak, listActiesVanBoxTemp, listOefeningenVanBoxTemp);
         bb.add(box);
     }
 
-    public void pasBoxAan(String naam, String omschrijving, Vak vak, ObservableList<Actie> acties, ObservableList<Oefening> oefening) {
-        ArrayList<Actie> act = new ArrayList<>(acties);
-        ArrayList<Oefening> oef = new ArrayList<>(oefening);
+    public void setListActiesVanBoxTemp(List<IActie> listActiesVanBoxTemp) {
+
+        List<? extends IActie> lijst = listActiesVanBoxTemp;
+        this.listActiesVanBoxTemp = (List<Actie>) lijst;
+    }
+
+    public void setListOefeningenVanBoxTemp(List<IOefening> listOefeningenVanBoxTemp) {
+        List<? extends IOefening> lijst = listOefeningenVanBoxTemp;
+        this.listOefeningenVanBoxTemp = (List<Oefening>) lijst;
+    }
+
+    public int CountlistOefeningenVanBoxTemp() {
+        return listOefeningenVanBoxTemp.size();
+    }
+
+    public int CountlistActiesVanBoxTemp() {
+        return listActiesVanBoxTemp.size();
+    }
+
+
+    public void pasBoxAan(String naam, String omschrijving, Vak vak) {
+
+        // De acties zijn onveranderd gebleven
+        if (listActiesVanBoxTemp.isEmpty()) {
+            listActiesVanBoxTemp = huidigeBox.getActies();
+        }
+        // De oefn zijn onveranderd gebleven
+        if (listOefeningenVanBoxTemp.isEmpty()) {
+            listOefeningenVanBoxTemp = huidigeBox.getOefeningen();
+        }
+
         huidigeBox.setNaam(naam);
         huidigeBox.setOmschrijving(omschrijving);
         huidigeBox.setVak(vak);
-        huidigeBox.setActies(act);
-        huidigeBox.setOefeningen(oef);
+        huidigeBox.setActies(listActiesVanBoxTemp);
+        huidigeBox.setOefeningen(listOefeningenVanBoxTemp);
         
         bb.update(huidigeBox);
 

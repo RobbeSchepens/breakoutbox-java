@@ -7,12 +7,15 @@ package gui;
 
 import domein.BoxController;
 import domein.BoxObserver;
+import domein.BoxSubject;
 import domein.IActie;
 import domein.IBox;
 import domein.IOefening;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -31,14 +34,14 @@ import javafx.scene.layout.VBox;
  *
  * @author Daan
  */
-public class DetailPanelBoxListOefeningenController extends VBox implements BoxObserver {
+public class DetailPanelBoxListOefeningenController extends VBox implements BoxObserver, BoxSubject {
      
      
     FrameBoxController fc;
     BoxController bc;
     private List<IOefening> listOefeningenTempAlle = new ArrayList<>();
     private List<IOefening> listOefeningenTempGeselect = new ArrayList<>();
-
+    private Set<BoxObserver> observers;
     @FXML
     private Label lblTitleLeftList;
     @FXML
@@ -69,6 +72,7 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
 
         this.bc = bc;
         this.fc = fc;
+        this.observers = new HashSet<>();
         lblTitleLeftList.setText("Oefeningen");
         lsvListAlle.setItems(bc.geefOefeningen());
 
@@ -132,9 +136,37 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
 
     @FXML
     private void btnSubmitOnAction(ActionEvent event) {
-        //hier nog dingen
+        bc.setListOefeningenVanBoxTemp(listOefeningenTempGeselect);
         fc.toonListview("cancel/init");
+        notifyObserversList();
     }
 
+
+    @Override
+    public void CountlistActiesVanBoxTemp() {
+
+    }
+
+    @Override
+    public void CountlistOefeningenVanBoxTemp() {
+
+    }
+
+    @Override
+    public void addBoxObserver(BoxObserver o) {
+        if (!observers.contains(o)) {
+            observers.add(o);
+        }
+    }
+
+    @Override
+    public void removeBoxObserver(BoxObserver o) {
+        observers.remove(o);
+    }
+    private void notifyObserversList() {
+        observers.forEach((observer) -> {
+            observer.CountlistOefeningenVanBoxTemp();
+        });
+    }
 
 }

@@ -14,7 +14,9 @@ import exceptions.NaamTeLangException;
 import exceptions.SpecialeTekensInNaamException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +35,7 @@ import javafx.scene.layout.VBox;
 public class DetailPanelBoxController extends VBox implements BoxObserver {
     private BoxController bc;
     private FrameBoxController fc;
-
+    private Set<BoxObserver> observers;
     @FXML
     private Label lblTitleRight;
     @FXML
@@ -78,6 +80,7 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
         }
         this.bc = bc;
         this.fc = fc;
+        this.observers = new HashSet<>();
         ddlVak.setItems(bc.geefVakken());
         initButtons(true);
     }
@@ -123,7 +126,7 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
     @FXML
     private void btnAddOnAction(ActionEvent event) {
         try {
-            bc.voegBoxToe(tfxNaam.getText(), txfOmschrijving.getText(), ddlVak.getSelectionModel().getSelectedItem(), null, null);
+            bc.voegBoxToe(tfxNaam.getText(), txfOmschrijving.getText(), ddlVak.getSelectionModel().getSelectedItem());
             clearRender();
             fc.toonListview("cancel/init");
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
@@ -141,7 +144,7 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
     @FXML
     private void btnAddWithContentOnAction(ActionEvent event) {
         try {
-            bc.voegBoxToe(tfxNaam.getText(), txfOmschrijving.getText(), ddlVak.getSelectionModel().getSelectedItem(), null, null);
+            bc.voegBoxToe(tfxNaam.getText(), txfOmschrijving.getText(), ddlVak.getSelectionModel().getSelectedItem());
             clearRender();
             fc.toonListview("cancel/init");
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
@@ -163,5 +166,15 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
 
     }
 
+
+    @Override
+    public void CountlistActiesVanBoxTemp() {
+        lblActiesCount.setText(bc.CountlistActiesVanBoxTemp() + " acties geselecteerd");
+    }
+
+    @Override
+    public void CountlistOefeningenVanBoxTemp() {
+        lblOefeningenCount.setText(bc.CountlistOefeningenVanBoxTemp() + " oefeningen geselecteerd");
+    }
 
 }

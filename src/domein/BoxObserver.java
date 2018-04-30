@@ -11,4 +11,8 @@ package domein;
  */
 public interface BoxObserver {
     public void update(IBox box);
+
+    public void CountlistActiesVanBoxTemp();
+
+    public void CountlistOefeningenVanBoxTemp();
 }

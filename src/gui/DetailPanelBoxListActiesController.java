@@ -8,15 +8,19 @@ package gui;
 import domein.Actie;
 import domein.BoxController;
 import domein.BoxObserver;
+import domein.BoxSubject;
 import domein.Groepsbewerking;
 import domein.IActie;
 import domein.IBox;
 import domein.IKlas;
+import domein.OefeningObserver;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -36,12 +40,13 @@ import javafx.scene.layout.VBox;
  *
  * @author Daan
  */
-public class DetailPanelBoxListActiesController extends VBox implements BoxObserver {
+public class DetailPanelBoxListActiesController extends VBox implements BoxObserver, BoxSubject {
 
     FrameBoxController fc;
     BoxController bc;
     private List<IActie> listActiesTempAlle;
     private List<IActie> listActiesTempGeselect = new ArrayList<>();
+    private Set<BoxObserver> observers;
 
     @FXML
     private Label lblTitleLeftList;
@@ -73,6 +78,8 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
 
         this.bc = bc;
         this.fc = fc;
+        this.observers = new HashSet<>();
+
         lblTitleLeftList.setText("Acties");
         listActiesTempAlle = new ArrayList<>(bc.geefActies());
         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
@@ -133,9 +140,36 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
 
     @FXML
     private void btnSubmitOnAction(ActionEvent event) {
-        //hier nog dingen
+        bc.setListActiesVanBoxTemp(listActiesTempGeselect);
         fc.toonListview("cancel/init");
+        notifyObserversList();
     }
 
+    @Override
+    public void addBoxObserver(BoxObserver o) {
+        if (!observers.contains(o)) {
+            observers.add(o);
+        }
+    }
+
+    @Override
+    public void removeBoxObserver(BoxObserver o) {
+        observers.remove(o);
+    }
+    private void notifyObserversList() {
+        observers.forEach((observer) -> {
+            observer.CountlistActiesVanBoxTemp();
+        });
+    }
+
+    @Override
+    public void CountlistActiesVanBoxTemp() {
+
+    }
+
+    @Override
+    public void CountlistOefeningenVanBoxTemp() {
+
+    }
 
 }
