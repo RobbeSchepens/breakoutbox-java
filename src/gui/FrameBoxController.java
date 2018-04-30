@@ -18,10 +18,9 @@ public class FrameBoxController extends GridPane {
     public FrameBoxController(OefeningController dc, KlasController kc, BoxController bc, SessieController sc, ActieController ac) {
         nav = new MenubarController(dc, kc, bc, sc, ac);
         overzichtPanelController = new OverzichtPanelBoxController(bc, this);
-
+        boxesDetailPanelController = new DetailPanelBoxController(bc, this);
         boxenDetailPanelListActiesController = new DetailPanelBoxListActiesController(bc, this);
         boxenDetailPanelListOefeningenController = new DetailPanelBoxListOefeningenController(bc, this);
-        boxesDetailPanelController = new DetailPanelBoxController(bc, this);
         overzichtPanelController.addBoxObserver(boxenDetailPanelListActiesController);
         overzichtPanelController.addBoxObserver(boxenDetailPanelListOefeningenController);
         boxenDetailPanelListActiesController.addBoxObserver(boxesDetailPanelController);

@@ -82,8 +82,8 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
         txfOmschrijving.setText(box.getOmschrijving());
         ddlVak.setItems(bc.geefVakken());
         ddlVak.getSelectionModel().select(box.getVak());
-        //lblActiesCount.setText(bc.CountlistActiesVanBoxTemp() + " acties geselecteerd");
-        //lblOefeningenCount.setText(bc.CountlistOefeningenVanBoxTemp() + " oefeningen geselecteerd");
+        lblActiesCount.setText(bc.CountlistActiesVanBoxTemp() + " acties geselecteerd");
+        lblOefeningenCount.setText(bc.CountlistOefeningenVanBoxTemp() + " oefeningen geselecteerd");
         lblError.setText("");
         lblSuccess.setText("");
     }
