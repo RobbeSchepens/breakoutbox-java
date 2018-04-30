@@ -36,7 +36,7 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT">
          <children>
-            <Label fx:id="lblAantalGeselecteerd" prefHeight="25.0" text="Geselecteerde doelstellingen: 0" />
+            <Label fx:id="lblAantalGeselecteerd" prefHeight="25.0" text="Geselecteerde Acties: 0" />
          </children>
          <padding>
             <Insets bottom="15.0" />

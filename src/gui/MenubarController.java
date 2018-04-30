@@ -132,6 +132,7 @@ public class MenubarController extends HBox{
             System.out.println("SessieController was null and is being initialized.");
             scc = new SessieController();
         }
+        nextpage = EnumMenu.SESSIE;
         FrameSessieController sc = new FrameSessieController(dc, kc, bc, scc, ac);
         Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
@@ -144,6 +145,7 @@ public class MenubarController extends HBox{
             System.out.println("ActieController was null and is being initialized.");
             ac = new ActieController();
         }
+        nextpage = EnumMenu.ACTIE;
         FrameActieController sc = new FrameActieController(dc, kc, bc, scc, ac);
         Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
