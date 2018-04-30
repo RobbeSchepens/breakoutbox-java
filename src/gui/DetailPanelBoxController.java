@@ -131,6 +131,7 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
             clearRender();
             fc.toonListview("cancel/init");
             fc.initNieuweOefening();
+            lblSuccess.setText("De box werd succesvol toegevoegd");
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());
@@ -149,6 +150,7 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
             bc.voegBoxToe(tfxNaam.getText(), txfOmschrijving.getText(), ddlVak.getSelectionModel().getSelectedItem());
             clearRender();
             fc.toonListview("cancel/init");
+            lblSuccess.setText("De box werd succesvol toegevoegd");
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());
