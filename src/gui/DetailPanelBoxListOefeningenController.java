@@ -7,15 +7,19 @@ package gui;
 
 import domein.BoxController;
 import domein.BoxObserver;
+import domein.IActie;
 import domein.IBox;
-import domein.IKlas;
+import domein.IOefening;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -32,15 +36,17 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
      
     FrameBoxController fc;
     BoxController bc;
+    private List<IOefening> listOefeningenTempAlle = new ArrayList<>();
+    private List<IOefening> listOefeningenTempGeselect = new ArrayList<>();
 
     @FXML
     private Label lblTitleLeftList;
     @FXML
     private Label lblAantalGeselecteerd;
     @FXML
-    private ListView<?> lsvListAlle;
+    private ListView<IOefening> lsvListAlle;
     @FXML
-    private ListView<?> lsvListGeselecteerde;
+    private ListView<IOefening> lsvListGeselecteerde;
     @FXML
     private Button btnDeselectAll;
     @FXML
@@ -63,6 +69,42 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
 
         this.bc = bc;
         this.fc = fc;
+        lblTitleLeftList.setText("Oefeningen");
+        lsvListAlle.setItems(bc.geefOefeningen());
+
+        listOefeningenTempAlle = new ArrayList<>(bc.geefOefeningen());
+        lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
+
+        lsvListAlle.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<IOefening>() { // moet veranderd woden
+            @Override
+            public void changed(ObservableValue<? extends IOefening> observable, IOefening oldValue, IOefening newValue) {
+                if (!(newValue == null)) {
+                    Platform.runLater(() -> {
+                        listOefeningenTempAlle.remove(newValue);
+                        lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
+                        listOefeningenTempGeselect.add(newValue);
+                        lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
+                        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listOefeningenTempGeselect.size());
+                    });
+                }
+            }
+        });
+
+        lsvListGeselecteerde.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<IOefening>() {
+            @Override
+            public void changed(ObservableValue<? extends IOefening> observable, IOefening oldValue, IOefening newValue) {
+                if (!(newValue == null)) {
+
+                    Platform.runLater(() -> {
+                        listOefeningenTempGeselect.remove(newValue);
+                        lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
+                        listOefeningenTempAlle.add(newValue);
+                        lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
+                        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listOefeningenTempGeselect.size());
+                    });
+                }
+            }
+        });
 
     }
 
@@ -85,10 +127,13 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
 
     @FXML
     private void btnCancelOnAction(ActionEvent event) {
+        fc.toonListview("cancel/init");
     }
 
     @FXML
     private void btnSubmitOnAction(ActionEvent event) {
+        //hier nog dingen
+        fc.toonListview("cancel/init");
     }
 
 

@@ -120,10 +120,6 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
         lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
     }
 
-    @Override
-    public void update(List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     @FXML
     private void btnDeselectAllOnAction(ActionEvent event) {
@@ -157,5 +153,10 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
         lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+    }
+
+    @Override
+    public void update(List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

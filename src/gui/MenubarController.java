@@ -115,9 +115,10 @@ public class MenubarController extends HBox{
 
     @FXML
     private void hbxBoxesOnMouseClicked(MouseEvent event) {
-        if (bc == null) {
-            System.out.println("BoxController was null and is being initialized.");
+        if (bc == null || ac == null) {
+            System.out.println("BoxController/ActieController was null and is being initialized.");
             bc = new BoxController();
+            ac = new ActieController();
         }
         nextpage = EnumMenu.BOX;
         FrameBoxController sc = new FrameBoxController(dc, kc, bc, scc, ac);
