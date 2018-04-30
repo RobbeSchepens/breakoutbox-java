@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domein;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 
-/**
- *
- * @author Daan
- */
 public class BoxController {
 
     private Box huidigeBox;
@@ -42,20 +32,15 @@ public class BoxController {
         return (ObservableList<IOefening>) bb.getOefeningen();
     }
 
-
     public void setHuidigeBox(IBox box) {
         this.huidigeBox = (Box) box;
-
     }
-
 
     public void delete(IBox o) {
         bb.delete((Box) o);
     }
 
-
     public void voegBoxToe(String naam, String omschrijving, Vak vak) {
-
         System.out.println("voeg box toe");
         System.out.println(listActiesVanBoxTemp);
         System.out.println(listOefeningenVanBoxTemp);
@@ -65,7 +50,6 @@ public class BoxController {
     }
 
     public void setListActiesVanBoxTemp(List<IActie> listActiesVanBoxTemp) {
-
         List<? extends IActie> lijst = listActiesVanBoxTemp;
         this.listActiesVanBoxTemp = (List<Actie>) lijst;
     }
@@ -76,19 +60,14 @@ public class BoxController {
     }
 
     public int CountlistOefeningenVanBoxTemp() {
-
         return listOefeningenVanBoxTemp.size();
     }
 
     public int CountlistActiesVanBoxTemp() {
         return listActiesVanBoxTemp.size();
-
     }
 
-
-
     public void pasBoxAan(String naam, String omschrijving, Vak vak) {
-
         // De acties zijn onveranderd gebleven
         if (listActiesVanBoxTemp.isEmpty()) {
             listActiesVanBoxTemp = huidigeBox.getActies();
@@ -105,7 +84,5 @@ public class BoxController {
         huidigeBox.setOefeningen(listOefeningenVanBoxTemp);
         
         bb.update(huidigeBox);
-
     }
-
 }
