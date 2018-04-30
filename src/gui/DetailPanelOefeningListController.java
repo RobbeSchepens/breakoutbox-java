@@ -126,9 +126,10 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
     }
 
     @Override
-    public void update(List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void updateCountGroepsb() {}
+
+    @Override
+    public void updateCountDoelst() {}
     
     @FXML
     private void btnDeselectAllOnAction(ActionEvent event) {
@@ -176,15 +177,9 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
         observers.remove(o);
     }
     
-    private void notifyObservers() {
-        observers.forEach((observer) -> {
-            observer.update(dc.getHuidigeOefening());
-        });
-    }
-    
     private void notifyObserversList() {
         observers.forEach((observer) -> {
-            observer.update(dc.getHuidigeOefening().getGroepsBewerkingen(), dc.getHuidigeOefening().getDoelstellingen());
+            observer.updateCountGroepsb();
         });
     }
 }

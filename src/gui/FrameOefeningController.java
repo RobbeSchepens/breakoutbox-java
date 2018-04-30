@@ -23,11 +23,11 @@ public final class FrameOefeningController extends GridPane {
         oefeningDetailPanelListController = new DetailPanelOefeningListController(dc, this);
         oefeningDetailPanelListDoelstellingController = new DetailPanelOefeningListDoelstellingController(dc, this);
         
-        //dc.addObserver(overzichtPanelController);
         overzichtPanelController.addOefeningObserver(oefeningDetailPanelController); // het scherm met de datails van oefeningen
         overzichtPanelController.addOefeningObserver(oefeningDetailPanelListController); // het scherm met lisviews gbw
         overzichtPanelController.addOefeningObserver(oefeningDetailPanelListDoelstellingController); // het scherm met lisviews doels
         oefeningDetailPanelListController.addOefeningObserver(oefeningDetailPanelController);
+        oefeningDetailPanelListDoelstellingController.addOefeningObserver(oefeningDetailPanelController);
         
         add(nav, 0, 0);
         setColumnSpan(nav, 2);

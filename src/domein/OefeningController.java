@@ -99,6 +99,14 @@ public class OefeningController {
     public void setListDoelstellingenVanOefening(List<Doelstelling> listDoelstellingenVanOefening) {
         this.listDoelstellingenVanOefening = listDoelstellingenVanOefening;
     }
+    
+    public int getAantalTempGroepsbewerkingen() {
+        return this.listGroepsbewerkingenVanOefening.size();
+    }
+    
+    public int getAantalTempDoelstellingen() {
+        return this.listDoelstellingenVanOefening.size();
+    }
 
     // Wordt niet gebruikt
     public void setGroepsbewerkingenOefening(List<Groepsbewerking> selectedItems) {

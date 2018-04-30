@@ -5,9 +5,12 @@ import domein.OefeningController;
 import domein.Groepsbewerking;
 import domein.IOefening;
 import domein.OefeningObserver;
+import domein.OefeningSubject;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -21,13 +24,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-public class DetailPanelOefeningListDoelstellingController extends VBox implements OefeningObserver {
+public class DetailPanelOefeningListDoelstellingController extends VBox implements OefeningObserver, OefeningSubject {
 
     private OefeningController dc;
     private FrameOefeningController fc;
     private List<Doelstelling> listDoelstellingenTempAlle = new ArrayList<>();
     private List<Doelstelling> listDoelstellingenTempGeselect = new ArrayList<>();
     private int geseleceerdeDoelstellingen = 0;
+    private Set<OefeningObserver> observers;
 
     @FXML private Label lblTitleLeftList;
     @FXML private Label lblAantalGeselecteerd;
@@ -46,6 +50,8 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+        
+        this.observers = new HashSet<>();
         this.dc = dcon;
         this.fc = fc;
 
@@ -135,6 +141,7 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
     private void btnSubmitOnAction(ActionEvent event) {
         dc.setListDoelstellingenVanOefening(listDoelstellingenTempGeselect);
         fc.toonListview("cancel/init");
+        notifyObserversList();
         //Dit crasht bij nieuwe oefening, er bestaat nog geen huidige oefening
         //dc.setDoelstellingenOefening(lsvListGeselecteerde.getSelectionModel().getSelectedItems());
     }
@@ -156,7 +163,25 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
     }
 
     @Override
-    public void update(List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateCountGroepsb() {}
+
+    @Override
+    public void updateCountDoelst() {}
+
+    @Override
+    public void addOefeningObserver(OefeningObserver o) {
+        if (!observers.contains(o))
+            observers.add(o);
+    }
+
+    @Override
+    public void removeOefeningObserver(OefeningObserver o) {
+        observers.remove(o);
+    }
+    
+    private void notifyObserversList() {
+        observers.forEach((observer) -> {
+            observer.updateCountDoelst();
+        });
     }
 }
