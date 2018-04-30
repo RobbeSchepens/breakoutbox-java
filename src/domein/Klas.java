@@ -69,10 +69,10 @@ public class Klas implements IKlas, Serializable {
     }
 
     public void setLeerlingen(List<Leerling> leerlingen) {
-        System.out.println("hier");
-        if (leerlingen == null || leerlingen.isEmpty()) {
+
+        /*if (leerlingen == null || leerlingen.isEmpty()) {
             throw new IllegalArgumentException("Je moet leerlingen opgeven");
-        }
+        }*/
         this.leerlingen = leerlingen;
     }
 
