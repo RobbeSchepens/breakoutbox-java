@@ -6,6 +6,10 @@
 package gui;
 
 import domein.BoxController;
+import domein.Vak;
+import exceptions.NaamTeKortException;
+import exceptions.NaamTeLangException;
+import exceptions.SpecialeTekensInNaamException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,7 +43,7 @@ public class DetailPanelBoxController extends VBox {
     @FXML
     private Label lblFeedback;
     @FXML
-    private ComboBox<?> ddlVak;
+    private ComboBox<Vak> ddlVak;
     @FXML
     private Button btnActies;
     @FXML
@@ -69,6 +73,7 @@ public class DetailPanelBoxController extends VBox {
         }
         this.bc = bc;
         this.fc = fc;
+        ddlVak.setItems(bc.geefVakken());
         initButtons(true);
     }
     private void initButtons(boolean isNew) {
@@ -85,18 +90,42 @@ public class DetailPanelBoxController extends VBox {
 
     @FXML
     private void btnOefeningenOnAction(ActionEvent event) {
+        fc.toonListview("oef");
     }
 
     @FXML
     private void btnActiesonAction(ActionEvent event) {
+        fc.toonListview("act");
     }
 
     @FXML
     private void btnAddOnAction(ActionEvent event) {
+        try {
+            bc.voegBoxToe(tfxNaam.getText(), txfOmschrijving.getText(), ddlVak.getSelectionModel().getSelectedItem(), null, null);
+            clearRender();
+            fc.toonListview("cancel/init");
+        } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
+            lblSuccess.setText("");
+            lblError.setText(ex.getMessage());
+        }
     }
 
     @FXML
     private void btnEditOnAction(ActionEvent event) {
+
+        fc.toonListview("cancel/init");
+    }
+
+    private void clearRender() {
+        initButtons(true);
+        tfxNaam.setText("");
+        txfOmschrijving.setText("");
+        ddlVak.setItems(bc.geefVakken());
+        ddlVak.getSelectionModel().clearSelection();
+        lblOefeningenCount.setText("0 oefeningen geselecteerd");
+        lblActiesCount.setText("0 acties geselecteerd");
+
+
     }
 
 }

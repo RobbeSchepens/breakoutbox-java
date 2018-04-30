@@ -10,5 +10,5 @@ package domein;
  * @author Daan
  */
 public interface BoxObserver {
-    public void update(IKlas klas);
+    public void update(IBox box);
 }

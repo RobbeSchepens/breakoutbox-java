@@ -21,27 +21,41 @@ public class BoxController {
         this.bb = new BoxBeheerder();
     }
 
-    public ObservableList<IBox> geefKlassen() {
+    public ObservableList<IBox> geefBoxen() {
         return (ObservableList<IBox>) bb.getBoxen();
     }
 
-    public void setHuidigeKlas(IBox box) {
+    public ObservableList<Vak> geefVakken() {
+        return (ObservableList<Vak>) bb.getVakken();
+    }
+
+    public ObservableList<IActie> geefActies() {
+        return (ObservableList<IActie>) bb.getActies();
+    }
+
+    public ObservableList<IOefening> geefOefeningen() {
+        return (ObservableList<IOefening>) bb.getOefeningen();
+    }
+
+
+    public void setHuidigeBox(IBox box) {
         this.huidigeBox = (Box) box;
 
     }
+
 
     public void delete(IBox o) {
         bb.delete((Box) o);
     }
 
-    public void voegKlasToe(String naam, String omschrijving, Vak vak, ObservableList<Actie> acties, ObservableList<Oefening> oefening) {
-        ArrayList<Actie> act = new ArrayList<>(acties);
-        ArrayList<Oefening> oef = new ArrayList<>(oefening);
+    public void voegBoxToe(String naam, String omschrijving, Vak vak, ObservableList<Actie> acties, ObservableList<Oefening> oefening) {
+        // ArrayList<Actie> act = new ArrayList<>(acties);
+        //ArrayList<Oefening> oef = new ArrayList<>(oefening);
         Box box = new Box();
         bb.add(box);
     }
 
-    public void pasOefeningAan(String naam, String omschrijving, Vak vak, ObservableList<Actie> acties, ObservableList<Oefening> oefening) {
+    public void pasBoxAan(String naam, String omschrijving, Vak vak, ObservableList<Actie> acties, ObservableList<Oefening> oefening) {
         ArrayList<Actie> act = new ArrayList<>(acties);
         ArrayList<Oefening> oef = new ArrayList<>(oefening);
         huidigeBox.setNaam(naam);

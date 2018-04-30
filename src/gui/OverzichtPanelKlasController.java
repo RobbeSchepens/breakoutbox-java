@@ -104,7 +104,6 @@ public class OverzichtPanelKlasController extends OverzichtPanelController<IKlas
     }
 
     void notifyChangeVoorAantalLln() {
-        System.out.println("hi");
         renderContent();
     }
     

@@ -6,11 +6,16 @@
 package gui;
 
 import domein.BoxController;
+import domein.BoxObserver;
+import domein.BoxSubject;
 import domein.OefeningController;
 import domein.IBox;
 import domein.IKlas;
 import domein.KlasController;
+import domein.KlasObserver;
+import java.util.HashSet;
 import java.util.Observable;
+import java.util.Set;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
@@ -19,13 +24,15 @@ import javafx.scene.control.TableColumn;
  *
  * @author Daan
  */
-public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, BoxController> {
+public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, BoxController> implements BoxSubject {
 
     BoxController bc;
     FrameBoxController fc;
+    private Set<BoxObserver> observers;
 
     public OverzichtPanelBoxController(BoxController bc, FrameBoxController fc) {
         super(bc);
+        this.observers = new HashSet<>();
         this.bc = bc;
         this.fc = fc;
         renderContent();
@@ -38,7 +45,8 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
 
     @Override
     <T> void implementTableviewListener(T newValue) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        bc.setHuidigeBox((IBox) newValue);
+        notifyObservers();
     }
 
     @Override
@@ -50,7 +58,7 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
 
     private void renderTable() {
         // Set items for tableview
-        getTbvOverzicht().setItems(bc.geefKlassen());
+        getTbvOverzicht().setItems(bc.geefBoxen());
 
         // Create new columns based on current class
         TableColumn<IBox, String> col1 = new TableColumn<>("Naam");
@@ -73,6 +81,25 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
     @Override
     void initNieuw() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addBoxObserver(BoxObserver o) {
+        if (!observers.contains(o)) {
+            observers.add(o);
+        }
+    }
+
+    @Override
+    public void removeBoxObserver(BoxObserver o) {
+        observers.remove(o);
+    }
+
+    public void notifyObservers() {
+        IBox o = getTbvOverzicht().getSelectionModel().getSelectedItem();
+        observers.forEach((observer) -> {
+            observer.update(o);
+        });
     }
 
 }

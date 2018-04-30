@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="740.0" type="VBox" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" >
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="740.0" type="VBox" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER">
          <children>
@@ -71,7 +71,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Label fx:id="lblActiesCount" text="0 toegangscodes geselecteerd" />
+                  <Label fx:id="lblActiesCount" text="0 acties geselecteerd" />
                </children>
             </HBox>
             <Label text="Vak" GridPane.rowIndex="2" />

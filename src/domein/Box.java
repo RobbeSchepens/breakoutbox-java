@@ -97,9 +97,9 @@ public class Box implements IBox, Serializable {
     }
 
     public void setOmschrijving(String omschrijving) {
-        if (omschrijving == null || omschrijving.trim().isEmpty()) {
+        /*if (omschrijving == null || omschrijving.trim().isEmpty()) {
             throw new IllegalArgumentException("Je moet een omschrijving opgeven");
-        }
+        }*/
         this.omschrijving = omschrijving;
     }
 
@@ -111,9 +111,9 @@ public class Box implements IBox, Serializable {
     }
 
     public void setActies(List<Actie> acties) {
-        if (acties == null || acties.isEmpty()) {
+        /*if (acties == null || acties.isEmpty()) {
             throw new IllegalArgumentException("Je moet acties opgeven");
-        }
+        }*/
         this.acties = acties;
     }
 
