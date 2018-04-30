@@ -22,6 +22,10 @@ public class KlasController {
 
     }
 
+    public void delete(IKlas o) {
+        kb.delete((Klas) o);
+    }
+
     public void voegKlasToe(String naam, ObservableList<Leerling> leerlingen) {
         ArrayList<Leerling> lln = new ArrayList<>(leerlingen);
         Klas klas = new Klas(naam, lln);

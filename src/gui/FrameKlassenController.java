@@ -1,8 +1,10 @@
 package gui;
 
+import domein.ActieController;
 import domein.BoxController;
 import domein.OefeningController;
 import domein.KlasController;
+import domein.SessieController;
 import javafx.scene.layout.GridPane;
 
 public class FrameKlassenController extends GridPane {
@@ -10,8 +12,8 @@ public class FrameKlassenController extends GridPane {
     MenubarController nav;
     OverzichtPanelKlasController overzichtPanelController;
     DetailPanelKlasController klassenDetailPanelController;
-    FrameKlassenController(OefeningController dc, KlasController kc, BoxController bc) {
-        nav = new MenubarController(dc, kc, bc);
+    FrameKlassenController(OefeningController dc, KlasController kc, BoxController bc, SessieController sc, ActieController ac) {
+        nav = new MenubarController(dc, kc, bc, sc, ac);
         overzichtPanelController = new OverzichtPanelKlasController(kc, this);
         klassenDetailPanelController = new DetailPanelKlasController(kc, this);
         

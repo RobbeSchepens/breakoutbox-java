@@ -5,10 +5,25 @@
  */
 package domein;
 
+import java.util.List;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author Daan
  */
-public class IBox {
+public interface IBox {
+
+    String getNaam();
+
+    String getOmschrijving();
+
+    StringProperty naamProperty();
+
+    List<Actie> getActies();
+
+    Vak getVak();
+
+    List<Oefening> getOefeningen();
 
 }

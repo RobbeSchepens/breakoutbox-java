@@ -12,6 +12,8 @@
     <class>domein.Doelstelling</class>
     <class>domein.Klas</class>
     <class>domein.Leerling</class>
+    <class>domein.Actie</class>
+    <class>domein.Box</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/breakoutbox"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package domein;
+
+import javafx.beans.property.StringProperty;
 
 /**
  *
  * @author Daan
  */
-public class OverzichtPanelBox {
+public interface IActie {
 
+    String getNaam();
+
+    StringProperty naamProperty();
 }

@@ -1,6 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gui;
 
-import domein.KlasController;
+import domein.ActieController;
+import domein.ActieObserver;
+import domein.ActieSubject;
+import domein.BoxObserver;
+import domein.IActie;
 import domein.IKlas;
 import domein.KlasObserver;
 import domein.KlasSubject;
@@ -14,18 +23,23 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-public class OverzichtPanelKlasController extends OverzichtPanelController<IKlas, KlasController> implements KlasSubject {
+/**
+ *
+ * @author Daan
+ */
+public class OverzichtPanelActieController extends OverzichtPanelController<IActie, ActieController> implements ActieSubject {
 
-    KlasController kc;
-    FrameKlassenController fc;
-    private Set<KlasObserver> observers;
+    ActieController ac;
+    FrameActieController fc;
+    private Set<ActieObserver> observers;
 
-    OverzichtPanelKlasController(KlasController kc, FrameKlassenController fc) {
-        super(kc);
+    public OverzichtPanelActieController(ActieController ac, FrameActieController fc) {
+        super(ac);
         this.observers = new HashSet<>();
-        this.kc = kc;
+        this.ac = ac;
         this.fc = fc;
         renderContent();
+
     }
 
     @Override
@@ -41,42 +55,39 @@ public class OverzichtPanelKlasController extends OverzichtPanelController<IKlas
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                kc.delete(getTbvOverzicht().getSelectionModel().getSelectedItem());
+                ac.delete(getTbvOverzicht().getSelectionModel().getSelectedItem());
             }
         }
     }
 
     @Override
     <T> void implementTableviewListener(T newValue) {
-        kc.setHuidigeKlas((IKlas) newValue);
+        ac.setHuidigeKlas((IActie) newValue);
         notifyObservers();
     }
 
     @Override
     void renderContent() {
-        setLblTitleLeftText("Overzicht Klassen");
-        setLblFilterOpText("Filter op klas:");
+        setLblTitleLeftText("Overzicht Acties");
+        setLblFilterOpText("Filter op actie:");
         renderTable();
     }
-    
+
     private void renderTable() {
         // Set items for tableview
-        getTbvOverzicht().setItems(kc.geefKlassen());
-        
+        getTbvOverzicht().setItems(ac.geefActies());
+
         // Create new columns based on current class
-        TableColumn<IKlas, String> col1 = new TableColumn<>("Naam");
+        TableColumn<IActie, String> col1 = new TableColumn<>("Naam");
         col1.setCellValueFactory(v -> v.getValue().naamProperty());
 
-        TableColumn<IKlas, String> col2 = new TableColumn<>("Aantal leerlingen");
-        col2.setCellValueFactory(v -> new ReadOnlyObjectWrapper(v.getValue().getLeerlingen().size()));
-        
         // Add the columns to the tableview
-        getTbvOverzicht().getColumns().setAll(col1, col2);
+        getTbvOverzicht().getColumns().setAll(col1);
     }
 
     @Override
     void filter(String newValue) {
-        System.out.println("wis filter"); // aangeroepen als textvak changes
+        System.out.println("filter");
     }
 
     @Override
@@ -86,28 +97,22 @@ public class OverzichtPanelKlasController extends OverzichtPanelController<IKlas
     }
 
     @Override
-    public void addKlasObserver(KlasObserver o) {
+    public void addActieObserver(ActieObserver o) {
         if (!observers.contains(o)) {
             observers.add(o);
         }
     }
 
     @Override
-    public void removeKlasObserver(KlasObserver o) {
+    public void removeActieObserver(ActieObserver o) {
         observers.remove(o);
     }
+
     public void notifyObservers() {
-        IKlas o = getTbvOverzicht().getSelectionModel().getSelectedItem();
+        IActie o = getTbvOverzicht().getSelectionModel().getSelectedItem();
         observers.forEach((observer) -> {
             observer.update(o);
         });
     }
 
-    void notifyChangeVoorAantalLln() {
-        System.out.println("hi");
-        renderContent();
-    }
-    
-    
-    
 }

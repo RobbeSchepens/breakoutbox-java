@@ -9,7 +9,8 @@ package domein;
  *
  * @author Daan
  */
-public interface KlasSubject {
-    void addKlasObserver(KlasObserver o);
-    void removeKlasObserver(KlasObserver o);
+public interface ActieSubject {
+    void addActieObserver(ActieObserver o);
+
+    void removeActieObserver(ActieObserver o);
 }

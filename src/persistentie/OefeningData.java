@@ -1,6 +1,8 @@
 package persistentie;
 
+import domein.Actie;
 import domein.AddGroepsbewerking;
+import domein.Box;
 import domein.Doelstelling;
 import domein.Groepsbewerking;
 import domein.Klas;
@@ -13,6 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import repository.GenericDaoJpa;
 import repository.KlasDaoJpa;
 
 public class OefeningData {
@@ -71,29 +74,67 @@ public class OefeningData {
                 new Klas("NaamKlas3", leerlingen.subList(2, 19))
         ));
 
-        KlasDaoJpa klasDao = new KlasDaoJpa();
+        List<Actie> acties = new ArrayList<>(Arrays.asList( // geen loop van maken!
+                new Actie("Actie1"),
+                new Actie("Actie2"),
+                new Actie("Actie3"),
+                new Actie("Actie4"),
+                new Actie("Actie5"),
+                new Actie("Actie6"),
+                new Actie("Actie7"),
+                new Actie("Actie8"),
+                new Actie("Actie9"),
+                new Actie("Actie10"),
+                new Actie("Actie11"),
+                new Actie("Actie12")
+        ));
+        File opgave1 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Optelsommen_Opgave.pdf");
+        File feedback1 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Optelsommen_Feedback.pdf");
+        File opgave2 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Vermenigvuldigingen_Opgave.pdf");
+        File feedback2 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Vermenigvuldigingen_Feedback.pdf");
+        File opgave3 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Hoofdstad VK_Opgave.pdf");
+        File feedback3 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Hoofdstad VK_Feedback.pdf");
 
+        List<Oefening> oefeningen = new ArrayList<>(Arrays.asList(
+                new Oefening("Optelsommen", "40", vakken.get(2), opgave1, feedback1, bewerkingenDatabankLijst.subList(8, 12), doelstellingenArray.subList(0, 3)),
+                new Oefening("Vermenigvuldigingen", "70", vakken.get(1), opgave2, feedback2, bewerkingenDatabankLijst.subList(0, 7), doelstellingenArray.subList(6, 10)),
+                new Oefening("Hoofdstad VK", "Londen", vakken.get(4), opgave3, feedback3, bewerkingenDatabankLijst.subList(3, 10), doelstellingenArray.subList(5, 7))
+        ));
+
+        List<Box> boxen = new ArrayList<>(Arrays.asList( // geen loop van maken!
+                new Box("box1", "Boxomschrijving1", vakken.get(2), acties.subList(2, 8), oefeningen.subList(0, 2)),
+                new Box("box2", "Boxomschrijving3", vakken.get(0), acties.subList(0, 11), oefeningen.subList(1, 2)),
+                new Box("box3", "Boxomschrijving2", vakken.get(3), acties.subList(0, 4), oefeningen.subList(0, 1))
+        ));
+
+
+
+        GenericDaoJpa klasDao = new GenericDaoJpa<>(Klas.class);
         klassen.forEach(klas -> {
             klasDao.insert(klas);
+        });
+
+        GenericDaoJpa ActieDao = new GenericDaoJpa<>(Actie.class);
+        acties.forEach(actie -> {
+            ActieDao.insert(actie);
         });
 
         vakken.forEach(vak -> ob.addVak(vak));
         bewerkingenDatabankLijst.forEach(bw -> ob.addGroepsbewerking(bw));
         doelstellingenArray.forEach(dls -> ob.addDoelstelling(dls));
+        ob.add(oefeningen.get(0));
+        ob.add(oefeningen.get(1));
+        ob.add(oefeningen.get(2));
+
+        GenericDaoJpa boxDao = new GenericDaoJpa<>(Box.class);
+        boxen.forEach(box -> {
+            boxDao.insert(box);
+        });
+
+        
+
 
         // public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
-        File opgave1 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Optelsommen_Opgave.pdf");
-        File feedback1 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Optelsommen_Feedback.pdf");
-
-        ob.add(new Oefening("Optelsommen", "40", vakken.get(2), opgave1, feedback1, bewerkingenDatabankLijst.subList(8, 12), doelstellingenArray.subList(0, 3)));
-
-        File opgave2 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Vermenigvuldigingen_Opgave.pdf");
-        File feedback2 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Vermenigvuldigingen_Feedback.pdf");
-        ob.add(new Oefening("Vermenigvuldigingen", "70", vakken.get(1), opgave2, feedback2, bewerkingenDatabankLijst.subList(0, 7), doelstellingenArray.subList(6, 10)));
-
-        File opgave3 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Hoofdstad VK_Opgave.pdf");
-        File feedback3 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Hoofdstad VK_Feedback.pdf");
-        ob.add(new Oefening("Hoofdstad VK", "Londen", vakken.get(4), opgave3, feedback3, bewerkingenDatabankLijst.subList(3, 10), doelstellingenArray.subList(5, 7)));
 
         /*GenericDaoJpa bewerkingDoa = new GenericDaoJpa(Groepsbewerking.class);
         GenericDaoJpa doelstellingDoa = new GenericDaoJpa(String.class);
