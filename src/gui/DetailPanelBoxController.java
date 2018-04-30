@@ -82,10 +82,8 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
         txfOmschrijving.setText(box.getOmschrijving());
         ddlVak.setItems(bc.geefVakken());
         ddlVak.getSelectionModel().select(box.getVak());
-
-        lblActiesCount.setText(box.getActies().size() + " acties geselecteerd");
-        lblOefeningenCount.setText(box.getOefeningen().size() + " oefeningen geselecteerd");
-
+        //lblActiesCount.setText(bc.CountlistActiesVanBoxTemp() + " acties geselecteerd");
+        //lblOefeningenCount.setText(bc.CountlistOefeningenVanBoxTemp() + " oefeningen geselecteerd");
         lblError.setText("");
         lblSuccess.setText("");
     }
@@ -162,11 +160,11 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
 
     @Override
     public void CountlistActiesVanBoxTemp() {
-        // lblActiesCount.setText(bc.CountlistActiesVanBoxTemp() + " acties geselecteerd");
+        lblActiesCount.setText(bc.CountlistActiesVanBoxTemp() + " acties geselecteerd");
     }
 
     @Override
     public void CountlistOefeningenVanBoxTemp() {
-        // lblOefeningenCount.setText(bc.CountlistOefeningenVanBoxTemp() + " oefeningen geselecteerd");
+        lblOefeningenCount.setText(bc.CountlistOefeningenVanBoxTemp() + " oefeningen geselecteerd");
     }
 }
