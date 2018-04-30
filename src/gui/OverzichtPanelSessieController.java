@@ -59,4 +59,7 @@ public class OverzichtPanelSessieController extends OverzichtPanelController<ISe
         System.out.println("render table hier");
     }
 
+    @Override
+    void clearAddedFilters() {}
+
 }

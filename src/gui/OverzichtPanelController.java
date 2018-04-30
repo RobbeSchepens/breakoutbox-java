@@ -79,6 +79,7 @@ public abstract class OverzichtPanelController<T, E> extends VBox {
         txfFilterOp.setText("");
         txfFilterOp.requestFocus();
         filter("");
+        clearAddedFilters();
     }
 
     public void clearSelectedItem() {
@@ -90,4 +91,5 @@ public abstract class OverzichtPanelController<T, E> extends VBox {
     abstract void renderContent();
     abstract void filter(String newValue);
     abstract void initNieuw();
+    abstract void clearAddedFilters();
 }

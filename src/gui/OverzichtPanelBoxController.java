@@ -102,4 +102,7 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
         });
     }
 
+    @Override
+    void clearAddedFilters() {}
+
 }

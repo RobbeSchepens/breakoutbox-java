@@ -115,4 +115,7 @@ public class OverzichtPanelActieController extends OverzichtPanelController<IAct
         });
     }
 
+    @Override
+    void clearAddedFilters() {}
+
 }

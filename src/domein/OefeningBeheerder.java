@@ -63,7 +63,7 @@ public final class OefeningBeheerder {
         return filteredOefeningList;
     }
     
-    public void veranderFilter(String filterValue) {
+    public void veranderFilter(String filterValue, Vak vak) {
         filteredOefeningList.setPredicate(oefening -> {
             // If filter text is empty, display all persons.
             if (filterValue == null || filterValue.isEmpty() || filterValue.equals("Alle vakken")) {

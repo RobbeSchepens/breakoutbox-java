@@ -1,8 +1,6 @@
 package gui;
 
-import domein.Doelstelling;
 import domein.OefeningController;
-import domein.Groepsbewerking;
 import domein.IOefening;
 import domein.OefeningObserver;
 import domein.PDF;
@@ -14,12 +12,11 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -41,7 +38,7 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     @FXML private TextField txfNaam;
     @FXML private Button btnAdd;
     @FXML private TextField txfAntwoord;
-    @FXML private ChoiceBox<Vak> ddlVak;
+    @FXML private ComboBox<Vak> ddlVak;
     @FXML private Button btnGroepsbewerkingen;
     @FXML private Label lblGroepsbewerkingenCount;
     @FXML private Button btnDoelstellingen;

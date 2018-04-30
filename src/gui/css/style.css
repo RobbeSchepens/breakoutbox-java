@@ -23,7 +23,7 @@
     -fx-text-fill: rgb(90, 97, 105);
 }
 
-.choice-box, .text-field {
+.choice-box,  .combo-box, .text-field {
     -fx-background-color: white;
     -fx-border-width: 1;
     -fx-border-color: rgb(190, 202, 214);
@@ -31,15 +31,15 @@
 }
 
 /* Selected item text color on the control itself */
-.choice-box > .label { -fx-text-fill: rgba(0,0,0,0.9); }
+.choice-box > .label, .combo-box-base > .label, .combo-box > .label { -fx-text-fill: rgba(0,0,0,0.9); }
 /* Background color of the whole context menu */
-.choice-box .context-menu { -fx-background-color: white; }
+.choice-box .context-menu, .combo-box-base .context-menu, .combo-box .context-menu { -fx-background-color: white; }
 /* Focused item background color in the list */
-.choice-box .menu-item:focused { -fx-background-color: #006fe6; }
+.choice-box .menu-item:focused, .combo-box-base .menu-item:focused, .combo-box .menu-item:focused { -fx-background-color: #006fe6; }
 /* Text color of non-focused items in the list */
-.choice-box .menu-item > .label { -fx-text-fill: rgba(0,0,0,0.9); }
+.choice-box .menu-item > .label, .combo-box-base .menu-item > .label, .combo-box .menu-item > .label { -fx-text-fill: rgba(0,0,0,0.9); }
 /* Text color of focused item in the list */
-.choice-box .menu-item:focused > .label { -fx-text-fill: white; }
+.choice-box .menu-item:focused > .label, .combo-box-base .menu-item:focused > .label, .combo-box .menu-item:focused > .label { -fx-text-fill: white; }
 
 .btn-card {
     -fx-background-radius: 12;

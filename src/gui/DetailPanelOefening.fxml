@@ -53,7 +53,6 @@
             <TextField fx:id="txfNaam" GridPane.columnIndex="1" />
             <TextField fx:id="txfAntwoord" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label focusTraversable="false" text="Vak" GridPane.rowIndex="1" />
-            <ChoiceBox fx:id="ddlVak" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label focusTraversable="false" text="Groepsbewerkingen" GridPane.rowIndex="5" />
             <Label focusTraversable="false" text="Doelstellingen" GridPane.rowIndex="6" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
@@ -116,6 +115,7 @@
                   </HBox>
                </children>
             </HBox>
+            <ComboBox fx:id="ddlVak" prefWidth="150.0" promptText="Kies een vak" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
          <VBox.margin>
             <Insets bottom="30.0" />

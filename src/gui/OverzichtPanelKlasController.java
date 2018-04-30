@@ -107,6 +107,7 @@ public class OverzichtPanelKlasController extends OverzichtPanelController<IKlas
         renderContent();
     }
     
-    
+    @Override
+    void clearAddedFilters() {}
     
 }

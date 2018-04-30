@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 
 public class OefeningController {
 
@@ -62,12 +61,12 @@ public class OefeningController {
         huidigeOefening = new OefeningNull();
     }
     
-    public void veranderFilter(String filterValue) {
-        ob.veranderFilter(filterValue);
+    public void veranderFilter(String filterValue, Vak vak) {
+        ob.veranderFilter(filterValue, vak);
     }
     
     public ObservableList<Vak> geefVakken() {
-        return ob.getVakken();
+        return FXCollections.unmodifiableObservableList(ob.getVakken());
     }
     
     public ObservableList<Groepsbewerking> geefGroepsbewerkingen() {
