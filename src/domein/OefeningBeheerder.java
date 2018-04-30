@@ -65,15 +65,25 @@ public final class OefeningBeheerder {
     
     public void veranderFilter(String filterValue, Vak vak) {
         filteredOefeningList.setPredicate(oefening -> {
-            // If filter text is empty, display all persons.
-            if (filterValue == null || filterValue.isEmpty() || filterValue.equals("Alle vakken")) {
+            // Als filtervalue of vak null/empty is, toon alle oefeningen
+            if (filterValue == null || filterValue.isEmpty() && vak == null)
                 return true;
-            }
-            // Compare first name and last name of every person with   
-            //filter text.
+            
+            // Filter op vak als naam null/empty is
+            if (filterValue == null || filterValue.isEmpty())
+                return oefening.getVak() == vak;
+            
             String lowerCaseValue = filterValue.toLowerCase();
-            return oefening.getNaam().toLowerCase().contains(lowerCaseValue);
+            
+            // Filter enkel op naam als vak null is
+            if (vak == null)
+                return oefening.getNaam().toLowerCase().contains(lowerCaseValue);
+            
+            // Filter op beiden
+            return oefening.getNaam().toLowerCase().contains(lowerCaseValue) && oefening.getVak() == vak;
         });
+        System.out.println(vak);
+        System.out.println(filteredOefeningList);
     }
     
     public void add(Oefening o) {

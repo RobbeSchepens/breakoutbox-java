@@ -5,19 +5,14 @@ import domein.IOefening;
 import domein.OefeningObserver;
 import domein.OefeningSubject;
 import domein.Vak;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Observable;
 import java.util.Optional;
 import java.util.Set;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
@@ -29,6 +24,7 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
     private FrameOefeningController fc;
     private Set<OefeningObserver> observers;
     private ComboBox<Vak> ddlVakken;
+    private String filtervalue;
     
     public OverzichtPanelOefeningController(OefeningController dcon, FrameOefeningController fc) {
         super(dcon);
@@ -42,12 +38,12 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
         super.getHbxFilter().getChildren().add(super.getHbxFilter().getChildren().size() - 1, ddlVakken);
         HBox.setMargin(ddlVakken, new Insets(0,15,0,0));
         
-//        ddlVakken.getSelectionModel().selectedItemProperty().addListener(
-//                (ObservableValue<? extends Vak> observable, Vak oldValue, Vak newValue) -> {
-//            if (!(newValue == null)) {
-//                dc.veranderFilter(newValue.getNaam());
-//            }
-//        });
+        ddlVakken.getSelectionModel().selectedItemProperty().addListener(
+                (ObservableValue<? extends Vak> observable, Vak oldValue, Vak newValue) -> {
+            if (!(newValue == null)) {
+                dc.veranderFilter(filtervalue, newValue);
+            }
+        });
         renderContent();
     }
     
@@ -61,11 +57,7 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
     void renderContent() {
         setLblTitleLeftText("Overzicht oefeningen");
         setLblFilterOpText("Filter op naam:");
-//        List<Vak> vl = new ArrayList<>();
-//        vl.add(new Vak("Alle vakken"));
-//        vl.addAll(dc.geefVakken());
         ddlVakken.setItems(dc.geefVakken());
-//        ddlVakken.getSelectionModel().selectFirst();
         renderTable();
     }
     
@@ -121,6 +113,7 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
 
     @Override
     void filter(String newValue) {
+        filtervalue = newValue;
         Vak vak = ddlVakken.getSelectionModel().getSelectedItem();
         dc.veranderFilter(newValue, vak);
     }
