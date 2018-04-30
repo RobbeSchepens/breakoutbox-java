@@ -122,12 +122,10 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
         bc.setListOefeningenVanBoxTemp(listOefeningenTempGeselect);
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
 
+
         listOefeningenTempAlle.removeAll(lt);
         lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
 
-
-        //List<IOefening
-        //notifyObserversList();
     }
 
     public void nieuweOefening() {

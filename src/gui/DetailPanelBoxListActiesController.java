@@ -125,7 +125,9 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
         bc.setListActiesVanBoxTemp(listActiesTempGeselect);
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
 
-        notifyObserversList();
+        listActiesTempAlle.removeAll(lt);
+        lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
+
 
     }
 
