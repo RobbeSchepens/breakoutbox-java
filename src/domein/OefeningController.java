@@ -11,7 +11,6 @@ public class OefeningController {
 
     private Oefening huidigeOefening;
     private OefeningBeheerder ob;
-    private FilteredList<IOefening> filteredOefeningList;
     private List<Groepsbewerking> listGroepsbewerkingenVanOefening = new ArrayList<>();
     private List<Doelstelling> listDoelstellingenVanOefening = new ArrayList<>();
     
@@ -21,7 +20,7 @@ public class OefeningController {
     }
     
     public ObservableList<IOefening> geefOefeningen() {
-        return (ObservableList<IOefening>)ob.getOefeningen();
+        return ob.getOefeningenFiltered();
     }
     
     public int geefAantalOefeningen() {
@@ -62,22 +61,9 @@ public class OefeningController {
         ob.delete((Oefening) o);
         huidigeOefening = new OefeningNull();
     }
-
-    public FilteredList<IOefening> geefOefeningenFiltered() {
-        return filteredOefeningList;
-    }
     
     public void veranderFilter(String filterValue) {
-        filteredOefeningList.setPredicate(oefening -> {
-            // If filter text is empty, display all persons.
-            if (filterValue == null || filterValue.isEmpty() || filterValue.equals("Alle vakken")) {
-                return true;
-            }
-            // Compare first name and last name of every person with   
-            //filter text.
-            String lowerCaseValue = filterValue.toLowerCase();
-            return oefening.getNaam().toLowerCase().contains(lowerCaseValue);
-        });
+        ob.veranderFilter(filterValue);
     }
     
     public ObservableList<Vak> geefVakken() {
