@@ -31,7 +31,8 @@ public final class OefeningBeheerder {
         setDoelstellingRepo(new GenericDaoJpa(Doelstelling.class));
         
         // Seeden van database
-        OefeningData od = new OefeningData(this);
+        //we hier
+        OefeningData od = new OefeningData(this, new BoxBeheerder());
     }
 
     public void setOefRepo(OefeningDaoJpa mock) {

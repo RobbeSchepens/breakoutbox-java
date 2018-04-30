@@ -3,6 +3,7 @@ package persistentie;
 import domein.Actie;
 import domein.AddGroepsbewerking;
 import domein.Box;
+import domein.BoxBeheerder;
 import domein.Doelstelling;
 import domein.Groepsbewerking;
 import domein.Klas;
@@ -21,9 +22,11 @@ import repository.KlasDaoJpa;
 public class OefeningData {
 
     private final OefeningBeheerder ob;
+    private final BoxBeheerder bb;
 
-    public OefeningData(OefeningBeheerder oefeningBeheerder) {
+    public OefeningData(OefeningBeheerder oefeningBeheerder, BoxBeheerder boxbeheerder) {
         ob = oefeningBeheerder;
+        bb = boxbeheerder;
         populeerData();
     }
 
@@ -101,12 +104,15 @@ public class OefeningData {
                 new Oefening("Hoofdstad VK", "Londen", vakken.get(4), opgave3, feedback3, bewerkingenDatabankLijst.subList(3, 10), doelstellingenArray.subList(5, 7))
         ));
 
-        /*List<Box> boxen = new ArrayList<>(Arrays.asList( // geen loop van maken!
+        List<Box> boxen = new ArrayList<>(Arrays.asList( // geen loop van maken!
                 new Box("box1", "Boxomschrijving1", vakken.get(2), acties.subList(2, 8), oefeningen.subList(0, 2)),
-                new Box("box2", "Boxomschrijving3", vakken.get(0), acties.subList(0, 11), oefeningen.subList(1, 2)),
+                new Box("box2", "Boxomschrijving3", vakken.get(0), acties.subList(0, 11), oefeningen.subList(1, 3)),
                 new Box("box3", "Boxomschrijving2", vakken.get(3), acties.subList(0, 4), oefeningen.subList(0, 1))
-        ));*/
+        ));
 
+        bb.add(boxen.get(0));
+        bb.add(boxen.get(1));
+        bb.add(boxen.get(2));
 
 
         GenericDaoJpa klasDao = new GenericDaoJpa<>(Klas.class);
@@ -122,10 +128,10 @@ public class OefeningData {
         vakken.forEach(vak -> ob.addVak(vak));
         bewerkingenDatabankLijst.forEach(bw -> ob.addGroepsbewerking(bw));
         doelstellingenArray.forEach(dls -> ob.addDoelstelling(dls));
-        ob.add(oefeningen.get(0));
+        /* ob.add(oefeningen.get(0));
         ob.add(oefeningen.get(1));
         ob.add(oefeningen.get(2));
-
+*/
         /* GenericDaoJpa boxDao = new GenericDaoJpa<>(Box.class);
         boxen.forEach(box -> {
             boxDao.insert(box);

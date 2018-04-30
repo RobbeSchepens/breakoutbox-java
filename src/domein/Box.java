@@ -74,13 +74,13 @@ public class Box implements IBox, Serializable {
 
 
     @Override
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     public List<Actie> getActies() {
         return acties;
     }
 
     @Override
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     public List<Oefening> getOefeningen() {
         return oefeningen;
     }
@@ -126,7 +126,7 @@ public class Box implements IBox, Serializable {
     }
 
     @Override
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     public Vak getVak() {
         return vak;
     }
