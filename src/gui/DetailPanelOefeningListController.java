@@ -123,6 +123,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
         listGroepsBewerkingenTempAlle.removeAll(listGroepsBewerkingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
         lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
+
     }
 
     @Override

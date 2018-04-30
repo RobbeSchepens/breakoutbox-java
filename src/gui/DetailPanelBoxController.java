@@ -98,6 +98,7 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
     @Override
     public void update(IBox box) {
         clearRender();
+        System.out.println(box);
         initButtons(false);
         lblTitleRight.setText("Overzicht Box");
         tfxNaam.setText(box.getNaam());

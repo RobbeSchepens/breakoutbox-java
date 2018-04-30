@@ -21,12 +21,12 @@ public class FrameBoxController extends GridPane {
         boxesDetailPanelController = new DetailPanelBoxController(bc, this);
         boxenDetailPanelListActiesController = new DetailPanelBoxListActiesController(bc, this);
         boxenDetailPanelListOefeningenController = new DetailPanelBoxListOefeningenController(bc, this);
-
-        overzichtPanelController.addBoxObserver(boxesDetailPanelController);
         overzichtPanelController.addBoxObserver(boxenDetailPanelListActiesController);
         overzichtPanelController.addBoxObserver(boxenDetailPanelListOefeningenController);
         boxenDetailPanelListActiesController.addBoxObserver(boxesDetailPanelController);
         boxenDetailPanelListOefeningenController.addBoxObserver(boxesDetailPanelController);
+        overzichtPanelController.addBoxObserver(boxesDetailPanelController);
+
 
         add(nav, 0, 0);
         setColumnSpan(nav, 2);

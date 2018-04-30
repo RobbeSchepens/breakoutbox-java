@@ -122,11 +122,14 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
         lblAantalGeselecteerd.setText("Acties geselecteerd: " + box.getActies().size());
         List<? extends IActie> lt = box.getActies();
         listActiesTempGeselect = (List<IActie>) lt;
+
         bc.setListActiesVanBoxTemp(listActiesTempGeselect);
+
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
 
         //listActiesTempAlle.removeAll(lt);
         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
+        
 
 
     }
@@ -139,7 +142,7 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
         bc.setListActiesVanBoxTemp(listActiesTempGeselect);
         lblAantalGeselecteerd.setText("Geselecteerde Oefeningen 0");
-
+        
     }
 
 
