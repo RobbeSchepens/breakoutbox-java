@@ -56,9 +56,9 @@ public class Klas implements IKlas, Serializable {
     }
 
     public void setNaam(String naam) {
-        if (naam == null || naam.trim().isEmpty()) {
+        /*if (naam == null || naam.trim().isEmpty()) {
             throw new IllegalArgumentException("Je moet een naam opgeven");
-        }
+        }*/
         this.naam.set(naam);
     }
 

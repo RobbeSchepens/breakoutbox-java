@@ -111,14 +111,14 @@ public class Box implements IBox, Serializable {
     }
 
     public void setActies(List<Actie> acties) {
-        /*if (acties == null || acties.isEmpty()) {
+        /* if (acties == null || acties.isEmpty()) {
             throw new IllegalArgumentException("Je moet acties opgeven");
         }*/
         this.acties = acties;
     }
 
     public void setOefeningen(List<Oefening> oefeningen) {
-        /*if (oefeningen == null || oefeningen.isEmpty()) {
+        /* if (oefeningen == null || oefeningen.isEmpty()) {
             throw new IllegalArgumentException("Je moet oefeningen opgeven");
         }*/
 
