@@ -14,6 +14,7 @@ import java.util.Set;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
@@ -33,10 +34,10 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
         this.dc = dcon;
         this.fc = fc;
         
-        // Filter Vakken toevoegen
+        // Filter Vakken toevoegen op voorlaatste positie + marge rechts
         ddlVakken = new ChoiceBox<>();
-
-        super.getHbxFilter().getChildren().add(ddlVakken);
+        super.getHbxFilter().getChildren().add(super.getHbxFilter().getChildren().size() - 1, ddlVakken);
+        super.getHbxFilter().setMargin(ddlVakken, new Insets(0,15,0,0));
         
 //        ddlVakken.getSelectionModel().selectedItemProperty().addListener(
 //                (ObservableValue<? extends Vak> observable, Vak oldValue, Vak newValue) -> {
