@@ -51,7 +51,7 @@ public class BoxController {
     public void voegBoxToe(String naam, String omschrijving, Vak vak, ObservableList<Actie> acties, ObservableList<Oefening> oefening) {
         // ArrayList<Actie> act = new ArrayList<>(acties);
         //ArrayList<Oefening> oef = new ArrayList<>(oefening);
-        Box box = new Box();
+        Box box = new Box(naam, omschrijving, vak, acties, oefening);
         bb.add(box);
     }
 

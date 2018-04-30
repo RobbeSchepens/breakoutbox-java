@@ -74,13 +74,13 @@ public class Box implements IBox, Serializable {
 
 
     @Override
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     public List<Actie> getActies() {
         return acties;
     }
 
     @Override
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     public List<Oefening> getOefeningen() {
         return oefeningen;
     }
@@ -90,9 +90,9 @@ public class Box implements IBox, Serializable {
     }
 
     public void setNaam(String naam) {
-        if (naam == null || naam.trim().isEmpty()) {
+        /*if (naam == null || naam.trim().isEmpty()) {
             throw new IllegalArgumentException("Je moet een naam opgeven");
-        }
+        }*/
         this.naam.set(naam);
     }
 
@@ -104,9 +104,9 @@ public class Box implements IBox, Serializable {
     }
 
     public void setVak(Vak vak) {
-        if (vak == null) {
+        /*if (vak == null) {
             throw new IllegalArgumentException("Je moet een vak opgeven");
-        }
+        }*/
         this.vak = vak;
     }
 
@@ -118,15 +118,15 @@ public class Box implements IBox, Serializable {
     }
 
     public void setOefeningen(List<Oefening> oefeningen) {
-        if (oefeningen == null || oefeningen.isEmpty()) {
+        /*if (oefeningen == null || oefeningen.isEmpty()) {
             throw new IllegalArgumentException("Je moet oefeningen opgeven");
-        }
+        }*/
 
         this.oefeningen = oefeningen;
     }
 
     @Override
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     public Vak getVak() {
         return vak;
     }
