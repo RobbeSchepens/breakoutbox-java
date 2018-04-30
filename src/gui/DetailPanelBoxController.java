@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import domein.BoxController;
@@ -27,46 +22,27 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-/**
- * FXML Controller class
- *
- * @author Daan
- */
 public class DetailPanelBoxController extends VBox implements BoxObserver {
+    
     private BoxController bc;
     private FrameBoxController fc;
     private Set<BoxObserver> observers;
-    @FXML
-    private Label lblTitleRight;
-    @FXML
-    private Button btnNieuweOefening;
-    @FXML
-    private Button btnOefeningen;
-    @FXML
-    private Label lblOefeningenCount;
-    @FXML
-    private Label lblFeedback;
-    @FXML
-    private ComboBox<Vak> ddlVak;
-    @FXML
-    private Button btnActies;
-    @FXML
-    private Label lblActiesCount;
-    @FXML
-    private TextField txfOmschrijving;
-    @FXML
-    private TextField tfxNaam;
-    @FXML
-    private Button btnAdd;
-    @FXML
-    private Button btnEdit;
-    @FXML
-    private Label lblError;
-    @FXML
-    private Label lblSuccess;
-
-    @FXML
-    private Button btnAddWithContent;
+    
+    @FXML private Label lblTitleRight;
+    @FXML private Button btnNieuweOefening;
+    @FXML private Button btnOefeningen;
+    @FXML private Label lblOefeningenCount;
+    @FXML private Label lblFeedback;
+    @FXML private ComboBox<Vak> ddlVak;
+    @FXML private Button btnActies;
+    @FXML private Label lblActiesCount;
+    @FXML private TextField txfOmschrijving;
+    @FXML private TextField tfxNaam;
+    @FXML private Button btnAdd;
+    @FXML private Button btnEdit;
+    @FXML private Label lblError;
+    @FXML private Label lblSuccess;
+    @FXML private Button btnAddWithContent;
 
     public DetailPanelBoxController(BoxController bc, FrameBoxController fc) {
         FXMLLoader loader
@@ -78,21 +54,22 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+        
         this.bc = bc;
         this.fc = fc;
         this.observers = new HashSet<>();
+        
         ddlVak.setItems(bc.geefVakken());
         initButtons(true);
     }
+    
     private void initButtons(boolean isNew) {
         btnAdd.setManaged(isNew);
         btnAdd.setVisible(isNew);
-
         btnAddWithContent.setManaged(!isNew);
         btnAddWithContent.setVisible(!isNew);
         btnEdit.setManaged(!isNew);
         btnEdit.setVisible(!isNew);
-
     }
 
     @Override
@@ -105,7 +82,7 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
         txfOmschrijving.setText(box.getOmschrijving());
         ddlVak.setItems(bc.geefVakken());
         ddlVak.getSelectionModel().select(box.getVak());
-        lblActiesCount.setText(bc.CountlistOefeningenVanBoxTemp() + " acties geselecteerd");
+        lblActiesCount.setText(bc.CountlistActiesVanBoxTemp() + " acties geselecteerd");
         lblOefeningenCount.setText(bc.CountlistOefeningenVanBoxTemp() + " oefeningen geselecteerd");
         lblError.setText("");
         lblSuccess.setText("");
@@ -146,12 +123,11 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
             clearRender();
             fc.toonListview("cancel/init");
             lblSuccess.setText("De box werd succesvol aangepast");
-            fc.notifyChangeAantallen();
+//            fc.notifyChangeAantallen();
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());
         }
-
     }
 
     @FXML
@@ -165,10 +141,8 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());
         }
-
     }
-
-
+    
     private void clearRender() {
         initButtons(true);
         tfxNaam.setText("");
@@ -177,9 +151,8 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
         ddlVak.getSelectionModel().clearSelection();
         lblOefeningenCount.setText("0 oefeningen geselecteerd");
         lblActiesCount.setText("0 acties geselecteerd");
-
-
     }
+    
     void initNieuweOefening() {
         initButtons(true);
         clearRender();
@@ -187,15 +160,11 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
 
     @Override
     public void CountlistActiesVanBoxTemp() {
-
         lblActiesCount.setText(bc.CountlistActiesVanBoxTemp() + " acties geselecteerd");
     }
 
     @Override
     public void CountlistOefeningenVanBoxTemp() {
-
         lblOefeningenCount.setText(bc.CountlistOefeningenVanBoxTemp() + " oefeningen geselecteerd");
     }
-
-
 }
