@@ -5,6 +5,7 @@
  */
 package gui;
 
+import domein.Box;
 import domein.BoxController;
 import domein.BoxObserver;
 import domein.BoxSubject;
@@ -20,6 +21,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -114,7 +116,27 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
 
     @Override
     public void update(IBox box) {
-        System.out.println("update");
+        lblAantalGeselecteerd.setText("Oefeningen geselecteerd: " + box.getOefeningen().size());
+
+
+        //listOefeningenTempAlle =
+        List<? extends IOefening> lt = box.getOefeningen();
+        listOefeningenTempGeselect = (List<IOefening>) lt;
+        bc.setListOefeningenVanBoxTemp(listOefeningenTempGeselect);
+        lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
+
+        notifyObserversList();
+    }
+
+    public void nieuweOefening() {
+        System.out.println("oefening wordt geinit");
+        listOefeningenTempAlle = new ArrayList<>(bc.geefOefeningen());
+        listOefeningenTempGeselect = new ArrayList<>();
+        lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
+        lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
+        bc.setListOefeningenVanBoxTemp(listOefeningenTempGeselect);
+        lblAantalGeselecteerd.setText("Geselecteerde oefeningen: 0");
+
     }
 
     @FXML

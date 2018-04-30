@@ -54,6 +54,11 @@ public class BoxController {
 
 
     public void voegBoxToe(String naam, String omschrijving, Vak vak) {
+
+        System.out.println("voeg box toe");
+        System.out.println(listActiesVanBoxTemp);
+        System.out.println(listOefeningenVanBoxTemp);
+
         Box box = new Box(naam, omschrijving, vak, listActiesVanBoxTemp, listOefeningenVanBoxTemp);
         bb.add(box);
     }

@@ -13,6 +13,7 @@ import domein.Groepsbewerking;
 import domein.IActie;
 import domein.IBox;
 import domein.IKlas;
+import domein.IOefening;
 import domein.OefeningObserver;
 import java.io.IOException;
 import java.net.URL;
@@ -118,8 +119,27 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
 
     @Override
     public void update(IBox box) {
-        System.out.println("update");
+        lblAantalGeselecteerd.setText("Acties geselecteerd: " + box.getActies().size());
+        List<? extends IActie> lt = box.getActies();
+        listActiesTempGeselect = (List<IActie>) lt;
+        bc.setListActiesVanBoxTemp(listActiesTempGeselect);
+        lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
+
+        notifyObserversList();
+
     }
+
+    public void nieuweOefening() {
+
+        listActiesTempAlle = new ArrayList<>(bc.geefActies());
+        listActiesTempGeselect = new ArrayList<>();
+        lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
+        lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
+        bc.setListActiesVanBoxTemp(listActiesTempGeselect);
+        lblAantalGeselecteerd.setText("Geselecteerde Oefeningen 0");
+
+    }
+
 
     @FXML
     private void lsvListAlleOnMouseClicked(MouseEvent event) {

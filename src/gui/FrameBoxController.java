@@ -59,7 +59,10 @@ public class FrameBoxController extends GridPane {
     }
 
     public void initNieuweOefening() {
+        boxesDetailPanelController.initNieuweOefening();
         overzichtPanelController.clearSelectedItem();
+        boxenDetailPanelListActiesController.nieuweOefening();
+        boxenDetailPanelListOefeningenController.nieuweOefening();
     }
     
 }

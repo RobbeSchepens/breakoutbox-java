@@ -98,13 +98,14 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
     @Override
     public void update(IBox box) {
         clearRender();
-        System.out.println("hi");
         initButtons(false);
         lblTitleRight.setText("Overzicht Box");
         tfxNaam.setText(box.getNaam());
         txfOmschrijving.setText(box.getOmschrijving());
         ddlVak.setItems(bc.geefVakken());
         ddlVak.getSelectionModel().select(box.getVak());
+        lblActiesCount.setText(bc.CountlistOefeningenVanBoxTemp() + " acties geselecteerd");
+        lblOefeningenCount.setText(bc.CountlistOefeningenVanBoxTemp() + " oefeningen geselecteerd");
         lblError.setText("");
         lblSuccess.setText("");
     }
@@ -129,6 +130,7 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
             bc.voegBoxToe(tfxNaam.getText(), txfOmschrijving.getText(), ddlVak.getSelectionModel().getSelectedItem());
             clearRender();
             fc.toonListview("cancel/init");
+            fc.initNieuweOefening();
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());
@@ -154,6 +156,7 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
 
     }
 
+
     private void clearRender() {
         initButtons(true);
         tfxNaam.setText("");
@@ -165,16 +168,23 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
 
 
     }
-
+    void initNieuweOefening() {
+        initButtons(true);
+        clearRender();
+    }
 
     @Override
     public void CountlistActiesVanBoxTemp() {
+
+        System.out.println(bc.CountlistActiesVanBoxTemp());
         lblActiesCount.setText(bc.CountlistActiesVanBoxTemp() + " acties geselecteerd");
     }
 
     @Override
     public void CountlistOefeningenVanBoxTemp() {
+        System.out.println(bc.CountlistActiesVanBoxTemp());
         lblOefeningenCount.setText(bc.CountlistOefeningenVanBoxTemp() + " oefeningen geselecteerd");
     }
+
 
 }

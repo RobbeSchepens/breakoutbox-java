@@ -80,7 +80,7 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
 
     @Override
     void initNieuw() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        fc.initNieuweOefening();
     }
 
     @Override
@@ -99,6 +99,8 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
         IBox o = getTbvOverzicht().getSelectionModel().getSelectedItem();
         observers.forEach((observer) -> {
             observer.update(o);
+            observer.CountlistActiesVanBoxTemp();
+            observer.CountlistOefeningenVanBoxTemp();
         });
     }
 
