@@ -143,8 +143,8 @@ public class OefeningData {
         vakken.add(new Vak("Nederlands"));*/
         List<Box> boxen = new ArrayList<>(Arrays.asList( // geen loop van maken!
                 new Box("box1", "Boxomschrijving1", vakken.get(2), acties.subList(2, 8), oefeningen.subList(0, 4)),
-                new Box("box2", "Boxomschrijving3", vakken.get(0), acties.subList(0, 11), oefeningen.subList(0, 12)),
-                new Box("box3", "Boxomschrijving2", vakken.get(3), acties.subList(0, 4), oefeningen.subList(4, 10))
+                new Box("box2", "Boxomschrijving2", vakken.get(0), acties.subList(0, 11), oefeningen.subList(0, 12)),
+                new Box("box3", "Boxomschrijving3", vakken.get(3), acties.subList(0, 4), oefeningen.subList(4, 10))
         ));
 
         bb.add(boxen.get(0));

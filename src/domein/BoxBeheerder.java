@@ -56,6 +56,8 @@ public final class BoxBeheerder {
     }
 
     public ObservableList<IBox> getBoxenFiltered() {
+        if (filteredBoxList == null)
+            getBoxen();
         return filteredBoxList;
     }
     

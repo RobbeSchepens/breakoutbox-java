@@ -61,6 +61,8 @@ public final class OefeningBeheerder {
     }
 
     public ObservableList<IOefening> getOefeningenFiltered() {
+        if (filteredOefeningList == null)
+            getOefeningen();
         return filteredOefeningList;
     }
     
