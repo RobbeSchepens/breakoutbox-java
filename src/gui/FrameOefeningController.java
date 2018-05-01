@@ -9,7 +9,6 @@ import javafx.scene.layout.GridPane;
 
 public final class FrameOefeningController extends GridPane {
     
-    OefeningController dcc;
     MenubarController nav;
     OverzichtPanelOefeningController overzichtPanelController;
     DetailPanelOefeningController oefeningDetailPanelController;

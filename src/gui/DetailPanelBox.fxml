@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -11,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="740.0" type="VBox" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="740.0" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER">
          <children>
@@ -44,7 +48,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <Button fx:id="btnActies" mnemonicParsing="false" onAction="#btnActiesonAction" text="Toon lijst">
+                  <Button fx:id="btnActies" mnemonicParsing="false" onAction="#btnActiesOnAction" text="Toon lijst">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
@@ -52,16 +56,7 @@
                   <Label fx:id="lblActiesCount" text="0 acties geselecteerd" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="394.0">
-                     <children>
-                        <Label fx:id="lblFeedback" wrapText="true" />
-                        <ComboBox fx:id="ddlVak" prefWidth="150.0" />
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
+            <ComboBox fx:id="ddlVak" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label focusTraversable="false" text="Acties" GridPane.rowIndex="3" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
@@ -76,7 +71,7 @@
             <Label text="Naam" />
             <Label text="Omschrijving" GridPane.rowIndex="1" />
             <TextField fx:id="txfOmschrijving" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="tfxNaam" GridPane.columnIndex="1" />
+            <TextField fx:id="txfNaam" GridPane.columnIndex="1" />
             <Label focusTraversable="false" text="Oefeningen" GridPane.rowIndex="4" />
          </children>
          <VBox.margin>

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import domein.BoxController;
@@ -12,7 +7,6 @@ import domein.IBox;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -20,10 +14,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-/**
- *
- * @author Daan
- */
 public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, BoxController> implements BoxSubject {
 
     BoxController bc;
@@ -36,24 +26,6 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
         this.bc = bc;
         this.fc = fc;
         renderContent();
-    }
-
-    @Override
-    void btnDeleteSelectedOnAction(ActionEvent event) {
-        if (getTbvOverzicht().getSelectionModel().getSelectedItem() != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Verwijder oefening");
-            alert.setHeaderText("Bent u zeker dat u de oefening wilt verwijderen?");
-
-            // Volgende regel zorgt ervoor dat het icoontje en de stylesheet meegenomen worden
-            alert.initOwner(this.getScene().getWindow());
-            alert.setGraphic(new ImageView(this.getClass().getResource("/gui/img/favicon.png").toString()));
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                bc.delete(getTbvOverzicht().getSelectionModel().getSelectedItem());
-            }
-        }
     }
 
     @Override
@@ -86,14 +58,23 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
         // Add the columns to the tableview
         getTbvOverzicht().getColumns().setAll(col1, col2, col3);
     }
-    @Override
-    void filter(String newValue) {
-        System.out.println("wis filter"); // aangeroepen als textvak changes
-    }
 
     @Override
-    void initNieuw() {
-        fc.initNieuweOefening();
+    void btnDeleteSelectedOnAction(ActionEvent event) {
+        if (getTbvOverzicht().getSelectionModel().getSelectedItem() != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Verwijder oefening");
+            alert.setHeaderText("Bent u zeker dat u de oefening wilt verwijderen?");
+
+            // Volgende regel zorgt ervoor dat het icoontje en de stylesheet meegenomen worden
+            alert.initOwner(this.getScene().getWindow());
+            alert.setGraphic(new ImageView(this.getClass().getResource("/gui/img/favicon.png").toString()));
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                bc.delete(getTbvOverzicht().getSelectionModel().getSelectedItem());
+            }
+        }
     }
 
     @Override
@@ -112,17 +93,20 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
         IBox o = getTbvOverzicht().getSelectionModel().getSelectedItem();
         observers.forEach((observer) -> {
             observer.update(o);
-            observer.CountlistActiesVanBoxTemp();
-            observer.CountlistOefeningenVanBoxTemp();
         });
+    }
+    
+    @Override
+    void filter(String newValue) {
+        bc.veranderFilter(newValue);
     }
 
     @Override
     void clearAddedFilters() {}
 
-
-    void NotifyChangeAantallen() {
-        renderContent();
+    @Override
+    void initNieuw() {
+        fc.initNieuweBox();
     }
 
 }

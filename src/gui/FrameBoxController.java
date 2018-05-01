@@ -7,7 +7,7 @@ import domein.KlasController;
 import domein.SessieController;
 import javafx.scene.layout.GridPane;
 
-public class FrameBoxController extends GridPane {
+public final class FrameBoxController extends GridPane {
 
     MenubarController nav;
     OverzichtPanelBoxController overzichtPanelController;
@@ -21,12 +21,18 @@ public class FrameBoxController extends GridPane {
         boxesDetailPanelController = new DetailPanelBoxController(bc, this);
         boxenDetailPanelListActiesController = new DetailPanelBoxListActiesController(bc, this);
         boxenDetailPanelListOefeningenController = new DetailPanelBoxListOefeningenController(bc, this);
+        
+        overzichtPanelController.addBoxObserver(boxesDetailPanelController);
         overzichtPanelController.addBoxObserver(boxenDetailPanelListActiesController);
         overzichtPanelController.addBoxObserver(boxenDetailPanelListOefeningenController);
         boxenDetailPanelListActiesController.addBoxObserver(boxesDetailPanelController);
         boxenDetailPanelListOefeningenController.addBoxObserver(boxesDetailPanelController);
-        overzichtPanelController.addBoxObserver(boxesDetailPanelController);
-
+        
+//        overzichtPanelController.addBoxObserver(boxenDetailPanelListActiesController);
+//        overzichtPanelController.addBoxObserver(boxenDetailPanelListOefeningenController);
+//        boxenDetailPanelListActiesController.addBoxObserver(boxesDetailPanelController);
+//        boxenDetailPanelListOefeningenController.addBoxObserver(boxesDetailPanelController);
+//        overzichtPanelController.addBoxObserver(boxesDetailPanelController);
 
         add(nav, 0, 0);
         setColumnSpan(nav, 2);
@@ -35,7 +41,6 @@ public class FrameBoxController extends GridPane {
         add(boxenDetailPanelListActiesController, 0, 1);
         add(boxenDetailPanelListOefeningenController, 0, 1);
         toonListview("cancel/init");
-        //add(hoofdmenu, 0, 1);
     }
     
     public void toonListview(String keuze) {
@@ -58,15 +63,11 @@ public class FrameBoxController extends GridPane {
         }
     }
 
-    public void initNieuweOefening() {
-        boxesDetailPanelController.initNieuweOefening();
+    public void initNieuweBox() {
+        boxesDetailPanelController.initNieuweBox();
         overzichtPanelController.clearSelectedItem();
-        boxenDetailPanelListActiesController.nieuweOefening();
-        boxenDetailPanelListOefeningenController.nieuweOefening();
+        boxenDetailPanelListActiesController.nieuweBox();
+        boxenDetailPanelListOefeningenController.nieuweBox();
     }
 
-//    void notifyChangeAantallen() {
-//        overzichtPanelController.NotifyChangeAantallen();
-//    }
-    
 }

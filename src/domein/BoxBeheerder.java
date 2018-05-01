@@ -1,60 +1,45 @@
 package domein;
 
+import java.util.Collections;
+import java.util.Comparator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javafx.collections.transformation.FilteredList;
 import repository.GenericDaoJpa;
 import repository.OefeningDaoJpa;
 
 public final class BoxBeheerder {
 
+    //Repositories
     private GenericDaoJpa<Box> boxRepo;
     private GenericDaoJpa<Actie> actieRepo;
     private OefeningDaoJpa oefeningRepo;
     private GenericDaoJpa<Vak> vakRepo;
 
+    // Lijsten
     private ObservableList<? extends IBox> boxen;
+    private FilteredList<IBox> filteredBoxList;
     private ObservableList<Vak> vakken;
     private ObservableList<? extends IOefening> oefeningen;
     private ObservableList<? extends IActie> acties;
-
 
     public BoxBeheerder() {
         setBoxRepo(new GenericDaoJpa(Box.class));
         setVakRepo(new GenericDaoJpa(Vak.class));
         setActieRepo(new GenericDaoJpa(Actie.class));
-        setOefeningRepo(new OefeningDaoJpa());
-
-    }
-
-    public GenericDaoJpa<Box> getBoxRepo() {
-        return boxRepo;
+        setOefeningRepo(new OefeningDaoJpa()); // Een tweede repo aanmaken, mss geen goed idee? (ook in OefBeheerder)
     }
 
     public void setBoxRepo(GenericDaoJpa<Box> boxRepo) {
         this.boxRepo = boxRepo;
     }
 
-    public GenericDaoJpa<Actie> getActieRepo() {
-        return actieRepo;
-    }
-
     public void setActieRepo(GenericDaoJpa<Actie> actieRepo) {
         this.actieRepo = actieRepo;
     }
 
-    public OefeningDaoJpa getOefeningRepo() {
-        return oefeningRepo;
-    }
-
     public void setOefeningRepo(OefeningDaoJpa oefeningRepo) {
         this.oefeningRepo = oefeningRepo;
-    }
-
-    public GenericDaoJpa<Vak> getVakRepo() {
-        return vakRepo;
     }
 
     public void setVakRepo(GenericDaoJpa<Vak> vakRepo) {
@@ -64,13 +49,30 @@ public final class BoxBeheerder {
     public ObservableList<? extends IBox> getBoxen() {
         if (boxen == null) {
             boxen = FXCollections.observableArrayList(boxRepo.findAll());
+            Collections.sort((ObservableList<Box>)boxen, Comparator.comparing(Box::getNaam));
+            filteredBoxList = new FilteredList<>((ObservableList<IBox>)getBoxen(), p -> true);
         }
         return boxen;
+    }
+
+    public ObservableList<IBox> getBoxenFiltered() {
+        return filteredBoxList;
+    }
+    
+    public void veranderFilter(String filterValue) {
+        filteredBoxList.setPredicate(oefening -> {
+            if (filterValue == null || filterValue.isEmpty())
+                return true;
+            
+            String lowerCaseValue = filterValue.toLowerCase();
+            return oefening.getNaam().toLowerCase().contains(lowerCaseValue);
+        });
     }
 
     public ObservableList<Vak> getVakken() {
         if (vakken == null) {
             vakken = FXCollections.observableArrayList(vakRepo.findAll());
+            Collections.sort(vakken, Comparator.comparing(Vak::getNaam));
         }
         return vakken;
     }
@@ -78,6 +80,7 @@ public final class BoxBeheerder {
     public ObservableList<? extends IOefening> getOefeningen() {
         if (oefeningen == null) {
             oefeningen = FXCollections.observableArrayList(oefeningRepo.findAll());
+            Collections.sort((ObservableList<Oefening>)oefeningen, Comparator.comparing(Oefening::getNaam));
         }
         return oefeningen;
     }
@@ -85,6 +88,7 @@ public final class BoxBeheerder {
     public ObservableList<? extends IActie> getActies() {
         if (acties == null) {
             acties = FXCollections.observableArrayList(actieRepo.findAll());
+            Collections.sort((ObservableList<Actie>)acties, Comparator.comparing(Actie::getNaam));
         }
         return acties;
     }
@@ -101,7 +105,6 @@ public final class BoxBeheerder {
     }
 
     public void update(Box o) {
-
         boxRepo.startTransaction();
         boxRepo.update(o);
         boxRepo.commitTransaction();

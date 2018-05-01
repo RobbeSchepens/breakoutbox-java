@@ -1,26 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
-import domein.Actie;
 import domein.BoxController;
 import domein.BoxObserver;
 import domein.BoxSubject;
-import domein.Groepsbewerking;
 import domein.IActie;
 import domein.IBox;
-import domein.IKlas;
-import domein.IOefening;
-import domein.OefeningObserver;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -29,18 +17,12 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-/**
- * FXML Controller class
- *
- * @author Daan
- */
 public class DetailPanelBoxListActiesController extends VBox implements BoxObserver, BoxSubject {
 
     FrameBoxController fc;
@@ -49,24 +31,14 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
     private List<IActie> listActiesTempGeselect = new ArrayList<>();
     private Set<BoxObserver> observers;
 
-    @FXML
-    private Label lblTitleLeftList;
-    @FXML
-    private Label lblAantalGeselecteerd;
-    @FXML
-    private ListView<IActie> lsvListAlle;
-    @FXML
-    private ListView<IActie> lsvListGeselecteerde;
-    @FXML
-    private Button btnDeselectAll;
-    @FXML
-    private Button btnCancel;
-    @FXML
-    private Button btnSubmit;
+    @FXML private Label lblTitleLeftList;
+    @FXML private Label lblAantalGeselecteerd;
+    @FXML private ListView<IActie> lsvListAlle;
+    @FXML private ListView<IActie> lsvListGeselecteerde;
+    @FXML private Button btnDeselectAll;
+    @FXML private Button btnCancel;
+    @FXML private Button btnSubmit;
 
-    /**
-     * Initializes the controller class.
-     */
     public DetailPanelBoxListActiesController(BoxController bc, FrameBoxController fc) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailPanelBoxListActies.fxml"));
         loader.setRoot(this);
@@ -123,7 +95,7 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
         List<? extends IActie> lt = box.getActies();
         listActiesTempGeselect = (List<IActie>) lt;
 
-        bc.setListActiesVanBoxTemp(listActiesTempGeselect);
+        bc.setListActiesVanBox(listActiesTempGeselect);
 
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
 
@@ -134,13 +106,13 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
 
     }
 
-    public void nieuweOefening() {
+    public void nieuweBox() {
 
         listActiesTempAlle = new ArrayList<>(bc.geefActies());
         listActiesTempGeselect = new ArrayList<>();
         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
-        bc.setListActiesVanBoxTemp(listActiesTempGeselect);
+        bc.setListActiesVanBox(listActiesTempGeselect);
         lblAantalGeselecteerd.setText("Geselecteerde Oefeningen 0");
         
     }
@@ -165,7 +137,7 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
 
     @FXML
     private void btnSubmitOnAction(ActionEvent event) {
-        bc.setListActiesVanBoxTemp(listActiesTempGeselect);
+        bc.setListActiesVanBox(listActiesTempGeselect);
         fc.toonListview("cancel/init");
         notifyObserversList();
     }
@@ -181,20 +153,20 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
     public void removeBoxObserver(BoxObserver o) {
         observers.remove(o);
     }
+    
     private void notifyObserversList() {
         observers.forEach((observer) -> {
-            observer.CountlistActiesVanBoxTemp();
+            observer.updateCountActies();
         });
     }
 
     @Override
-    public void CountlistActiesVanBoxTemp() {
-
+    public void updateCountActies() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void CountlistOefeningenVanBoxTemp() {
-
+    public void updateCountOefeningen() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

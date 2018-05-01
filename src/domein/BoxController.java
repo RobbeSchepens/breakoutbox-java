@@ -2,13 +2,13 @@ package domein;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class BoxController {
 
     private Box huidigeBox;
-    private BoxBeheerder bb = new BoxBeheerder();
-
+    private BoxBeheerder bb;
     private List<Actie> listActiesVanBoxTemp = new ArrayList<>();
     private List<Oefening> listOefeningenVanBoxTemp = new ArrayList<>();
 
@@ -17,27 +17,15 @@ public class BoxController {
     }
 
     public ObservableList<IBox> geefBoxen() {
-        return (ObservableList<IBox>) bb.getBoxen();
+        return bb.getBoxenFiltered();
     }
 
-    public ObservableList<Vak> geefVakken() {
-        return (ObservableList<Vak>) bb.getVakken();
-    }
-
-    public ObservableList<IActie> geefActies() {
-        return (ObservableList<IActie>) bb.getActies();
-    }
-
-    public ObservableList<IOefening> geefOefeningen() {
-        return (ObservableList<IOefening>) bb.getOefeningen();
+    public int geefAantalBoxen() {
+        return bb.getBoxen().size();
     }
 
     public void setHuidigeBox(IBox box) {
         this.huidigeBox = (Box) box;
-    }
-
-    public void delete(IBox o) {
-        bb.delete((Box) o);
     }
 
     public void voegBoxToe(String naam, String omschrijving, Vak vak) {
@@ -47,24 +35,6 @@ public class BoxController {
 
         Box box = new Box(naam, omschrijving, vak, listActiesVanBoxTemp, listOefeningenVanBoxTemp);
         bb.add(box);
-    }
-
-    public void setListActiesVanBoxTemp(List<IActie> listActiesVanBoxTemp) {
-        List<? extends IActie> lijst = listActiesVanBoxTemp;
-        this.listActiesVanBoxTemp = (List<Actie>) lijst;
-    }
-
-    public void setListOefeningenVanBoxTemp(List<IOefening> listOefeningenVanBoxTemp) {
-        List<? extends IOefening> lijst = listOefeningenVanBoxTemp;
-        this.listOefeningenVanBoxTemp = (List<Oefening>) lijst;
-    }
-
-    public int CountlistOefeningenVanBoxTemp() {
-        return listOefeningenVanBoxTemp.size();
-    }
-
-    public int CountlistActiesVanBoxTemp() {
-        return listActiesVanBoxTemp.size();
     }
 
     public void pasBoxAan(String naam, String omschrijving, Vak vak) {
@@ -84,5 +54,49 @@ public class BoxController {
         huidigeBox.setOefeningen(listOefeningenVanBoxTemp);
         
         bb.update(huidigeBox);
+    }
+
+    public void delete(IBox o) {
+        bb.delete((Box) o);
+    }
+    
+    public void veranderFilter(String filterValue) {
+        bb.veranderFilter(filterValue);
+    }
+    
+    public ObservableList<Vak> geefVakken() {
+        return bb.getVakken();
+    }
+
+    public ObservableList<IActie> geefActies() {
+        return (ObservableList<IActie>) bb.getActies();
+    }
+
+    public ObservableList<IOefening> geefOefeningen() {
+        return (ObservableList<IOefening>) bb.getOefeningen();
+    }
+    
+    public void setListActiesVanBox(List<? extends IActie> list) {
+        this.listActiesVanBoxTemp = (List<Actie>)list;
+    }
+
+    public void setListOefeningenVanBox(List<? extends IOefening> list) {
+        this.listOefeningenVanBoxTemp = (List<Oefening>)list;
+    }
+    
+    public int getAantalTempActies() {
+        return this.listActiesVanBoxTemp.size();
+    }
+    
+    public int getAantalTempOefeningen() {
+        return this.listOefeningenVanBoxTemp.size();
+    }
+    
+    public ObservableList<IActie> geefActiesHuidigeBox() {
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(huidigeBox.getActies()));
+    }
+    
+    public ObservableList<IOefening> geefOefeningenHuidigeBox() {
+        return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(huidigeBox.getOefeningen()));
     }
 }

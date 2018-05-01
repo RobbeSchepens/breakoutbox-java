@@ -31,37 +31,22 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-/**
- * FXML Controller class
- *
- * @author Daan
- */
 public class DetailPanelBoxListOefeningenController extends VBox implements BoxObserver, BoxSubject {
-     
      
     FrameBoxController fc;
     BoxController bc;
     private List<IOefening> listOefeningenTempAlle = new ArrayList<>();
     private List<IOefening> listOefeningenTempGeselect = new ArrayList<>();
     private Set<BoxObserver> observers;
-    @FXML
-    private Label lblTitleLeftList;
-    @FXML
-    private Label lblAantalGeselecteerd;
-    @FXML
-    private ListView<IOefening> lsvListAlle;
-    @FXML
-    private ListView<IOefening> lsvListGeselecteerde;
-    @FXML
-    private Button btnDeselectAll;
-    @FXML
-    private Button btnCancel;
-    @FXML
-    private Button btnSubmit;
+    
+    @FXML private Label lblTitleLeftList;
+    @FXML private Label lblAantalGeselecteerd;
+    @FXML private ListView<IOefening> lsvListAlle;
+    @FXML private ListView<IOefening> lsvListGeselecteerde;
+    @FXML private Button btnDeselectAll;
+    @FXML private Button btnCancel;
+    @FXML private Button btnSubmit;
 
-    /**
-     * Initializes the controller class.
-     */
     public DetailPanelBoxListOefeningenController(BoxController bc, FrameBoxController fc) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailPanelBoxListOefeningen.fxml"));
         loader.setRoot(this);
@@ -119,7 +104,7 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
         lblAantalGeselecteerd.setText("Oefeningen geselecteerd: " + box.getOefeningen().size());
         List<? extends IOefening> lt = box.getOefeningen();
         listOefeningenTempGeselect = (List<IOefening>) lt;
-        bc.setListOefeningenVanBoxTemp(listOefeningenTempGeselect);
+        bc.setListOefeningenVanBox(listOefeningenTempGeselect);
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
 
 
@@ -128,18 +113,16 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
 
         lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
         lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
-
     }
 
-    public void nieuweOefening() {
+    public void nieuweBox() {
         System.out.println("oefening wordt geinit");
         listOefeningenTempAlle = new ArrayList<>(bc.geefOefeningen());
         listOefeningenTempGeselect = new ArrayList<>();
         lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
-        bc.setListOefeningenVanBoxTemp(listOefeningenTempGeselect);
+        bc.setListOefeningenVanBox(listOefeningenTempGeselect);
         lblAantalGeselecteerd.setText("Geselecteerde oefeningen: 0");
-
     }
 
     @FXML
@@ -161,37 +144,32 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
 
     @FXML
     private void btnSubmitOnAction(ActionEvent event) {
-        bc.setListOefeningenVanBoxTemp(listOefeningenTempGeselect);
+        bc.setListOefeningenVanBox(listOefeningenTempGeselect);
         fc.toonListview("cancel/init");
         notifyObserversList();
     }
 
-
-    @Override
-    public void CountlistActiesVanBoxTemp() {
-
-    }
-
-    @Override
-    public void CountlistOefeningenVanBoxTemp() {
-
-    }
-
     @Override
     public void addBoxObserver(BoxObserver o) {
-        if (!observers.contains(o)) {
+        if (!observers.contains(o))
             observers.add(o);
-        }
     }
 
     @Override
     public void removeBoxObserver(BoxObserver o) {
         observers.remove(o);
     }
+    
     private void notifyObserversList() {
         observers.forEach((observer) -> {
-            observer.CountlistOefeningenVanBoxTemp();
+            observer.updateCountOefeningen();
         });
     }
+
+    @Override
+    public void updateCountActies() {}
+
+    @Override
+    public void updateCountOefeningen() {}
 
 }

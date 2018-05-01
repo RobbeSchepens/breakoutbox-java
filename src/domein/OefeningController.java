@@ -15,7 +15,7 @@ public class OefeningController {
     
     public OefeningController() {
         ob = new OefeningBeheerder();
-        huidigeOefening = new OefeningNull();
+        //huidigeOefening = new OefeningNull();
     }
     
     public ObservableList<IOefening> geefOefeningen() {
