@@ -100,15 +100,15 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
         //listActiesTempAlle.removeAll(lt);
 
-        ArrayList<IActie> h = new ArrayList<>();
-        for (int j = 0; j < listActiesTempGeselect.size(); j++) {
-            for (int i = 0; i < listActiesTempAlle.size(); i++) {
-                if (listActiesTempAlle.get(i).getNaam().equals(listActiesTempGeselect.get(j).getNaam())) {
-                    h.add(listActiesTempAlle.get(i));
-                }
-            }
-        }
-        listActiesTempAlle.removeAll(h);
+//        ArrayList<IActie> h = new ArrayList<>();
+//        for (int j = 0; j < listActiesTempGeselect.size(); j++) {
+//            for (int i = 0; i < listActiesTempAlle.size(); i++) {
+//                if (listActiesTempAlle.get(i).getNaam().equals(listActiesTempGeselect.get(j).getNaam())) {
+//                    h.add(listActiesTempAlle.get(i));
+//                }
+//            }
+//        }
+//        listActiesTempAlle.removeAll(h);
         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
 
 
@@ -169,12 +169,8 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
     }
 
     @Override
-    public void updateCountActies() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void updateCountActies() {}
 
     @Override
-    public void updateCountOefeningen() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void updateCountOefeningen() {}
 }

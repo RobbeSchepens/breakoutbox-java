@@ -19,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 /**
  *
@@ -77,6 +78,11 @@ public class Box implements IBox, Serializable {
     @ManyToMany(cascade = CascadeType.PERSIST)
     public List<Actie> getActies() {
         return acties;
+    }
+    
+    @Transient
+    public int getActiesCount() {
+        return getActies().size();
     }
 
     @Override

@@ -14,7 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, BoxController> implements BoxSubject {
+public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, BoxController> implements BoxSubject, BoxObserver {
 
     BoxController bc;
     FrameBoxController fc;
@@ -51,7 +51,7 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
         col1.setCellValueFactory(v -> v.getValue().naamProperty());
 
         TableColumn<IBox, String> col2 = new TableColumn<>("Aantal acties");
-        col2.setCellValueFactory(v -> new ReadOnlyObjectWrapper(v.getValue().getActies().size()));
+        col2.setCellValueFactory(v -> new ReadOnlyObjectWrapper(v.getValue().getActiesCount()));
 
         TableColumn<IBox, String> col3 = new TableColumn<>("Aantal oefeningen");
         col3.setCellValueFactory(v -> new ReadOnlyObjectWrapper(v.getValue().getOefeningen().size()));
@@ -109,5 +109,17 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
     void initNieuw() {
         fc.initNieuweBox();
     }
+
+    @Override
+    public void update(IBox box) {}
+
+    @Override
+    public void updateCountActies() {
+//        getTbvOverzicht().getColumns().get(1).setVisible(false);
+//        getTbvOverzicht().getColumns().get(1).setVisible(true);
+    }
+
+    @Override
+    public void updateCountOefeningen() {}
 
 }

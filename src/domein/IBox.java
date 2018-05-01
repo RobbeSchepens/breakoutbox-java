@@ -22,6 +22,8 @@ public interface IBox {
 
     List<Actie> getActies();
 
+    int getActiesCount();
+    
     Vak getVak();
 
     List<Oefening> getOefeningen();
