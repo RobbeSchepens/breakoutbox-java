@@ -175,12 +175,22 @@ public class OefeningData {
                         (Oefening) oDao.get(1L),
                         (Oefening) oDao.get(3L),
                         (Oefening) oDao.get(8L)
+                ))),
+                new Box("box2", "Boxomschrijving2", vakken.get(2), new ArrayList<Actie>(Arrays.asList(
+                        (Actie) ActieDao.get(5L),
+                        (Actie) ActieDao.get(7L),
+                        (Actie) ActieDao.get(8L)
+                )), new ArrayList<Oefening>(Arrays.asList(
+                        (Oefening) oDao.get(7L),
+                        (Oefening) oDao.get(8L),
+                        (Oefening) oDao.get(2L)
                 )))
         //new Box("box2", "Boxomschrijving2", vakken.get(0), acties.subList(0, 11), oefeningen.subList(0, 12)),
         //new Box("box3", "Boxomschrijving3", vakken.get(3), acties.subList(0, 4), oefeningen.subList(4, 10))
         ));
 
         bb.add(boxen.get(0));
+        bb.add(boxen.get(1));
 
 
         /* GenericDaoJpa boxDao = new GenericDaoJpa<>(Box.class);
