@@ -122,6 +122,10 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
 
     @Override
     public void updateEditedItem() {
+        bc.geefBoxen().forEach(e -> System.out.println(e.getActiesCount()));
+        System.out.println("inupdate overzichtpanel");
+        getTbvOverzicht().getColumns().get(1).setVisible(false);
+        getTbvOverzicht().getColumns().get(1).setVisible(true);
         getTbvOverzicht().getColumns().forEach(e -> e.setVisible(false));
         getTbvOverzicht().getColumns().forEach(e -> e.setVisible(true));
     }
