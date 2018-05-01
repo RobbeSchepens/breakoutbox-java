@@ -107,15 +107,15 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
         bc.setListOefeningenVanBox(listOefeningenTempGeselect);
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
 
-//        ArrayList<IOefening> h = new ArrayList<>();
-//        for (int j = 0; j < listOefeningenTempGeselect.size(); j++) {
-//            for (int i = 0; i < listOefeningenTempAlle.size(); i++) {
-//                if (listOefeningenTempAlle.get(i).getNaam().equals(listOefeningenTempGeselect.get(j).getNaam())) {
-//                    h.add(listOefeningenTempAlle.get(i));
-//                }
-//            }
-//        }
-//        listOefeningenTempAlle.removeAll(h);
+        ArrayList<IOefening> h = new ArrayList<>();
+        for (int j = 0; j < listOefeningenTempGeselect.size(); j++) {
+            for (int i = 0; i < listOefeningenTempAlle.size(); i++) {
+                if (listOefeningenTempAlle.get(i).getNaam().equals(listOefeningenTempGeselect.get(j).getNaam())) {
+                    h.add(listOefeningenTempAlle.get(i));
+                }
+            }
+        }
+        listOefeningenTempAlle.removeAll(h);
 
         lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
     }
