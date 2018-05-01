@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,11 +15,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="740.0" type="VBox" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="740.0" type="VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER">
          <children>
-            <Label fx:id="lblTitleRight" focusTraversable="false" styleClass="h1" text="nieuwe klas" />
+            <Label fx:id="lblTitleRight" focusTraversable="false" styleClass="h1" text="Nieuwe klas" />
          </children>
          <VBox.margin>
             <Insets bottom="15.0" />
@@ -35,90 +39,14 @@
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="555.0" minWidth="10.0" prefWidth="554.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="330.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label focusTraversable="false" text="Naam Klas" />
             <TextField fx:id="txfNaamKlas" GridPane.columnIndex="1" />
             <Label fx:id="lblUploadExcel" focusTraversable="false" text="Upload excel" GridPane.rowIndex="1" />
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <children>
-                  <VBox prefHeight="330.0" prefWidth="265.0">
-                     <children>
-                        <GridPane hgap="15.0" prefWidth="264.0" vgap="15.0">
-                           <columnConstraints>
-                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                 <children>
-                                    <TextField fx:id="txfNaamLln" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="393.0">
-                                       <children>
-                                          <Label fx:id="lblOpgave1" wrapText="true" />
-                                          <TextField fx:id="txfVoornaam" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </HBox>
-                              <Label text="Naam: " GridPane.rowIndex="2" />
-                              <Label text="Nieuwe leerling toevoegen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label prefHeight="17.0" prefWidth="78.0" text="Voornaam: " GridPane.rowIndex="3" />
-                              <Button mnemonicParsing="false" onAction="#btnVoegLlnToeOnAction" prefHeight="25.0" prefWidth="150.0" text="Voeg leerling toe" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Button mnemonicParsing="false" onAction="#btnVerwijderLlnOnAction" prefWidth="150.0" text="Verwijder leerling" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                              <Label fx:id="lblGeselect" styleClass="text-danger" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6" GridPane.valignment="BOTTOM">
-                                 <GridPane.margin>
-                                    <Insets left="2.0" />
-                                 </GridPane.margin></Label>
-                              <Label fx:id="lblToegevoegdBoodschap" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="TOP" />
-                           </children>
-                        </GridPane>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="330.0" prefWidth="265.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="264.0">
-                           <children>
-                              <Label text="Leerlingen in klas :">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <ListView fx:id="lsvLeerlingen" prefHeight="300.0" prefWidth="264.0" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="393.0">
-                     <children>
-                        <Label fx:id="lblOpgave" wrapText="true" />
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-            <Button fx:id="btnFileOpgave" mnemonicParsing="false" onAction="#btnUploadExcelOnAction" text="file ..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="btnFileOpgave" mnemonicParsing="false" onAction="#btnUploadExcelOnAction" text="Kies file..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="lblExcelName" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="50.0" />
@@ -130,9 +58,65 @@
          </VBox.margin>
       </GridPane>
       <HBox alignment="CENTER">
-         <padding>
-            <Insets bottom="15.0" />
-         </padding>
+         <children>
+            <VBox>
+               <children>
+                  <GridPane hgap="15.0" vgap="15.0">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <TextField fx:id="txfNaamLln" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="txfVoornaam" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Naam" GridPane.rowIndex="1" />
+                        <Label text="Nieuwe leerling toevoegen" GridPane.columnIndex="1" />
+                        <Label text="Voornaam" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" onAction="#btnVoegLlnToeOnAction" prefHeight="25.0" prefWidth="150.0" text="Voeg leerling toe" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Button mnemonicParsing="false" onAction="#btnVerwijderLlnOnAction" prefWidth="150.0" text="Verwijder leerling" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="lblGeselect" styleClass="text-info" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="lblToegevoegdBoodschap" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                     </children>
+                     <VBox.margin>
+                        <Insets right="15.0" />
+                     </VBox.margin>
+                  </GridPane>
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <HBox alignment="CENTER" prefHeight="30.0">
+                     <children>
+                        <Label text="Leerlingen in klas">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <ListView fx:id="lsvLeerlingen" />
+               </children>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets bottom="30.0" />
+         </VBox.margin>
       </HBox>
       <HBox alignment="CENTER">
          <padding>

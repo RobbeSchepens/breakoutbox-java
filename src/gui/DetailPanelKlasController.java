@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import domein.IKlas;
@@ -26,11 +21,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
-/**
- * FXML Controller class
- *
- * @author Daan
- */
 public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     KlasController kc;
@@ -74,11 +64,6 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
     @FXML
     private Label lblToegevoegdBoodschap;
 
-
-
-    /**
-     * Initializes the controller class.
-     */
     public DetailPanelKlasController(KlasController kc, FrameKlassenController fc) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("DetailPanelKlas.fxml"));
@@ -97,11 +82,10 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
             @Override
             public void changed(ObservableValue<? extends Leerling> observable, Leerling oldValue, Leerling newValue) {
                 if (!(newValue == null)) {
-                    lblGeselect.setText("Geselecteerd : " + newValue.toString());
+                    lblGeselect.setText("Geselecteerd: " + newValue.toString());
                 }
             }
         });
-
     }
 
     @Override
@@ -110,14 +94,10 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
         initButtons(false);
 
         txfNaamKlas.setText(klas.getNaam());
-
         lsvLeerlingen.setItems(FXCollections.observableArrayList(klas.getLeerlingen()));
-        lblTitleRight.setText("Overzicht Klas");
+        lblTitleRight.setText("Klas");
         lblUploadExcel.setVisible(false);
         btnFileOpgave.setVisible(false);
-
-
-
     }
 
     private void initButtons(boolean isNew) {
@@ -125,10 +105,8 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
         btnAdd.setVisible(isNew);
         btnEdit.setManaged(!isNew);
         btnEdit.setVisible(!isNew);
-
     }
-
-
+    
     @FXML
     private void btnVoegLlnToeOnAction(ActionEvent event) {
         int i = 0;
@@ -138,7 +116,7 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
         txfVoornaam.setText("");
         for (Leerling item : lsvLeerlingen.getItems()) {
             if (item.getVoornaam().trim().equals(ln.getVoornaam().trim()) && item.getAchternaam().trim().equals(ln.getAchternaam().trim())) {
-                lblToegevoegdBoodschap.setText("leerling bestaat al");
+                lblToegevoegdBoodschap.setText("Leerling bestaat al.");
                 test = true;
             }
         }
@@ -148,27 +126,19 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
             lsvLeerlingen.getItems().add(ln);
             lblToegevoegdBoodschap.setText(ln.getVoornaam() + " toegevoegd!");
         }
-
-
-
     }
-
-
+    
     @FXML
     private void btnVerwijderLlnOnAction(ActionEvent event) {
         Leerling g = lsvLeerlingen.getSelectionModel().getSelectedItem();
         lsvLeerlingen.getItems().remove(g);
-        lblGeselect.setText(g.getVoornaam() + " Verwijderd!");
+        lblGeselect.setText(g.getVoornaam() + " verwijderd!");
         lsvLeerlingen.getSelectionModel().clearSelection();
-
-
     }
 
     @FXML
     private void btnUploadExcelOnAction(ActionEvent event) {
         System.out.println("implement excel opener");
-
-        //lblExcelName
     }
 
     @FXML
@@ -177,8 +147,7 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
             kc.voegKlasToe(txfNaamKlas.getText(), lsvLeerlingen.getItems());
             clearRender();
             lblError.setText("");
-            lblSuccess.setText("De oefening werd succesvol toegevoegd.");
-
+            lblSuccess.setText("De klas werd succesvol toegevoegd.");
         } catch (IllegalArgumentException ex) {
             lblSuccess.setText("");
             System.out.println(ex.getMessage());
@@ -190,12 +159,11 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @FXML
     private void btnEditOnAction(ActionEvent event) {
-
         try {
             kc.pasOefeningAan(txfNaamKlas.getText(), lsvLeerlingen.getItems());
             clearRender();
             lblError.setText("");
-            lblSuccess.setText("De oefening werd succesvol aangepast.");
+            lblSuccess.setText("De klas werd succesvol aangepast.");
             fc.notifyChangeVoorAantalLln();
         } catch (IllegalArgumentException ex) {
             lblSuccess.setText("");
@@ -206,7 +174,6 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
     void initNieuweOefening() {
         initButtons(true);
         clearRender();
-
     }
 
     private void clearRender() {
@@ -215,11 +182,9 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
         txfNaamKlas.setText("");
         txfNaamLln.setText("");
         txfVoornaam.setText("");
+        lblGeselect.setText("");
         lblToegevoegdBoodschap.setText("");
         btnFileOpgave.setVisible(true);
         lblUploadExcel.setVisible(true);
-
-
     }
-
 }
