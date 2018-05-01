@@ -14,7 +14,11 @@ public class KlasController {
     }
     
     public ObservableList<IKlas> geefKlassen() {
-        return (ObservableList<IKlas>)kb.getKlassen();
+        return kb.getKlassenFiltered();
+    }
+
+    public int geefAantalBoxen() {
+        return kb.getKlassen().size();
     }
 
     public void setHuidigeKlas(IKlas klas) {
@@ -38,6 +42,10 @@ public class KlasController {
         huidigeKlas.setLeerlingen(leerlingen);
         kb.update(huidigeKlas);
 
+    }
+
+    public void veranderFilter(String filterValue) {
+        kb.veranderFilter(filterValue);
     }
     
 }

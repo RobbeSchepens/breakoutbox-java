@@ -1,7 +1,10 @@
 package domein;
 
+import java.util.Collections;
+import java.util.Comparator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import repository.GenericDaoJpa;
 
 public class KlasBeheerder {
@@ -11,12 +14,11 @@ public class KlasBeheerder {
 
     // Lijsten
     private ObservableList<? extends IKlas> klassen;
+    private FilteredList<IKlas> filteredKlasList;
     
     public KlasBeheerder() {
         setKlasRepo(new GenericDaoJpa(Klas.class));
-        
-        // Seeden van database
-        //OefeningData od = new OefeningData(this);
+
     }
 
     public void setKlasRepo(GenericDaoJpa<Klas> mock) {
@@ -24,12 +26,32 @@ public class KlasBeheerder {
     }
     
     public ObservableList<? extends IKlas> getKlassen() {
-        if (klassen == null)
+        if (klassen == null) {
             klassen = FXCollections.observableArrayList(klasRepo.findAll());
-
+            Collections.sort((ObservableList<Klas>) klassen, Comparator.comparing(Klas::getNaam));
+            filteredKlasList = new FilteredList<>((ObservableList<IKlas>) getKlassen(), p -> true);
+        }
         return klassen;
     }
-    
+
+    public ObservableList<IKlas> getKlassenFiltered() {
+        if (filteredKlasList == null) {
+            getKlassen();
+        }
+        return filteredKlasList;
+    }
+
+    public void veranderFilter(String filterValue) {
+        filteredKlasList.setPredicate(oefening -> {
+            if (filterValue == null || filterValue.isEmpty()) {
+                return true;
+            }
+
+            String lowerCaseValue = filterValue.toLowerCase();
+            return oefening.getNaam().toLowerCase().contains(lowerCaseValue);
+        });
+    }
+
     public void add(Klas o) {
         /*if (klasRepo.getByToString(o) != null) {
             throw new IllegalArgumentException("Er bestaat al een klas met deze naam.");

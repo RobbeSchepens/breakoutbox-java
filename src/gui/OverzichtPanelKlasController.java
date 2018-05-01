@@ -76,7 +76,7 @@ public class OverzichtPanelKlasController extends OverzichtPanelController<IKlas
 
     @Override
     void filter(String newValue) {
-        System.out.println("wis filter"); // aangeroepen als textvak changes
+        kc.veranderFilter(newValue);
     }
 
     @Override
