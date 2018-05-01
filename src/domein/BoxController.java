@@ -29,6 +29,7 @@ public class BoxController {
     }
 
     public void voegBoxToe(String naam, String omschrijving, Vak vak) {
+
         Box box = new Box(naam, omschrijving, vak, listActiesVanBoxTemp, listOefeningenVanBoxTemp);
         bb.add(box);
     }

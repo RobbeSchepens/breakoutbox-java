@@ -92,19 +92,17 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
 
     @Override
     public void update(IBox box) {
+        listActiesTempAlle = new ArrayList<>(bc.geefActies());
         lblAantalGeselecteerd.setText("Acties geselecteerd: " + box.getActies().size());
         List<? extends IActie> lt = box.getActies();
         listActiesTempGeselect = (List<IActie>) lt;
-
         bc.setListActiesVanBox(listActiesTempGeselect);
-
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
-
         //listActiesTempAlle.removeAll(lt);
-        lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
+
         
 
-
+        lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
     }
 
     public void nieuweBox() {

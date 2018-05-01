@@ -59,6 +59,9 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
     private void initButtons(boolean isNew) {
         btnAdd.setManaged(isNew);
         btnAdd.setVisible(isNew);
+        btnAddWithContent.setVisible(!isNew);
+        btnAddWithContent.setVisible(!isNew);
+
         btnEdit.setManaged(!isNew);
         btnEdit.setVisible(!isNew);
     }
@@ -127,7 +130,7 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
         try {
             bc.voegBoxToe(txfNaam.getText(), txfOmschrijving.getText(), ddlVak.getSelectionModel().getSelectedItem());
             
-            clearRender();
+            initNieuweBox();
             lblError.setText("");
             lblSuccess.setText("De box werd succesvol toegevoegd.");
             fc.toonListview("cancel/init");
@@ -142,7 +145,7 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
         try {
             bc.pasBoxAan(txfNaam.getText(), txfOmschrijving.getText(), ddlVak.getSelectionModel().getSelectedItem());
             
-            clearRender();
+            initNieuweBox();
             lblError.setText("");
             lblSuccess.setText("De box werd succesvol aangepast.");
             fc.toonListview("cancel/init");
@@ -154,6 +157,18 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
 
     @FXML
     private void btnAddWithContentOnAction(ActionEvent event) {
+        try {
+            bc.voegBoxToe(txfNaam.getText(), txfOmschrijving.getText(), ddlVak.getSelectionModel().getSelectedItem());
+
+            initNieuweBox();
+            lblError.setText("");
+            lblSuccess.setText("De aangepaste box werd succesvol toegevoegd.");
+            fc.toonListview("cancel/init");
+        } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
+            lblSuccess.setText("");
+            lblError.setText(ex.getMessage());
+        }
+
     }
 
 }

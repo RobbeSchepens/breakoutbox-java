@@ -179,11 +179,14 @@ public class OefeningData {
                 new Box("box2", "Boxomschrijving2", vakken.get(2), new ArrayList<Actie>(Arrays.asList(
                         (Actie) ActieDao.get(5L),
                         (Actie) ActieDao.get(7L),
-                        (Actie) ActieDao.get(8L)
+                        (Actie) ActieDao.get(8L),
+                        (Actie) ActieDao.get(3L)
                 )), new ArrayList<Oefening>(Arrays.asList(
                         (Oefening) oDao.get(7L),
                         (Oefening) oDao.get(8L),
-                        (Oefening) oDao.get(2L)
+                        (Oefening) oDao.get(2L),
+                        (Oefening) oDao.get(5L),
+                        (Oefening) oDao.get(4L)
                 )))
         //new Box("box2", "Boxomschrijving2", vakken.get(0), acties.subList(0, 11), oefeningen.subList(0, 12)),
         //new Box("box3", "Boxomschrijving3", vakken.get(3), acties.subList(0, 4), oefeningen.subList(4, 10))
