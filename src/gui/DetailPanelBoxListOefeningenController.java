@@ -60,9 +60,8 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
         this.bc = bc;
         this.fc = fc;
         this.observers = new HashSet<>();
-        lblTitleLeftList.setText("Oefeningen");
-        lsvListAlle.setItems(bc.geefOefeningen());
 
+        lblTitleLeftList.setText("Oefeningen");
         listOefeningenTempAlle = new ArrayList<>(bc.geefOefeningen());
         lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
 

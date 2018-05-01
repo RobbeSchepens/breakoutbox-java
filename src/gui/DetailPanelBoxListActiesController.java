@@ -54,6 +54,7 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
         this.observers = new HashSet<>();
 
         lblTitleLeftList.setText("Acties");
+
         listActiesTempAlle = new ArrayList<>(bc.geefActies());
         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
 
