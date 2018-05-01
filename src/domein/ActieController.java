@@ -16,11 +16,15 @@ import org.eclipse.persistence.exceptions.DatabaseException;
 public class ActieController {
 
     private Actie huidigeActie;
-    ActieBeheerder ab = new ActieBeheerder();
+    ActieBeheerder ab;
 
 
     public ActieController() {
         this.ab = new ActieBeheerder();
+    }
+
+    public int geefAantalActies() {
+        return ab.getActies().size();
     }
 
     public void setHuidigeKlas(IActie actie) {
