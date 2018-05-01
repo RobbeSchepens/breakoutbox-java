@@ -96,37 +96,37 @@ public class Box implements IBox, Serializable {
     }
 
     public void setNaam(String naam) {
-        /*if (naam == null || naam.trim().isEmpty()) {
+        if (naam == null || naam.trim().isEmpty()) {
             throw new IllegalArgumentException("Je moet een naam opgeven");
-        }*/
+        }
         this.naam.set(naam);
     }
 
     public void setOmschrijving(String omschrijving) {
-        /*if (omschrijving == null || omschrijving.trim().isEmpty()) {
+        if (omschrijving == null || omschrijving.trim().isEmpty()) {
             throw new IllegalArgumentException("Je moet een omschrijving opgeven");
-        }*/
+        }
         this.omschrijving = omschrijving;
     }
 
     public void setVak(Vak vak) {
-        /*if (vak == null) {
+        if (vak == null) {
             throw new IllegalArgumentException("Je moet een vak opgeven");
-        }*/
+        }
         this.vak = vak;
     }
 
     public void setActies(List<Actie> acties) {
-        /* if (acties == null || acties.isEmpty()) {
+        if (acties == null || acties.isEmpty()) {
             throw new IllegalArgumentException("Je moet acties opgeven");
-        }*/
+        }
         this.acties = acties;
     }
 
     public void setOefeningen(List<Oefening> oefeningen) {
-        /* if (oefeningen == null || oefeningen.isEmpty()) {
+        if (oefeningen == null || oefeningen.isEmpty()) {
             throw new IllegalArgumentException("Je moet oefeningen opgeven");
-        }*/
+        }
 
         this.oefeningen = oefeningen;
     }
