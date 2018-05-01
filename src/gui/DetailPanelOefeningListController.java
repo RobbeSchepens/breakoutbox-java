@@ -1,5 +1,6 @@
 package gui;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import domein.Doelstelling;
 import domein.OefeningController;
 import domein.Groepsbewerking;
@@ -54,7 +55,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
         this.dc = dcon;
         this.fc = fc;
 
-        List<Groepsbewerking> p = dc.geefGroepsbewerkingen();
+        List<Groepsbewerking> p = new ArrayList<>(dc.geefGroepsbewerkingen());
         for (Groepsbewerking item : p) {
                 listGroepsBewerkingenTempAlle.add(item);
         }
@@ -98,12 +99,12 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
     @Override
     public void update(IOefening oefening) {
         listGroepsBewerkingenTempAlle.clear();
-        List<Groepsbewerking> p = dc.geefGroepsbewerkingen();
+        List<Groepsbewerking> p = new ArrayList<>(dc.geefGroepsbewerkingen());
         for (Groepsbewerking item : p) {
             listGroepsBewerkingenTempAlle.add(item);
         }
 
-        List<Groepsbewerking> m = dc.geefGroepsbewerkingenHuidigeOefening();
+        List<Groepsbewerking> m = new ArrayList<>(dc.geefGroepsbewerkingenHuidigeOefening());
         listGroepsBewerkingenTempGeselect = new ArrayList<>();
         for (Groepsbewerking item : m) {
             listGroepsBewerkingenTempGeselect.add(item);
@@ -160,7 +161,8 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
 
     void nieuweOefening() {
         listGroepsBewerkingenTempGeselect = new ArrayList<>();
-        listGroepsBewerkingenTempAlle = dc.geefGroepsbewerkingen();
+        listGroepsBewerkingenTempAlle = new ArrayList<>(dc.geefGroepsbewerkingen());
+        System.out.println(listGroepsBewerkingenTempAlle);
         dc.setListGroepsbewerkingenVanOefening(listGroepsBewerkingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));

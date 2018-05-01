@@ -125,18 +125,18 @@ public final class OefeningBeheerder {
     }
 
     public ObservableList<Groepsbewerking> getGroepsbewerkingen() {
-
+        if (groepsbewerkingen == null) {
             groepsbewerkingen = FXCollections.observableArrayList(groepsbewerkingRepo.findAll());
             Collections.sort(groepsbewerkingen, Comparator.comparing(Groepsbewerking::toString));
-
+        }
         return groepsbewerkingen;
     }
 
     public ObservableList<Doelstelling> getDoelstellingen() {
-
+        if (doelstellingen == null) {
             doelstellingen = FXCollections.observableArrayList(doelstellingRepo.findAll());
             Collections.sort(doelstellingen, Comparator.comparing(Doelstelling::getDoelstelling));
-
+        }
         return doelstellingen;
     }
     
