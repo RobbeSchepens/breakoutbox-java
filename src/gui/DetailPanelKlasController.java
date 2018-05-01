@@ -4,6 +4,7 @@ import domein.IKlas;
 import domein.KlasController;
 import domein.KlasObserver;
 import domein.Leerling;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class DetailPanelKlasController extends VBox implements KlasObserver {
 
@@ -138,7 +140,14 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @FXML
     private void btnUploadExcelOnAction(ActionEvent event) {
-        System.out.println("implement excel opener");
+        /*FileChooser excelChooser = new FileChooser();
+        excelChooser.setTitle("Kies een klas");
+        excelChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        excelChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(".xlsx", "*.xlsx"));
+
+        File excelFile = excelChooser.showOpenDialog((Stage) (this.getScene().getWindow()));*/
+
+
     }
 
     @FXML
