@@ -30,7 +30,6 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
 
     @Override
     <T> void implementTableviewListener(T newValue) {
-        System.out.println("tbvl");
         bc.setHuidigeBox((IBox) newValue);
         notifyObservers();
     }
@@ -58,6 +57,7 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
 
         // Add the columns to the tableview
         getTbvOverzicht().getColumns().setAll(col1, col2, col3);
+
     }
 
     @Override
