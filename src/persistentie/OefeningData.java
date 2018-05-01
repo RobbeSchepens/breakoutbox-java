@@ -79,17 +79,17 @@ public class OefeningData {
 
         List<Actie> acties = new ArrayList<>(Arrays.asList( // geen loop van maken!
                 new Actie("Actie1"),
-                new Actie("Actie2"),
+                new Actie("ssssss"),
                 new Actie("Actie3"),
-                new Actie("Actie4"),
-                new Actie("Actie5"),
-                new Actie("Actie6"),
-                new Actie("Actie7"),
-                new Actie("Actie8"),
-                new Actie("Actie9"),
-                new Actie("Actie10"),
-                new Actie("Actie11"),
-                new Actie("Actie12")
+                new Actie("ddddddddd"),
+                new Actie("hfgh5"),
+                new Actie("cccccccc"),
+                new Actie("uuuuuuu"),
+                new Actie("hhhhhhhh"),
+                new Actie("ddddddd"),
+                new Actie("kkkkkkkkk"),
+                new Actie("nnnnnnnn"),
+                new Actie("bbbbbbb")
         ));
         File opgave1 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Optelsommen_Opgave.pdf");
         File feedback1 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Optelsommen_Feedback.pdf");

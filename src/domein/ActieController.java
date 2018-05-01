@@ -23,6 +23,10 @@ public class ActieController {
         this.ab = new ActieBeheerder();
     }
 
+    public ObservableList<IActie> geefActies() {
+        return ab.getActiesFiltered();
+    }
+
     public int geefAantalActies() {
         return ab.getActies().size();
     }
@@ -30,9 +34,6 @@ public class ActieController {
     public void setHuidigeKlas(IActie actie) {
         this.huidigeActie = (Actie) actie;
 
-    }
-    public ObservableList<IActie> geefActies() {
-        return (ObservableList<IActie>) ab.getActies();
     }
 
     public void voegActieToe(String naam) {
@@ -43,9 +44,10 @@ public class ActieController {
 
     public void delete(IActie o) {
         ab.delete((Actie) o);
+    }
 
-
-
+    public void veranderFilter(String filterValue) {
+        ab.veranderFilter(filterValue);
     }
 
     public void pasActieAan(String naam) {
@@ -53,5 +55,6 @@ public class ActieController {
         ab.update(huidigeActie);
 
     }
+
 
 }

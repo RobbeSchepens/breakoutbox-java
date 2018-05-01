@@ -87,7 +87,7 @@ public class OverzichtPanelActieController extends OverzichtPanelController<IAct
 
     @Override
     void filter(String newValue) {
-        System.out.println("filter");
+        ac.veranderFilter(newValue);
     }
 
     @Override
