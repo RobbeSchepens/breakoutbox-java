@@ -180,12 +180,18 @@ public class DetailPanelBoxController extends VBox implements BoxObserver, Updat
     }
 
     @Override
-    public void addUpdatedItemObserver(BoxObserver o) {}
+    public void addUpdatedItemObserver(UpdateItemTableObserver o) {
+        if (!observers.contains(o))
+            observers.add(o);
+    }
 
     @Override
-    public void removeUpdatedItemObserver(BoxObserver o) {}
+    public void removeUpdatedItemObserver(UpdateItemTableObserver o) {
+        observers.remove(o);
+    }
     
     private void notifyUpdatedItem() {
+        System.out.println(observers);
         observers.forEach((observer) -> {
             observer.updateEditedItem();
         });
