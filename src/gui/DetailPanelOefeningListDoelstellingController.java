@@ -97,6 +97,7 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
     public void update(IOefening oefening) {
         listDoelstellingenTempAlle.clear();
         List<Doelstelling> p = dc.geefDoelstellingen();
+        System.out.println(dc.geefDoelstellingen());
         for (Doelstelling item : p) {
             listDoelstellingenTempAlle.add(item);
         }
@@ -119,6 +120,7 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
                 }
             }
         }
+        System.out.println(h);
         listDoelstellingenTempAlle.removeAll(h);
 
 
