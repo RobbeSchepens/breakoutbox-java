@@ -4,6 +4,7 @@ import domein.BoxController;
 import domein.BoxObserver;
 import domein.BoxSubject;
 import domein.IBox;
+import domein.UpdateItemTableObserver;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -14,7 +15,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, BoxController> implements BoxSubject, BoxObserver {
+public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, BoxController> implements BoxSubject, BoxObserver, UpdateItemTableObserver {
 
     BoxController bc;
     FrameBoxController fc;
@@ -114,12 +115,15 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
     public void update(IBox box) {}
 
     @Override
-    public void updateCountActies() {
-//        getTbvOverzicht().getColumns().get(1).setVisible(false);
-//        getTbvOverzicht().getColumns().get(1).setVisible(true);
-    }
+    public void updateCountActies() {}
 
     @Override
     public void updateCountOefeningen() {}
+
+    @Override
+    public void updateEditedItem() {
+        getTbvOverzicht().getColumns().forEach(e -> e.setVisible(false));
+        getTbvOverzicht().getColumns().forEach(e -> e.setVisible(true));
+    }
 
 }

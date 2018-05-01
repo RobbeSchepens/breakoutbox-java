@@ -88,13 +88,20 @@
          </children>
       </HBox>
       <HBox alignment="CENTER">
+         <children>
+            <Button fx:id="btnAddWithContent" mnemonicParsing="false" onAction="#btnAddWithContentOnAction" styleClass="btn-big-action" text="Maak nieuwe bob met deze gegevens" />
+         </children>
+         <padding>
+            <Insets bottom="15.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER">
          <padding>
             <Insets bottom="15.0" />
          </padding>
          <children>
             <Label fx:id="lblError" styleClass="text-danger" />
             <Label fx:id="lblSuccess" styleClass="text-success" />
-            <Button fx:id="btnAddWithContent" mnemonicParsing="false" onAction="#btnAddWithContentOnAction" styleClass="btn-big-action" text="Maak nieuwe bob met deze gegevens" />
          </children>
       </HBox>
    </children>

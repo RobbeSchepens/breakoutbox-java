@@ -3,12 +3,16 @@ package gui;
 import domein.BoxController;
 import domein.BoxObserver;
 import domein.IBox;
+import domein.UpdateItemTableObserver;
+import domein.UpdateItemTableSubject;
 import domein.Vak;
 import exceptions.NaamTeKortException;
 import exceptions.NaamTeLangException;
 import exceptions.SpecialeTekensInNaamException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,10 +22,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class DetailPanelBoxController extends VBox implements BoxObserver {
+public class DetailPanelBoxController extends VBox implements BoxObserver, UpdateItemTableSubject {
     
     private BoxController bc;
     private FrameBoxController fc;
+    private Set<UpdateItemTableObserver> observers;
     
     @FXML private Label lblTitleRight;
     @FXML private Button btnNieuweOefening;
@@ -51,6 +56,7 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
         
         this.bc = bcon;
         this.fc = fc; // parent controller for showing listview bewerkingen en doelstellingen
+        this.observers = new HashSet<>();
         
         ddlVak.setItems(bc.geefVakken());
         initButtons(true);
@@ -149,6 +155,8 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
             lblError.setText("");
             lblSuccess.setText("De box werd succesvol aangepast.");
             fc.toonListview("cancel/init");
+            
+            notifyUpdatedItem();
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());
@@ -169,6 +177,18 @@ public class DetailPanelBoxController extends VBox implements BoxObserver {
             lblError.setText(ex.getMessage());
         }
 
+    }
+
+    @Override
+    public void addUpdatedItemObserver(BoxObserver o) {}
+
+    @Override
+    public void removeUpdatedItemObserver(BoxObserver o) {}
+    
+    private void notifyUpdatedItem() {
+        observers.forEach((observer) -> {
+            observer.updateEditedItem();
+        });
     }
 
 }
