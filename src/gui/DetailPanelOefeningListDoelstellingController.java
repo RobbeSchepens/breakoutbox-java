@@ -120,7 +120,6 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
                 }
             }
         }
-        System.out.println(h);
         listDoelstellingenTempAlle.removeAll(h);
 
 
