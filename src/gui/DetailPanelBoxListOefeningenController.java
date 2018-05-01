@@ -102,8 +102,16 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
     public void update(IBox box) {
         listOefeningenTempAlle = new ArrayList<>(bc.geefOefeningen());
         lblAantalGeselecteerd.setText("Oefeningen geselecteerd: " + box.getOefeningen().size());
-        List<? extends IOefening> lt = box.getOefeningen();
-        listOefeningenTempGeselect = (List<IOefening>) lt;
+
+        //List<? extends IOefening> lt = box.getOefeningen();
+        //listOefeningenTempGeselect = (List<IOefening>) lt;
+
+        List<IOefening> m = new ArrayList<>(bc.geefOefeningenHuidigeBox());
+        listOefeningenTempGeselect = new ArrayList<>();
+        for (IOefening item : m) {
+            listOefeningenTempGeselect.add(item);
+        }
+
         bc.setListOefeningenVanBox(listOefeningenTempGeselect);
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
 

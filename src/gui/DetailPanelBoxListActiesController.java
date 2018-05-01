@@ -5,6 +5,7 @@ import domein.BoxObserver;
 import domein.BoxSubject;
 import domein.IActie;
 import domein.IBox;
+import domein.IOefening;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -94,12 +95,19 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
     public void update(IBox box) {
         listActiesTempAlle = new ArrayList<>(bc.geefActies());
         lblAantalGeselecteerd.setText("Acties geselecteerd: " + box.getActies().size());
-        List<? extends IActie> lt = box.getActies();
-        listActiesTempGeselect = (List<IActie>) lt;
+
+        //List<? extends IActie> lt = box.getActies();
+        //listActiesTempGeselect = (List<IActie>) lt;
+
+        List<IActie> m = new ArrayList<>(bc.geefActiesHuidigeBox());
+        listActiesTempGeselect = new ArrayList<>();
+        for (IActie item : m) {
+            listActiesTempGeselect.add(item);
+        }
+
+
         bc.setListActiesVanBox(listActiesTempGeselect);
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
-        //listActiesTempAlle.removeAll(lt);
-
         ArrayList<IActie> h = new ArrayList<>();
         for (int j = 0; j < listActiesTempGeselect.size(); j++) {
             for (int i = 0; i < listActiesTempAlle.size(); i++) {
