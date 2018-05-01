@@ -141,17 +141,11 @@ public class OefeningData {
         vakken.add(new Vak("Geschiedenis"));
         vakken.add(new Vak("Natuurkunde"));
         vakken.add(new Vak("Nederlands"));*/
-        List<Box> boxen = new ArrayList<>(Arrays.asList( // geen loop van maken!
-                new Box("box1", "Boxomschrijving1", vakken.get(2), acties.subList(2, 8), oefeningen.subList(0, 4)),
-                new Box("box2", "Boxomschrijving2", vakken.get(0), acties.subList(0, 11), oefeningen.subList(0, 12)),
-                new Box("box3", "Boxomschrijving3", vakken.get(3), acties.subList(0, 4), oefeningen.subList(4, 10))
-        ));
+ /*
 
         bb.add(boxen.get(0));
         bb.add(boxen.get(1));
-        bb.add(boxen.get(2));
-
-
+        bb.add(boxen.get(2));*/
         GenericDaoJpa klasDao = new GenericDaoJpa<>(Klas.class);
         klassen.forEach(klas -> {
             klasDao.insert(klas);
@@ -168,16 +162,31 @@ public class OefeningData {
         // ob.add(oefeningen.get(0));
         //ob.add(oefeningen.get(1));
 
-        //oefeningen.forEach(oefb -> ob.add(oefb));
+        oefeningen.forEach(oefb -> ob.add(oefb));
 
+        GenericDaoJpa oDao = new GenericDaoJpa<>(Oefening.class);
+
+        List<Box> boxen = new ArrayList<>(Arrays.asList( // geen loop van maken!
+                new Box("box1", "Boxomschrijving1", vakken.get(2), new ArrayList<Actie>(Arrays.asList(
+                        (Actie) ActieDao.get(1L),
+                        (Actie) ActieDao.get(3L),
+                        (Actie) ActieDao.get(4L)
+                )), new ArrayList<Oefening>(Arrays.asList(
+                        (Oefening) oDao.get(1L),
+                        (Oefening) oDao.get(3L),
+                        (Oefening) oDao.get(8L)
+                )))
+        //new Box("box2", "Boxomschrijving2", vakken.get(0), acties.subList(0, 11), oefeningen.subList(0, 12)),
+        //new Box("box3", "Boxomschrijving3", vakken.get(3), acties.subList(0, 4), oefeningen.subList(4, 10))
+        ));
+
+        bb.add(boxen.get(0));
 
 
         /* GenericDaoJpa boxDao = new GenericDaoJpa<>(Box.class);
         boxen.forEach(box -> {
             boxDao.insert(box);
         });*/
-
-        
 
 
         // public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback, List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
