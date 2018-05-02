@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,11 +18,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 @Entity
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 public class Klas implements IKlas, Serializable {
-
+    @Transient
     private long id;
+    @Transient
     private SimpleStringProperty naam = new SimpleStringProperty();
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Leerling> leerlingen;
 
     public Klas() {
@@ -30,18 +33,15 @@ public class Klas implements IKlas, Serializable {
     public Klas(String naam, List<Leerling> leerlingen) {
 
         setNaam(naam);
-        if (leerlingen == null || leerlingen.isEmpty()) {
-            throw new IllegalArgumentException("Je moet leerlingen opgeven");
-        }
+
         setLeerlingen(leerlingen);
     }
-    
     @Id
+    @Access(AccessType.PROPERTY)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -53,8 +53,9 @@ public class Klas implements IKlas, Serializable {
     }
 
 
-    @Column(name = "Naam")
     @Override
+    @Basic
+    @Access(AccessType.PROPERTY)
     public String getNaam() {
         return naam.get();
     }
@@ -66,7 +67,6 @@ public class Klas implements IKlas, Serializable {
         this.naam.set(naam);
     }
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
     @Override
     public List<Leerling> getLeerlingen() {
         return leerlingen;
@@ -74,9 +74,9 @@ public class Klas implements IKlas, Serializable {
 
     public void setLeerlingen(List<Leerling> leerlingen) {
 
-        /*if (leerlingen == null || leerlingen.isEmpty()) {
+        if (leerlingen == null || leerlingen.isEmpty()) {
             throw new IllegalArgumentException("Je moet leerlingen opgeven");
-        }*/
+        }
         this.leerlingen = leerlingen;
     }
 

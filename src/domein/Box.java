@@ -11,6 +11,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,15 +27,20 @@ import javax.persistence.Transient;
  * @author Daan
  */
 @Entity
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 public class Box implements IBox, Serializable {
-
+    @Transient
     private long id;
+    @Transient
     private SimpleStringProperty naam = new SimpleStringProperty();
+
     private String omschrijving;
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Vak vak;
     //private List<Toegangscode> toegangscodes;
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Actie> acties;
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Oefening> oefeningen;
 
     public Box() {
@@ -47,20 +53,21 @@ public class Box implements IBox, Serializable {
         setNaam(naam);
         setOmschrijving(omschrijving);
         setVak(vak);
-        if (acties == null || acties.isEmpty()) {
-            throw new IllegalArgumentException("Je moet acties opgeven");
-        }
+
         setActies(acties);
-        if (oefeningen == null || oefeningen.isEmpty()) {
-            throw new IllegalArgumentException("Je moet oefeningen opgeven");
-        }
+
         setOefeningen(oefeningen);
     }
 
     @Id
+    @Access(AccessType.PROPERTY)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override
@@ -68,37 +75,11 @@ public class Box implements IBox, Serializable {
         return naam;
     }
 
-    @Column(name = "Naam")
     @Override
+    @Basic
+    @Access(AccessType.PROPERTY)
     public String getNaam() {
     return naam.get();
-    }
-
-    @Override
-    public String getOmschrijving() {
-        return omschrijving;
-    }
-
-
-    @Override
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    public List<Actie> getActies() {
-        return acties;
-    }
-    
-    @Transient
-    public int getActiesCount() {
-        return getActies().size();
-    }
-
-    @Override
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    public List<Oefening> getOefeningen() {
-        return oefeningen;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public void setNaam(String naam) {
@@ -108,11 +89,21 @@ public class Box implements IBox, Serializable {
         this.naam.set(naam);
     }
 
+    @Override
+    public String getOmschrijving() {
+        return omschrijving;
+    }
+
     public void setOmschrijving(String omschrijving) {
         if (omschrijving == null || omschrijving.trim().isEmpty()) {
             throw new IllegalArgumentException("Je moet een omschrijving opgeven");
         }
         this.omschrijving = omschrijving;
+    }
+
+    @Override
+    public Vak getVak() {
+        return vak;
     }
 
     public void setVak(Vak vak) {
@@ -122,22 +113,33 @@ public class Box implements IBox, Serializable {
         this.vak = vak;
     }
 
-    public void setActies(List<Actie> acties) {
 
+    @Override
+    public List<Actie> getActies() {
+        return acties;
+    }
+    public void setActies(List<Actie> acties) {
+        if (acties == null || acties.isEmpty()) {
+            throw new IllegalArgumentException("Je moet acties opgeven");
+        }
         this.acties = acties;
     }
 
-    public void setOefeningen(List<Oefening> oefeningen) {
-
-
-        this.oefeningen = oefeningen;
+    public int getActiesCount() {
+        return getActies().size();
     }
 
     @Override
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    public Vak getVak() {
-        return vak;
+    public List<Oefening> getOefeningen() {
+        return oefeningen;
     }
+    public void setOefeningen(List<Oefening> oefeningen) {
+        if (oefeningen == null || oefeningen.isEmpty()) {
+            throw new IllegalArgumentException("Je moet oefeningen opgeven");
+        }
+        this.oefeningen = oefeningen;
+    }
+
 
     @Override
     public String toString() {
