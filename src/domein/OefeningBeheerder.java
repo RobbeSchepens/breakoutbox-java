@@ -91,9 +91,7 @@ public final class OefeningBeheerder implements BeheerderSubject, BeheerderObser
     }
     
     public void add(Oefening o) {
-        if (geefOefeningByNaamJpa(o.getNaam()) != null)
-            throw new IllegalArgumentException("Er bestaat al een oefening met deze naam.");
-        
+        checkOpDubbel(o);
         oefRepo.startTransaction();
         oefRepo.insert(o);
         oefRepo.commitTransaction();
@@ -102,6 +100,7 @@ public final class OefeningBeheerder implements BeheerderSubject, BeheerderObser
     }
 
     public void update(Oefening o) {
+        checkOpDubbel(o);
         oefRepo.startTransaction();
         oefRepo.update(o);
         oefRepo.commitTransaction();
@@ -114,6 +113,14 @@ public final class OefeningBeheerder implements BeheerderSubject, BeheerderObser
         oefRepo.commitTransaction();
         getOefeningen().remove(o);
         notifyObservers();
+    }
+
+    public void checkOpDubbel(Oefening o) {
+        for (IOefening item : getOefeningen()) {
+            if (item.getNaam().equals(o.getNaam())) {
+                throw new IllegalArgumentException("Deze naam is al in gebruik");
+            }
+        }
     }
     
     public Oefening geefOefeningByNaamJpa(String naam) {
