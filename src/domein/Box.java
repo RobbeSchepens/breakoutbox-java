@@ -5,7 +5,10 @@
  */
 package domein;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -13,7 +16,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +23,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 /**
  *
@@ -146,5 +154,35 @@ public class Box implements IBox, Serializable {
         return naam.get();
     }
 
+    void createPdf(File selectedDirectory) { // naam van box, naam van oefeningen met zijn doelstellingen
 
+        if (selectedDirectory != null) {
+            try (PDDocument pdf = new PDDocument()) {
+
+                PDPage blankPage = new PDPage(PDRectangle.A4);
+                pdf.addPage(blankPage);
+                PDFont font = PDType1Font.HELVETICA;
+                try (PDPageContentStream contentStream = new PDPageContentStream(pdf, blankPage)) {
+                    contentStream.beginText();
+                    contentStream.setFont(font, 12);
+                    contentStream.setLeading(14.5f);
+                    contentStream.newLineAtOffset(100, 700);
+
+                    StringBuilder sb = new StringBuilder(String.format("Sessie: %s%n", getNaam()));
+                    sb.append("\n\n");
+
+
+                    contentStream.endText();
+                    contentStream.moveTo(PDRectangle.A4.getUpperRightX() / 2, PDRectangle.A4.getLowerLeftY() + 20);
+                    contentStream.beginText();
+
+                    contentStream.endText();
+                }
+
+                pdf.save(String.format("%s\\%s.pdf", selectedDirectory.getAbsolutePath(), getNaam()));
+            } catch (IOException | RuntimeException ex) {
+                throw new RuntimeException("Fout tijdens pdf creatie");
+            }
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package domein;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -99,4 +100,9 @@ public class BoxController {
     public ObservableList<IOefening> geefOefeningenHuidigeBox() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(huidigeBox.getOefeningen()));
     }
+
+    public void createPdf(File selectedDirectory) {
+        huidigeBox.createPdf(selectedDirectory);
+    }
+
 }
