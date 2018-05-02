@@ -10,7 +10,6 @@ import domein.Klas;
 import domein.Leerling;
 import domein.Oefening;
 import domein.OefeningBeheerder;
-import domein.PDF;
 import domein.SubstractGroepsbewerking;
 import domein.Vak;
 import java.io.File;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import repository.GenericDaoJpa;
-import repository.KlasDaoJpa;
 
 public class OefeningData {
 
