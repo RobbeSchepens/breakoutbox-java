@@ -44,7 +44,7 @@ public class OefeningData {
 
         List<Doelstelling> doelstellingenArray = new ArrayList();
         for (int i = 1; i < 16; i++) { // 12 doelstellingen maken
-            doelstellingenArray.add(new Doelstelling("Doelstelling" + i));
+            doelstellingenArray.add(new Doelstelling("ABCD"+i, "Doelstelling" + i));
         }
         GenericDaoJpa doelsDao = new GenericDaoJpa<>(Doelstelling.class);
         doelstellingenArray.forEach(doels -> {

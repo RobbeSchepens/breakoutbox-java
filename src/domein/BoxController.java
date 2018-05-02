@@ -32,6 +32,10 @@ public class BoxController {
     public void setHuidigeBox(IBox box) {
         this.huidigeBox = (Box) box;
     }
+    
+    public IBox getHuidigeBox() {
+        return huidigeBox;
+    }
 
     public void voegBoxToe(String naam, String omschrijving, Vak vak) {
         Box box = new Box(naam, omschrijving, vak, listActiesVanBoxTemp, listOefeningenVanBoxTemp);
@@ -93,6 +97,10 @@ public class BoxController {
         return this.listOefeningenVanBoxTemp.size();
     }
     
+    public List<Oefening> getOefeningenListTemp() {
+        return this.listOefeningenVanBoxTemp;
+    }
+    
     public ObservableList<IActie> geefActiesHuidigeBox() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(huidigeBox.getActies()));
     }
@@ -104,5 +112,4 @@ public class BoxController {
     public void createPdf(File selectedDirectory) {
         huidigeBox.createPdf(selectedDirectory);
     }
-
 }

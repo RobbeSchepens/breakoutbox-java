@@ -3,6 +3,7 @@ package gui;
 import domein.BoxController;
 import domein.BoxObserver;
 import domein.IBox;
+import domein.Oefening;
 import domein.UpdateItemTableObserver;
 import domein.UpdateItemTableSubject;
 import domein.Vak;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,10 +36,8 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
     
     @FXML private Label lblTitleRight;
     @FXML private Button btnNieuweOefening;
-    @FXML
-    private Button btnActies;
-    @FXML
-    private Button btnCreatePdf;
+    @FXML private Button btnActies;
+    @FXML private Button btnCreatePdf;
     @FXML private Label lblActiesCount;
     @FXML private ComboBox<Vak> ddlVak;
     @FXML private Button btnOefeningen;
@@ -49,6 +49,7 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
     @FXML private Label lblSuccess;
     @FXML private Button btnAddWithContent;
     @FXML private TextField txfNaam;
+    @FXML private Label lblDoelstellingen;
     
     public BoxDetailPanelController(BoxController bcon, BoxFrameController fc) {
         FXMLLoader loader
@@ -95,6 +96,7 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
         ddlVak.getSelectionModel().clearSelection();
         lblActiesCount.setText("0 acties geselecteerd");
         lblOefeningenCount.setText("0 oefeningen geselecteerd");
+        lblDoelstellingen.setText("");
         lblError.setText("");
         lblSuccess.setText("");
         txfNaam.requestFocus();
@@ -111,6 +113,26 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
         lblOefeningenCount.setText(o.getOefeningen().size() + " oefeningen geselecteerd");
         lblError.setText("");
         lblSuccess.setText("");
+        updateDoelstellingen(o.getOefeningen());
+    }
+    
+    private void updateDoelstellingen(List<Oefening> oef) {
+        StringBuilder sb = new StringBuilder();
+        oef.forEach(e -> e.getDoelstellingen().forEach(d -> {
+            sb.append(d.getCode()).append(", ");
+            if (sb.length() >= 72 && !sb.toString().substring(0, sb.length()-1).contains("\n"))
+                sb.append("\n");
+            if (sb.length() >= 144 && !sb.toString().substring(100, sb.length()-1).contains("\n"))
+                sb.append("\n");
+            if (sb.length() >= 216 && !sb.toString().substring(172, sb.length()-1).contains("\n"))
+                sb.append("\n");
+            if (sb.length() >= 288 && !sb.toString().substring(244, sb.length()-1).contains("\n"))
+                sb.append("\n");
+        }));
+        
+        // Delete the last ", "
+        sb.setLength(sb.length() - 2);
+        lblDoelstellingen.setText(sb.toString());
     }
 
     @Override
@@ -121,6 +143,7 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
     @Override
     public void updateCountOefeningen() {
         lblOefeningenCount.setText(bc.getAantalTempOefeningen() + " oefeningen geselecteerd");
+        updateDoelstellingen(bc.getOefeningenListTemp());
     }
     
     @FXML
@@ -183,7 +206,6 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());
         }
-
     }
 
     @FXML
@@ -224,8 +246,4 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
             observer.updateEditedItem();
         });
     }
-    
-    
-    
-    
 }
