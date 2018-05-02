@@ -1,28 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domein;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import repository.GenericDaoJpa;
 
-/**
- *
- * @author Daan
- */
-public class ActieBeheerder {
+public class ActieBeheerder implements BeheerderSubject, BeheerderObserver {
 
     private GenericDaoJpa<Actie> actieRepo;
     private ObservableList<? extends IActie> acties;
     private FilteredList<IActie> filteredActieList;
+    private Set<BeheerderObserver> observers;
 
     public ActieBeheerder() {
+        observers = new HashSet<>();
         setActieRepo(new GenericDaoJpa(Actie.class));
     }
 
@@ -81,6 +76,24 @@ public class ActieBeheerder {
         actieRepo.commitTransaction();
     }
 
+    @Override
+    public void addBeheerderObserver(BeheerderObserver o) {
+        if (!observers.contains(o))
+            observers.add(o);
+    }
 
+    @Override
+    public void removeBeheerderObserver(BeheerderObserver o) {
+        observers.remove(o);
+    }
+    
+    private void notifyObservers() {
+        observers.forEach(e -> e.updateActies());
+    }
 
+    @Override public void updateOefeningen() {}
+    @Override public void updateBoxes() {}
+    @Override public void updateSessies() {}
+    @Override public void updateActies() {}
+    @Override public void updateKlassen() {}
 }

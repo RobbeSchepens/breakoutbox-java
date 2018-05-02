@@ -1,12 +1,10 @@
 package domein;
 
 import java.io.File;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 
 public class OefeningController {
 
@@ -18,6 +16,10 @@ public class OefeningController {
     public OefeningController() {
         ob = new OefeningBeheerder();
         //huidigeOefening = new OefeningNull();
+    }
+
+    public OefeningBeheerder getOb() {
+        return ob;
     }
     
     public ObservableList<IOefening> geefOefeningen() {
@@ -37,18 +39,8 @@ public class OefeningController {
     }
     
     public void voegNieuweOefeningToe(String naam, String antwoord, File opgave, File feedback, Vak vak) {
-
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, listGroepsbewerkingenVanOefening, listDoelstellingenVanOefening);
-
-        try {
-            ob.add(oefening);
-        } catch (Exception e) {
-
-        
-        }
-
-
-
+        ob.add(oefening);
     }
 
     public void pasOefeningAan(String naam, String antwoord, File opgave, File feedback, Vak vak) {

@@ -16,6 +16,10 @@ public class DomeinController {
         this.sc = new SessieController();
         
         // Observer pattern
+        getAc().getAb().addBeheerderObserver(getBc().getBb());
+        getOc().getOb().addBeheerderObserver(getBc().getBb());
+        getBc().getBb().addBeheerderObserver(getSc().getSb());
+        getKc().getKb().addBeheerderObserver(getSc().getSb());
     }
 
     public OefeningController getOc() {

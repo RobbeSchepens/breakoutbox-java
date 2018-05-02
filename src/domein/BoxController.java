@@ -16,6 +16,10 @@ public class BoxController {
         this.bb = new BoxBeheerder();
     }
 
+    public BoxBeheerder getBb() {
+        return bb;
+    }
+
     public ObservableList<IBox> geefBoxen() {
         return bb.getBoxenFiltered();
     }
@@ -29,7 +33,6 @@ public class BoxController {
     }
 
     public void voegBoxToe(String naam, String omschrijving, Vak vak) {
-
         Box box = new Box(naam, omschrijving, vak, listActiesVanBoxTemp, listOefeningenVanBoxTemp);
         bb.add(box);
     }

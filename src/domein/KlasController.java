@@ -11,6 +11,10 @@ public class KlasController {
     public KlasController() {
         this.kb = new KlasBeheerder();
     }
+
+    public KlasBeheerder getKb() {
+        return kb;
+    }
     
     public ObservableList<IKlas> geefKlassen() {
         return kb.getKlassenFiltered();

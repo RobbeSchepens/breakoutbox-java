@@ -1,31 +1,38 @@
 package domein;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.util.HashSet;
+import java.util.Set;
 
-public final class SessieBeheerder {
-    public final String PERSISTENCE_UNIT_NAME = "breakoutboxPU";
-    private EntityManager em;
-    private EntityManagerFactory emf;
+public final class SessieBeheerder implements BeheerderSubject, BeheerderObserver {
 
+    private Set<BeheerderObserver> observers;
+    
     public SessieBeheerder() {
-        initializePersistentie();
-    }
-    
-    private void initializePersistentie() {
-        openPersistentie();
-        //SessieData od = new SessieData(this);
-        //od.populeerData();
-    }
-    
-    private void openPersistentie() {
-        emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        em = emf.createEntityManager();
+        observers = new HashSet<>();
     }
 
-    public void closePersistentie(){
-         em.close();
-         emf.close();
+    @Override
+    public void addBeheerderObserver(BeheerderObserver o) {
+        if (!observers.contains(o))
+            observers.add(o);
+    }
+
+    @Override
+    public void removeBeheerderObserver(BeheerderObserver o) {
+        observers.remove(o);
+    }
+    
+    private void notifyObservers() {
+        observers.forEach(e -> e.updateSessies());
+    }
+
+    @Override public void updateOefeningen() {}
+    @Override public void updateBoxes() {
+        //boxes = null;
+    }
+    @Override public void updateSessies() {}
+    @Override public void updateActies() {}
+    @Override public void updateKlassen() {
+        //klassen = null;
     }
 }

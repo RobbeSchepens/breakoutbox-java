@@ -2,6 +2,8 @@ package domein;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -9,7 +11,7 @@ import persistentie.OefeningData;
 import repository.GenericDaoJpa;
 import repository.OefeningDaoJpa;
 
-public final class OefeningBeheerder {
+public final class OefeningBeheerder implements BeheerderSubject, BeheerderObserver {
 
     //Repositories
     private OefeningDaoJpa oefRepo;
@@ -23,8 +25,10 @@ public final class OefeningBeheerder {
     private ObservableList<Vak> vakken;
     private ObservableList<Groepsbewerking> groepsbewerkingen;
     private ObservableList<Doelstelling> doelstellingen;
+    private Set<BeheerderObserver> observers;
     
     public OefeningBeheerder() {
+        observers = new HashSet<>();
         setOefRepo(new OefeningDaoJpa());
         setVakRepo(new GenericDaoJpa(Vak.class));
         setGroepsbewerkingRepo(new GenericDaoJpa(Groepsbewerking.class));
@@ -95,7 +99,6 @@ public final class OefeningBeheerder {
         oefRepo.startTransaction();
         ((ObservableList<Oefening>)getOefeningen()).add(o);
         oefRepo.insert(o);
-
         oefRepo.commitTransaction();
     }
 
@@ -157,4 +160,25 @@ public final class OefeningBeheerder {
         doelstellingRepo.insert(o);
         doelstellingRepo.commitTransaction();
     }
+
+    @Override
+    public void addBeheerderObserver(BeheerderObserver o) {
+        if (!observers.contains(o))
+            observers.add(o);
+    }
+
+    @Override
+    public void removeBeheerderObserver(BeheerderObserver o) {
+        observers.remove(o);
+    }
+    
+    private void notifyObservers() {
+        observers.forEach(e -> e.updateOefeningen());
+    }
+
+    @Override public void updateOefeningen() {}
+    @Override public void updateBoxes() {}
+    @Override public void updateSessies() {}
+    @Override public void updateActies() {}
+    @Override public void updateKlassen() {}
 }

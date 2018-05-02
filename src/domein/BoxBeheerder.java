@@ -2,13 +2,15 @@ package domein;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import repository.GenericDaoJpa;
 import repository.OefeningDaoJpa;
 
-public final class BoxBeheerder {
+public final class BoxBeheerder implements BeheerderSubject, BeheerderObserver {
 
     //Repositories
     private GenericDaoJpa<Box> boxRepo;
@@ -22,8 +24,10 @@ public final class BoxBeheerder {
     private ObservableList<Vak> vakken;
     private ObservableList<? extends IOefening> oefeningen;
     private ObservableList<? extends IActie> acties;
+    private Set<BeheerderObserver> observers;
 
     public BoxBeheerder() {
+        observers = new HashSet<>();
         setBoxRepo(new GenericDaoJpa(Box.class));
         setVakRepo(new GenericDaoJpa(Vak.class));
         setActieRepo(new GenericDaoJpa(Actie.class));
@@ -119,4 +123,28 @@ public final class BoxBeheerder {
         boxRepo.commitTransaction();
     }
 
+    @Override
+    public void addBeheerderObserver(BeheerderObserver o) {
+        if (!observers.contains(o))
+            observers.add(o);
+    }
+
+    @Override
+    public void removeBeheerderObserver(BeheerderObserver o) {
+        observers.remove(o);
+    }
+    
+    private void notifyObservers() {
+        observers.forEach(e -> e.updateBoxes());
+    }
+
+    @Override public void updateOefeningen() {
+        oefeningen = null;
+    }
+    @Override public void updateBoxes() {}
+    @Override public void updateSessies() {}
+    @Override public void updateActies() {
+        acties = null;
+    }
+    @Override public void updateKlassen() {}
 }
