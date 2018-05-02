@@ -25,6 +25,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
+
 public class DetailPanelOefeningListDoelstellingController extends VBox implements OefeningObserver, OefeningSubject {
 
     private OefeningController dc;

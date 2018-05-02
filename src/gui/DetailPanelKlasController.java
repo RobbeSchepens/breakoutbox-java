@@ -5,10 +5,9 @@ import domein.KlasController;
 import domein.KlasObserver;
 import domein.Leerling;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import javafx.application.Platform;
+import java.util.Iterator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,6 +21,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class DetailPanelKlasController extends VBox implements KlasObserver {
 
@@ -140,13 +143,38 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @FXML
     private void btnUploadExcelOnAction(ActionEvent event) {
-        /*FileChooser excelChooser = new FileChooser();
-        excelChooser.setTitle("Kies een klas");
-        excelChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        excelChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(".xlsx", "*.xlsx"));
 
-        File excelFile = excelChooser.showOpenDialog((Stage) (this.getScene().getWindow()));*/
+            FileChooser excelChooser = new FileChooser();
+            excelChooser.setTitle("Kies een klas");
+            excelChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+            excelChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(".xlsx", "*.xlsx"));
+            File ef = excelChooser.showOpenDialog((Stage) (this.getScene().getWindow()));
 
+
+        try (FileInputStream inputStream = new FileInputStream(ef); Workbook workbook = new XSSFWorkbook(inputStream)) {
+            boolean nameError = false;
+            org.apache.poi.ss.usermodel.Sheet firstSheet = workbook.getSheetAt(0);
+            Iterator<Row> iterator = firstSheet.iterator();
+
+            while (iterator.hasNext()) {
+                Row nextRow = iterator.next();
+                String voornaam = nextRow.getCell(0).getStringCellValue().trim();
+                // String achternaam = nextRow.getCell(1).getStringCellValue().trim();
+
+                if (!voornaam.isEmpty()) {
+
+                    lsvLeerlingen.getItems().add(new Leerling(voornaam, voornaam));
+
+                }
+            }
+            if (nameError) {
+
+            }
+        } catch (IOException ex) {
+
+        } catch (NullPointerException npe) {
+
+        }
 
     }
 
