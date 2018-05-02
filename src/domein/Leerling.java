@@ -29,8 +29,8 @@ public class Leerling {
     }
 
     public Leerling(String voornaam, String achternaam) {
-        this.voornaam = voornaam;
-        this.achternaam = achternaam;
+        setVoornaam(voornaam);
+        setAchternaam(achternaam);
     }
 
     public long getId() {
@@ -46,6 +46,10 @@ public class Leerling {
     }
 
     public void setVoornaam(String voornaam) {
+        if (voornaam == null || voornaam.trim().isEmpty()) {
+            throw new IllegalArgumentException("Je moet een voornaam opgeven");
+        }
+
         this.voornaam = voornaam;
     }
 
@@ -54,6 +58,9 @@ public class Leerling {
     }
 
     public void setAchternaam(String achternaam) {
+        if (achternaam == null || achternaam.trim().isEmpty()) {
+            throw new IllegalArgumentException("Je moet een achternaam opgeven");
+        }
         this.achternaam = achternaam;
     }
 

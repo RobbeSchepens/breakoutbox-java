@@ -101,21 +101,26 @@ public class KlasDetailPanelController extends VBox implements KlasObserver {
     private void btnVoegLlnToeOnAction(ActionEvent event) {
         int i = 0;
         boolean test = false;
-        Leerling ln = new Leerling(txfNaamLln.getText(), txfVoornaam.getText());
-        txfNaamLln.setText("");
-        txfVoornaam.setText("");
-        for (Leerling item : lsvLeerlingen.getItems()) {
-            if (item.getVoornaam().trim().equals(ln.getVoornaam().trim()) && item.getAchternaam().trim().equals(ln.getAchternaam().trim())) {
-                lblToegevoegdBoodschap.setText("Leerling bestaat al.");
-                test = true;
+        try {
+            Leerling ln = new Leerling(txfNaamLln.getText(), txfVoornaam.getText());
+            txfNaamLln.setText("");
+            txfVoornaam.setText("");
+            for (Leerling item : lsvLeerlingen.getItems()) {
+                if (item.getVoornaam().trim().equals(ln.getVoornaam().trim()) && item.getAchternaam().trim().equals(ln.getAchternaam().trim())) {
+                    lblToegevoegdBoodschap.setText("Leerling bestaat al.");
+                    test = true;
+                }
             }
+            if (test) {
+                lblToegevoegdBoodschap.setText("Leerling al in lijst!");
+            } else {
+                lsvLeerlingen.getItems().add(ln);
+                lblToegevoegdBoodschap.setText(ln.getVoornaam() + " toegevoegd!");
+            }
+        } catch (IllegalArgumentException iae) {
+            lblToegevoegdBoodschap.setText(iae.getMessage());
         }
-        if (test) {
-            lblToegevoegdBoodschap.setText("Leerling al in lijst!");
-        } else {
-            lsvLeerlingen.getItems().add(ln);
-            lblToegevoegdBoodschap.setText(ln.getVoornaam() + " toegevoegd!");
-        }
+
     }
     
     @FXML
