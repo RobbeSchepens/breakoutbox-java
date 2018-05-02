@@ -3,12 +3,12 @@ package gui;
 import domein.DomeinController;
 import javafx.scene.layout.GridPane;
 
-class SessieFrameController extends GridPane {
+public class SessieFrameController extends GridPane {
 
     NavigatieController nav;
     SessieOverzichtPanelController sessieOverzicht;
 
-    SessieFrameController(DomeinController dc) {
+    public SessieFrameController(DomeinController dc) {
         nav = new NavigatieController(dc);
         sessieOverzicht = new SessieOverzichtPanelController(dc.getSc(), this);
 
