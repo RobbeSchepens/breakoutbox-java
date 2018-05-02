@@ -116,11 +116,15 @@ public final class OefeningBeheerder implements BeheerderSubject, BeheerderObser
     }
 
     public void checkOpDubbel(Oefening o) {
+
         for (IOefening item : getOefeningen()) {
             if (item.getNaam().equals(o.getNaam())) {
-                throw new IllegalArgumentException("Deze naam is al in gebruik");
+                if (!(item == o)) {
+                    throw new IllegalArgumentException("Deze naam is al in gebruik");
+                }
             }
         }
+
     }
     
     public Oefening geefOefeningByNaamJpa(String naam) {

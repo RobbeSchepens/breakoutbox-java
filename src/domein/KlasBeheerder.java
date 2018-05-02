@@ -84,7 +84,9 @@ public class KlasBeheerder implements BeheerderSubject, BeheerderObserver {
     public void checkOpDubbel(Klas o) {
         for (IKlas item : getKlassen()) {
             if (item.getNaam().equals(o.getNaam())) {
-                throw new IllegalArgumentException("Deze naam is al in gebruik");
+                if (!(item == o)) {
+                    throw new IllegalArgumentException("Deze klas naam is al in gebruik");
+                }
             }
         }
     }
