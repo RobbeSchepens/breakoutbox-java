@@ -163,7 +163,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
     void nieuweOefening() {
         listGroepsBewerkingenTempGeselect = new ArrayList<>();
         listGroepsBewerkingenTempAlle = new ArrayList<>(dc.geefGroepsbewerkingen());
-        System.out.println(listGroepsBewerkingenTempAlle);
+
         dc.setListGroepsbewerkingenVanOefening(listGroepsBewerkingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
