@@ -78,8 +78,8 @@ public abstract class OverzichtPanelController<T, E> extends VBox {
     private void btnClearFilterOnAction(ActionEvent event) {
         txfFilterOp.setText("");
         txfFilterOp.requestFocus();
-        filter("");
         clearAddedFilters();
+        filter("");
     }
 
     public void clearSelectedItem() {

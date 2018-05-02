@@ -31,7 +31,6 @@ public final class OefeningBeheerder {
         setDoelstellingRepo(new GenericDaoJpa(Doelstelling.class));
         
         // Seeden van database
-        //we hier
         OefeningData od = new OefeningData(this, new BoxBeheerder());
     }
 

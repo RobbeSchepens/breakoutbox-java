@@ -24,7 +24,7 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
     private FrameOefeningController fc;
     private Set<OefeningObserver> observers;
     private ComboBox<Vak> ddlVakken;
-    private String filtervalue;
+    private String filtervalue = "";
     
     public OverzichtPanelOefeningController(OefeningController dcon, FrameOefeningController fc) {
         super(dcon);
@@ -32,6 +32,11 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
         this.dc = dcon;
         this.fc = fc;
         
+        createComboBoxVakken();
+        renderContent();
+    }
+    
+    private void createComboBoxVakken() {
         // Filter Vakken toevoegen op voorlaatste positie + marge rechts
         ddlVakken = new ComboBox<>();
         ddlVakken.setPromptText("Alle vakken");
@@ -40,11 +45,11 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
         
         ddlVakken.getSelectionModel().selectedItemProperty().addListener(
                 (ObservableValue<? extends Vak> observable, Vak oldValue, Vak newValue) -> {
+                    System.out.println("eventlistener vak");
             if (!(newValue == null)) {
                 dc.veranderFilter(filtervalue, newValue);
             }
         });
-        renderContent();
     }
     
     @Override
