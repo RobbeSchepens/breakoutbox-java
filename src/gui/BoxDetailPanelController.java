@@ -74,7 +74,7 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
         btnAdd.setVisible(isNew);
         btnAddWithContent.setVisible(!isNew);
         btnAddWithContent.setVisible(!isNew);
-
+        btnCreatePdf.setVisible(!isNew);
         btnEdit.setManaged(!isNew);
         btnEdit.setVisible(!isNew);
     }
