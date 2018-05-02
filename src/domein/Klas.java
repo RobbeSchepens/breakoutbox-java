@@ -28,7 +28,11 @@ public class Klas implements IKlas, Serializable {
     }
 
     public Klas(String naam, List<Leerling> leerlingen) {
+
         setNaam(naam);
+        if (leerlingen == null || leerlingen.isEmpty()) {
+            throw new IllegalArgumentException("Je moet leerlingen opgeven");
+        }
         setLeerlingen(leerlingen);
     }
     
@@ -56,9 +60,9 @@ public class Klas implements IKlas, Serializable {
     }
 
     public void setNaam(String naam) {
-        /*if (naam == null || naam.trim().isEmpty()) {
+        if (naam == null || naam.trim().isEmpty()) {
             throw new IllegalArgumentException("Je moet een naam opgeven");
-        }*/
+        }
         this.naam.set(naam);
     }
 
