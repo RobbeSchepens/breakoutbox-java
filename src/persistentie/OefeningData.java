@@ -89,7 +89,6 @@ public class OefeningData {
             vakDao.commitTransaction();
         });
 
-
         List<Leerling> leerlingen = new ArrayList<>(Arrays.asList(
                 new Leerling("Andrea", "Van Dijk"),
                 new Leerling("Henk", "Bakker"),
@@ -143,7 +142,9 @@ public class OefeningData {
                 )))
         ));
 
-        System.out.println(klassen.get(0).getLeerlingen());
+        System.out.println(klassen.get(0).getNaam() + klassen.get(0).getLeerlingen());
+        System.out.println(klassen.get(1).getNaam() + klassen.get(1).getLeerlingen());
+        System.out.println(klassen.get(2).getNaam() + klassen.get(2).getLeerlingen());
 
         GenericDaoJpa klasDao = new GenericDaoJpa<>(Klas.class);
         klassen.forEach(klas -> {
@@ -188,7 +189,6 @@ public class OefeningData {
             klasDao.insert(pdf);
             klasDao.commitTransaction();
         });*/
-
         List<Oefening> oefeningen = new ArrayList<>(Arrays.asList(
                 new Oefening("Optelsommen", "40", (Vak) vakDao.get(1L), opgave1, feedback1, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
@@ -353,8 +353,6 @@ public class OefeningData {
             oDao.insert(oef);
             oDao.commitTransaction();
         });
-
-
 
         List<Box> boxen = new ArrayList<>(Arrays.asList( // geen loop van maken!
                 new Box("box1", "Boxomschrijving1", (Vak) vakDao.get(1L), new ArrayList<Actie>(Arrays.asList(
