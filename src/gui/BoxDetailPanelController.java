@@ -196,4 +196,8 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
             observer.updateEditedItem();
         });
     }
+    
+    
+    
+    
 }
