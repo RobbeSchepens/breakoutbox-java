@@ -168,7 +168,7 @@ public class Box implements IBox, Serializable {
                     contentStream.setLeading(14.5f);
                     contentStream.newLineAtOffset(70, 750);
 
-                    StringBuilder sb = new StringBuilder(String.format("Sessie: %s", getNaam()));
+                    StringBuilder sb = new StringBuilder(String.format("BoxNaam: %s", getNaam()));
                     sb.append("\n");
                     sb.append("\n");
 
