@@ -34,10 +34,8 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
     
     @FXML private Label lblTitleRight;
     @FXML private Button btnNieuweOefening;
-    @FXML
-    private Button btnActies;
-    @FXML
-    private Button btnCreatePdf;
+    @FXML private Button btnActies;
+    @FXML private Button btnCreatePdf;
     @FXML private Label lblActiesCount;
     @FXML private ComboBox<Vak> ddlVak;
     @FXML private Button btnOefeningen;
@@ -49,6 +47,7 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
     @FXML private Label lblSuccess;
     @FXML private Button btnAddWithContent;
     @FXML private TextField txfNaam;
+    @FXML private Label lblDoelstellingen;
     
     public BoxDetailPanelController(BoxController bcon, BoxFrameController fc) {
         FXMLLoader loader
@@ -95,6 +94,7 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
         ddlVak.getSelectionModel().clearSelection();
         lblActiesCount.setText("0 acties geselecteerd");
         lblOefeningenCount.setText("0 oefeningen geselecteerd");
+        lblDoelstellingen.setText("");
         lblError.setText("");
         lblSuccess.setText("");
         txfNaam.requestFocus();
@@ -111,6 +111,17 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
         lblOefeningenCount.setText(o.getOefeningen().size() + " oefeningen geselecteerd");
         lblError.setText("");
         lblSuccess.setText("");
+        
+        StringBuilder sb = new StringBuilder();
+        o.getOefeningen().forEach(e -> e.getDoelstellingen().forEach(d -> {
+            sb.append(d.getCode()).append(", ");
+            if (sb.length() >= 72 && !sb.toString().contains("\n"))
+                sb.append("\n");
+            if (sb.length() >= 144)
+                sb.append("\n");
+        }));
+        sb.setLength(sb.length() - 2);
+        lblDoelstellingen.setText(sb.toString());
     }
 
     @Override
@@ -183,7 +194,6 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());
         }
-
     }
 
     @FXML
@@ -224,8 +234,4 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
             observer.updateEditedItem();
         });
     }
-    
-    
-    
-    
 }

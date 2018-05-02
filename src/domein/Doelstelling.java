@@ -12,14 +12,16 @@ public class Doelstelling implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    
+    private String code;
     private String doelstelling;
 
     public Doelstelling() {
 
     }
 
-    public Doelstelling(String doelstelling) {
+    public Doelstelling(String code, String doelstelling) {
+        this.code = code;
         this.doelstelling = doelstelling;
     }
 
@@ -29,6 +31,14 @@ public class Doelstelling implements Serializable {
 
     public void setDoelstelling(String doelstelling) {
         this.doelstelling = doelstelling;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override
