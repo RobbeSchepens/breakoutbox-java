@@ -1,7 +1,6 @@
 package domein;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import javafx.collections.ObservableList;
 
 public class KlasController {
@@ -17,13 +16,12 @@ public class KlasController {
         return kb.getKlassenFiltered();
     }
 
-    public int geefAantalBoxen() {
+    public int geefAantalKlassen() {
         return kb.getKlassen().size();
     }
 
     public void setHuidigeKlas(IKlas klas) {
         this.huidigeKlas = (Klas) klas;
-
     }
 
     public void delete(IKlas o) {
@@ -41,7 +39,6 @@ public class KlasController {
         huidigeKlas.setNaam(naam);
         huidigeKlas.setLeerlingen(leerlingen);
         kb.update(huidigeKlas);
-
     }
 
     public void veranderFilter(String filterValue) {

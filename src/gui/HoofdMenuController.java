@@ -9,7 +9,6 @@ import static gui.MenubarController.nextpage;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -17,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -63,10 +61,10 @@ public class HoofdMenuController extends GridPane {
 
     private void laadAantallen() {
         lblAantalOef.setText(String.valueOf(dc.geefAantalOefeningen()));
-        //lblAantalBoxes.setText(String.valueOf(bc.geefAantalBoxes()));
-        //lblAantalSessies.setText(String.valueOf(ssc.geefAantalSessies()));
-//        lblAantalActies.setText(String.valueOf(ac.geefAantalActies()));
-//        lblAantalKlassen.setText(String.valueOf(kc.geefAantalKlassen()));
+        lblAantalBoxes.setText(String.valueOf(bc.geefAantalBoxen()));
+        //lblAantalSessies.setText(String.valueOf(scc.geefAantalSessies()));
+        lblAantalActies.setText(String.valueOf(ac.geefAantalActies()));
+        lblAantalKlassen.setText(String.valueOf(kc.geefAantalKlassen()));
     }
     
     private void setMouseHoverIconButtons() {
