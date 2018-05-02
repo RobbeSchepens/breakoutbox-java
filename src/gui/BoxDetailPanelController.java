@@ -131,7 +131,8 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
         }));
         
         // Delete the last ", "
-        sb.setLength(sb.length() - 2);
+        if (sb.toString().contains(","))
+            sb.setLength(sb.length() - 2);
         lblDoelstellingen.setText(sb.toString());
     }
 
