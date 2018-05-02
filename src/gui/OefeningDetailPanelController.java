@@ -151,11 +151,11 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
     @FXML
     private void btnOpenOpgaveOnAction(ActionEvent event) {
         try {
-            if (fileOpgave.toString().endsWith(".pdf")) {
-                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + fileOpgave);
+            Desktop desktop = Desktop.getDesktop();
+            if (desktop.isSupported(Desktop.Action.OPEN)) {
+                desktop.open(fileFeedback);
             } else {
-                Desktop desktop = Desktop.getDesktop();
-                desktop.open(fileOpgave);
+                lblError.setText("Openen van de PDF is niet ondersteund.");
             }
         } catch (IOException ioe) {
             System.out.println(ioe);
@@ -175,11 +175,11 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
     @FXML
     private void btnOpenFeedbackOnAction(ActionEvent event) {
         try {
-            if (fileFeedback.toString().endsWith(".pdf")) {
-                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + fileFeedback);
-            } else {
-                Desktop desktop = Desktop.getDesktop();
+            Desktop desktop = Desktop.getDesktop();
+            if (desktop.isSupported(Desktop.Action.OPEN)) {
                 desktop.open(fileFeedback);
+            } else {
+                lblError.setText("Openen van de PDF is niet ondersteund.");
             }
         } catch (IOException ioe) {
             System.out.println(ioe);
