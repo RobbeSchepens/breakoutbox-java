@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 public class MenubarController extends HBox{
 
-    private static EnumMenu nextpage = EnumMenu.HOME;
+    static EnumMenu nextpage = EnumMenu.HOME;
 
     private OefeningController dc;
     private BoxController bc;
@@ -41,12 +41,17 @@ public class MenubarController extends HBox{
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+        
         this.dc = dcon;
         this.bc = bc;
         this.kc = kc;
         this.scc = sc;
         this.ac = ac;
         
+        setActiveMenuItem();
+    } 
+    
+    private void setActiveMenuItem() {
         String nonactiveCss = "-fx-background-color: white; -fx-border-color: #ccc;";
         String nonactiveCssLabel = "-fx-text-fill: #333;";
         String activeCss = "-fx-background-color: #006fe6;";
@@ -85,12 +90,13 @@ public class MenubarController extends HBox{
                 hbxKlassen.setStyle(activeCss);
                 hbxKlassen.getChildren().get(0).setStyle(activeCssLabel); break;
         }
-    } 
+    }
     
     @FXML
     private void hbxHomeOnMouseClicked(MouseEvent event) {
         if (dc == null) { // gebeurt nooit momenteel
-            new OefeningController();
+            System.out.println("OefeningController was null and is being initialized.");
+            dc = new OefeningController();
         }
 
         nextpage = EnumMenu.HOME;

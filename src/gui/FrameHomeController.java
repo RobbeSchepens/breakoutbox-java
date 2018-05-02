@@ -14,7 +14,7 @@ public class FrameHomeController extends GridPane {
     
     public FrameHomeController(OefeningController dc, KlasController kc, BoxController bc, SessieController sc, ActieController ac) {
         nav = new MenubarController(dc, kc, bc, sc, ac);
-        hoofdmenu = new HoofdMenuController(dc);
+        hoofdmenu = new HoofdMenuController(dc, kc, bc, sc, ac);
         add(nav, 0, 0);
         add(hoofdmenu, 0, 1);
     }

@@ -21,80 +21,132 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0">
+      <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0">
          <children>
-            <Label styleClass="h1" text="Hoofdmenu" textAlignment="CENTER" textFill="#3291ff" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-               <children>
-                  <Button fx:id="btnBeheerOef" minWidth="250.0" mnemonicParsing="false" onAction="#btnBeheerOefOnAction" styleClass="btn-card" textAlignment="CENTER">
-                     <graphic>
-                        <GridPane alignment="CENTER">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints vgrow="SOMETIMES" />
-                            <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label styleClass="btn-card-label-main" text="Oefeningen beheren" GridPane.halignment="CENTER" />
-                              <Label fx:id="lblAantalOef" styleClass="label-sub" text="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                                 <graphic>
-                                    <Label styleClass="label-sub" text="Aantal oefeningen:" />
-                                 </graphic>
-                              </Label>
-                           </children>
-                        </GridPane>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="btnBeheerBob" minWidth="250.0" mnemonicParsing="false" onAction="#btnBeheerBobOnAction" styleClass="btn-card" textAlignment="CENTER">
-                     <graphic>
-                        <GridPane alignment="CENTER">
-                           <children>
-                              <Label styleClass="btn-card-label-main" text="Boxes beheren" GridPane.halignment="CENTER" />
-                              <Label fx:id="lblAantalBoxes" styleClass="btn-card-label" text="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                                 <graphic>
-                                    <Label styleClass="btn-card-label" text="Aantal boxes:" />
-                                 </graphic>
-                              </Label>
-                           </children>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="btnBeheerSessies" minWidth="250.0" mnemonicParsing="false" onAction="#btnBeheerSessiesOnAction" styleClass="btn-card" textAlignment="CENTER">
-                     <graphic>
-                        <GridPane alignment="CENTER">
-                           <children>
-                              <Label styleClass="btn-card-label-main" text="Sessies beheren" GridPane.halignment="CENTER" />
-                              <Label fx:id="lblAantalSessies" styleClass="btnlbl" text="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                                 <graphic>
-                                    <Label styleClass="btnlbl" text="Aantal actieve sessies:" />
-                                 </graphic>
-                              </Label>
-                           </children>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints vgrow="SOMETIMES" />
-                              <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                        </GridPane>
-                     </graphic>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </HBox>
+            <Button fx:id="btnBeheerOef" mnemonicParsing="false" onAction="#btnBeheerOefOnAction" prefHeight="100.0" prefWidth="600.0" styleClass="btn-card" textAlignment="CENTER">
+               <graphic>
+                  <GridPane alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints vgrow="SOMETIMES" />
+                      <RowConstraints percentHeight="50.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label styleClass="btn-card-label-main" text="Oefeningen beheren" GridPane.halignment="LEFT" />
+                        <Label fx:id="lblAantalOef" contentDisplay="RIGHT" styleClass="label-sub" text="0" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                           <graphic>
+                              <Label styleClass="label-sub" text="oefeningen" />
+                           </graphic>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </graphic>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnBeheerBob" mnemonicParsing="false" onAction="#btnBeheerBobOnAction" prefHeight="100.0" prefWidth="600.0" styleClass="btn-card" textAlignment="CENTER">
+               <graphic>
+                  <GridPane alignment="CENTER">
+                     <children>
+                        <Label styleClass="btn-card-label-main" text="Boxes beheren" GridPane.halignment="LEFT" />
+                        <Label fx:id="lblAantalBoxes" contentDisplay="RIGHT" styleClass="btn-card-label" text="0" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                           <graphic>
+                              <Label styleClass="btn-card-label" text="boxes" />
+                           </graphic>
+                        </Label>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="50.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </graphic>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnBeheerSessies" mnemonicParsing="false" onAction="#btnBeheerSessiesOnAction" prefHeight="100.0" prefWidth="600.0" styleClass="btn-card" textAlignment="CENTER">
+               <graphic>
+                  <GridPane alignment="CENTER">
+                     <children>
+                        <Label styleClass="btn-card-label-main" text="Sessies beheren" GridPane.halignment="LEFT" />
+                        <Label fx:id="lblAantalSessies" contentDisplay="RIGHT" styleClass="btnlbl" text="0" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                           <graphic>
+                              <Label styleClass="btnlbl" text="actieve sessies" />
+                           </graphic>
+                        </Label>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="50.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </graphic>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnBeheerActies" mnemonicParsing="false" onAction="#btnBeheerActiesOnAction" prefHeight="100.0" prefWidth="600.0" styleClass="btn-card" textAlignment="CENTER">
+               <graphic>
+                  <GridPane alignment="CENTER">
+                     <children>
+                        <Label styleClass="btn-card-label-main" text="Acties beheren" GridPane.halignment="LEFT" />
+                        <Label fx:id="lblAantalActies" contentDisplay="RIGHT" styleClass="btnlbl" text="0" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                           <graphic>
+                              <Label styleClass="btnlbl" text="acties" />
+                           </graphic>
+                        </Label>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="50.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </graphic>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnBeheerKlassen" mnemonicParsing="false" onAction="#btnBeheerKlassenOnAction" prefHeight="100.0" prefWidth="600.0" styleClass="btn-card" textAlignment="CENTER">
+               <graphic>
+                  <GridPane alignment="CENTER">
+                     <children>
+                        <Label styleClass="btn-card-label-main" text="Klassen beheren" GridPane.halignment="LEFT" />
+                        <Label fx:id="lblAantalKlassen" contentDisplay="RIGHT" styleClass="btnlbl" text="0" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                           <graphic>
+                              <Label styleClass="btnlbl" text="acties" />
+                           </graphic>
+                        </Label>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="50.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </graphic>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Button>
          </children>
+         <padding>
+            <Insets top="45.0" />
+         </padding>
       </VBox>
    </children>
 </fx:root>

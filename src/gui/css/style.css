@@ -42,17 +42,21 @@
 .choice-box .menu-item:focused > .label, .combo-box-base .menu-item:focused > .label, .combo-box .menu-item:focused > .label { -fx-text-fill: white; }
 
 .btn-card {
-    -fx-background-radius: 12;
+/*    -fx-background-radius: 12;*/
+    -fx-background-radius: 0;
+    -fx-background-color: white;
+    -fx-border-width: 1;
+    -fx-border-color: #42484e;
 }
 
 .btn-card .label {
     -fx-font-size: 14px;
-    -fx-text-fill: white;
+    -fx-text-fill: #212529;
 }
 
 .btn-card .btn-card-label-main {
     -fx-font-family: "Poppins Medium";
-    -fx-font-size: 17px;
+    -fx-font-size: 21px;
 }
 
 .h1 {
