@@ -52,15 +52,8 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
     @FXML private Button btnFileOpgave;
     @FXML private Label lblOpgave;
     @FXML private Label lblError;
-    @FXML
-    private Label lblSuccess;
-
-    @FXML
-    private Button btnAddWithContent;
-    @FXML
-    private Label lblError1;
-    @FXML
-    private Label lblSuccess1;
+    @FXML private Label lblSuccess;
+    @FXML private Button btnAddWithContent;
 
     public OefeningDetailPanelController(OefeningController dcon, OefeningFrameController fc) {
         FXMLLoader loader

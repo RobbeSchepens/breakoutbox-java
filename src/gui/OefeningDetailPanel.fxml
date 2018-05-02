@@ -135,8 +135,6 @@
             <Insets bottom="15.0" />
          </padding>
          <children>
-            <Label fx:id="lblError" styleClass="text-danger" />
-            <Label fx:id="lblSuccess" styleClass="text-success" />
             <Button fx:id="btnAddWithContent" mnemonicParsing="false" onAction="#btnAddWithContentOnAction" styleClass="btn-big-action" text="Maak nieuwe oefening met deze gegevens" />
          </children>
       </HBox>
@@ -145,8 +143,8 @@
             <Insets bottom="15.0" />
          </padding>
          <children>
-            <Label fx:id="lblError1" styleClass="text-danger" />
-            <Label fx:id="lblSuccess1" styleClass="text-success" />
+            <Label fx:id="lblError" styleClass="text-danger" />
+            <Label fx:id="lblSuccess" styleClass="text-success" />
          </children>
       </HBox>
    </children>
