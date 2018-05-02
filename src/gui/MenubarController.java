@@ -6,8 +6,10 @@ import domein.OefeningController;
 import domein.KlasController;
 import domein.SessieController;
 import java.io.IOException;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.input.MouseEvent;
@@ -49,6 +51,7 @@ public class MenubarController extends HBox{
         this.ac = ac;
         
         setActiveMenuItem();
+        setMouseHoverIconButtons();
     } 
     
     private void setActiveMenuItem() {
@@ -90,6 +93,19 @@ public class MenubarController extends HBox{
                 hbxKlassen.setStyle(activeCss);
                 hbxKlassen.getChildren().get(0).setStyle(activeCssLabel); break;
         }
+    }
+    
+    private void setMouseHoverIconButtons() {
+        this.getChildren().forEach(e -> {
+            if (e instanceof HBox) {
+                e.setOnMouseEntered((Event event) -> {
+                    getScene().setCursor(Cursor.HAND);
+                });
+                e.setOnMouseExited((Event event) -> {
+                    getScene().setCursor(Cursor.DEFAULT);
+                });
+            }
+        });
     }
     
     @FXML
@@ -171,5 +187,4 @@ public class MenubarController extends HBox{
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
-    
 }
