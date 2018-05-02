@@ -61,6 +61,8 @@ public class GenericDaoJpa<T> implements GenericDao<T> {
     @Override
     public void insert(T object) {
         em.persist(object);
+        //System.out.println("voor flush in genericDaoJpa");
+        //em.flush();
     }
 
     @Override

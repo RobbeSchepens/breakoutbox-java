@@ -1,10 +1,12 @@
 package domein;
 
 import java.io.File;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 
 public class OefeningController {
 
@@ -35,8 +37,18 @@ public class OefeningController {
     }
     
     public void voegNieuweOefeningToe(String naam, String antwoord, File opgave, File feedback, Vak vak) {
+
         Oefening oefening = new Oefening(naam, antwoord, vak, opgave, feedback, listGroepsbewerkingenVanOefening, listDoelstellingenVanOefening);
-        ob.add(oefening);
+
+        try {
+            ob.add(oefening);
+        } catch (Exception e) {
+
+        
+        }
+
+
+
     }
 
     public void pasOefeningAan(String naam, String antwoord, File opgave, File feedback, Vak vak) {
@@ -52,6 +64,7 @@ public class OefeningController {
         if (listDoelstellingenVanOefening.isEmpty()) {
             listDoelstellingenVanOefening = huidigeOefening.getDoelstellingen();
         }
+
         huidigeOefening.roepSettersAan(naam, antwoord, vak, opgave, feedback, listGroepsbewerkingenVanOefening, listDoelstellingenVanOefening);
         ob.update(huidigeOefening);
     }
@@ -110,4 +123,5 @@ public class OefeningController {
     public ObservableList<Doelstelling> geefDoelstellingenHuidigeOefening() {
         return FXCollections.unmodifiableObservableList(FXCollections.observableArrayList(huidigeOefening.getDoelstellingen()));
     }
+
 }

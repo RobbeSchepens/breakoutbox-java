@@ -96,6 +96,7 @@ public final class OefeningBeheerder {
         oefRepo.startTransaction();
         ((ObservableList<Oefening>)getOefeningen()).add(o);
         oefRepo.insert(o);
+
         oefRepo.commitTransaction();
     }
 

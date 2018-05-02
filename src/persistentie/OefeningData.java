@@ -10,6 +10,7 @@ import domein.Klas;
 import domein.Leerling;
 import domein.Oefening;
 import domein.OefeningBeheerder;
+import domein.PDF;
 import domein.SubstractGroepsbewerking;
 import domein.Vak;
 import java.io.File;
@@ -181,12 +182,22 @@ public class OefeningData {
         File opgave12 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Werkwoorden_Opgave.pdf");
         File feedback12 = new File(System.getProperty("user.dir") + File.separator + "PDFinit" + File.separator + "Werkwoorden_Feedback.pdf");
 
+        /*GenericDaoJpa pdfDao = new GenericDaoJpa<>(PDF.class);
+        klassen.forEach(pdf -> {
+            klasDao.startTransaction();
+            klasDao.insert(pdf);
+            klasDao.commitTransaction();
+        });*/
+
         List<Oefening> oefeningen = new ArrayList<>(Arrays.asList(
                 new Oefening("Optelsommen", "40", (Vak) vakDao.get(1L), opgave1, feedback1, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
                         (Groepsbewerking) gbwDao.get(2L),
                         (Groepsbewerking) gbwDao.get(3L),
-                        (Groepsbewerking) gbwDao.get(4L),
+                        (Groepsbewerking) gbwDao.get(7L),
+                        (Groepsbewerking) gbwDao.get(8L),
+                        (Groepsbewerking) gbwDao.get(9L),
+                        (Groepsbewerking) gbwDao.get(10L),
                         (Groepsbewerking) gbwDao.get(5L),
                         (Groepsbewerking) gbwDao.get(6L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
@@ -213,7 +224,9 @@ public class OefeningData {
                         (Groepsbewerking) gbwDao.get(1L),
                         (Groepsbewerking) gbwDao.get(2L),
                         (Groepsbewerking) gbwDao.get(3L),
-                        (Groepsbewerking) gbwDao.get(4L),
+                        (Groepsbewerking) gbwDao.get(7L),
+                        (Groepsbewerking) gbwDao.get(8L),
+                        (Groepsbewerking) gbwDao.get(9L),
                         (Groepsbewerking) gbwDao.get(5L),
                         (Groepsbewerking) gbwDao.get(6L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
@@ -250,16 +263,14 @@ public class OefeningData {
                 ))),
                 new Oefening("Letters", "HYU", vakken.get(4), opgave7, feedback7, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
-                        (Groepsbewerking) gbwDao.get(2L),
-                        (Groepsbewerking) gbwDao.get(3L),
-                        (Groepsbewerking) gbwDao.get(4L),
-                        (Groepsbewerking) gbwDao.get(5L),
-                        (Groepsbewerking) gbwDao.get(6L)
+                        (Groepsbewerking) gbwDao.get(2L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
                         (Doelstelling) doelsDao.get(1L),
                         (Doelstelling) doelsDao.get(2L),
                         (Doelstelling) doelsDao.get(3L),
-                        (Doelstelling) doelsDao.get(4L)
+                        (Doelstelling) doelsDao.get(4L),
+                        (Doelstelling) doelsDao.get(11L),
+                        (Doelstelling) doelsDao.get(12L)
                 ))),
                 new Oefening("Organen", "Longen", vakken.get(3), opgave8, feedback8, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
@@ -285,7 +296,9 @@ public class OefeningData {
                         (Doelstelling) doelsDao.get(1L),
                         (Doelstelling) doelsDao.get(2L),
                         (Doelstelling) doelsDao.get(3L),
-                        (Doelstelling) doelsDao.get(4L)
+                        (Doelstelling) doelsDao.get(4L),
+                        (Doelstelling) doelsDao.get(8L),
+                        (Doelstelling) doelsDao.get(9L)
                 ))),
                 new Oefening("Aftrekkingen", "80", vakken.get(1), opgave10, feedback10, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
@@ -297,7 +310,10 @@ public class OefeningData {
                         (Doelstelling) doelsDao.get(1L),
                         (Doelstelling) doelsDao.get(2L),
                         (Doelstelling) doelsDao.get(3L),
-                        (Doelstelling) doelsDao.get(4L)
+                        (Doelstelling) doelsDao.get(7L),
+                        (Doelstelling) doelsDao.get(8L),
+                        (Doelstelling) doelsDao.get(9L),
+                        (Doelstelling) doelsDao.get(10L)
                 ))),
                 new Oefening("Vortooid deelwoorden", "Ik heb gemist", vakken.get(4), opgave11, feedback11, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
@@ -316,7 +332,12 @@ public class OefeningData {
                         (Groepsbewerking) gbwDao.get(2L),
                         (Groepsbewerking) gbwDao.get(3L),
                         (Groepsbewerking) gbwDao.get(4L),
+                        (Groepsbewerking) gbwDao.get(11L),
+                        (Groepsbewerking) gbwDao.get(12L),
                         (Groepsbewerking) gbwDao.get(5L),
+                        (Groepsbewerking) gbwDao.get(14L),
+                        (Groepsbewerking) gbwDao.get(15L),
+                        (Groepsbewerking) gbwDao.get(16L),
                         (Groepsbewerking) gbwDao.get(6L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
                         (Doelstelling) doelsDao.get(1L),

@@ -125,6 +125,7 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
         lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
 
+        dc.setListGroepsbewerkingenVanOefening(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
     }
 
     @Override

@@ -73,13 +73,12 @@ public class Oefening implements IOefening, Serializable {
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
         setGroepsbewerkingen(groepsbewerkingen);
         setVak(vak);
-
+        setNaam(naam); // onder feedback en antwoord zetten indien niet lukt
         setOpgave(opgave);
-
         setFeedback(feedback);
 
         setAntwoord(antwoord);
-        setNaam(naam);
+
         setDoelstellingen(doelstellingen);
     }
 
@@ -168,7 +167,7 @@ public class Oefening implements IOefening, Serializable {
         if (opgave == null) {
             throw new IllegalArgumentException("Selecteer een PDF om toe te voegen als opgave.");
         }
-        this.opgave = new PDF(opgave, String.format("%s", opgave.getName()));
+        this.opgave = new PDF(opgave, String.format("%s_%s", getNaam(), "O.pdf"));
     }
 
     @Override
@@ -180,7 +179,7 @@ public class Oefening implements IOefening, Serializable {
         if (feedback == null) {
             throw new IllegalArgumentException("Selecteer een PDF om toe te voegen als feedback.");
         }
-        this.feedback = new PDF(feedback, String.format("%s", feedback.getName()));
+        this.feedback = new PDF(feedback, String.format("%s_%s", getNaam(), "F.pdf"));
     }
 
     @Override

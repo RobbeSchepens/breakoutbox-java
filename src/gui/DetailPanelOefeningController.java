@@ -52,7 +52,11 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     @FXML private Button btnFileOpgave;
     @FXML private Label lblOpgave;
     @FXML private Label lblError;
-    @FXML private Label lblSuccess;
+    @FXML
+    private Label lblSuccess;
+
+    @FXML
+    private Button btnAddWithContent;
 
     public DetailPanelOefeningController(OefeningController dcon, FrameOefeningController fc) {
         FXMLLoader loader
@@ -84,6 +88,8 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
         btnEdit.setVisible(!isNew);
         btnOpenOpgave.setDisable(isNew);
         btnOpenFeedback.setDisable(isNew);
+        btnAddWithContent.setVisible(!isNew);
+        btnAddWithContent.setVisible(!isNew);
     }
 
     void initNieuweOefening() {
@@ -221,7 +227,7 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     private void btnEditOnAction(ActionEvent event) {
         try {
             dc.pasOefeningAan(txfNaam.getText(), txfAntwoord.getText(), fileOpgave, fileFeedback, ddlVak.getSelectionModel().getSelectedItem());
-            clearRender();
+            initNieuweOefening();
             lblError.setText("");
             lblSuccess.setText("De oefening werd succesvol aangepast.");
             fc.toonListview("cancel/init");
@@ -230,5 +236,23 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
             lblError.setText(ex.getMessage());
         }
     }
+
+    @FXML
+    private void btnAddWithContentOnAction(ActionEvent event) {
+
+        try {
+            dc.voegNieuweOefeningToe(txfNaam.getText(), txfAntwoord.getText(), fileOpgave, fileFeedback, ddlVak.getSelectionModel().getSelectedItem());
+            initNieuweOefening();
+            lblError.setText("");
+            lblSuccess.setText("De aangepaste oefening werd succesvol toegevoegd.");
+            fc.toonListview("cancel/init");
+        } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
+            lblSuccess.setText("");
+            lblError.setText(ex.getMessage());
+        }
+
+
+    }
+
     
 }
