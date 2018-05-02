@@ -11,6 +11,14 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
         observers = new HashSet<>();
     }
 
+    /*public void checkOpDubbel(Sessie o) {
+        for (IActie item : getSessies()) {
+            if (item.getNaam().equals(o.getNaam())) {
+                throw new IllegalArgumentException("Deze naam is al in gebruik");
+            }
+        }
+    }*/
+
     @Override
     public void addBeheerderObserver(BeheerderObserver o) {
         if (!observers.contains(o))

@@ -53,9 +53,7 @@ public class ActieBeheerder implements BeheerderSubject, BeheerderObserver {
     }
 
     public void add(Actie o) {
-        /*if (klasRepo.getByToString(o) != null) {
-            throw new IllegalArgumentException("Er bestaat al een klas met deze naam.");
-        }*/
+        checkOpDubbel(o);
         actieRepo.startTransaction();
         actieRepo.insert(o);
         actieRepo.commitTransaction();
@@ -64,6 +62,7 @@ public class ActieBeheerder implements BeheerderSubject, BeheerderObserver {
     }
 
     public void update(Actie o) {
+        checkOpDubbel(o);
         actieRepo.startTransaction();
         actieRepo.update(o);
         actieRepo.commitTransaction();
@@ -77,6 +76,15 @@ public class ActieBeheerder implements BeheerderSubject, BeheerderObserver {
         getActies().remove(o);
         notifyObservers();
     }
+
+    public void checkOpDubbel(Actie o) {
+        for (IActie item : getActies()) {
+            if (item.getNaam().equals(o.getNaam())) {
+                throw new IllegalArgumentException("Deze naam is al in gebruik");
+            }
+        }
+    }
+
 
     @Override
     public void addBeheerderObserver(BeheerderObserver o) {

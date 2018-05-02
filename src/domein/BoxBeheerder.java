@@ -100,9 +100,7 @@ public final class BoxBeheerder implements BeheerderSubject, BeheerderObserver {
     }
 
     public void add(Box o) {
-        /*if (klasRepo.getByToString(o) != null) {
-            throw new IllegalArgumentException("Er bestaat al een klas met deze naam.");
-        }*/
+        checkOpDubbel(o);
 
         boxRepo.startTransaction();
         boxRepo.insert(o);
@@ -112,6 +110,7 @@ public final class BoxBeheerder implements BeheerderSubject, BeheerderObserver {
     }
 
     public void update(Box o) {
+        checkOpDubbel(o);
         boxRepo.startTransaction();
         boxRepo.update(o);
         boxRepo.commitTransaction();
@@ -124,6 +123,14 @@ public final class BoxBeheerder implements BeheerderSubject, BeheerderObserver {
         boxRepo.commitTransaction();
         getBoxen().remove(o);
         notifyObservers();
+    }
+
+    public void checkOpDubbel(Box o) {
+        for (IBox item : getBoxen()) {
+            if (item.getNaam().equals(o.getNaam())) {
+                throw new IllegalArgumentException("Deze naam is al in gebruik");
+            }
+        }
     }
 
     @Override
