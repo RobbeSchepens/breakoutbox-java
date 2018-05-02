@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,6 +25,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -124,12 +127,45 @@ public class KlasDetailPanelController extends VBox implements KlasObserver {
     }
 
     @FXML
-    private void btnUploadExcelOnAction(ActionEvent event) {
-            FileChooser excelChooser = new FileChooser();
-            excelChooser.setTitle("Kies een klas");
-            excelChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-            excelChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(".xlsx", "*.xlsx"));
-            File ef = excelChooser.showOpenDialog((Stage) (this.getScene().getWindow()));
+    private void btnUploadExcelOnAction(ActionEvent event) throws IOException {
+        FileChooser excelChooser = new FileChooser();
+        excelChooser.setTitle("Open Excel Bestand");
+        excelChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        excelChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter(".xlsx", "*.xlsx")
+        );
+        File excelFile = excelChooser.showOpenDialog((Stage) (this.getScene().getWindow()));
+
+        try (FileInputStream inputStream = new FileInputStream(excelFile); Workbook workbook = new XSSFWorkbook(inputStream)) {
+            boolean nameError = false;
+            Sheet firstSheet = workbook.getSheetAt(0);
+            Iterator<Row> iterator = firstSheet.iterator();
+
+            while (iterator.hasNext()) {
+                Row nextRow = iterator.next();
+                String voornaam = nextRow.getCell(0).getStringCellValue().trim();
+                String achternaam = nextRow.getCell(1).getStringCellValue().trim();
+                if (!voornaam.isEmpty()) {
+                    if (!voornaam.matches("^[a-zA-Z\\s]*$")) {
+                        nameError = true;
+                    } else {
+                        lsvLeerlingen.getItems().add(new Leerling(voornaam, achternaam));
+                        System.out.println(new Leerling(voornaam, achternaam));
+                    }
+                }
+            }
+            if (nameError) {
+                System.out.println("error");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(KlasDetailPanelController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException npe) {
+            System.out.println("Nullpointer caught");
+        } catch (Exception e) {
+            System.out.println("Exception e thrown");
+        }
+
+
     }
 
     @FXML
