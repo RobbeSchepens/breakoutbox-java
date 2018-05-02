@@ -26,52 +26,33 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class DetailPanelKlasController extends VBox implements KlasObserver {
+public class KlasDetailPanelController extends VBox implements KlasObserver {
 
     KlasController kc;
-    FrameKlassenController fc;
+    KlasFrameController fc;
     private FileChooser fileChooserExcel;
 
+    @FXML private Label lblTitleRight;
+    @FXML private Button btnNieuweOefening;
+    @FXML private TextField txfNaamKlas;
+    @FXML private TextField txfNaamLln;
+    @FXML private Label lblOpgave1;
+    @FXML private Label lblUploadExcel;
+    @FXML private TextField txfVoornaam;
+    @FXML private ListView<Leerling> lsvLeerlingen;
+    @FXML private Label lblOpgave;
+    @FXML private Button btnFileOpgave;
+    @FXML private Label lblExcelName;
+    @FXML private Label lblError;
+    @FXML private Label lblSuccess;
+    @FXML private Button btnEdit;
+    @FXML private Button btnAdd;
+    @FXML private Label lblGeselect;
+    @FXML private Label lblToegevoegdBoodschap;
 
-    @FXML
-    private Label lblTitleRight;
-    @FXML
-    private Button btnNieuweOefening;
-    @FXML
-    private TextField txfNaamKlas;
-    @FXML
-    private TextField txfNaamLln;
-    @FXML
-    private Label lblOpgave1;
-    @FXML
-    private Label lblUploadExcel;
-    @FXML
-    private TextField txfVoornaam;
-    @FXML
-    private ListView<Leerling> lsvLeerlingen;
-    @FXML
-    private Label lblOpgave;
-    @FXML
-    private Button btnFileOpgave;
-    @FXML
-    private Label lblExcelName;
-    @FXML
-    private Label lblError;
-    @FXML
-    private Label lblSuccess;
-    @FXML
-    private Button btnEdit;
-    @FXML
-    private Button btnAdd;
-
-    @FXML
-    private Label lblGeselect;
-    @FXML
-    private Label lblToegevoegdBoodschap;
-
-    public DetailPanelKlasController(KlasController kc, FrameKlassenController fc) {
+    public KlasDetailPanelController(KlasController kc, KlasFrameController fc) {
         FXMLLoader loader
-                = new FXMLLoader(getClass().getResource("DetailPanelKlas.fxml"));
+                = new FXMLLoader(getClass().getResource("KlasDetailPanel.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -79,6 +60,7 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
+        
         this.kc = kc;
         this.fc = fc;
         initButtons(true);
@@ -143,15 +125,11 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
 
     @FXML
     private void btnUploadExcelOnAction(ActionEvent event) {
-
             FileChooser excelChooser = new FileChooser();
             excelChooser.setTitle("Kies een klas");
             excelChooser.setInitialDirectory(new File(System.getProperty("user.home")));
             excelChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(".xlsx", "*.xlsx"));
             File ef = excelChooser.showOpenDialog((Stage) (this.getScene().getWindow()));
-
-
-
     }
 
     @FXML
@@ -166,8 +144,6 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
             System.out.println(ex.getMessage());
             lblError.setText(ex.getMessage());
         }
-        //lblError
-        //lblSuccess
     }
 
     @FXML

@@ -14,13 +14,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-public class OverzichtPanelKlasController extends OverzichtPanelController<IKlas, KlasController> implements KlasSubject {
+public class KlasOverzichtPanelController extends OverzichtPanelController<IKlas, KlasController> implements KlasSubject {
 
     KlasController kc;
-    FrameKlassenController fc;
+    KlasFrameController fc;
     private Set<KlasObserver> observers;
 
-    OverzichtPanelKlasController(KlasController kc, FrameKlassenController fc) {
+    KlasOverzichtPanelController(KlasController kc, KlasFrameController fc) {
         super(kc);
         this.observers = new HashSet<>();
         this.kc = kc;
@@ -109,5 +109,4 @@ public class OverzichtPanelKlasController extends OverzichtPanelController<IKlas
     
     @Override
     void clearAddedFilters() {}
-    
 }

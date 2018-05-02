@@ -1,7 +1,5 @@
 package gui;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
-import domein.Doelstelling;
 import domein.OefeningController;
 import domein.Groepsbewerking;
 import domein.IOefening;
@@ -25,10 +23,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-public class DetailPanelOefeningListController extends VBox implements OefeningObserver, OefeningSubject {
+public class OefeningGroepsbDetailPanelController extends VBox implements OefeningObserver, OefeningSubject {
 
     private OefeningController dc;
-    private FrameOefeningController fc;
+    private OefeningFrameController fc;
     private List<Groepsbewerking> listGroepsBewerkingenTempAlle = new ArrayList<>();
     private List<Groepsbewerking> listGroepsBewerkingenTempGeselect = new ArrayList<>();
     private Set<OefeningObserver> observers;
@@ -41,8 +39,8 @@ public class DetailPanelOefeningListController extends VBox implements OefeningO
     @FXML private ListView<Groepsbewerking> lsvListAlle;
     @FXML private ListView<Groepsbewerking> lsvListGeselecteerde;
 
-    public DetailPanelOefeningListController(OefeningController dcon, FrameOefeningController fc) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailPanelOefeningList.fxml"));
+    public OefeningGroepsbDetailPanelController(OefeningController dcon, OefeningFrameController fc) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("OefeningGroepsbDetailPanel.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {

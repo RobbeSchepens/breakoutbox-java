@@ -1,45 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import domein.ActieController;
 import domein.ActieObserver;
 import domein.ActieSubject;
-import domein.BoxObserver;
 import domein.IActie;
-import domein.IKlas;
-import domein.KlasObserver;
-import domein.KlasSubject;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-/**
- *
- * @author Daan
- */
-public class OverzichtPanelActieController extends OverzichtPanelController<IActie, ActieController> implements ActieSubject {
+public class ActieOverzichtPanelController extends OverzichtPanelController<IActie, ActieController> implements ActieSubject {
 
     ActieController ac;
-    FrameActieController fc;
+    ActieFrameController fc;
     private Set<ActieObserver> observers;
 
-    public OverzichtPanelActieController(ActieController ac, FrameActieController fc) {
+    public ActieOverzichtPanelController(ActieController ac, ActieFrameController fc) {
         super(ac);
         this.observers = new HashSet<>();
         this.ac = ac;
         this.fc = fc;
         renderContent();
-
     }
 
     @Override
@@ -117,5 +102,4 @@ public class OverzichtPanelActieController extends OverzichtPanelController<IAct
 
     @Override
     void clearAddedFilters() {}
-
 }

@@ -22,10 +22,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class DetailPanelBoxController extends VBox implements BoxObserver, UpdateItemTableSubject {
+public class BoxDetailPanelController extends VBox implements BoxObserver, UpdateItemTableSubject {
     
     private BoxController bc;
-    private FrameBoxController fc;
+    private BoxFrameController fc;
     private Set<UpdateItemTableObserver> observers;
     
     @FXML private Label lblTitleRight;
@@ -43,9 +43,9 @@ public class DetailPanelBoxController extends VBox implements BoxObserver, Updat
     @FXML private Button btnAddWithContent;
     @FXML private TextField txfNaam;
     
-    public DetailPanelBoxController(BoxController bcon, FrameBoxController fc) {
+    public BoxDetailPanelController(BoxController bcon, BoxFrameController fc) {
         FXMLLoader loader
-                = new FXMLLoader(getClass().getResource("DetailPanelBox.fxml"));
+                = new FXMLLoader(getClass().getResource("BoxDetailPanel.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -196,5 +196,4 @@ public class DetailPanelBoxController extends VBox implements BoxObserver, Updat
             observer.updateEditedItem();
         });
     }
-
 }

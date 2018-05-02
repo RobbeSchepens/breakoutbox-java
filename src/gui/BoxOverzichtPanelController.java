@@ -15,13 +15,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, BoxController> implements BoxSubject, BoxObserver, UpdateItemTableObserver {
+public class BoxOverzichtPanelController extends OverzichtPanelController<IBox, BoxController> implements BoxSubject, BoxObserver, UpdateItemTableObserver {
 
     BoxController bc;
-    FrameBoxController fc;
+    BoxFrameController fc;
     private Set<BoxObserver> observers;
 
-    public OverzichtPanelBoxController(BoxController bc, FrameBoxController fc) {
+    public BoxOverzichtPanelController(BoxController bc, BoxFrameController fc) {
         super(bc);
         this.observers = new HashSet<>();
         this.bc = bc;
@@ -58,7 +58,6 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
 
         // Add the columns to the tableview
         getTbvOverzicht().getColumns().setAll(col1, col2, col3);
-
     }
 
     @Override
@@ -122,12 +121,7 @@ public class OverzichtPanelBoxController extends OverzichtPanelController<IBox, 
 
     @Override
     public void updateEditedItem() {
-        bc.geefBoxen().forEach(e -> System.out.println(e.getActiesCount()));
-        System.out.println("inupdate overzichtpanel");
-        getTbvOverzicht().getColumns().get(1).setVisible(false);
-        getTbvOverzicht().getColumns().get(1).setVisible(true);
         getTbvOverzicht().getColumns().forEach(e -> e.setVisible(false));
         getTbvOverzicht().getColumns().forEach(e -> e.setVisible(true));
     }
-
 }

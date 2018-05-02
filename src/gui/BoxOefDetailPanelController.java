@@ -21,7 +21,6 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,9 +30,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-public class DetailPanelBoxListOefeningenController extends VBox implements BoxObserver, BoxSubject {
+public class BoxOefDetailPanelController extends VBox implements BoxObserver, BoxSubject {
      
-    FrameBoxController fc;
+    BoxFrameController fc;
     BoxController bc;
     private List<IOefening> listOefeningenTempAlle = new ArrayList<>();
     private List<IOefening> listOefeningenTempGeselect = new ArrayList<>();
@@ -47,8 +46,8 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
 
-    public DetailPanelBoxListOefeningenController(BoxController bc, FrameBoxController fc) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailPanelBoxListOefeningen.fxml"));
+    public BoxOefDetailPanelController(BoxController bc, BoxFrameController fc) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("BoxOefDetailPanel.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -95,7 +94,6 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
                 }
             }
         });
-
     }
 
     @Override
@@ -184,5 +182,4 @@ public class DetailPanelBoxListOefeningenController extends VBox implements BoxO
 
     @Override
     public void updateCountOefeningen() {}
-
 }

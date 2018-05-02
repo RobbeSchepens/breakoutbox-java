@@ -1,26 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import domein.ISessie;
-import domein.OefeningController;
 import domein.SessieController;
-import java.nio.channels.SeekableByteChannel;
 import javafx.event.ActionEvent;
 
-/**
- *
- * @author Daan
- */
-public class OverzichtPanelSessieController extends OverzichtPanelController<ISessie, SessieController> {
+public class SessieOverzichtPanelController extends OverzichtPanelController<ISessie, SessieController> {
 
     private SessieController sc;
-    private FrameSessieController fc;
+    private SessieFrameController fc;
 
-    public OverzichtPanelSessieController(SessieController sc, FrameSessieController fc) {
+    public SessieOverzichtPanelController(SessieController sc, SessieFrameController fc) {
         super(sc);
 
         this.sc = sc;
@@ -61,5 +50,4 @@ public class OverzichtPanelSessieController extends OverzichtPanelController<ISe
 
     @Override
     void clearAddedFilters() {}
-
 }

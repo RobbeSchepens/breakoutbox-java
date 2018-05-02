@@ -2,6 +2,7 @@ package gui;
 
 import domein.ActieController;
 import domein.BoxController;
+import domein.DomeinController;
 import domein.OefeningController;
 import domein.KlasController;
 import domein.SessieController;
@@ -16,15 +17,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-public class MenubarController extends HBox{
+public class NavigatieController extends HBox{
 
-    static EnumMenu nextpage = EnumMenu.HOME;
+    static EnumNavigatie nextpage = EnumNavigatie.HOME;
 
-    private OefeningController dc;
+    private DomeinController dc;
+    private OefeningController oc;
     private BoxController bc;
+    private SessieController sc;
     private KlasController kc;
     private ActieController ac;
-    private SessieController scc;
             
     @FXML private HBox hbxHome;
     @FXML private HBox hbxOef;
@@ -33,9 +35,9 @@ public class MenubarController extends HBox{
     @FXML private HBox hbxActies;
     @FXML private HBox hbxKlassen;
     
-    public MenubarController(OefeningController dcon, KlasController kc, BoxController bc, SessieController sc, ActieController ac) {
+    public NavigatieController(DomeinController dc) {
         FXMLLoader loader
-                = new FXMLLoader(getClass().getResource("Menubar.fxml"));
+                = new FXMLLoader(getClass().getResource("Navigatie.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -44,11 +46,12 @@ public class MenubarController extends HBox{
             throw new RuntimeException(ex);
         }
         
-        this.dc = dcon;
-        this.bc = bc;
-        this.kc = kc;
-        this.scc = sc;
-        this.ac = ac;
+        this.dc = dc;
+        this.oc = dc.getOc();
+        this.bc = dc.getBc();
+        this.sc = dc.getSc();
+        this.kc = dc.getKc();
+        this.ac = dc.getAc();
         
         setActiveMenuItem();
         setMouseHoverIconButtons();
@@ -110,27 +113,27 @@ public class MenubarController extends HBox{
     
     @FXML
     private void hbxHomeOnMouseClicked(MouseEvent event) {
-        if (dc == null) { // gebeurt nooit momenteel
+        if (oc == null) { // gebeurt nooit momenteel
             System.out.println("OefeningController was null and is being initialized.");
-            dc = new OefeningController();
+            oc = new OefeningController();
         }
 
-        nextpage = EnumMenu.HOME;
-        FrameHomeController sc = new FrameHomeController(dc, kc, bc, scc, ac);
-        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
+        nextpage = EnumNavigatie.HOME;
+        HomeFrameController fc = new HomeFrameController(dc);
+        Scene scene = new Scene(fc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
 
     @FXML
     private void hbxOefOnMouseClicked(MouseEvent event) {
-        if (dc == null) {
+        if (oc == null) {
             System.out.println("OefeningController was null and is being initialized.");
-            dc = new OefeningController();
+            oc = new OefeningController();
         }
-        nextpage = EnumMenu.OEFENING;
-        FrameOefeningController sc = new FrameOefeningController(dc, kc, bc, scc, ac);
-        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
+        nextpage = EnumNavigatie.OEFENING;
+        OefeningFrameController fc = new OefeningFrameController(dc);
+        Scene scene = new Scene(fc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
@@ -142,22 +145,22 @@ public class MenubarController extends HBox{
             bc = new BoxController();
             ac = new ActieController();
         }
-        nextpage = EnumMenu.BOX;
-        FrameBoxController sc = new FrameBoxController(dc, kc, bc, scc, ac);
-        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
+        nextpage = EnumNavigatie.BOX;
+        BoxFrameController fc = new BoxFrameController(dc);
+        Scene scene = new Scene(fc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
 
     @FXML
     private void hbxSessiesOnMouseClicked(MouseEvent event) {
-        if (scc == null) {
+        if (sc == null) {
             System.out.println("SessieController was null and is being initialized.");
-            scc = new SessieController();
+            sc = new SessieController();
         }
-        nextpage = EnumMenu.SESSIE;
-        FrameSessieController sc = new FrameSessieController(dc, kc, bc, scc, ac);
-        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
+        nextpage = EnumNavigatie.SESSIE;
+        SessieFrameController fc = new SessieFrameController(dc);
+        Scene scene = new Scene(fc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
@@ -168,9 +171,9 @@ public class MenubarController extends HBox{
             System.out.println("ActieController was null and is being initialized.");
             ac = new ActieController();
         }
-        nextpage = EnumMenu.ACTIE;
-        FrameActieController sc = new FrameActieController(dc, kc, bc, scc, ac);
-        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
+        nextpage = EnumNavigatie.ACTIE;
+        ActieFrameController fc = new ActieFrameController(dc);
+        Scene scene = new Scene(fc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
@@ -181,9 +184,9 @@ public class MenubarController extends HBox{
             System.out.println("KlasController was null and is being initialized.");
             kc = new KlasController();
         }
-        nextpage = EnumMenu.KLAS;
-        FrameKlassenController sc = new FrameKlassenController(dc, kc, bc, scc, ac);
-        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
+        nextpage = EnumNavigatie.KLAS;
+        KlasFrameController fc = new KlasFrameController(dc);
+        Scene scene = new Scene(fc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }

@@ -2,7 +2,6 @@ package gui;
 
 import domein.Doelstelling;
 import domein.OefeningController;
-import domein.Groepsbewerking;
 import domein.IOefening;
 import domein.OefeningObserver;
 import domein.OefeningSubject;
@@ -15,7 +14,6 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,14 +23,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-
-public class DetailPanelOefeningListDoelstellingController extends VBox implements OefeningObserver, OefeningSubject {
+public class OefeningDoelstDetailPanelController extends VBox implements OefeningObserver, OefeningSubject {
 
     private OefeningController dc;
-    private FrameOefeningController fc;
+    private OefeningFrameController fc;
     private List<Doelstelling> listDoelstellingenTempAlle = new ArrayList<>();
     private List<Doelstelling> listDoelstellingenTempGeselect = new ArrayList<>();
-    private int geseleceerdeDoelstellingen = 0;
     private Set<OefeningObserver> observers;
 
     @FXML private Label lblTitleLeftList;
@@ -43,8 +39,8 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
     @FXML private ListView<Doelstelling> lsvListAlle;
     @FXML private ListView<Doelstelling> lsvListGeselecteerde;
 
-    public DetailPanelOefeningListDoelstellingController(OefeningController dcon, FrameOefeningController fc) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailPanelOefeningListDoelstelling.fxml"));
+    public OefeningDoelstDetailPanelController(OefeningController dcon, OefeningFrameController fc) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("OefeningDoelstDetailPanel.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -104,7 +100,6 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
             listDoelstellingenTempAlle.add(item);
         }
 
-
         List<Doelstelling> m = new ArrayList<>(dc.geefDoelstellingenHuidigeOefening());
         listDoelstellingenTempGeselect = new ArrayList<>();
         for (Doelstelling item : m) {
@@ -124,15 +119,12 @@ public class DetailPanelOefeningListDoelstellingController extends VBox implemen
         }
         listDoelstellingenTempAlle.removeAll(h);
 
-
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
         lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
         
         dc.setListDoelstellingenVanOefening(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
-        
     }
 
-    
     @FXML
     private void btnDeselectAllOnAction(ActionEvent event) {
         lsvListGeselecteerde.getSelectionModel().clearSelection();

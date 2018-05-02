@@ -1,8 +1,8 @@
 package startup;
 
-import domein.OefeningController;
+import domein.DomeinController;
 import domein.PDF;
-import gui.FrameHomeController;
+import gui.HomeFrameController;
 import java.io.File;
 import java.util.Arrays;
 import javafx.application.Application;
@@ -35,7 +35,7 @@ public class StartUpGuiClientApp extends Application {
         }
         Arrays.stream(pdfLocation.listFiles()).forEach(File::delete);
 
-        FrameHomeController root = new FrameHomeController(new OefeningController(), null, null, null, null);
+        HomeFrameController root = new HomeFrameController(new DomeinController());
 
         Scene scene = new Scene(root, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");

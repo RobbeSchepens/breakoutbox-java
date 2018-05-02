@@ -24,9 +24,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-public class DetailPanelBoxListActiesController extends VBox implements BoxObserver, BoxSubject {
+public class BoxActiesDetailPanelController extends VBox implements BoxObserver, BoxSubject {
 
-    FrameBoxController fc;
+    BoxFrameController fc;
     BoxController bc;
     private List<IActie> listActiesTempAlle;
     private List<IActie> listActiesTempGeselect = new ArrayList<>();
@@ -40,8 +40,8 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
 
-    public DetailPanelBoxListActiesController(BoxController bc, FrameBoxController fc) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailPanelBoxListActies.fxml"));
+    public BoxActiesDetailPanelController(BoxController bc, BoxFrameController fc) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("BoxActiesDetailPanel.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -105,7 +105,6 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
             listActiesTempGeselect.add(item);
         }
 
-
         bc.setListActiesVanBox(listActiesTempGeselect);
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
         ArrayList<IActie> h = new ArrayList<>();
@@ -118,21 +117,16 @@ public class DetailPanelBoxListActiesController extends VBox implements BoxObser
         }
         listActiesTempAlle.removeAll(h);
         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
-
-
     }
 
     public void nieuweBox() {
-
         listActiesTempAlle = new ArrayList<>(bc.geefActies());
         listActiesTempGeselect = new ArrayList<>();
         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
         bc.setListActiesVanBox(listActiesTempGeselect);
         lblAantalGeselecteerd.setText("Geselecteerde Oefeningen 0");
-        
     }
-
 
     @FXML
     private void lsvListAlleOnMouseClicked(MouseEvent event) {

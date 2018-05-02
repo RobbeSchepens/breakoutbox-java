@@ -2,10 +2,11 @@ package gui;
 
 import domein.ActieController;
 import domein.BoxController;
+import domein.DomeinController;
 import domein.KlasController;
 import domein.OefeningController;
 import domein.SessieController;
-import static gui.MenubarController.nextpage;
+import static gui.NavigatieController.nextpage;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -22,11 +23,12 @@ import javafx.stage.Stage;
 
 public class HoofdMenuController extends GridPane {
     
-    private OefeningController dc;
+    private DomeinController dc;
+    private OefeningController oc;
     private BoxController bc;
+    private SessieController sc;
     private KlasController kc;
     private ActieController ac;
-    private SessieController scc;
     
     @FXML private Button btnBeheerBob;
     @FXML private Button btnBeheerSessies;
@@ -39,7 +41,7 @@ public class HoofdMenuController extends GridPane {
     @FXML private Button btnBeheerKlassen;
     @FXML private Label lblAantalKlassen;
     
-    public HoofdMenuController(OefeningController dcon, KlasController kc, BoxController bc, SessieController sc, ActieController ac) {
+    public HoofdMenuController(DomeinController dc) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HoofdMenu.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -49,20 +51,21 @@ public class HoofdMenuController extends GridPane {
             throw new RuntimeException(ex);
         }
         
-        this.dc = dcon;
-        this.bc = bc;
-        this.kc = kc;
-        this.scc = sc;
-        this.ac = ac;
+        this.dc = dc;
+        this.oc = dc.getOc();
+        this.bc = dc.getBc();
+        this.sc = dc.getSc();
+        this.kc = dc.getKc();
+        this.ac = dc.getAc();
         
         laadAantallen();
         setMouseHoverIconButtons();
     }
 
     private void laadAantallen() {
-        lblAantalOef.setText(String.valueOf(dc.geefAantalOefeningen()));
+        lblAantalOef.setText(String.valueOf(oc.geefAantalOefeningen()));
         lblAantalBoxes.setText(String.valueOf(bc.geefAantalBoxen()));
-        //lblAantalSessies.setText(String.valueOf(scc.geefAantalSessies()));
+        //lblAantalSessies.setText(String.valueOf(sc.geefAantalSessies()));
         lblAantalActies.setText(String.valueOf(ac.geefAantalActies()));
         lblAantalKlassen.setText(String.valueOf(kc.geefAantalKlassen()));
     }
@@ -82,13 +85,13 @@ public class HoofdMenuController extends GridPane {
 
     @FXML
     private void btnBeheerOefOnAction(ActionEvent event) {
-        if (dc == null) {
+        if (oc == null) {
             System.out.println("OefeningController was null and is being initialized.");
-            dc = new OefeningController();
+            oc = new OefeningController();
         }
-        nextpage = EnumMenu.OEFENING;
-        FrameOefeningController sc = new FrameOefeningController(dc, kc, bc, scc, ac);
-        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
+        nextpage = EnumNavigatie.OEFENING;
+        OefeningFrameController fc = new OefeningFrameController(dc);
+        Scene scene = new Scene(fc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
@@ -100,22 +103,22 @@ public class HoofdMenuController extends GridPane {
             bc = new BoxController();
             ac = new ActieController();
         }
-        nextpage = EnumMenu.BOX;
-        FrameBoxController sc = new FrameBoxController(dc, kc, bc, scc, ac);
-        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
+        nextpage = EnumNavigatie.BOX;
+        BoxFrameController fc = new BoxFrameController(dc);
+        Scene scene = new Scene(fc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
 
     @FXML
     private void btnBeheerSessiesOnAction(ActionEvent event) {
-        if (scc == null) {
+        if (sc == null) {
             System.out.println("SessieController was null and is being initialized.");
-            scc = new SessieController();
+            sc = new SessieController();
         }
-        nextpage = EnumMenu.SESSIE;
-        FrameSessieController sc = new FrameSessieController(dc, kc, bc, scc, ac);
-        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
+        nextpage = EnumNavigatie.SESSIE;
+        SessieFrameController fc = new SessieFrameController(dc);
+        Scene scene = new Scene(fc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
@@ -126,9 +129,9 @@ public class HoofdMenuController extends GridPane {
             System.out.println("ActieController was null and is being initialized.");
             ac = new ActieController();
         }
-        nextpage = EnumMenu.ACTIE;
-        FrameActieController sc = new FrameActieController(dc, kc, bc, scc, ac);
-        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
+        nextpage = EnumNavigatie.ACTIE;
+        ActieFrameController fc = new ActieFrameController(dc);
+        Scene scene = new Scene(fc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
@@ -139,9 +142,9 @@ public class HoofdMenuController extends GridPane {
             System.out.println("KlasController was null and is being initialized.");
             kc = new KlasController();
         }
-        nextpage = EnumMenu.KLAS;
-        FrameKlassenController sc = new FrameKlassenController(dc, kc, bc, scc, ac);
-        Scene scene = new Scene(sc, 1280, 770, false, SceneAntialiasing.BALANCED);
+        nextpage = EnumNavigatie.KLAS;
+        KlasFrameController fc = new KlasFrameController(dc);
+        Scene scene = new Scene(fc, 1280, 770, false, SceneAntialiasing.BALANCED);
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }

@@ -23,10 +23,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class DetailPanelOefeningController extends VBox implements OefeningObserver {
+public class OefeningDetailPanelController extends VBox implements OefeningObserver {
 
     private OefeningController dc;
-    private FrameOefeningController fc;
+    private OefeningFrameController fc;
     private FileChooser fileChooserOpgave;
     private FileChooser fileChooserFeedback;
     private File fileOpgave;
@@ -57,10 +57,14 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
 
     @FXML
     private Button btnAddWithContent;
+    @FXML
+    private Label lblError1;
+    @FXML
+    private Label lblSuccess1;
 
-    public DetailPanelOefeningController(OefeningController dcon, FrameOefeningController fc) {
+    public OefeningDetailPanelController(OefeningController dcon, OefeningFrameController fc) {
         FXMLLoader loader
-                = new FXMLLoader(getClass().getResource("DetailPanelOefening.fxml"));
+                = new FXMLLoader(getClass().getResource("OefeningDetailPanel.fxml"));
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -193,7 +197,8 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
     private void btnFileFeedbackOnAction(ActionEvent event) {
         fileFeedback = fileChooserFeedback.showOpenDialog((Stage)(this.getScene().getWindow()));
         if (fileFeedback != null) {
-            lblFeedback.setText(fileFeedback.getName());
+            fileFeedbackNaam = fileOpgave.getName();
+            lblFeedback.setText(fileFeedbackNaam);
             btnOpenFeedback.setDisable(false);
         }
     }
@@ -239,7 +244,6 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
 
     @FXML
     private void btnAddWithContentOnAction(ActionEvent event) {
-
         try {
             dc.voegNieuweOefeningToe(txfNaam.getText(), txfAntwoord.getText(), fileOpgave, fileFeedback, ddlVak.getSelectionModel().getSelectedItem());
             initNieuweOefening();
@@ -250,9 +254,5 @@ public class DetailPanelOefeningController extends VBox implements OefeningObser
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());
         }
-
-
     }
-
-    
 }

@@ -18,18 +18,18 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-public final class OverzichtPanelOefeningController extends OverzichtPanelController<IOefening, OefeningController> implements OefeningSubject {
+public final class OefeningOverzichtPanelController extends OverzichtPanelController<IOefening, OefeningController> implements OefeningSubject {
 
-    private OefeningController dc;
-    private FrameOefeningController fc;
+    private OefeningController oc;
+    private OefeningFrameController fc;
     private Set<OefeningObserver> observers;
     private ComboBox<Vak> ddlVakken;
     private String filtervalue = "";
     
-    public OverzichtPanelOefeningController(OefeningController dcon, FrameOefeningController fc) {
-        super(dcon);
+    public OefeningOverzichtPanelController(OefeningController oc, OefeningFrameController fc) {
+        super(oc);
         this.observers = new HashSet<>();
-        this.dc = dcon;
+        this.oc = oc;
         this.fc = fc;
         
         createComboBoxVakken();
@@ -47,14 +47,14 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
                 (ObservableValue<? extends Vak> observable, Vak oldValue, Vak newValue) -> {
                     System.out.println("eventlistener vak");
             if (!(newValue == null)) {
-                dc.veranderFilter(filtervalue, newValue);
+                oc.veranderFilter(filtervalue, newValue);
             }
         });
     }
     
     @Override
     void implementTableviewListener(Object newValue) {
-        dc.setHuidigeOefening((IOefening) newValue);
+        oc.setHuidigeOefening((IOefening) newValue);
         notifyObservers();
     }
 
@@ -62,13 +62,13 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
     void renderContent() {
         setLblTitleLeftText("Overzicht oefeningen");
         setLblFilterOpText("Filter op naam:");
-        ddlVakken.setItems(dc.geefVakken());
+        ddlVakken.setItems(oc.geefVakken());
         renderTable();
     }
     
     private void renderTable() {
         // Set items for tableview
-        getTbvOverzicht().setItems(dc.geefOefeningen());
+        getTbvOverzicht().setItems(oc.geefOefeningen());
         
         // Create new columns based on current class
         TableColumn<IOefening, String> col1 = new TableColumn<>("Naam");
@@ -93,7 +93,7 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-                dc.delete(getTbvOverzicht().getSelectionModel().getSelectedItem());
+                oc.delete(getTbvOverzicht().getSelectionModel().getSelectedItem());
             }
         }
     }
@@ -120,7 +120,7 @@ public final class OverzichtPanelOefeningController extends OverzichtPanelContro
     void filter(String newValue) {
         filtervalue = newValue;
         Vak vak = ddlVakken.getSelectionModel().getSelectedItem();
-        dc.veranderFilter(newValue, vak);
+        oc.veranderFilter(newValue, vak);
     }
 
     @Override

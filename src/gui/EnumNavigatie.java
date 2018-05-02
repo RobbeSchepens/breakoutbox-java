@@ -1,6 +1,6 @@
 
 package gui;
 
-public enum EnumMenu {
+public enum EnumNavigatie {
     HOME, OEFENING, BOX, SESSIE, KLAS, ACTIE
 }
