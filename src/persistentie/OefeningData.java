@@ -140,9 +140,6 @@ public class OefeningData {
                 )))
         ));
 
-        System.out.println(klassen.get(0).getNaam() + klassen.get(0).getLeerlingen());
-        System.out.println(klassen.get(1).getNaam() + klassen.get(1).getLeerlingen());
-        System.out.println(klassen.get(2).getNaam() + klassen.get(2).getLeerlingen());
 
         GenericDaoJpa klasDao = new GenericDaoJpa<>(Klas.class);
         klassen.forEach(klas -> {
