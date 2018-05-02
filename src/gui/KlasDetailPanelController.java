@@ -35,6 +35,9 @@ public class KlasDetailPanelController extends VBox implements KlasObserver {
     KlasFrameController fc;
     private FileChooser fileChooserExcel;
 
+    @FXML
+    private Label lblToegevoegdBoodschaperr;
+    
     @FXML private Label lblTitleRight;
     @FXML private Button btnNieuweOefening;
     @FXML private TextField txfNaamKlas;
@@ -112,13 +115,16 @@ public class KlasDetailPanelController extends VBox implements KlasObserver {
                 }
             }
             if (test) {
-                lblToegevoegdBoodschap.setText("Leerling al in lijst!");
+                lblToegevoegdBoodschap.setText("");
+                lblToegevoegdBoodschaperr.setText("Leerling al in lijst!");
             } else {
+                lblToegevoegdBoodschaperr.setText("");
                 lsvLeerlingen.getItems().add(ln);
                 lblToegevoegdBoodschap.setText(ln.getVoornaam() + " toegevoegd!");
             }
         } catch (IllegalArgumentException iae) {
-            lblToegevoegdBoodschap.setText(iae.getMessage());
+            lblToegevoegdBoodschap.setText("");
+            lblToegevoegdBoodschaperr.setText(iae.getMessage());
         }
 
     }
@@ -207,6 +213,7 @@ public class KlasDetailPanelController extends VBox implements KlasObserver {
         txfVoornaam.setText("");
         lblGeselect.setText("");
         lblToegevoegdBoodschap.setText("");
+        lblToegevoegdBoodschaperr.setText("");
         btnFileOpgave.setVisible(true);
         lblUploadExcel.setVisible(true);
     }
