@@ -166,13 +166,14 @@ public class Box implements IBox, Serializable {
                     contentStream.beginText();
                     contentStream.setFont(font, 12);
                     contentStream.setLeading(14.5f);
-                    contentStream.newLineAtOffset(100, 700);
+                    contentStream.newLineAtOffset(70, 750);
 
-                    StringBuilder sb = new StringBuilder(String.format("Sessie: ", getNaam()));
+                    StringBuilder sb = new StringBuilder(String.format("Sessie: %s", getNaam()));
                     sb.append("\n");
                     sb.append("\n");
+
                     for (Oefening oef : getOefeningen()) {
-                        sb.append("Oefening: " + oef.getNaam() + "\n");
+                        sb.append("Oefening: " + oef.getNaam() + "\n----------------------------------------\n");
                         for (Doelstelling doels : oef.getDoelstellingen()) {
                             sb.append(String.format("%s\n", doels));
                         }
