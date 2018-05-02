@@ -64,8 +64,8 @@ public class OefeningTest {
             new SubstractGroepsbewerking("trek af", 7.00),
             new SubstractGroepsbewerking("trek af", 12.00)
             )), new ArrayList<>(Arrays.asList(
-            new Doelstelling("Doelstelling1"),
-            new Doelstelling("Doelstelling2")
+            new Doelstelling("AB", "Doelstelling1"),
+            new Doelstelling("CD", "Doelstelling2")
             )), true}});
     }
 
