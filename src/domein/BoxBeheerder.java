@@ -105,22 +105,25 @@ public final class BoxBeheerder implements BeheerderSubject, BeheerderObserver {
         }*/
 
         boxRepo.startTransaction();
-        ((ObservableList<Box>) getBoxen()).add(o);
         boxRepo.insert(o);
         boxRepo.commitTransaction();
+        ((ObservableList<Box>) getBoxen()).add(o);
+        notifyObservers();
     }
 
     public void update(Box o) {
         boxRepo.startTransaction();
         boxRepo.update(o);
         boxRepo.commitTransaction();
+        notifyObservers();
     }
 
     public void delete(Box o) {
         boxRepo.startTransaction();
         boxRepo.delete(o);
-        getBoxen().remove(o);
         boxRepo.commitTransaction();
+        getBoxen().remove(o);
+        notifyObservers();
     }
 
     @Override

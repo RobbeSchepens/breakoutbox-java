@@ -61,22 +61,25 @@ public class KlasBeheerder implements BeheerderSubject, BeheerderObserver {
         }*/
 
         klasRepo.startTransaction();
-        ((ObservableList<Klas>)getKlassen()).add(o);
         klasRepo.insert(o);
         klasRepo.commitTransaction();
+        ((ObservableList<Klas>)getKlassen()).add(o);
+        notifyObservers();
     }
 
     public void update(Klas o) {
         klasRepo.startTransaction();
         klasRepo.update(o);
         klasRepo.commitTransaction();
+        notifyObservers();
     }
     
     public void delete(Klas o) {
         klasRepo.startTransaction();
         klasRepo.delete(o);
-        getKlassen().remove(o);
         klasRepo.commitTransaction();
+        getKlassen().remove(o);
+        notifyObservers();
     }
 
     @Override

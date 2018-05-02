@@ -61,7 +61,7 @@ public class BoxOverzichtPanelController extends OverzichtPanelController<IBox, 
     }
 
     @Override
-    void btnDeleteSelectedOnAction(ActionEvent event) {
+    void btnDeleteSelectedOnAction() {
         if (getTbvOverzicht().getSelectionModel().getSelectedItem() != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Verwijder oefening");

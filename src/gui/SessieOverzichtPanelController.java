@@ -18,7 +18,7 @@ public class SessieOverzichtPanelController extends OverzichtPanelController<ISe
     }
 
     @Override
-    void btnDeleteSelectedOnAction(ActionEvent event) {
+    void btnDeleteSelectedOnAction() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

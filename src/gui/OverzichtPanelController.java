@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javax.persistence.RollbackException;
+import org.eclipse.persistence.exceptions.DatabaseException;
 
 public abstract class OverzichtPanelController<T, E> extends VBox {
 
@@ -21,10 +23,11 @@ public abstract class OverzichtPanelController<T, E> extends VBox {
     @FXML private Label lblTitleLeft, lblFilterOp;
     @FXML private TextField txfFilterOp;
     @FXML private TableView<T> tbvOverzicht;
-    @FXML private Button btnDeleteSelected;
     @FXML private Button btnDeselect;
     @FXML private Button btnClearFilter;
     @FXML private HBox hbxFilter;
+    @FXML private Label lblError;
+    @FXML private Button btnDelete;
 
     public OverzichtPanelController(E dcon) {
         FXMLLoader loader
@@ -86,7 +89,17 @@ public abstract class OverzichtPanelController<T, E> extends VBox {
         tbvOverzicht.getSelectionModel().clearSelection();
     }
 
-    @FXML abstract void btnDeleteSelectedOnAction(ActionEvent event);
+    @FXML
+    private void btnDeleteOnAction(ActionEvent event) {
+        try {
+            btnDeleteSelectedOnAction();
+        }
+        catch (DatabaseException | RollbackException ex){
+            lblError.setText("Het object kon niet verwijderd worden want het maakt deel uit van een ander object.");
+        }
+    }
+    
+    abstract void btnDeleteSelectedOnAction();
     abstract <T> void implementTableviewListener(T newValue);
     abstract void renderContent();
     abstract void filter(String newValue);

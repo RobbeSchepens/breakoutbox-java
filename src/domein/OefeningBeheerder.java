@@ -88,8 +88,6 @@ public final class OefeningBeheerder implements BeheerderSubject, BeheerderObser
             // Filter op beiden
             return oefening.getNaam().toLowerCase().contains(lowerCaseValue) && oefening.getVak() == vak;
         });
-        System.out.println(vak);
-        System.out.println(filteredOefeningList);
     }
     
     public void add(Oefening o) {
@@ -97,22 +95,25 @@ public final class OefeningBeheerder implements BeheerderSubject, BeheerderObser
             throw new IllegalArgumentException("Er bestaat al een oefening met deze naam.");
         
         oefRepo.startTransaction();
-        ((ObservableList<Oefening>)getOefeningen()).add(o);
         oefRepo.insert(o);
         oefRepo.commitTransaction();
+        ((ObservableList<Oefening>)getOefeningen()).add(o);
+        notifyObservers();
     }
 
     public void update(Oefening o) {
         oefRepo.startTransaction();
         oefRepo.update(o);
         oefRepo.commitTransaction();
+        notifyObservers();
     }
     
     public void delete(Oefening o) {
         oefRepo.startTransaction();
         oefRepo.delete(o);
-        getOefeningen().remove(o);
         oefRepo.commitTransaction();
+        getOefeningen().remove(o);
+        notifyObservers();
     }
     
     public Oefening geefOefeningByNaamJpa(String naam) {

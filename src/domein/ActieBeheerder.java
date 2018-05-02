@@ -57,23 +57,25 @@ public class ActieBeheerder implements BeheerderSubject, BeheerderObserver {
             throw new IllegalArgumentException("Er bestaat al een klas met deze naam.");
         }*/
         actieRepo.startTransaction();
-        ((ObservableList<Actie>) getActies()).add(o);
         actieRepo.insert(o);
         actieRepo.commitTransaction();
+        ((ObservableList<Actie>) getActies()).add(o);
+        notifyObservers();
     }
 
     public void update(Actie o) {
-
         actieRepo.startTransaction();
         actieRepo.update(o);
         actieRepo.commitTransaction();
+        notifyObservers();
     }
 
     public void delete(Actie o) {
         actieRepo.startTransaction();
-        getActies().remove(o);
         actieRepo.delete(o);
         actieRepo.commitTransaction();
+        getActies().remove(o);
+        notifyObservers();
     }
 
     @Override
