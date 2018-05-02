@@ -151,30 +151,6 @@ public class DetailPanelKlasController extends VBox implements KlasObserver {
             File ef = excelChooser.showOpenDialog((Stage) (this.getScene().getWindow()));
 
 
-        try (FileInputStream inputStream = new FileInputStream(ef); Workbook workbook = new XSSFWorkbook(inputStream)) {
-            boolean nameError = false;
-            org.apache.poi.ss.usermodel.Sheet firstSheet = workbook.getSheetAt(0);
-            Iterator<Row> iterator = firstSheet.iterator();
-
-            while (iterator.hasNext()) {
-                Row nextRow = iterator.next();
-                String voornaam = nextRow.getCell(0).getStringCellValue().trim();
-                // String achternaam = nextRow.getCell(1).getStringCellValue().trim();
-
-                if (!voornaam.isEmpty()) {
-
-                    lsvLeerlingen.getItems().add(new Leerling(voornaam, voornaam));
-
-                }
-            }
-            if (nameError) {
-
-            }
-        } catch (IOException ex) {
-
-        } catch (NullPointerException npe) {
-
-        }
 
     }
 
