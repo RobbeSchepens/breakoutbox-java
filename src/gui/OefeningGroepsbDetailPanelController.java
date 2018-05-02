@@ -33,7 +33,7 @@ public class OefeningGroepsbDetailPanelController extends VBox implements Oefeni
 
     @FXML private Label lblTitleLeftList;
     @FXML private Label lblAantalGeselecteerd;
-    @FXML private Button btnDeselectAll;
+
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
     @FXML private ListView<Groepsbewerking> lsvListAlle;
@@ -132,10 +132,6 @@ public class OefeningGroepsbDetailPanelController extends VBox implements Oefeni
     @Override
     public void updateCountDoelst() {}
     
-    @FXML
-    private void btnDeselectAllOnAction(ActionEvent event) {
-        lsvListGeselecteerde.getSelectionModel().clearSelection();
-    }
     @FXML
     private void btnCancelOnAction(ActionEvent event) {
         fc.toonListview("cancel/init");

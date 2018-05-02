@@ -33,7 +33,7 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
 
     @FXML private Label lblTitleLeftList;
     @FXML private Label lblAantalGeselecteerd;
-    @FXML private Button btnDeselectAll;
+
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
     @FXML private ListView<Doelstelling> lsvListAlle;
@@ -123,11 +123,6 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
         lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
         
         dc.setListDoelstellingenVanOefening(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
-    }
-
-    @FXML
-    private void btnDeselectAllOnAction(ActionEvent event) {
-        lsvListGeselecteerde.getSelectionModel().clearSelection();
     }
 
     @FXML

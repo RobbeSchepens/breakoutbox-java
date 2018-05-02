@@ -42,10 +42,24 @@ public class OefeningData {
             gbwDao.commitTransaction();
         });
 
-        List<Doelstelling> doelstellingenArray = new ArrayList();
-        for (int i = 1; i < 16; i++) { // 12 doelstellingen maken
-            doelstellingenArray.add(new Doelstelling("ABCD"+i, "Doelstelling" + i));
-        }
+        List<Doelstelling> doelstellingenArray = new ArrayList(Arrays.asList(
+                new Doelstelling("WISK107", "doelstelling"),
+                new Doelstelling("WISK70", "doelstelling"),
+                new Doelstelling("WISK11", "doelstelling"),
+                new Doelstelling("NLD19", "doelstelling"),
+                new Doelstelling("NLD101", "doelstelling"),
+                new Doelstelling("NLD89", "doelstelling"),
+                new Doelstelling("NAT91", "doelstelling"),
+                new Doelstelling("NAT5", "doelstelling"),
+                new Doelstelling("NAT27", "doelstelling"),
+                new Doelstelling("GESCH99", "doelstelling"),
+                new Doelstelling("GESCH12", "doelstelling"),
+                new Doelstelling("GESCH52", "doelstelling"),
+                new Doelstelling("AARD2", "doelstelling"),
+                new Doelstelling("AARD23", "doelstelling"),
+                new Doelstelling("AARD98", "doelstelling")
+        ));
+
         GenericDaoJpa doelsDao = new GenericDaoJpa<>(Doelstelling.class);
         doelstellingenArray.forEach(doels -> {
             doelsDao.startTransaction();
@@ -53,18 +67,18 @@ public class OefeningData {
             doelsDao.commitTransaction();
         });
         List<Actie> acties = new ArrayList<>(Arrays.asList( // geen loop van maken!
-                new Actie("Actie1"),
-                new Actie("ssssss"),
-                new Actie("Actie3"),
-                new Actie("ddddddddd"),
-                new Actie("hfgh5"),
-                new Actie("cccccccc"),
-                new Actie("uuuuuuu"),
-                new Actie("hhhhhhhh"),
-                new Actie("ddddddd"),
-                new Actie("kkkkkkkkk"),
-                new Actie("nnnnnnnn"),
-                new Actie("bbbbbbb")
+                new Actie("Ga naar de westelijke hoek van de klas"),
+                new Actie("Pak de ballon"),
+                new Actie("Pak de doos"),
+                new Actie("Ga naar de hoek me"),
+                new Actie("Vind de envelop"),
+                new Actie("Zoek in de atlas"),
+                new Actie("Zoek de glazen pot"),
+                new Actie("Vraag aan de leerkracht"),
+                new Actie("Pak de doos"),
+                new Actie("Zoek de pen"),
+                new Actie("Kijk op de computer"),
+                new Actie("Kijk onder de tafel")
         ));
         GenericDaoJpa actieDao = new GenericDaoJpa<>(Actie.class);
         acties.forEach(actie -> {
@@ -131,12 +145,22 @@ public class OefeningData {
                         (Leerling) llnDao.get(13L),
                         (Leerling) llnDao.get(14L),
                         (Leerling) llnDao.get(17L),
-                        (Leerling) llnDao.get(8L)
+                        (Leerling) llnDao.get(1L),
+                        (Leerling) llnDao.get(2L),
+                        (Leerling) llnDao.get(3L),
+                        (Leerling) llnDao.get(4L),
+                        (Leerling) llnDao.get(5L), (Leerling) llnDao.get(6L),
+                        (Leerling) llnDao.get(7L), (Leerling) llnDao.get(8L),
+                        (Leerling) llnDao.get(9L)
                 ))),
                 new Klas("NaamKlas3", new ArrayList<Leerling>(Arrays.asList(
                         (Leerling) llnDao.get(2L),
                         (Leerling) llnDao.get(3L),
-                        (Leerling) llnDao.get(4L)
+                        (Leerling) llnDao.get(4L),
+                        (Leerling) llnDao.get(14L), (Leerling) llnDao.get(8L),
+                        (Leerling) llnDao.get(15L), (Leerling) llnDao.get(19L),
+                        (Leerling) llnDao.get(16L), (Leerling) llnDao.get(20L),
+                        (Leerling) llnDao.get(17L)
                 )))
         ));
 
@@ -189,19 +213,17 @@ public class OefeningData {
                         (Groepsbewerking) gbwDao.get(1L),
                         (Groepsbewerking) gbwDao.get(2L),
                         (Groepsbewerking) gbwDao.get(3L),
+                        (Groepsbewerking) gbwDao.get(4L),
+                        (Groepsbewerking) gbwDao.get(5L),
+                        (Groepsbewerking) gbwDao.get(6L),
                         (Groepsbewerking) gbwDao.get(7L),
                         (Groepsbewerking) gbwDao.get(8L),
-                        (Groepsbewerking) gbwDao.get(9L),
-                        (Groepsbewerking) gbwDao.get(10L),
-                        (Groepsbewerking) gbwDao.get(5L),
-                        (Groepsbewerking) gbwDao.get(6L)
+                        (Groepsbewerking) gbwDao.get(9L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
                         (Doelstelling) doelsDao.get(1L),
                         (Doelstelling) doelsDao.get(2L),
-                        (Doelstelling) doelsDao.get(3L),
-                        (Doelstelling) doelsDao.get(4L)
-                ))),
-                new Oefening("Vermenigvuldigingen", "542", vakken.get(1), opgave2, feedback2, new ArrayList<Groepsbewerking>(Arrays.asList(
+                        (Doelstelling) doelsDao.get(3L)
+                ))),                        new Oefening("Vermenigvuldigingen", "542", vakken.get(1), opgave2, feedback2, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
                         (Groepsbewerking) gbwDao.get(2L),
                         (Groepsbewerking) gbwDao.get(3L),
@@ -211,8 +233,7 @@ public class OefeningData {
                 )), new ArrayList<Doelstelling>(Arrays.asList(
                         (Doelstelling) doelsDao.get(1L),
                         (Doelstelling) doelsDao.get(2L),
-                        (Doelstelling) doelsDao.get(3L),
-                        (Doelstelling) doelsDao.get(4L)
+                        (Doelstelling) doelsDao.get(3L)
                 ))),
                 new Oefening("Hoofdstad VK", "Londen", vakken.get(1), opgave3, feedback3, bewerkingenDatabankLijst.subList(3, 9), doelstellingenArray.subList(2, 8)),
                 new Oefening("Delingen", "23", vakken.get(1), opgave4, feedback4, new ArrayList<Groepsbewerking>(Arrays.asList(
@@ -220,15 +241,15 @@ public class OefeningData {
                         (Groepsbewerking) gbwDao.get(2L),
                         (Groepsbewerking) gbwDao.get(3L),
                         (Groepsbewerking) gbwDao.get(7L),
+                        (Groepsbewerking) gbwDao.get(10L),
                         (Groepsbewerking) gbwDao.get(8L),
                         (Groepsbewerking) gbwDao.get(9L),
                         (Groepsbewerking) gbwDao.get(5L),
                         (Groepsbewerking) gbwDao.get(6L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
-                        (Doelstelling) doelsDao.get(1L),
-                        (Doelstelling) doelsDao.get(2L),
-                        (Doelstelling) doelsDao.get(3L),
-                        (Doelstelling) doelsDao.get(4L)
+                        (Doelstelling) doelsDao.get(4L),
+                        (Doelstelling) doelsDao.get(5L),
+                        (Doelstelling) doelsDao.get(6L)
                 ))),
                 new Oefening("Dieren", "Aap", vakken.get(3), opgave5, feedback5, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
@@ -236,12 +257,16 @@ public class OefeningData {
                         (Groepsbewerking) gbwDao.get(3L),
                         (Groepsbewerking) gbwDao.get(4L),
                         (Groepsbewerking) gbwDao.get(5L),
-                        (Groepsbewerking) gbwDao.get(6L)
+                        (Groepsbewerking) gbwDao.get(6L),
+                        (Groepsbewerking) gbwDao.get(7L),
+                        (Groepsbewerking) gbwDao.get(8L),
+                        (Groepsbewerking) gbwDao.get(9L),
+                        (Groepsbewerking) gbwDao.get(10L),
+                        (Groepsbewerking) gbwDao.get(11L),
+                        (Groepsbewerking) gbwDao.get(12L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
-                        (Doelstelling) doelsDao.get(1L),
-                        (Doelstelling) doelsDao.get(2L),
-                        (Doelstelling) doelsDao.get(3L),
-                        (Doelstelling) doelsDao.get(4L)
+                        (Doelstelling) doelsDao.get(7L),
+                        (Doelstelling) doelsDao.get(8L)
                 ))),
                 new Oefening("Kleuren", "Rood", vakken.get(4), opgave6, feedback6, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
@@ -249,12 +274,14 @@ public class OefeningData {
                         (Groepsbewerking) gbwDao.get(3L),
                         (Groepsbewerking) gbwDao.get(4L),
                         (Groepsbewerking) gbwDao.get(5L),
-                        (Groepsbewerking) gbwDao.get(6L)
+                        (Groepsbewerking) gbwDao.get(6L),
+                        (Groepsbewerking) gbwDao.get(12L),
+                        (Groepsbewerking) gbwDao.get(13L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
                         (Doelstelling) doelsDao.get(1L),
-                        (Doelstelling) doelsDao.get(2L),
                         (Doelstelling) doelsDao.get(3L),
-                        (Doelstelling) doelsDao.get(4L)
+                        (Doelstelling) doelsDao.get(4L),
+                        (Doelstelling) doelsDao.get(2L)
                 ))),
                 new Oefening("Letters", "HYU", vakken.get(4), opgave7, feedback7, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
@@ -264,8 +291,8 @@ public class OefeningData {
                         (Doelstelling) doelsDao.get(2L),
                         (Doelstelling) doelsDao.get(3L),
                         (Doelstelling) doelsDao.get(4L),
-                        (Doelstelling) doelsDao.get(11L),
-                        (Doelstelling) doelsDao.get(12L)
+                        (Doelstelling) doelsDao.get(5L),
+                        (Doelstelling) doelsDao.get(6L)
                 ))),
                 new Oefening("Organen", "Longen", vakken.get(3), opgave8, feedback8, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
@@ -275,18 +302,13 @@ public class OefeningData {
                         (Groepsbewerking) gbwDao.get(5L),
                         (Groepsbewerking) gbwDao.get(6L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
-                        (Doelstelling) doelsDao.get(1L),
-                        (Doelstelling) doelsDao.get(2L),
-                        (Doelstelling) doelsDao.get(3L),
-                        (Doelstelling) doelsDao.get(4L)
+                        (Doelstelling) doelsDao.get(7L),
+                        (Doelstelling) doelsDao.get(5L)
                 ))),
                 new Oefening("Rekensommen", "800", vakken.get(1), opgave9, feedback9, new ArrayList<Groepsbewerking>(Arrays.asList(
-                        (Groepsbewerking) gbwDao.get(1L),
-                        (Groepsbewerking) gbwDao.get(2L),
-                        (Groepsbewerking) gbwDao.get(3L),
-                        (Groepsbewerking) gbwDao.get(4L),
-                        (Groepsbewerking) gbwDao.get(5L),
-                        (Groepsbewerking) gbwDao.get(6L)
+                        (Groepsbewerking) gbwDao.get(8L),
+                        (Groepsbewerking) gbwDao.get(9L),
+                        (Groepsbewerking) gbwDao.get(10L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
                         (Doelstelling) doelsDao.get(1L),
                         (Doelstelling) doelsDao.get(2L),
@@ -302,26 +324,15 @@ public class OefeningData {
                         (Groepsbewerking) gbwDao.get(5L),
                         (Groepsbewerking) gbwDao.get(6L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
-                        (Doelstelling) doelsDao.get(1L),
                         (Doelstelling) doelsDao.get(2L),
-                        (Doelstelling) doelsDao.get(3L),
-                        (Doelstelling) doelsDao.get(7L),
-                        (Doelstelling) doelsDao.get(8L),
-                        (Doelstelling) doelsDao.get(9L),
-                        (Doelstelling) doelsDao.get(10L)
+                        (Doelstelling) doelsDao.get(3L)
                 ))),
                 new Oefening("Vortooid deelwoorden", "Ik heb gemist", vakken.get(4), opgave11, feedback11, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
                         (Groepsbewerking) gbwDao.get(2L),
-                        (Groepsbewerking) gbwDao.get(3L),
-                        (Groepsbewerking) gbwDao.get(4L),
-                        (Groepsbewerking) gbwDao.get(5L),
-                        (Groepsbewerking) gbwDao.get(6L)
+                        (Groepsbewerking) gbwDao.get(3L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
-                        (Doelstelling) doelsDao.get(1L),
-                        (Doelstelling) doelsDao.get(3L),
-                        (Doelstelling) doelsDao.get(4L)
-                ))),
+                        (Doelstelling) doelsDao.get(5L)))),
                 new Oefening("Werkwoorden", "babbelen", vakken.get(4), opgave12, feedback12, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
                         (Groepsbewerking) gbwDao.get(2L),
@@ -335,45 +346,81 @@ public class OefeningData {
                         (Groepsbewerking) gbwDao.get(16L),
                         (Groepsbewerking) gbwDao.get(6L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
-                        (Doelstelling) doelsDao.get(1L),
-                        (Doelstelling) doelsDao.get(2L),
-                        (Doelstelling) doelsDao.get(3L),
                         (Doelstelling) doelsDao.get(4L)
                 )))
         ));
 
         GenericDaoJpa oDao = new GenericDaoJpa<>(Oefening.class);
         oefeningen.forEach(oef -> {
+
             oDao.startTransaction();
             oDao.insert(oef);
             oDao.commitTransaction();
         });
 
         List<Box> boxen = new ArrayList<>(Arrays.asList( // geen loop van maken!
-                new Box("box1", "Boxomschrijving1", (Vak) vakDao.get(1L), new ArrayList<Actie>(Arrays.asList(
-                        (Actie) actieDao.get(1L),
-                        (Actie) actieDao.get(3L),
-                        (Actie) actieDao.get(4L)
-                )), new ArrayList<Oefening>(Arrays.asList(
-                        (Oefening) oDao.get(1L),
-                        (Oefening) oDao.get(3L),
-                        (Oefening) oDao.get(8L)
-                ))),
-                new Box("box2", "Boxomschrijving2", (Vak) vakDao.get(2L), new ArrayList<Actie>(Arrays.asList(
+                new Box("Wiskunde", "Foxus op wiskunde", (Vak) vakDao.get(2L), new ArrayList<Actie>(Arrays.asList(
                         (Actie) actieDao.get(5L),
+                        (Actie) actieDao.get(6L),
                         (Actie) actieDao.get(7L),
                         (Actie) actieDao.get(8L),
-                        (Actie) actieDao.get(3L)
+                        (Actie) actieDao.get(9L),
+                        (Actie) actieDao.get(10L)
+                )), new ArrayList<Oefening>(Arrays.asList(
+                        (Oefening) oDao.get(1L),
+                        (Oefening) oDao.get(2L),
+                        (Oefening) oDao.get(4L),
+                        (Oefening) oDao.get(12L),
+                        (Oefening) oDao.get(7L),
+                        (Oefening) oDao.get(6L),
+                        (Oefening) oDao.get(10L),
+                        (Oefening) oDao.get(9L)
+                ))),
+                new Box("NL", "focus op nederlands", (Vak) vakDao.get(5L), new ArrayList<Actie>(Arrays.asList(
+                        (Actie) actieDao.get(11L),
+                        (Actie) actieDao.get(10L),
+                        (Actie) actieDao.get(9L),
+                        (Actie) actieDao.get(8L),
+                        (Actie) actieDao.get(7L),
+                        (Actie) actieDao.get(6L), (Actie) actieDao.get(4L),
+                        (Actie) actieDao.get(5L), (Actie) actieDao.get(3L)
                 )), new ArrayList<Oefening>(Arrays.asList(
                         (Oefening) oDao.get(7L),
-                        (Oefening) oDao.get(8L),
+                        (Oefening) oDao.get(11L),
+                        (Oefening) oDao.get(3L),
+                        (Oefening) oDao.get(12L),
+                        (Oefening) oDao.get(6L)
+                ))),
+                new Box("Van alles wat", "Van alles wat", (Vak) vakDao.get(1L), new ArrayList<Actie>(Arrays.asList(
+                        (Actie) actieDao.get(1L),
+                        (Actie) actieDao.get(2L),
+                        (Actie) actieDao.get(3L),
+                        (Actie) actieDao.get(4L),
+                        (Actie) actieDao.get(5L),
+                        (Actie) actieDao.get(6L),
+                        (Actie) actieDao.get(7L),
+                        (Actie) actieDao.get(8L),
+                        (Actie) actieDao.get(9L),
+                        (Actie) actieDao.get(10L),
+                        (Actie) actieDao.get(11L)
+                )), new ArrayList<Oefening>(Arrays.asList(
+                        (Oefening) oDao.get(1L),
                         (Oefening) oDao.get(2L),
+                        (Oefening) oDao.get(3L),
+                        (Oefening) oDao.get(4L),
                         (Oefening) oDao.get(5L),
-                        (Oefening) oDao.get(4L)
+                        (Oefening) oDao.get(6L),
+                        (Oefening) oDao.get(7L),
+                        (Oefening) oDao.get(8L),
+                        (Oefening) oDao.get(9L),
+                        (Oefening) oDao.get(10L),
+                        (Oefening) oDao.get(11L),
+                        (Oefening) oDao.get(12L)
                 )))
         ));
         GenericDaoJpa boxDao = new GenericDaoJpa<>(Box.class);
         boxen.forEach(box -> {
+
             boxDao.startTransaction();
             boxDao.insert(box);
             boxDao.commitTransaction();

@@ -42,7 +42,7 @@ public class BoxOefDetailPanelController extends VBox implements BoxObserver, Bo
     @FXML private Label lblAantalGeselecteerd;
     @FXML private ListView<IOefening> lsvListAlle;
     @FXML private ListView<IOefening> lsvListGeselecteerde;
-    @FXML private Button btnDeselectAll;
+
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
 
@@ -144,9 +144,6 @@ public class BoxOefDetailPanelController extends VBox implements BoxObserver, Bo
     private void lsvListGeselecteerdeOnMouseClicked(MouseEvent event) {
     }
 
-    @FXML
-    private void btnDeselectAllOnAction(ActionEvent event) {
-    }
 
     @FXML
     private void btnCancelOnAction(ActionEvent event) {

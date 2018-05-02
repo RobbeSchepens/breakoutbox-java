@@ -166,6 +166,7 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
     private void btnFileOpgaveOnAction(ActionEvent event) {
         fileOpgave = fileChooserOpgave.showOpenDialog((Stage)(this.getScene().getWindow()));
         if (fileOpgave != null) {
+            System.out.println("hier");
             fileOpgaveNaam = fileOpgave.getName();
             lblOpgave.setText(fileOpgaveNaam);
             btnOpenOpgave.setDisable(false);
