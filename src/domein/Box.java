@@ -175,7 +175,7 @@ public class Box implements IBox, Serializable {
                     for (Oefening oef : getOefeningen()) {
                         sb.append("Oefening: " + oef.getNaam() + "\n----------------------------------------\n");
                         for (Doelstelling doels : oef.getDoelstellingen()) {
-                            sb.append(String.format("%s\n", doels));
+                            sb.append(String.format("%s\n", doels.toString()));
                         }
                         sb.append("\n");
                     }

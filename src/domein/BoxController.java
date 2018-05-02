@@ -38,11 +38,17 @@ public class BoxController {
     }
 
     public void voegBoxToe(String naam, String omschrijving, Vak vak) {
+
         Box box = new Box(naam, omschrijving, vak, listActiesVanBoxTemp, listOefeningenVanBoxTemp);
+
         bb.add(box);
     }
 
     public void pasBoxAan(String naam, String omschrijving, Vak vak) {
+
+        Box hBoxTemp = huidigeBox;
+
+
         // De acties zijn onveranderd gebleven
         if (listActiesVanBoxTemp.isEmpty()) {
             listActiesVanBoxTemp = huidigeBox.getActies();
@@ -51,14 +57,18 @@ public class BoxController {
         if (listOefeningenVanBoxTemp.isEmpty()) {
             listOefeningenVanBoxTemp = huidigeBox.getOefeningen();
         }
-
         huidigeBox.setNaam(naam);
         huidigeBox.setOmschrijving(omschrijving);
         huidigeBox.setVak(vak);
         huidigeBox.setActies(listActiesVanBoxTemp);
         huidigeBox.setOefeningen(listOefeningenVanBoxTemp);
-        
+
+        if (hBoxTemp.equals(huidigeBox)) {
+            System.out.println("ze zijn gelijk");
+        }
+
         bb.update(huidigeBox);
+
     }
 
     public void delete(IBox o) {
