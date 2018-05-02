@@ -54,9 +54,7 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
     }
     
     public void add(Sessie o) {
-        if (geefSessieByNaamJpa(o.getNaam()) != null)
-            throw new IllegalArgumentException("Er bestaat al een sessie met deze naam.");
-        
+        checkOpDubbel(o);
         sessieRepo.startTransaction();
         sessieRepo.insert(o);
         sessieRepo.commitTransaction();
@@ -65,6 +63,7 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
     }
 
     public void update(Sessie o) {
+        checkOpDubbel(o);
         sessieRepo.startTransaction();
         sessieRepo.update(o);
         sessieRepo.commitTransaction();
@@ -77,6 +76,16 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
         sessieRepo.commitTransaction();
         getSessies().remove(o);
         notifyObservers();
+    }
+
+    public void checkOpDubbel(Sessie o) {
+        for (ISessie item : getSessies()) {
+            if (item.getNaam().equals(o.getNaam())) {
+                if (!(item == o)) {
+                    throw new IllegalArgumentException("Deze sessie is al in gebruik");
+                }
+            }
+        }
     }
     
     public Oefening geefSessieByNaamJpa(String naam) {
