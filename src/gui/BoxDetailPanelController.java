@@ -30,7 +30,10 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
     
     @FXML private Label lblTitleRight;
     @FXML private Button btnNieuweOefening;
-    @FXML private Button btnActies;
+    @FXML
+    private Button btnActies;
+    @FXML
+    private Button btnCreatePdf;
     @FXML private Label lblActiesCount;
     @FXML private ComboBox<Vak> ddlVak;
     @FXML private Button btnOefeningen;
@@ -176,6 +179,11 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());
         }
+
+    }
+
+    @FXML
+    private void btnCreatePdfOnAction(ActionEvent event) {
 
     }
 
