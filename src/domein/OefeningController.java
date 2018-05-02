@@ -63,7 +63,7 @@ public class OefeningController {
     
     public void delete(IOefening o) {
         ob.delete((Oefening) o);
-        huidigeOefening = new OefeningNull();
+        //huidigeOefening = new OefeningNull();
     }
     
     public void veranderFilter(String filterValue, Vak vak) {

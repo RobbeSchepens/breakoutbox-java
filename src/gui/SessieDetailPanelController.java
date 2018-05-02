@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -31,6 +32,7 @@ public class SessieDetailPanelController extends VBox {
     @FXML private Label lblError;
     @FXML private Label lblSuccess;
     @FXML private Label lblCode;
+    @FXML private DatePicker dtpStartDatum;
     
     public SessieDetailPanelController(SessieController sc, SessieFrameController fc) {
         FXMLLoader loader
@@ -57,8 +59,6 @@ public class SessieDetailPanelController extends VBox {
 
     private void clearRender() {
         initButtons(true);
-        
-        initButtons(true);
         lblCode.setText("");
         txfNaam.setText("");
         txfOmschrijving.setText("");
@@ -67,6 +67,7 @@ public class SessieDetailPanelController extends VBox {
 //        ddlKlas.setItems(sc.geefKlassen());
         ddlKlas.getSelectionModel().clearSelection();
         lblAantalGroepen.setText("");
+        dtpStartDatum.setValue(null);
         lblError.setText("");
         lblSuccess.setText("");
         txfNaam.requestFocus();
