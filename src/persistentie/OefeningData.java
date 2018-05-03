@@ -10,9 +10,11 @@ import domein.Klas;
 import domein.Leerling;
 import domein.Oefening;
 import domein.OefeningBeheerder;
+import domein.Sessie;
 import domein.SubstractGroepsbewerking;
 import domein.Vak;
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -164,7 +166,6 @@ public class OefeningData {
                 )))
         ));
 
-
         GenericDaoJpa klasDao = new GenericDaoJpa<>(Klas.class);
         klassen.forEach(klas -> {
             klasDao.startTransaction();
@@ -223,7 +224,7 @@ public class OefeningData {
                         (Doelstelling) doelsDao.get(1L),
                         (Doelstelling) doelsDao.get(2L),
                         (Doelstelling) doelsDao.get(3L)
-                ))),                        new Oefening("Vermenigvuldigingen", "542", vakken.get(1), opgave2, feedback2, new ArrayList<Groepsbewerking>(Arrays.asList(
+                ))), new Oefening("Vermenigvuldigingen", "542", vakken.get(1), opgave2, feedback2, new ArrayList<Groepsbewerking>(Arrays.asList(
                         (Groepsbewerking) gbwDao.get(1L),
                         (Groepsbewerking) gbwDao.get(2L),
                         (Groepsbewerking) gbwDao.get(3L),
@@ -420,9 +421,20 @@ public class OefeningData {
         ));
         GenericDaoJpa boxDao = new GenericDaoJpa<>(Box.class);
         boxen.forEach(box -> {
-
             boxDao.startTransaction();
             boxDao.insert(box);
+            boxDao.commitTransaction();
+        });
+
+        ArrayList<Sessie> lijstSessie = new ArrayList<>(Arrays.asList(
+                new Sessie("Wis A1 Ma", "Een sessie wiskunde op donderdag", (Klas) klasDao.get(1L), (Box) boxDao.get(1L), false, "auto", 7, LocalDate.now()),
+                new Sessie("nederlands", "Een sessie nederlands op donderdag", (Klas) klasDao.get(2L), (Box) boxDao.get(2L), false, "auto", 5, LocalDate.now())
+        ));
+
+        GenericDaoJpa sessieDao = new GenericDaoJpa<>(Sessie.class);
+        lijstSessie.forEach(sessie -> {
+            boxDao.startTransaction();
+            boxDao.insert(sessie);
             boxDao.commitTransaction();
         });
 
