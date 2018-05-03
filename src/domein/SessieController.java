@@ -32,8 +32,9 @@ public class SessieController {
         return huidigeSessie;
     }
     
-    public void voegNieuweSessieToe(String naam, String omschrijving, LocalDate startdatum) {
-        Sessie sessie = new Sessie(naam, omschrijving, startdatum);
+    public void voegNieuweSessieToe(String naam, String omschrijving, IKlas klas, IBox box, 
+            boolean isAfstand, String typeGroepen, int aantalGroepen, LocalDate startdatum) {
+        Sessie sessie = new Sessie(naam, omschrijving, (Klas)klas, (Box)box, isAfstand, typeGroepen, aantalGroepen, startdatum);
         sb.add(sessie);
     }
 

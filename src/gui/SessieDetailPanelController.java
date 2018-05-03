@@ -5,14 +5,22 @@ import domein.IKlas;
 import domein.ISessie;
 import domein.SessieController;
 import domein.SessieObserver;
+import exceptions.NaamTeKortException;
+import exceptions.NaamTeLangException;
+import exceptions.SpecialeTekensInNaamException;
 import java.io.IOException;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
@@ -35,6 +43,11 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
     @FXML private Label lblSuccess;
     @FXML private Label lblCode;
     @FXML private DatePicker dtpStartDatum;
+    @FXML private Slider sliGroepen;
+    @FXML private CheckBox cbxAfstandsonderwijs;
+    @FXML private RadioButton radGroepenAuto;
+    @FXML private RadioButton radGroepenHandLeerkracht;
+    @FXML private RadioButton radGroepenHandLeerlingen;
     
     public SessieDetailPanelController(SessieController sc, SessieFrameController fc) {
         FXMLLoader loader
@@ -50,6 +63,11 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
         this.sc = sc;
         this.fc = fc;
         initButtons(true);
+        
+        sliGroepen.valueProperty().addListener((ObservableValue<? extends Number> observable, 
+                Number oldValue, Number newValue) -> {
+            lblAantalGroepen.setText(newValue.toString());
+        });
     }
 
     private void initButtons(boolean isNew) {
@@ -86,6 +104,28 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
 
     @FXML
     private void btnAddOnAction(ActionEvent event) {
+        try {
+            String typegroep = "";
+            if (radGroepenAuto.isSelected())
+                typegroep = "auto";
+            if (radGroepenHandLeerkracht.isSelected())
+                typegroep = "handleerkracht";
+            if (radGroepenHandLeerlingen.isSelected())
+                typegroep = "handleerling";
+            
+            sc.voegNieuweSessieToe(txfNaam.getText(), txfOmschrijving.getText(), 
+                    ddlKlas.getSelectionModel().getSelectedItem(),
+                    ddlBox.getSelectionModel().getSelectedItem(),
+                    cbxAfstandsonderwijs.isSelected(), typegroep, 
+                    (int)sliGroepen.getValue(), dtpStartDatum.getValue());
+            
+            initNieuw();
+            lblError.setText("");
+            lblSuccess.setText("De box werd succesvol toegevoegd.");
+        } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
+            lblSuccess.setText("");
+            lblError.setText(ex.getMessage());
+        }
     }
 
     @FXML
