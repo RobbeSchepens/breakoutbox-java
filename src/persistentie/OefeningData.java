@@ -132,13 +132,13 @@ public class OefeningData {
         });
 
         List<Klas> klassen = new ArrayList<>(Arrays.asList(
-                new Klas("NaamKlas1", new ArrayList<Leerling>(Arrays.asList(
+                new Klas("2E3", new ArrayList<Leerling>(Arrays.asList(
                         (Leerling) llnDao.get(1L),
                         (Leerling) llnDao.get(2L),
                         (Leerling) llnDao.get(3L),
                         (Leerling) llnDao.get(4L)
                 ))),
-                new Klas("NaamKlas2", new ArrayList<Leerling>(Arrays.asList(
+                new Klas("1A4", new ArrayList<Leerling>(Arrays.asList(
                         (Leerling) llnDao.get(10L),
                         (Leerling) llnDao.get(11L),
                         (Leerling) llnDao.get(12L),
@@ -153,7 +153,7 @@ public class OefeningData {
                         (Leerling) llnDao.get(7L), (Leerling) llnDao.get(8L),
                         (Leerling) llnDao.get(9L)
                 ))),
-                new Klas("NaamKlas3", new ArrayList<Leerling>(Arrays.asList(
+                new Klas("2A1", new ArrayList<Leerling>(Arrays.asList(
                         (Leerling) llnDao.get(2L),
                         (Leerling) llnDao.get(3L),
                         (Leerling) llnDao.get(4L),
