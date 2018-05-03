@@ -78,7 +78,7 @@ public class ActieDetailPanelController extends VBox implements ActieObserver {
     private void btnEditOnAction(ActionEvent event) {
         try {
             ac.pasActieAan(txfNaam.getText());
-            clearRender();
+            //clearRender();
             lblError.setText("");
             lblSuccess.setText("De actie werd succesvol aangepast.");
         } catch (IllegalArgumentException ex) {

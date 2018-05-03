@@ -204,8 +204,8 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
     private void btnEditOnAction(ActionEvent event) {
         try {
             bc.pasBoxAan(txfNaam.getText(), txfOmschrijving.getText(), ddlVak.getSelectionModel().getSelectedItem());
-
-            initNieuweBox();
+            initButtons(true);
+            //initNieuweBox();
             lblError.setText("");
             lblSuccess.setText("De box werd succesvol aangepast.");
             fc.toonListview("cancel/init");

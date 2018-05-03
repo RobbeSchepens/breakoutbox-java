@@ -183,7 +183,7 @@ public final class KlasDetailPanelController extends VBox implements KlasObserve
     private void btnEditOnAction(ActionEvent event) {
         try {
             kc.pasOefeningAan(txfNaamKlas.getText(), lsvLeerlingen.getItems());
-            clearRender();
+            //clearRender();
             lblError.setText("");
             lblSuccess.setText("De klas werd succesvol aangepast.");
             fc.notifyChangeVoorAantalLln();
