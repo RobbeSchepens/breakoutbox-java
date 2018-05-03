@@ -83,11 +83,13 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
         
         ddlKlas.valueProperty().addListener((ObservableValue<? extends IKlas> observable, 
                 IKlas oldValue, IKlas newValue) -> {
-            int maxGroepen = (int)Math.ceil((double)newValue.getLeerlingen().size() / 4);
+            int minGroepen = (int)Math.ceil((double)newValue.getLeerlingen().size() / 4);
+            int maxGroepen = (int)Math.ceil((double)newValue.getLeerlingen().size() / 2);
+            sliGroepen.setMin(minGroepen);
             sliGroepen.setMax(maxGroepen);
             lblLeerlingenCount.setText(newValue.getLeerlingen().size() 
-                    + " leerlingen gevonden. Max aantal groepen: " 
-                    + maxGroepen);
+                    + " leerlingen gevonden. Min/max groepen: " 
+                    + minGroepen + "/" + maxGroepen);
         });
     }
 
