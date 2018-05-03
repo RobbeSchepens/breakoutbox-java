@@ -3,10 +3,10 @@ package gui;
 import domein.DomeinController;
 import javafx.scene.layout.GridPane;
 
-public class HomeFrameController extends GridPane {
+public final class HomeFrameController extends GridPane {
 
-    NavigatieController nav;
-    HoofdMenuController hoofdmenu;
+    private final NavigatieController nav;
+    private final HoofdMenuController hoofdmenu;
     
     public HomeFrameController(DomeinController dc) {
         nav = new NavigatieController(dc);

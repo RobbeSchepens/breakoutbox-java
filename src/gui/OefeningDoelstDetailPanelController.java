@@ -25,15 +25,14 @@ import javafx.scene.layout.VBox;
 
 public class OefeningDoelstDetailPanelController extends VBox implements OefeningObserver, OefeningSubject {
 
-    private OefeningController dc;
-    private OefeningFrameController fc;
+    private final OefeningController dc;
+    private final OefeningFrameController fc;
     private List<Doelstelling> listDoelstellingenTempAlle = new ArrayList<>();
     private List<Doelstelling> listDoelstellingenTempGeselect = new ArrayList<>();
-    private Set<OefeningObserver> observers;
+    private final Set<OefeningObserver> observers;
 
     @FXML private Label lblTitleLeftList;
     @FXML private Label lblAantalGeselecteerd;
-
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
     @FXML private ListView<Doelstelling> lsvListAlle;
@@ -96,15 +95,15 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
         listDoelstellingenTempAlle.clear();
         List<Doelstelling> p = new ArrayList<>(dc.geefDoelstellingen());
 
-        for (Doelstelling item : p) {
+        p.forEach((item) -> {
             listDoelstellingenTempAlle.add(item);
-        }
+        });
 
         List<Doelstelling> m = new ArrayList<>(dc.geefDoelstellingenHuidigeOefening());
         listDoelstellingenTempGeselect = new ArrayList<>();
-        for (Doelstelling item : m) {
+        m.forEach((item) -> {
             listDoelstellingenTempGeselect.add(item);
-        }
+        });
 
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
         //listDoelstellingenTempAlle.removeAll(listDoelstellingenTempGeselect); //werkt niet deftig, idk xd

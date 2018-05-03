@@ -8,19 +8,18 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-public class KlasOverzichtPanelController extends OverzichtPanelController<IKlas, KlasController> implements KlasSubject {
+public final class KlasOverzichtPanelController extends OverzichtPanelController<IKlas, KlasController> implements KlasSubject {
 
-    KlasController kc;
-    KlasFrameController fc;
-    private Set<KlasObserver> observers;
+    private final KlasController kc;
+    private final KlasFrameController fc;
+    private final Set<KlasObserver> observers;
 
-    KlasOverzichtPanelController(KlasController kc, KlasFrameController fc) {
+    public KlasOverzichtPanelController(KlasController kc, KlasFrameController fc) {
         super(kc);
         this.observers = new HashSet<>();
         this.kc = kc;
@@ -32,8 +31,8 @@ public class KlasOverzichtPanelController extends OverzichtPanelController<IKlas
     void btnDeleteSelectedOnAction() {
         if (getTbvOverzicht().getSelectionModel().getSelectedItem() != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Verwijder oefening");
-            alert.setHeaderText("Bent u zeker dat u de oefening wilt verwijderen?");
+            alert.setTitle("Verwijder klas");
+            alert.setHeaderText("Bent u zeker dat u de klas wilt verwijderen?");
 
             // Volgende regel zorgt ervoor dat het icoontje en de stylesheet meegenomen worden
             alert.initOwner(this.getScene().getWindow());
@@ -54,8 +53,8 @@ public class KlasOverzichtPanelController extends OverzichtPanelController<IKlas
 
     @Override
     void renderContent() {
-        setLblTitleLeftText("Overzicht Klassen");
-        setLblFilterOpText("Filter op klas:");
+        setLblTitleLeftText("Overzicht klassen");
+        setLblFilterOpText("Filter op naam:");
         renderTable();
     }
     
@@ -81,7 +80,7 @@ public class KlasOverzichtPanelController extends OverzichtPanelController<IKlas
 
     @Override
     void initNieuw() {
-        fc.initNieuweOefening();
+        fc.initNieuw();
         renderTable();
     }
 

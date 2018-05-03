@@ -25,15 +25,14 @@ import javafx.scene.layout.VBox;
 
 public class OefeningGroepsbDetailPanelController extends VBox implements OefeningObserver, OefeningSubject {
 
-    private OefeningController dc;
-    private OefeningFrameController fc;
+    private final OefeningController dc;
+    private final OefeningFrameController fc;
     private List<Groepsbewerking> listGroepsBewerkingenTempAlle = new ArrayList<>();
     private List<Groepsbewerking> listGroepsBewerkingenTempGeselect = new ArrayList<>();
-    private Set<OefeningObserver> observers;
+    private final Set<OefeningObserver> observers;
 
     @FXML private Label lblTitleLeftList;
     @FXML private Label lblAantalGeselecteerd;
-
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
     @FXML private ListView<Groepsbewerking> lsvListAlle;

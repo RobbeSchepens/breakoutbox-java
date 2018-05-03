@@ -29,15 +29,13 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class KlasDetailPanelController extends VBox implements KlasObserver {
+public final class KlasDetailPanelController extends VBox implements KlasObserver {
 
-    KlasController kc;
-    KlasFrameController fc;
+    private final KlasController kc;
+    private final KlasFrameController fc;
     private FileChooser fileChooserExcel;
 
-    @FXML
-    private Label lblToegevoegdBoodschaperr;
-    
+    @FXML private Label lblToegevoegdBoodschaperr;
     @FXML private Label lblTitleRight;
     @FXML private Button btnNieuweOefening;
     @FXML private TextField txfNaamKlas;
@@ -71,12 +69,10 @@ public class KlasDetailPanelController extends VBox implements KlasObserver {
         this.fc = fc;
         initButtons(true);
 
-        lsvLeerlingen.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Leerling>() {
-            @Override
-            public void changed(ObservableValue<? extends Leerling> observable, Leerling oldValue, Leerling newValue) {
-                if (!(newValue == null)) {
-                    lblGeselect.setText("Geselecteerd: " + newValue.toString());
-                }
+        lsvLeerlingen.getSelectionModel().selectedItemProperty().addListener(
+                (ObservableValue<? extends Leerling> observable, Leerling oldValue, Leerling newValue) -> {
+            if (!(newValue == null)) {
+                lblGeselect.setText("Geselecteerd: " + newValue.toString());
             }
         });
     }
@@ -162,14 +158,12 @@ public class KlasDetailPanelController extends VBox implements KlasObserver {
             }
 
         } catch (IOException ex) {
-            System.out.println("io exception in excel uploaden button");
+            lblError.setText("Er is iets fout gelopen bij het lezen van de file.");
         } catch (NullPointerException npe) {
-            System.out.println("nullpointer exception in excel uploaden button");
+            lblError.setText("Er is iets fout gelopen.");
         } catch (Exception e) {
-            System.out.println("exception exception in excel uploaden button");
+            lblError.setText("Er is iets fout gelopen.");
         }
-
-
     }
 
     @FXML

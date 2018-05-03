@@ -18,7 +18,7 @@ import org.eclipse.persistence.exceptions.DatabaseException;
 
 public abstract class OverzichtPanelController<T, E> extends VBox {
 
-    private E controller;
+    private final E controller;
 
     @FXML private Label lblTitleLeft, lblFilterOp;
     @FXML private TextField txfFilterOp;

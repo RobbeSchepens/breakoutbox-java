@@ -16,11 +16,11 @@ public class SessieController {
         return sb;
     }
     
-    public ObservableList<ISessie> geefSessieen() {
+    public ObservableList<ISessie> geefSessies() {
         return sb.getSessiesFiltered();
     }
     
-    public int geefAantalSessieen() {
+    public int geefAantalSessies() {
         return sb.getSessies().size();
     }
     

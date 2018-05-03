@@ -5,7 +5,6 @@ import domein.BoxObserver;
 import domein.BoxSubject;
 import domein.IActie;
 import domein.IBox;
-import domein.IOefening;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,17 +25,16 @@ import javafx.scene.layout.VBox;
 
 public class BoxActiesDetailPanelController extends VBox implements BoxObserver, BoxSubject {
 
-    BoxFrameController fc;
-    BoxController bc;
+    private final BoxFrameController fc;
+    private final BoxController bc;
     private List<IActie> listActiesTempAlle;
     private List<IActie> listActiesTempGeselect = new ArrayList<>();
-    private Set<BoxObserver> observers;
+    private final Set<BoxObserver> observers;
 
     @FXML private Label lblTitleLeftList;
     @FXML private Label lblAantalGeselecteerd;
     @FXML private ListView<IActie> lsvListAlle;
     @FXML private ListView<IActie> lsvListGeselecteerde;
-
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
 
@@ -55,7 +53,6 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
         this.observers = new HashSet<>();
 
         lblTitleLeftList.setText("Acties");
-
         listActiesTempAlle = new ArrayList<>(bc.geefActies());
         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
 
@@ -101,9 +98,9 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
 
         List<IActie> m = new ArrayList<>(bc.geefActiesHuidigeBox());
         listActiesTempGeselect = new ArrayList<>();
-        for (IActie item : m) {
+        m.forEach((item) -> {
             listActiesTempGeselect.add(item);
-        }
+        });
 
         bc.setListActiesVanBox(listActiesTempGeselect);
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
@@ -135,7 +132,6 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
     @FXML
     private void lsvListGeselecteerdeOnMouseClicked(MouseEvent event) {
     }
-
 
     @FXML
     private void btnCancelOnAction(ActionEvent event) {

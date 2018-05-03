@@ -2,7 +2,9 @@ package gui;
 
 import domein.IBox;
 import domein.IKlas;
+import domein.ISessie;
 import domein.SessieController;
+import domein.SessieObserver;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,10 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class SessieDetailPanelController extends VBox {
+public class SessieDetailPanelController extends VBox implements SessieObserver {
 
-    private SessieController sc;
-    private SessieFrameController fc;
+    private final SessieController sc;
+    private final SessieFrameController fc;
     
     @FXML private Label lblTitleRight;
     @FXML private Button btnNieuweOefening;
@@ -73,6 +75,11 @@ public class SessieDetailPanelController extends VBox {
         txfNaam.requestFocus();
     }
 
+    void initNieuw() {
+        initButtons(true);
+        clearRender();
+    }
+
     @FXML
     private void btnNieuweOefeningOnAction(ActionEvent event) {
     }
@@ -87,6 +94,11 @@ public class SessieDetailPanelController extends VBox {
 
     @FXML
     private void btnAddWithContentOnAction(ActionEvent event) {
+    }
+
+    @Override
+    public void update(ISessie sessie) {
+        
     }
     
 }

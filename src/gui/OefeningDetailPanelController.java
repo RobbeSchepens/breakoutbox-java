@@ -25,10 +25,10 @@ import javafx.stage.Stage;
 
 public class OefeningDetailPanelController extends VBox implements OefeningObserver {
 
-    private OefeningController dc;
-    private OefeningFrameController fc;
-    private FileChooser fileChooserOpgave;
-    private FileChooser fileChooserFeedback;
+    private final OefeningController dc;
+    private final OefeningFrameController fc;
+    private final FileChooser fileChooserOpgave;
+    private final FileChooser fileChooserFeedback;
     private File fileOpgave;
     private File fileFeedback;
     private String fileOpgaveNaam;

@@ -21,7 +21,7 @@ public class NavigatieController extends HBox{
 
     static EnumNavigatie nextpage = EnumNavigatie.HOME;
 
-    private DomeinController dc;
+    private final DomeinController dc;
     private OefeningController oc;
     private BoxController bc;
     private SessieController sc;

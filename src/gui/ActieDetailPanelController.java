@@ -14,8 +14,8 @@ import javafx.scene.layout.VBox;
 
 public class ActieDetailPanelController extends VBox implements ActieObserver {
     
-    private ActieController ac;
-    private ActieFrameController fc;
+    private final ActieController ac;
+    private final ActieFrameController fc;
 
     @FXML private Label lblTitleRight;
     @FXML private Button btnNieuweOefening;
@@ -65,7 +65,7 @@ public class ActieDetailPanelController extends VBox implements ActieObserver {
             ac.voegActieToe(txfNaam.getText());
             clearRender();
             lblError.setText("");
-            lblSuccess.setText("De Actie werd succesvol toegevoegd.");
+            lblSuccess.setText("De actie werd succesvol toegevoegd.");
 
         } catch (IllegalArgumentException ex) {
             lblSuccess.setText("");
@@ -80,7 +80,7 @@ public class ActieDetailPanelController extends VBox implements ActieObserver {
             ac.pasActieAan(txfNaam.getText());
             clearRender();
             lblError.setText("");
-            lblSuccess.setText("De Actie werd succesvol aangepast.");
+            lblSuccess.setText("De actie werd succesvol aangepast.");
         } catch (IllegalArgumentException ex) {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());

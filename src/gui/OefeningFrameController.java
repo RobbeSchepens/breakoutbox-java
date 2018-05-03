@@ -5,11 +5,11 @@ import javafx.scene.layout.GridPane;
 
 public final class OefeningFrameController extends GridPane {
     
-    NavigatieController nav;
-    OefeningOverzichtPanelController oefOverview;
-    OefeningDetailPanelController oefDetail;
-    OefeningGroepsbDetailPanelController oefDetailGroepsb;
-    OefeningDoelstDetailPanelController oefDetailDoelst;
+    private final NavigatieController nav;
+    private final OefeningOverzichtPanelController oefOverview;
+    private final OefeningDetailPanelController oefDetail;
+    private final OefeningGroepsbDetailPanelController oefDetailGroepsb;
+    private final OefeningDoelstDetailPanelController oefDetailDoelst;
     
     public OefeningFrameController(DomeinController dc) {
         nav = new NavigatieController(dc);

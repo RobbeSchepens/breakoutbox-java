@@ -19,7 +19,6 @@ import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -30,9 +29,9 @@ import javafx.stage.Stage;
 
 public class BoxDetailPanelController extends VBox implements BoxObserver, UpdateItemTableSubject {
     
-    private BoxController bc;
-    private BoxFrameController fc;
-    private Set<UpdateItemTableObserver> observers;
+    private final BoxController bc;
+    private final BoxFrameController fc;
+    private final Set<UpdateItemTableObserver> observers;
     
     @FXML private Label lblTitleRight;
     @FXML private Button btnNieuweOefening;
@@ -213,7 +212,7 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
     private void btnCreatePdfOnAction(ActionEvent event) {
         try {
             DirectoryChooser chooser = new DirectoryChooser();
-            chooser.setTitle("PDF met Box gegevens opslaan");
+            chooser.setTitle("PDF met box gegevens opslaan");
             chooser.setInitialDirectory(new File(System.getProperty("user.home")));
             File selectedDirectory = chooser.showDialog((Stage) (this.getScene().getWindow()));
 
@@ -225,8 +224,8 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
             alert.setHeaderText("");
             alert.setContentText(String.format("%s: %s\\%s.pdf", "PDF aangemaakt in", selectedDirectory, sessie.getNaam()));
             alert.showAndWait();*/
-        } catch (RuntimeException re) {
-            System.out.println("fout");
+        } catch (RuntimeException ex) {
+            lblError.setText(ex.getMessage());
         }
     }
 

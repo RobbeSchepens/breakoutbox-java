@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
-import domein.Box;
 import domein.BoxController;
 import domein.BoxObserver;
 import domein.BoxSubject;
-import domein.IActie;
 import domein.IBox;
 import domein.IOefening;
 import java.io.IOException;
@@ -32,17 +25,16 @@ import javafx.scene.layout.VBox;
 
 public class BoxOefDetailPanelController extends VBox implements BoxObserver, BoxSubject {
      
-    BoxFrameController fc;
-    BoxController bc;
+    private final BoxFrameController fc;
+    private final BoxController bc;
     private List<IOefening> listOefeningenTempAlle = new ArrayList<>();
     private List<IOefening> listOefeningenTempGeselect = new ArrayList<>();
-    private Set<BoxObserver> observers;
+    private final Set<BoxObserver> observers;
     
     @FXML private Label lblTitleLeftList;
     @FXML private Label lblAantalGeselecteerd;
     @FXML private ListView<IOefening> lsvListAlle;
     @FXML private ListView<IOefening> lsvListGeselecteerde;
-
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
 
