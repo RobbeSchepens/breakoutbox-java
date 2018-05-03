@@ -134,21 +134,21 @@ public class BoxDetailPanelController extends VBox implements BoxObserver, Updat
     private void updateDoelstellingen(List<Oefening> oef) {
         StringBuilder sb = new StringBuilder();
         oef.forEach(e -> e.getDoelstellingen().forEach(d -> {
-            if (!(sb.toString().contains(d.toString()))) {
-
-                sb.append(d.getCode()).append(", ");
-                if (sb.length() >= 72 && !sb.toString().substring(0, sb.length() - 1).contains("\n")) {
-                    sb.append("\n");
-                }
-                if (sb.length() >= 144 && !sb.toString().substring(100, sb.length() - 1).contains("\n")) {
-                    sb.append("\n");
-                }
-                if (sb.length() >= 216 && !sb.toString().substring(172, sb.length() - 1).contains("\n")) {
-                    sb.append("\n");
-                }
-                if (sb.length() >= 288 && !sb.toString().substring(244, sb.length() - 1).contains("\n")) {
-                    sb.append("\n");
-                }
+            if (sb.toString().contains(d.toString())) {
+                return;
+            }
+            sb.append(d.getCode()).append(", ");
+            if (sb.length() >= 72 && !sb.toString().substring(0, sb.length() - 1).contains("\n")) {
+                sb.append("\n");
+            }
+            if (sb.length() >= 144 && !sb.toString().substring(100, sb.length() - 1).contains("\n")) {
+                sb.append("\n");
+            }
+            if (sb.length() >= 216 && !sb.toString().substring(172, sb.length() - 1).contains("\n")) {
+                sb.append("\n");
+            }
+            if (sb.length() >= 288 && !sb.toString().substring(244, sb.length() - 1).contains("\n")) {
+                sb.append("\n");
             }
         }));
 
