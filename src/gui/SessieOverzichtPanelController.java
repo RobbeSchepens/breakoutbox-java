@@ -71,14 +71,14 @@ public final class SessieOverzichtPanelController extends OverzichtPanelControll
 
     private void renderTable() {
         // Set items for tableview
-        //getTbvOverzicht().setItems(sc.geefSessies());
+        getTbvOverzicht().setItems(sc.geefSessies());
         
         // Create new columns based on current class
         TableColumn<ISessie, String> col1 = new TableColumn<>("Naam");
         col1.setCellValueFactory(v -> v.getValue().naamProperty());
 
         TableColumn<ISessie, String> col2 = new TableColumn<>("Klas");
-        //col2.setCellValueFactory(v -> v.getValue().getKlas().toString());
+        col2.setCellValueFactory(v -> v.getValue().getKlas().naamProperty());
 
         TableColumn<ISessie, LocalDate> col3 = new TableColumn<>("Startdatum");
         //col2.setCellValueFactory(v -> v.getValue().getStartdatum().toString());

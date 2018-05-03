@@ -7,5 +7,10 @@ public interface ISessie {
     String getNaam();
     StringProperty naamProperty();
     String getOmschrijving();
+    Klas getKlas();
+    Box getBox();
+    boolean isAfstandsonderwijs();
+    String getTypeGroepen();
+    int getAantalGroepen();
     LocalDate getStartdatum();
 }

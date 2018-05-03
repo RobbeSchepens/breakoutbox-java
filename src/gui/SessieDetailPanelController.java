@@ -137,7 +137,7 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
             
             initNieuw();
             lblError.setText("");
-            lblSuccess.setText("De box werd succesvol toegevoegd.");
+            lblSuccess.setText("De sessie werd succesvol toegevoegd.");
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());
