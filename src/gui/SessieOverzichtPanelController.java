@@ -49,7 +49,8 @@ public final class SessieOverzichtPanelController extends OverzichtPanelControll
 
     @Override
     <T> void implementTableviewListener(T newValue) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        sc.setHuidigeSessie((ISessie) newValue);
+        notifyObservers();
     }
 
     @Override

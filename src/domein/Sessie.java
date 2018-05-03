@@ -36,6 +36,7 @@ public class Sessie implements ISessie, Serializable {
 
     @Transient
     private final StringProperty naam = new SimpleStringProperty();
+    private String code;
     private String omschrijving;
     private LocalDate startdatum;
     
@@ -55,6 +56,7 @@ public class Sessie implements ISessie, Serializable {
     public Sessie(String naam, String omschrijving, Klas klas, Box box, boolean afstand, 
             String typeGroepen, int aantalGroepen, LocalDate startdatum) {
         setNaam(naam);
+        setCode("XYZ");
         setOmschrijving(omschrijving);
         setKlas(klas);
         setBox(box);
@@ -109,6 +111,15 @@ public class Sessie implements ISessie, Serializable {
         if (m.find()) {
             throw new SpecialeTekensInNaamException("Geen speciale tekens toegelaten in de naam van de oefening. Deze mogen wel: spatie ._-<>+?!=$%&*()|");
         }
+    }
+
+    @Override
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override

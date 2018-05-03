@@ -29,7 +29,7 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
 
     private final SessieController sc;
     private final SessieFrameController fc;
-    final ToggleGroup grpRadioButtons = new ToggleGroup();
+    private final ToggleGroup grpRadioButtons = new ToggleGroup();
     
     @FXML private Label lblTitleRight;
     @FXML private Button btnNieuweOefening;
@@ -90,6 +90,8 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
             lblLeerlingenCount.setText(newValue.getLeerlingen().size() 
                     + " leerlingen gevonden. Min/max groepen: " 
                     + minGroepen + "/" + maxGroepen);
+//            sliGroepen.setValue(minGroepen);
+//            lblAantalGroepen.setText(String.valueOf(minGroepen));
         });
     }
 
@@ -109,11 +111,30 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
         ddlBox.getSelectionModel().clearSelection();
         ddlKlas.setItems(sc.geefKlassen());
         ddlKlas.getSelectionModel().clearSelection();
+        grpRadioButtons.getToggles().forEach(e -> e.setSelected(false));
+        cbxAfstandsonderwijs.setSelected(false);
         lblAantalGroepen.setText("");
         dtpStartDatum.setValue(null);
         lblError.setText("");
         lblSuccess.setText("");
         txfNaam.requestFocus();
+    }
+
+    @Override
+    public void update(ISessie s) {
+        initButtons(false);
+        lblCode.setText(s.getCode());
+        txfNaam.setText(s.getNaam());
+        txfOmschrijving.setText(s.getOmschrijving());
+        ddlBox.setItems(sc.geefBoxes());
+        ddlBox.getSelectionModel().select(s.getBox());
+        ddlKlas.setItems(sc.geefKlassen());
+        ddlKlas.getSelectionModel().select(s.getKlas());
+        lblAantalGroepen.setText(String.valueOf(s.getAantalGroepen()));
+        cbxAfstandsonderwijs.setSelected(s.isAfstandsonderwijs());
+        dtpStartDatum.setValue(s.getStartdatum());
+        lblError.setText("");
+        lblSuccess.setText("");
     }
 
     void initNieuw() {
@@ -123,6 +144,7 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
 
     @FXML
     private void btnNieuweOefeningOnAction(ActionEvent event) {
+        clearRender();
     }
 
     @FXML
@@ -153,15 +175,53 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
 
     @FXML
     private void btnEditOnAction(ActionEvent event) {
+        try {
+            String typegroep = "";
+            if (radGroepenAuto.isSelected())
+                typegroep = "auto";
+            if (radGroepenHandLeerkracht.isSelected())
+                typegroep = "handleerkracht";
+            if (radGroepenHandLeerlingen.isSelected())
+                typegroep = "handleerling";
+            
+            sc.voegNieuweSessieToe(txfNaam.getText(), txfOmschrijving.getText(), 
+                    ddlKlas.getSelectionModel().getSelectedItem(),
+                    ddlBox.getSelectionModel().getSelectedItem(),
+                    cbxAfstandsonderwijs.isSelected(), typegroep, 
+                    (int)sliGroepen.getValue(), dtpStartDatum.getValue());
+
+            initNieuw();
+            lblError.setText("");
+            lblSuccess.setText("De sessie werd succesvol aangepast.");
+        } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
+            lblSuccess.setText("");
+            lblError.setText(ex.getMessage());
+        }
     }
 
     @FXML
     private void btnAddWithContentOnAction(ActionEvent event) {
+        try {
+            String typegroep = "";
+            if (radGroepenAuto.isSelected())
+                typegroep = "auto";
+            if (radGroepenHandLeerkracht.isSelected())
+                typegroep = "handleerkracht";
+            if (radGroepenHandLeerlingen.isSelected())
+                typegroep = "handleerling";
+            
+            sc.voegNieuweSessieToe(txfNaam.getText(), txfOmschrijving.getText(), 
+                    ddlKlas.getSelectionModel().getSelectedItem(),
+                    ddlBox.getSelectionModel().getSelectedItem(),
+                    cbxAfstandsonderwijs.isSelected(), typegroep, 
+                    (int)sliGroepen.getValue(), dtpStartDatum.getValue());
+            
+            initNieuw();
+            lblError.setText("");
+            lblSuccess.setText("De aangepaste sessie werd succesvol toegevoegd.");
+        } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
+            lblSuccess.setText("");
+            lblError.setText(ex.getMessage());
+        }
     }
-
-    @Override
-    public void update(ISessie sessie) {
-        
-    }
-    
 }
