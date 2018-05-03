@@ -71,14 +71,12 @@ public class Oefening implements IOefening, Serializable {
 
     public Oefening(String naam, String antwoord, Vak vak, File opgave, File feedback,
             List<Groepsbewerking> groepsbewerkingen, List<Doelstelling> doelstellingen) {
-        setGroepsbewerkingen(groepsbewerkingen);
-        setVak(vak);
         setNaam(naam); // onder feedback en antwoord zetten indien niet lukt
+        setAntwoord(antwoord);
+        setVak(vak);
         setOpgave(opgave);
         setFeedback(feedback);
-
-        setAntwoord(antwoord);
-
+        setGroepsbewerkingen(groepsbewerkingen);
         setDoelstellingen(doelstellingen);
     }
 
