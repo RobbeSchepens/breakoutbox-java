@@ -36,7 +36,10 @@ public class BoxOefDetailPanelController extends VBox implements BoxObserver, Bo
     @FXML private ListView<IOefening> lsvListAlle;
     @FXML private ListView<IOefening> lsvListGeselecteerde;
     @FXML private Button btnCancel;
-    @FXML private Button btnSubmit;
+    @FXML
+    private Button btnSubmit;
+    @FXML
+    private Label lblAantalBeschikbaar;
 
     public BoxOefDetailPanelController(BoxController bc, BoxFrameController fc) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("BoxOefDetailPanel.fxml"));
@@ -65,7 +68,8 @@ public class BoxOefDetailPanelController extends VBox implements BoxObserver, Bo
                         lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
                         listOefeningenTempGeselect.add(newValue);
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
-                        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listOefeningenTempGeselect.size());
+                        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listOefeningenTempGeselect.size());
+                        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listOefeningenTempAlle.size());
                     });
                 }
             }
@@ -81,7 +85,8 @@ public class BoxOefDetailPanelController extends VBox implements BoxObserver, Bo
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
                         listOefeningenTempAlle.add(newValue);
                         lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
-                        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listOefeningenTempGeselect.size());
+                        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listOefeningenTempGeselect.size());
+                        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listOefeningenTempAlle.size());
                     });
                 }
             }
@@ -91,7 +96,8 @@ public class BoxOefDetailPanelController extends VBox implements BoxObserver, Bo
     @Override
     public void update(IBox box) {
         listOefeningenTempAlle = new ArrayList<>(bc.geefOefeningen());
-        lblAantalGeselecteerd.setText("Oefeningen geselecteerd: " + box.getOefeningen().size());
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + box.getOefeningen().size());
+
 
         //List<? extends IOefening> lt = box.getOefeningen();
         //listOefeningenTempGeselect = (List<IOefening>) lt;
@@ -105,6 +111,8 @@ public class BoxOefDetailPanelController extends VBox implements BoxObserver, Bo
         bc.setListOefeningenVanBox(listOefeningenTempGeselect);
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
 
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listOefeningenTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listOefeningenTempAlle.size());
         ArrayList<IOefening> h = new ArrayList<>();
         for (int j = 0; j < listOefeningenTempGeselect.size(); j++) {
             for (int i = 0; i < listOefeningenTempAlle.size(); i++) {
@@ -116,16 +124,17 @@ public class BoxOefDetailPanelController extends VBox implements BoxObserver, Bo
         listOefeningenTempAlle.removeAll(h);
 
         lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listOefeningenTempAlle.size());
     }
 
     public void nieuweBox() {
-        System.out.println("oefening wordt geinit");
         listOefeningenTempAlle = new ArrayList<>(bc.geefOefeningen());
         listOefeningenTempGeselect = new ArrayList<>();
         lsvListAlle.setItems(FXCollections.observableArrayList(listOefeningenTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
         bc.setListOefeningenVanBox(listOefeningenTempGeselect);
-        lblAantalGeselecteerd.setText("Geselecteerde oefeningen: 0");
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listOefeningenTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listOefeningenTempAlle.size());
     }
 
     @FXML

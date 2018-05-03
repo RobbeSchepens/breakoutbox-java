@@ -85,8 +85,7 @@ public final class KlasDetailPanelController extends VBox implements KlasObserve
         txfNaamKlas.setText(klas.getNaam());
         lsvLeerlingen.setItems(FXCollections.observableArrayList(klas.getLeerlingen()));
         lblTitleRight.setText("Klas");
-        lblUploadExcel.setVisible(false);
-        btnFileOpgave.setVisible(false);
+        btnFileOpgave.setVisible(true);
     }
 
     private void initButtons(boolean isNew) {
@@ -105,14 +104,14 @@ public final class KlasDetailPanelController extends VBox implements KlasObserve
             txfNaamLln.setText("");
             txfVoornaam.setText("");
             for (Leerling item : lsvLeerlingen.getItems()) {
-                if (item.getVoornaam().trim().equals(ln.getVoornaam().trim()) && item.getAchternaam().trim().equals(ln.getAchternaam().trim())) {
+                /*if (item.getVoornaam().trim().equals(ln.getVoornaam().trim()) && item.getAchternaam().trim().equals(ln.getAchternaam().trim())) {
                     lblToegevoegdBoodschap.setText("Leerling bestaat al.");
                     test = true;
-                }
+                }*/
             }
             if (test) {
-                lblToegevoegdBoodschap.setText("");
-                lblToegevoegdBoodschaperr.setText("Leerling al in lijst!");
+                //lblToegevoegdBoodschap.setText("");
+                //lblToegevoegdBoodschaperr.setText("Leerling al in lijst!");
             } else {
                 lblToegevoegdBoodschaperr.setText("");
                 lsvLeerlingen.getItems().add(ln);

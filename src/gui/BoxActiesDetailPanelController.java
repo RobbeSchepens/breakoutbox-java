@@ -36,7 +36,10 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
     @FXML private ListView<IActie> lsvListAlle;
     @FXML private ListView<IActie> lsvListGeselecteerde;
     @FXML private Button btnCancel;
-    @FXML private Button btnSubmit;
+    @FXML
+    private Button btnSubmit;
+    @FXML
+    private Label lblAantalBeschikbaar;
 
     public BoxActiesDetailPanelController(BoxController bc, BoxFrameController fc) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("BoxActiesDetailPanel.fxml"));
@@ -56,6 +59,8 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
         listActiesTempAlle = new ArrayList<>(bc.geefActies());
         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
 
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listActiesTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listActiesTempAlle.size());
         lsvListAlle.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<IActie>() { // moet veranderd woden
             @Override
             public void changed(ObservableValue<? extends IActie> observable, IActie oldValue, IActie newValue) {
@@ -65,7 +70,8 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
                         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
                         listActiesTempGeselect.add(newValue);
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
-                        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listActiesTempGeselect.size());
+                        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listActiesTempGeselect.size());
+                        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listActiesTempAlle.size());
                     });
                 }
             }
@@ -81,7 +87,8 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
                         listActiesTempAlle.add(newValue);
                         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
-                        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listActiesTempGeselect.size());
+                        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listActiesTempGeselect.size());
+                        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listActiesTempAlle.size());
                     });
                 }
             }
@@ -122,7 +129,8 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
         bc.setListActiesVanBox(listActiesTempGeselect);
-        lblAantalGeselecteerd.setText("Geselecteerde Oefeningen 0");
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listActiesTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listActiesTempAlle.size());
     }
 
     @FXML

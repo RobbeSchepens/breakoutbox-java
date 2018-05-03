@@ -36,7 +36,20 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT">
          <children>
-            <Label fx:id="lblAantalGeselecteerd" prefHeight="25.0" text="Geselecteerde Acties: 0" />
+            <HBox alignment="CENTER_LEFT" prefWidth="255.0">
+               <children>
+                  <Label fx:id="lblAantalBeschikbaar" text="Aantal beschikbaar : 0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="255.0">
+               <children>
+                  <Label fx:id="lblAantalGeselecteerd" prefHeight="25.0" text="Aantal geselecteerd: 0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets bottom="15.0" />

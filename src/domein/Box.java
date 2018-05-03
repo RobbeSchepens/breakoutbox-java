@@ -196,7 +196,7 @@ public class Box implements IBox, Serializable {
                     contentStream.endText();
                 }
 
-                pdf.save(String.format("%s\\%s.pdf", selectedDirectory.getAbsolutePath(), getNaam()));
+                pdf.save(String.format("%s%s%s.pdf", selectedDirectory.getAbsolutePath(), File.separator, getNaam()));
             } catch (IOException | RuntimeException ex) {
                 throw new RuntimeException("Fout tijdens pdf creatie");
             }

@@ -36,7 +36,10 @@ public class OefeningGroepsbDetailPanelController extends VBox implements Oefeni
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
     @FXML private ListView<Groepsbewerking> lsvListAlle;
-    @FXML private ListView<Groepsbewerking> lsvListGeselecteerde;
+    @FXML
+    private ListView<Groepsbewerking> lsvListGeselecteerde;
+    @FXML
+    private Label lblAantalBeschikbaar;
 
     public OefeningGroepsbDetailPanelController(OefeningController dcon, OefeningFrameController fc) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("OefeningGroepsbDetailPanel.fxml"));
@@ -60,6 +63,9 @@ public class OefeningGroepsbDetailPanelController extends VBox implements Oefeni
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
         lblTitleLeftList.setText("Groepsbewerkingen");
 
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listGroepsBewerkingenTempAlle.size());
+
         lsvListAlle.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Groepsbewerking>() {
             @Override
             public void changed(ObservableValue<? extends Groepsbewerking> observable, Groepsbewerking oldValue, Groepsbewerking newValue) {
@@ -70,7 +76,8 @@ public class OefeningGroepsbDetailPanelController extends VBox implements Oefeni
                         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
                         listGroepsBewerkingenTempGeselect.add(newValue);
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
-                        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
+                        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
+                        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listGroepsBewerkingenTempAlle.size());
                     });
                 }
             }
@@ -85,7 +92,8 @@ public class OefeningGroepsbDetailPanelController extends VBox implements Oefeni
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
                         listGroepsBewerkingenTempAlle.add(newValue);
                         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
-                        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
+                        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
+                        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listGroepsBewerkingenTempAlle.size());
                     });
                 }
             }
@@ -120,7 +128,9 @@ public class OefeningGroepsbDetailPanelController extends VBox implements Oefeni
         listGroepsBewerkingenTempAlle.removeAll(h);
         listGroepsBewerkingenTempAlle.removeAll(listGroepsBewerkingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
-        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
+
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listGroepsBewerkingenTempAlle.size());
 
         dc.setListGroepsbewerkingenVanOefening(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
     }
@@ -160,7 +170,8 @@ public class OefeningGroepsbDetailPanelController extends VBox implements Oefeni
         dc.setListGroepsbewerkingenVanOefening(listGroepsBewerkingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
-        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listGroepsBewerkingenTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listGroepsBewerkingenTempAlle.size());
     }
 
     @Override

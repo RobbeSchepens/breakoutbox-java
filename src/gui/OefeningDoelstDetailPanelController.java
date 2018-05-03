@@ -36,7 +36,10 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
     @FXML private ListView<Doelstelling> lsvListAlle;
-    @FXML private ListView<Doelstelling> lsvListGeselecteerde;
+    @FXML
+    private ListView<Doelstelling> lsvListGeselecteerde;
+    @FXML
+    private Label lblAantalBeschikbaar;
 
     public OefeningDoelstDetailPanelController(OefeningController dcon, OefeningFrameController fc) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("OefeningDoelstDetailPanel.fxml"));
@@ -57,6 +60,8 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
             listDoelstellingenTempAlle.add(item);
         }
 
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listDoelstellingenTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listDoelstellingenTempAlle.size());
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
         lblTitleLeftList.setText("Doelstellingen");
         lsvListAlle.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Doelstelling>() {
@@ -68,7 +73,8 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
                         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
                         listDoelstellingenTempGeselect.add(newValue);
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
-                        lblAantalGeselecteerd.setText("doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+                        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listDoelstellingenTempGeselect.size());
+                        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listDoelstellingenTempAlle.size());
                     });
                 }
             }
@@ -83,7 +89,8 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
                         listDoelstellingenTempAlle.add(newValue);
                         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
-                        lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+                        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listDoelstellingenTempGeselect.size());
+                        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listDoelstellingenTempAlle.size());
                     });
                 }
             }
@@ -119,7 +126,8 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
         listDoelstellingenTempAlle.removeAll(h);
 
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
-        lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listDoelstellingenTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listDoelstellingenTempAlle.size());
         
         dc.setListDoelstellingenVanOefening(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
     }
@@ -134,8 +142,6 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
         dc.setListDoelstellingenVanOefening(listDoelstellingenTempGeselect);
         fc.toonListview("cancel/init");
         notifyObserversList();
-        //Dit crasht bij nieuwe oefening, er bestaat nog geen huidige oefening
-        //dc.setDoelstellingenOefening(lsvListGeselecteerde.getSelectionModel().getSelectedItems());
     }
     @FXML
     private void lsvListAlleOnMouseClicked(MouseEvent event) {
@@ -151,7 +157,8 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
         dc.setListDoelstellingenVanOefening(listDoelstellingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
-        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listDoelstellingenTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listDoelstellingenTempAlle.size());
     }
 
     @Override
