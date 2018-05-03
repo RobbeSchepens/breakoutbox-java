@@ -50,6 +50,7 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
     @FXML private RadioButton radGroepenAuto;
     @FXML private RadioButton radGroepenHandLeerkracht;
     @FXML private RadioButton radGroepenHandLeerlingen;
+    @FXML private Label lblLeerlingenCount;
     
     public SessieDetailPanelController(SessieController sc, SessieFrameController fc) {
         FXMLLoader loader
@@ -82,7 +83,11 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
         
         ddlKlas.valueProperty().addListener((ObservableValue<? extends IKlas> observable, 
                 IKlas oldValue, IKlas newValue) -> {
-            sliGroepen.setMax(Math.ceil((double)newValue.getLeerlingen().size() / 4));
+            int maxGroepen = (int)Math.ceil((double)newValue.getLeerlingen().size() / 4);
+            sliGroepen.setMax(maxGroepen);
+            lblLeerlingenCount.setText(newValue.getLeerlingen().size() 
+                    + " leerlingen gevonden. Max aantal groepen: " 
+                    + maxGroepen);
         });
     }
 

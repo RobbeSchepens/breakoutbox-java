@@ -77,7 +77,6 @@
                   <ComboBox fx:id="ddlBox" prefWidth="150.0" promptText="Kies een box" />
                </children>
             </HBox>
-            <ComboBox fx:id="ddlKlas" prefWidth="150.0" promptText="Kies een klas" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label focusTraversable="false" text="Omschrijving" GridPane.rowIndex="2" />
             <TextField fx:id="txfOmschrijving" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="6">
@@ -103,6 +102,16 @@
             <Label fx:id="lblCode" GridPane.columnIndex="1" />
             <Label text="Startdatum" GridPane.rowIndex="8" />
             <DatePicker fx:id="dtpStartDatum" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <ComboBox fx:id="ddlKlas" prefWidth="150.0" promptText="Kies een klas">
+                     <HBox.margin>
+                        <Insets right="15.0" />
+                     </HBox.margin>
+                  </ComboBox>
+                  <Label fx:id="lblLeerlingenCount" />
+               </children>
+            </HBox>
          </children>
          <VBox.margin>
             <Insets bottom="30.0" />
