@@ -1,6 +1,7 @@
 package domein;
 
 import java.time.LocalDate;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class SessieController {
@@ -58,4 +59,11 @@ public class SessieController {
         sb.veranderFilter(filterValue);
     }
     
+    public ObservableList<IKlas> geefKlassen() {
+        return FXCollections.unmodifiableObservableList((ObservableList<IKlas>)sb.getKlassen());
+    }
+    
+    public ObservableList<IBox> geefBoxes() {
+        return FXCollections.unmodifiableObservableList((ObservableList<IBox>)sb.getBoxes());
+    }
 }

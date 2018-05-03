@@ -63,10 +63,17 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
         this.sc = sc;
         this.fc = fc;
         initButtons(true);
+        ddlKlas.setItems(sc.geefKlassen());
+        ddlBox.setItems(sc.geefBoxes());
         
         sliGroepen.valueProperty().addListener((ObservableValue<? extends Number> observable, 
                 Number oldValue, Number newValue) -> {
             lblAantalGroepen.setText(newValue.toString());
+        });
+        
+        ddlKlas.valueProperty().addListener((ObservableValue<? extends IKlas> observable, 
+                IKlas oldValue, IKlas newValue) -> {
+            sliGroepen.setMax(Math.ceil(newValue.getLeerlingen().size() / 4));
         });
     }
 
@@ -82,9 +89,9 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
         lblCode.setText("");
         txfNaam.setText("");
         txfOmschrijving.setText("");
-//        ddlBox.setItems(sc.geefBoxes());
+        ddlBox.setItems(sc.geefBoxes());
         ddlBox.getSelectionModel().clearSelection();
-//        ddlKlas.setItems(sc.geefKlassen());
+        ddlKlas.setItems(sc.geefKlassen());
         ddlKlas.getSelectionModel().clearSelection();
         lblAantalGroepen.setText("");
         dtpStartDatum.setValue(null);
