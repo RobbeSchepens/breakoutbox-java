@@ -59,7 +59,8 @@ public class OefeningData {
                 new Doelstelling("GESCH52", "doelstelling"),
                 new Doelstelling("AARD2", "doelstelling"),
                 new Doelstelling("AARD23", "doelstelling"),
-                new Doelstelling("AARD98", "doelstelling")
+                new Doelstelling("AARD98", "doelstelling"),
+                new Doelstelling("Verwijderbaare doelstelling", "doelstelling")
         ));
 
         GenericDaoJpa doelsDao = new GenericDaoJpa<>(Doelstelling.class);
@@ -80,7 +81,8 @@ public class OefeningData {
                 new Actie("Pak de doos"),
                 new Actie("Zoek de pen"),
                 new Actie("Kijk op de computer"),
-                new Actie("Kijk onder de tafel")
+                new Actie("Kijk onder de tafel"),
+                new Actie("Verwijderbare ")
         ));
         GenericDaoJpa actieDao = new GenericDaoJpa<>(Actie.class);
         acties.forEach(actie -> {
@@ -123,7 +125,9 @@ public class OefeningData {
                 new Leerling("Sam", "Leunens"),
                 new Leerling("Sarah", "VanBossche"),
                 new Leerling("Femke", "Vanhoeke"),
-                new Leerling("Sep", "Jacobs")));
+                new Leerling("Sep", "Jacobs"),
+                new Leerling("Verwijderbare", "Leerling")
+        ));
 
         GenericDaoJpa llnDao = new GenericDaoJpa<>(Leerling.class);
         leerlingen.forEach(ll -> {
@@ -162,6 +166,10 @@ public class OefeningData {
                         (Leerling) llnDao.get(14L), (Leerling) llnDao.get(8L),
                         (Leerling) llnDao.get(15L), (Leerling) llnDao.get(19L),
                         (Leerling) llnDao.get(16L), (Leerling) llnDao.get(20L),
+                        (Leerling) llnDao.get(17L)
+                ))),
+                new Klas("Verwijderbare klas", new ArrayList<Leerling>(Arrays.asList(
+                        (Leerling) llnDao.get(2L),
                         (Leerling) llnDao.get(17L)
                 )))
         ));
@@ -346,6 +354,13 @@ public class OefeningData {
                         (Groepsbewerking) gbwDao.get(15L),
                         (Groepsbewerking) gbwDao.get(16L),
                         (Groepsbewerking) gbwDao.get(6L)
+                )), new ArrayList<Doelstelling>(Arrays.asList(
+                        (Doelstelling) doelsDao.get(4L)
+                ))),
+                new Oefening("verwijderbare ", "babbelen", vakken.get(4), opgave12, feedback12, new ArrayList<Groepsbewerking>(Arrays.asList(
+                        (Groepsbewerking) gbwDao.get(1L),
+                        (Groepsbewerking) gbwDao.get(2L),
+                        (Groepsbewerking) gbwDao.get(3L)
                 )), new ArrayList<Doelstelling>(Arrays.asList(
                         (Doelstelling) doelsDao.get(4L)
                 )))
