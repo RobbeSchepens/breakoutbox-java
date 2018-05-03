@@ -126,6 +126,8 @@ public class Sessie implements ISessie, Serializable {
     }
 
     public void setKlas(Klas klas) {
+        if (klas == null)
+            throw new IllegalArgumentException("Er werd geen klas opgegeven.");
         this.klas = klas;
     }
 
@@ -135,6 +137,8 @@ public class Sessie implements ISessie, Serializable {
     }
 
     public void setBox(Box box) {
+        if (box == null)
+            throw new IllegalArgumentException("Er werd geen box opgegeven.");
         this.box = box;
     }
 
@@ -165,6 +169,8 @@ public class Sessie implements ISessie, Serializable {
     }
 
     public void setAantalGroepen(int aantalGroepen) {
+        if (aantalGroepen <= 0)
+            throw new IllegalArgumentException("Er werd geen aantal groepen opgegeven.");
         this.aantalGroepen = aantalGroepen;
     }
 
@@ -174,6 +180,8 @@ public class Sessie implements ISessie, Serializable {
     }
 
     public void setStartdatum(LocalDate startdatum) {
+        if (startdatum.isBefore(LocalDate.now()))
+            throw new IllegalArgumentException("De opgegeven datum moet later dan vandaag vallen.");
         this.startdatum = startdatum;
     }
 

@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
@@ -81,7 +82,7 @@ public final class SessieOverzichtPanelController extends OverzichtPanelControll
         col2.setCellValueFactory(v -> v.getValue().getKlas().naamProperty());
 
         TableColumn<ISessie, LocalDate> col3 = new TableColumn<>("Startdatum");
-        //col2.setCellValueFactory(v -> v.getValue().getStartdatum().toString());
+        col3.setCellValueFactory(v -> new ReadOnlyObjectWrapper(v.getValue().getStartdatum()));
         
         // Add the columns to the tableview
         getTbvOverzicht().getColumns().setAll(col1, col2, col3);
