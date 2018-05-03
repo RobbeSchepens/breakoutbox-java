@@ -22,12 +22,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
 public class SessieDetailPanelController extends VBox implements SessieObserver {
 
     private final SessieController sc;
     private final SessieFrameController fc;
+    final ToggleGroup grpRadioButtons = new ToggleGroup();
     
     @FXML private Label lblTitleRight;
     @FXML private Button btnNieuweOefening;
@@ -48,6 +50,7 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
     @FXML private RadioButton radGroepenAuto;
     @FXML private RadioButton radGroepenHandLeerkracht;
     @FXML private RadioButton radGroepenHandLeerlingen;
+    @FXML private Label lblLeerlingenCount;
     
     public SessieDetailPanelController(SessieController sc, SessieFrameController fc) {
         FXMLLoader loader
@@ -65,15 +68,26 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
         initButtons(true);
         ddlKlas.setItems(sc.geefKlassen());
         ddlBox.setItems(sc.geefBoxes());
+        radGroepenAuto.setToggleGroup(grpRadioButtons);
+        radGroepenHandLeerkracht.setToggleGroup(grpRadioButtons);
+        radGroepenHandLeerlingen.setToggleGroup(grpRadioButtons);
+        radGroepenAuto.setSelected(true);
+        
+        sliGroepen.valueProperty().addListener((obs, oldval, newVal) -> 
+                sliGroepen.setValue(newVal.intValue()));
         
         sliGroepen.valueProperty().addListener((ObservableValue<? extends Number> observable, 
                 Number oldValue, Number newValue) -> {
-            lblAantalGroepen.setText(newValue.toString());
+            lblAantalGroepen.setText(String.valueOf(newValue.intValue()));
         });
         
         ddlKlas.valueProperty().addListener((ObservableValue<? extends IKlas> observable, 
                 IKlas oldValue, IKlas newValue) -> {
-            sliGroepen.setMax(Math.ceil(newValue.getLeerlingen().size() / 4));
+            int maxGroepen = (int)Math.ceil((double)newValue.getLeerlingen().size() / 4);
+            sliGroepen.setMax(maxGroepen);
+            lblLeerlingenCount.setText(newValue.getLeerlingen().size() 
+                    + " leerlingen gevonden. Max aantal groepen: " 
+                    + maxGroepen);
         });
     }
 
@@ -128,7 +142,7 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
             
             initNieuw();
             lblError.setText("");
-            lblSuccess.setText("De box werd succesvol toegevoegd.");
+            lblSuccess.setText("De sessie werd succesvol toegevoegd.");
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());

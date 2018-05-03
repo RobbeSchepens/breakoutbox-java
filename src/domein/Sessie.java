@@ -120,6 +120,7 @@ public class Sessie implements ISessie, Serializable {
         this.omschrijving = omschrijving;
     }
 
+    @Override
     public Klas getKlas() {
         return klas;
     }
@@ -128,6 +129,7 @@ public class Sessie implements ISessie, Serializable {
         this.klas = klas;
     }
 
+    @Override
     public Box getBox() {
         return box;
     }
@@ -136,7 +138,8 @@ public class Sessie implements ISessie, Serializable {
         this.box = box;
     }
 
-    public boolean isIsAfstandsonderwijs() {
+    @Override
+    public boolean isAfstandsonderwijs() {
         return isAfstandsonderwijs;
     }
 
@@ -144,6 +147,7 @@ public class Sessie implements ISessie, Serializable {
         this.isAfstandsonderwijs = isAfstandsonderwijs;
     }
 
+    @Override
     public String getTypeGroepen() {
         return typeGroepen;
     }
@@ -155,6 +159,7 @@ public class Sessie implements ISessie, Serializable {
         this.typeGroepen = typeGroepen;
     }
 
+    @Override
     public int getAantalGroepen() {
         return aantalGroepen;
     }
