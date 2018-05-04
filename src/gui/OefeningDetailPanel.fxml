@@ -84,7 +84,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnFileFeedback" mnemonicParsing="false" onAction="#btnFileFeedbackOnAction" text="File...">
+                  <Button fx:id="btnFileFeedback" mnemonicParsing="false" onAction="#btnFileFeedbackOnAction" text="Kies...">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
@@ -103,7 +103,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnFileOpgave" mnemonicParsing="false" onAction="#btnFileOpgaveOnAction" text="File...">
+                  <Button fx:id="btnFileOpgave" mnemonicParsing="false" onAction="#btnFileOpgaveOnAction" text="Kies...">
                      <HBox.margin>
                         <Insets right="15.0" />
                      </HBox.margin>
