@@ -20,6 +20,7 @@ import javax.persistence.Transient;
 @Entity
 @Access(AccessType.FIELD)
 public class Klas implements IKlas, Serializable {
+    
     @Transient
     private long id;
     @Transient
@@ -31,27 +32,25 @@ public class Klas implements IKlas, Serializable {
     }
 
     public Klas(String naam, List<Leerling> leerlingen) {
-
         setNaam(naam);
-
         setLeerlingen(leerlingen);
     }
+    
     @Id
     @Access(AccessType.PROPERTY)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
+    
     public void setId(long id) {
         this.id = id;
     }
-
 
     @Override
     public StringProperty naamProperty() {
         return naam;
     }
-
 
     @Override
     @Basic
@@ -73,7 +72,6 @@ public class Klas implements IKlas, Serializable {
     }
 
     public void setLeerlingen(List<Leerling> leerlingen) {
-
         if (leerlingen == null || leerlingen.isEmpty()) {
             throw new IllegalArgumentException("Je moet leerlingen opgeven");
         }
@@ -84,5 +82,4 @@ public class Klas implements IKlas, Serializable {
     public String toString() {
         return naam.get();
     }
-
 }

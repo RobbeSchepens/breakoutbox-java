@@ -5,7 +5,7 @@ import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class OefeningNull extends Oefening {
+public class OefeningNull implements IOefening {
 
     private final StringProperty naam = new SimpleStringProperty();
     private String antwoord;
@@ -30,7 +30,7 @@ public class OefeningNull extends Oefening {
         return naam.get();
     }
 
-    @Override
+    //@Override
     public void setNaam(String value) {
         naam.set(value);
     }

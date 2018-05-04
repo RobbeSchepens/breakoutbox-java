@@ -7,17 +7,16 @@ import domein.IActie;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-public class ActieOverzichtPanelController extends OverzichtPanelController<IActie, ActieController> implements ActieSubject {
+public final class ActieOverzichtPanelController extends OverzichtPanelController<IActie, ActieController> implements ActieSubject {
 
-    ActieController ac;
-    ActieFrameController fc;
-    private Set<ActieObserver> observers;
+    private final ActieController ac;
+    private final ActieFrameController fc;
+    private final Set<ActieObserver> observers;
 
     public ActieOverzichtPanelController(ActieController ac, ActieFrameController fc) {
         super(ac);
@@ -31,8 +30,8 @@ public class ActieOverzichtPanelController extends OverzichtPanelController<IAct
     void btnDeleteSelectedOnAction() {
         if (getTbvOverzicht().getSelectionModel().getSelectedItem() != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Verwijder oefening");
-            alert.setHeaderText("Bent u zeker dat u de oefening wilt verwijderen?");
+            alert.setTitle("Verwijder actie");
+            alert.setHeaderText("Bent u zeker dat u de actie wilt verwijderen?");
 
             // Volgende regel zorgt ervoor dat het icoontje en de stylesheet meegenomen worden
             alert.initOwner(this.getScene().getWindow());
@@ -53,8 +52,8 @@ public class ActieOverzichtPanelController extends OverzichtPanelController<IAct
 
     @Override
     void renderContent() {
-        setLblTitleLeftText("Overzicht Acties");
-        setLblFilterOpText("Filter op actie:");
+        setLblTitleLeftText("Overzicht acties");
+        setLblFilterOpText("Filter op naam:");
         renderTable();
     }
 

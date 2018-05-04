@@ -3,13 +3,13 @@ package gui;
 import domein.DomeinController;
 import javafx.scene.layout.GridPane;
 
-public class KlasFrameController extends GridPane {
+public final class KlasFrameController extends GridPane {
 
-    NavigatieController nav;
-    KlasOverzichtPanelController klasOverview;
-    KlasDetailPanelController klasDetail;
+    private final NavigatieController nav;
+    private final KlasOverzichtPanelController klasOverview;
+    private final KlasDetailPanelController klasDetail;
     
-    KlasFrameController(DomeinController dc) {
+    public KlasFrameController(DomeinController dc) {
         nav = new NavigatieController(dc);
         klasOverview = new KlasOverzichtPanelController(dc.getKc(), this);
         klasDetail = new KlasDetailPanelController(dc.getKc(), this);
@@ -22,7 +22,7 @@ public class KlasFrameController extends GridPane {
         add(klasDetail, 1, 1);
     }
     
-    void initNieuweOefening() {
+    void initNieuw() {
         klasOverview.clearSelectedItem();
         klasDetail.initNieuweOefening();
     }

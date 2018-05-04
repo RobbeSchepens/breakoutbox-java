@@ -1,6 +1,7 @@
 package domein;
 
 import java.time.LocalDate;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class SessieController {
@@ -16,11 +17,11 @@ public class SessieController {
         return sb;
     }
     
-    public ObservableList<ISessie> geefSessieen() {
+    public ObservableList<ISessie> geefSessies() {
         return sb.getSessiesFiltered();
     }
     
-    public int geefAantalSessieen() {
+    public int geefAantalSessies() {
         return sb.getSessies().size();
     }
     
@@ -32,8 +33,9 @@ public class SessieController {
         return huidigeSessie;
     }
     
-    public void voegNieuweSessieToe(String naam, String omschrijving, LocalDate startdatum) {
-        Sessie sessie = new Sessie(naam, omschrijving, startdatum);
+    public void voegNieuweSessieToe(String naam, String omschrijving, IKlas klas, IBox box, 
+            boolean isAfstand, String typeGroepen, int aantalGroepen, LocalDate startdatum) {
+        Sessie sessie = new Sessie(naam, omschrijving, (Klas)klas, (Box)box, isAfstand, typeGroepen, aantalGroepen, startdatum);
         sb.add(sessie);
     }
 
@@ -57,4 +59,11 @@ public class SessieController {
         sb.veranderFilter(filterValue);
     }
     
+    public ObservableList<IKlas> geefKlassen() {
+        return FXCollections.unmodifiableObservableList((ObservableList<IKlas>)sb.getKlassen());
+    }
+    
+    public ObservableList<IBox> geefBoxes() {
+        return FXCollections.unmodifiableObservableList((ObservableList<IBox>)sb.getBoxes());
+    }
 }

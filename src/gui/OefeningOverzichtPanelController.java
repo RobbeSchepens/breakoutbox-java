@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -20,9 +19,9 @@ import javafx.scene.layout.HBox;
 
 public final class OefeningOverzichtPanelController extends OverzichtPanelController<IOefening, OefeningController> implements OefeningSubject {
 
-    private OefeningController oc;
-    private OefeningFrameController fc;
-    private Set<OefeningObserver> observers;
+    private final OefeningController oc;
+    private final OefeningFrameController fc;
+    private final Set<OefeningObserver> observers;
     private ComboBox<Vak> ddlVakken;
     private String filtervalue = "";
     
@@ -45,7 +44,6 @@ public final class OefeningOverzichtPanelController extends OverzichtPanelContro
         
         ddlVakken.getSelectionModel().selectedItemProperty().addListener(
                 (ObservableValue<? extends Vak> observable, Vak oldValue, Vak newValue) -> {
-                    System.out.println("eventlistener vak");
             if (!(newValue == null)) {
                 oc.veranderFilter(filtervalue, newValue);
             }

@@ -43,7 +43,7 @@ public class Doelstelling implements Serializable {
 
     @Override
     public String toString() {
-        return doelstelling;
+        return code;
     }
 
 }

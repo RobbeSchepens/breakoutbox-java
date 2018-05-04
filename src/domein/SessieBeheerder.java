@@ -13,19 +13,33 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
 
     //Repositories
     private GenericDaoJpa<Sessie> sessieRepo;
+    private GenericDaoJpa<Klas> klasRepo;
+    private GenericDaoJpa<Box> boxRepo;
     
     // Lijsten
     private ObservableList<? extends ISessie> sessies;
     private FilteredList<ISessie> filteredSessieList;
-    private Set<BeheerderObserver> observers;
+    private ObservableList<? extends IKlas> klassen;
+    private ObservableList<? extends IBox> boxes;
+    private final Set<BeheerderObserver> observers;
     
     public SessieBeheerder() {
         observers = new HashSet<>();
         setSessieRepo(new GenericDaoJpa(Sessie.class));
+        setKlasRepo(new GenericDaoJpa(Klas.class));
+        setBoxRepo(new GenericDaoJpa(Box.class));
     }
 
     public void setSessieRepo(GenericDaoJpa<Sessie> mock) {
         sessieRepo = mock;
+    }
+
+    public void setKlasRepo(GenericDaoJpa<Klas> mock) {
+        klasRepo = mock;
+    }
+
+    public void setBoxRepo(GenericDaoJpa<Box> mock) {
+        boxRepo = mock;
     }
     
     public ObservableList<? extends ISessie> getSessies() {
@@ -90,7 +104,23 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
     
     public Oefening geefSessieByNaamJpa(String naam) {
         return null;
-        //return sessieRepo.getOefeningByName(naam);
+        //return sessieRepo.getSessieByName(naam);
+    }
+
+    public ObservableList<? extends IKlas> getKlassen() {
+        if (klassen == null) {
+            klassen = FXCollections.observableArrayList(klasRepo.findAll());
+            Collections.sort((ObservableList<Klas>)klassen, Comparator.comparing(Klas::getNaam));
+        }
+        return klassen;
+    }
+
+    public ObservableList<? extends IBox> getBoxes() {
+        if (boxes == null) {
+            boxes = FXCollections.observableArrayList(boxRepo.findAll());
+            Collections.sort((ObservableList<Box>)boxes, Comparator.comparing(Box::getNaam));
+        }
+        return boxes;
     }
 
     @Override
@@ -110,11 +140,11 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
 
     @Override public void updateOefeningen() {}
     @Override public void updateBoxes() {
-        //boxes = null;
+        boxes = null;
     }
     @Override public void updateSessies() {}
     @Override public void updateActies() {}
     @Override public void updateKlassen() {
-        //klassen = null;
+        klassen = null;
     }
 }

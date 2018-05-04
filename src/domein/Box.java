@@ -175,7 +175,7 @@ public class Box implements IBox, Serializable {
                     for (Oefening oef : getOefeningen()) {
                         sb.append("Oefening: " + oef.getNaam() + "\n----------------------------------------\n");
                         for (Doelstelling doels : oef.getDoelstellingen()) {
-                            sb.append(String.format("%s\n", doels));
+                            sb.append(String.format("%s\n", doels.toString()));
                         }
                         sb.append("\n");
                     }
@@ -196,7 +196,7 @@ public class Box implements IBox, Serializable {
                     contentStream.endText();
                 }
 
-                pdf.save(String.format("%s\\%s.pdf", selectedDirectory.getAbsolutePath(), getNaam()));
+                pdf.save(String.format("%s%s%s.pdf", selectedDirectory.getAbsolutePath(), File.separator, getNaam()));
             } catch (IOException | RuntimeException ex) {
                 throw new RuntimeException("Fout tijdens pdf creatie");
             }

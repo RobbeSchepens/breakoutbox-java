@@ -25,19 +25,21 @@ import javafx.scene.layout.VBox;
 
 public class OefeningDoelstDetailPanelController extends VBox implements OefeningObserver, OefeningSubject {
 
-    private OefeningController dc;
-    private OefeningFrameController fc;
+    private final OefeningController dc;
+    private final OefeningFrameController fc;
     private List<Doelstelling> listDoelstellingenTempAlle = new ArrayList<>();
     private List<Doelstelling> listDoelstellingenTempGeselect = new ArrayList<>();
-    private Set<OefeningObserver> observers;
+    private final Set<OefeningObserver> observers;
 
     @FXML private Label lblTitleLeftList;
     @FXML private Label lblAantalGeselecteerd;
-
     @FXML private Button btnCancel;
     @FXML private Button btnSubmit;
     @FXML private ListView<Doelstelling> lsvListAlle;
-    @FXML private ListView<Doelstelling> lsvListGeselecteerde;
+    @FXML
+    private ListView<Doelstelling> lsvListGeselecteerde;
+    @FXML
+    private Label lblAantalBeschikbaar;
 
     public OefeningDoelstDetailPanelController(OefeningController dcon, OefeningFrameController fc) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("OefeningDoelstDetailPanel.fxml"));
@@ -58,6 +60,8 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
             listDoelstellingenTempAlle.add(item);
         }
 
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listDoelstellingenTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listDoelstellingenTempAlle.size());
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
         lblTitleLeftList.setText("Doelstellingen");
         lsvListAlle.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Doelstelling>() {
@@ -69,7 +73,8 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
                         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
                         listDoelstellingenTempGeselect.add(newValue);
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
-                        lblAantalGeselecteerd.setText("doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+                        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listDoelstellingenTempGeselect.size());
+                        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listDoelstellingenTempAlle.size());
                     });
                 }
             }
@@ -84,7 +89,8 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
                         listDoelstellingenTempAlle.add(newValue);
                         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
-                        lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+                        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listDoelstellingenTempGeselect.size());
+                        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listDoelstellingenTempAlle.size());
                     });
                 }
             }
@@ -96,15 +102,15 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
         listDoelstellingenTempAlle.clear();
         List<Doelstelling> p = new ArrayList<>(dc.geefDoelstellingen());
 
-        for (Doelstelling item : p) {
+        p.forEach((item) -> {
             listDoelstellingenTempAlle.add(item);
-        }
+        });
 
         List<Doelstelling> m = new ArrayList<>(dc.geefDoelstellingenHuidigeOefening());
         listDoelstellingenTempGeselect = new ArrayList<>();
-        for (Doelstelling item : m) {
+        m.forEach((item) -> {
             listDoelstellingenTempGeselect.add(item);
-        }
+        });
 
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
         //listDoelstellingenTempAlle.removeAll(listDoelstellingenTempGeselect); //werkt niet deftig, idk xd
@@ -120,7 +126,8 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
         listDoelstellingenTempAlle.removeAll(h);
 
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
-        lblAantalGeselecteerd.setText("Doelstellingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listDoelstellingenTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listDoelstellingenTempAlle.size());
         
         dc.setListDoelstellingenVanOefening(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
     }
@@ -135,8 +142,6 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
         dc.setListDoelstellingenVanOefening(listDoelstellingenTempGeselect);
         fc.toonListview("cancel/init");
         notifyObserversList();
-        //Dit crasht bij nieuwe oefening, er bestaat nog geen huidige oefening
-        //dc.setDoelstellingenOefening(lsvListGeselecteerde.getSelectionModel().getSelectedItems());
     }
     @FXML
     private void lsvListAlleOnMouseClicked(MouseEvent event) {
@@ -152,7 +157,8 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
         dc.setListDoelstellingenVanOefening(listDoelstellingenTempGeselect);
         lsvListAlle.setItems(FXCollections.observableArrayList(listDoelstellingenTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listDoelstellingenTempGeselect));
-        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listDoelstellingenTempGeselect.size());
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listDoelstellingenTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listDoelstellingenTempAlle.size());
     }
 
     @Override

@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 
 public class HoofdMenuController extends GridPane {
     
-    private DomeinController dc;
+    private final DomeinController dc;
     private OefeningController oc;
     private BoxController bc;
     private SessieController sc;
@@ -148,5 +148,4 @@ public class HoofdMenuController extends GridPane {
         scene.getStylesheets().add("gui/css/style.css");
         ((Stage) this.getScene().getWindow()).setScene(scene);
     }
-
 }

@@ -1,4 +1,3 @@
-
 package domein;
 
 public interface BoxObserver {

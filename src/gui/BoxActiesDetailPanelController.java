@@ -5,7 +5,6 @@ import domein.BoxObserver;
 import domein.BoxSubject;
 import domein.IActie;
 import domein.IBox;
-import domein.IOefening;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,19 +25,21 @@ import javafx.scene.layout.VBox;
 
 public class BoxActiesDetailPanelController extends VBox implements BoxObserver, BoxSubject {
 
-    BoxFrameController fc;
-    BoxController bc;
+    private final BoxFrameController fc;
+    private final BoxController bc;
     private List<IActie> listActiesTempAlle;
     private List<IActie> listActiesTempGeselect = new ArrayList<>();
-    private Set<BoxObserver> observers;
+    private final Set<BoxObserver> observers;
 
     @FXML private Label lblTitleLeftList;
     @FXML private Label lblAantalGeselecteerd;
     @FXML private ListView<IActie> lsvListAlle;
     @FXML private ListView<IActie> lsvListGeselecteerde;
-
     @FXML private Button btnCancel;
-    @FXML private Button btnSubmit;
+    @FXML
+    private Button btnSubmit;
+    @FXML
+    private Label lblAantalBeschikbaar;
 
     public BoxActiesDetailPanelController(BoxController bc, BoxFrameController fc) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("BoxActiesDetailPanel.fxml"));
@@ -55,10 +56,11 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
         this.observers = new HashSet<>();
 
         lblTitleLeftList.setText("Acties");
-
         listActiesTempAlle = new ArrayList<>(bc.geefActies());
         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
 
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listActiesTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listActiesTempAlle.size());
         lsvListAlle.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<IActie>() { // moet veranderd woden
             @Override
             public void changed(ObservableValue<? extends IActie> observable, IActie oldValue, IActie newValue) {
@@ -68,7 +70,8 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
                         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
                         listActiesTempGeselect.add(newValue);
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
-                        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listActiesTempGeselect.size());
+                        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listActiesTempGeselect.size());
+                        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listActiesTempAlle.size());
                     });
                 }
             }
@@ -84,7 +87,8 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
                         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
                         listActiesTempAlle.add(newValue);
                         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
-                        lblAantalGeselecteerd.setText("Groepsbewerkingen geselecteerd: " + listActiesTempGeselect.size());
+                        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listActiesTempGeselect.size());
+                        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listActiesTempAlle.size());
                     });
                 }
             }
@@ -101,9 +105,9 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
 
         List<IActie> m = new ArrayList<>(bc.geefActiesHuidigeBox());
         listActiesTempGeselect = new ArrayList<>();
-        for (IActie item : m) {
+        m.forEach((item) -> {
             listActiesTempGeselect.add(item);
-        }
+        });
 
         bc.setListActiesVanBox(listActiesTempGeselect);
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
@@ -125,7 +129,8 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
         lsvListAlle.setItems(FXCollections.observableArrayList(listActiesTempAlle));
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listActiesTempGeselect));
         bc.setListActiesVanBox(listActiesTempGeselect);
-        lblAantalGeselecteerd.setText("Geselecteerde Oefeningen 0");
+        lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listActiesTempGeselect.size());
+        lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listActiesTempAlle.size());
     }
 
     @FXML
@@ -135,7 +140,6 @@ public class BoxActiesDetailPanelController extends VBox implements BoxObserver,
     @FXML
     private void lsvListGeselecteerdeOnMouseClicked(MouseEvent event) {
     }
-
 
     @FXML
     private void btnCancelOnAction(ActionEvent event) {

@@ -3,13 +3,13 @@ package gui;
 import domein.DomeinController;
 import javafx.scene.layout.GridPane;
 
-public class ActieFrameController extends GridPane {
+public final class ActieFrameController extends GridPane {
 
-    NavigatieController nav;
-    ActieOverzichtPanelController actieOverzicht;
-    ActieDetailPanelController actieDetail;
+    private final NavigatieController nav;
+    private final ActieOverzichtPanelController actieOverzicht;
+    private final ActieDetailPanelController actieDetail;
 
-    ActieFrameController(DomeinController dc) {
+    public ActieFrameController(DomeinController dc) {
         nav = new NavigatieController(dc);
         actieOverzicht = new ActieOverzichtPanelController(dc.getAc(), this);
         actieDetail = new ActieDetailPanelController(dc.getAc(), this);

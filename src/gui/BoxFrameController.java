@@ -5,11 +5,11 @@ import javafx.scene.layout.GridPane;
 
 public final class BoxFrameController extends GridPane {
 
-    NavigatieController nav;
-    BoxOverzichtPanelController boxOverzicht;
-    BoxDetailPanelController boxDetail;
-    BoxActiesDetailPanelController boxDetailActies;
-    BoxOefDetailPanelController boxDetailOef;
+    private final NavigatieController nav;
+    private final BoxOverzichtPanelController boxOverzicht;
+    private final BoxDetailPanelController boxDetail;
+    private final BoxActiesDetailPanelController boxDetailActies;
+    private final BoxOefDetailPanelController boxDetailOef;
     
     public BoxFrameController(DomeinController dc) {
         nav = new NavigatieController(dc);

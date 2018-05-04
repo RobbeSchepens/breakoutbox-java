@@ -9,17 +9,16 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 
-public class BoxOverzichtPanelController extends OverzichtPanelController<IBox, BoxController> implements BoxSubject, BoxObserver, UpdateItemTableObserver {
+public final class BoxOverzichtPanelController extends OverzichtPanelController<IBox, BoxController> implements BoxSubject, BoxObserver, UpdateItemTableObserver {
 
-    BoxController bc;
-    BoxFrameController fc;
-    private Set<BoxObserver> observers;
+    private final BoxController bc;
+    private final BoxFrameController fc;
+    private final Set<BoxObserver> observers;
 
     public BoxOverzichtPanelController(BoxController bc, BoxFrameController fc) {
         super(bc);
@@ -37,8 +36,8 @@ public class BoxOverzichtPanelController extends OverzichtPanelController<IBox, 
 
     @Override
     void renderContent() {
-        setLblTitleLeftText("Overzicht Boxes");
-        setLblFilterOpText("Filter op box:");
+        setLblTitleLeftText("Overzicht boxes");
+        setLblFilterOpText("Filter op naam:");
         renderTable();
     }
 
@@ -64,8 +63,8 @@ public class BoxOverzichtPanelController extends OverzichtPanelController<IBox, 
     void btnDeleteSelectedOnAction() {
         if (getTbvOverzicht().getSelectionModel().getSelectedItem() != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Verwijder oefening");
-            alert.setHeaderText("Bent u zeker dat u de oefening wilt verwijderen?");
+            alert.setTitle("Verwijder box");
+            alert.setHeaderText("Bent u zeker dat u de box wilt verwijderen?");
 
             // Volgende regel zorgt ervoor dat het icoontje en de stylesheet meegenomen worden
             alert.initOwner(this.getScene().getWindow());

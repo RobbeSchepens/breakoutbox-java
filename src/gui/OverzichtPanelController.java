@@ -18,7 +18,7 @@ import org.eclipse.persistence.exceptions.DatabaseException;
 
 public abstract class OverzichtPanelController<T, E> extends VBox {
 
-    private E controller;
+    private final E controller;
 
     @FXML private Label lblTitleLeft, lblFilterOp;
     @FXML private TextField txfFilterOp;
@@ -95,7 +95,7 @@ public abstract class OverzichtPanelController<T, E> extends VBox {
             btnDeleteSelectedOnAction();
         }
         catch (DatabaseException | RollbackException ex){
-            lblError.setText("Het object kon niet verwijderd worden want het maakt deel uit van een ander object.");
+            lblError.setText("Dit item kon niet verwijderd worden want het maakt deel uit van een ander object.");
         }
     }
     
