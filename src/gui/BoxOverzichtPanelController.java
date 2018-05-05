@@ -49,8 +49,8 @@ public final class BoxOverzichtPanelController extends OverzichtPanelController<
         TableColumn<IBox, String> col1 = new TableColumn<>("Naam");
         col1.setCellValueFactory(v -> v.getValue().naamProperty());
 
-        TableColumn<IBox, String> col2 = new TableColumn<>("Aantal acties");
-        col2.setCellValueFactory(v -> new ReadOnlyObjectWrapper(v.getValue().getActiesCount()));
+        TableColumn<IBox, String> col2 = new TableColumn<>("Vak");
+        col2.setCellValueFactory(v -> new ReadOnlyObjectWrapper(v.getValue().getVak()));
 
         TableColumn<IBox, String> col3 = new TableColumn<>("Aantal oefeningen");
         col3.setCellValueFactory(v -> new ReadOnlyObjectWrapper(v.getValue().getOefeningen().size()));
@@ -95,14 +95,15 @@ public final class BoxOverzichtPanelController extends OverzichtPanelController<
             observer.update(o);
         });
     }
-    
+
     @Override
     void filter(String newValue) {
         bc.veranderFilter(newValue);
     }
 
     @Override
-    void clearAddedFilters() {}
+    void clearAddedFilters() {
+    }
 
     @Override
     void initNieuw() {
@@ -110,13 +111,16 @@ public final class BoxOverzichtPanelController extends OverzichtPanelController<
     }
 
     @Override
-    public void update(IBox box) {}
+    public void update(IBox box) {
+    }
 
     @Override
-    public void updateCountActies() {}
+    public void updateCountActies() {
+    }
 
     @Override
-    public void updateCountOefeningen() {}
+    public void updateCountOefeningen() {
+    }
 
     @Override
     public void updateEditedItem() {
