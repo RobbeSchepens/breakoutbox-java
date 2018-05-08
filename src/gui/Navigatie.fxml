@@ -11,7 +11,7 @@
 
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1280.0" style="-fx-border-width: 0 0 2 0; -fx-border-color: #006fe6;" type="HBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox fx:id="hbxHome" alignment="CENTER" onMouseClicked="#hbxHomeOnMouseClicked">
+      <HBox fx:id="hbxHome" alignment="CENTER" onMouseClicked="#hbxHomeOnMouseClicked" styleClass="navitem">
          <children>
             <Label styleClass="menutext" text="Home" textAlignment="CENTER" wrapText="true" />
          </children>
@@ -19,7 +19,7 @@
             <Insets left="30.0" right="30.0" />
          </padding>
       </HBox>
-      <HBox fx:id="hbxOef" alignment="CENTER" onMouseClicked="#hbxOefOnMouseClicked">
+      <HBox fx:id="hbxOef" alignment="CENTER" onMouseClicked="#hbxOefOnMouseClicked" styleClass="navitem">
          <children>
             <Label styleClass="menutext" text="Oefeningen beheren" textAlignment="CENTER" wrapText="true" />
          </children>
@@ -27,7 +27,7 @@
             <Insets left="30.0" right="30.0" />
          </padding>
       </HBox>
-      <HBox fx:id="hbxBoxes" alignment="CENTER" onMouseClicked="#hbxBoxesOnMouseClicked">
+      <HBox fx:id="hbxBoxes" alignment="CENTER" onMouseClicked="#hbxBoxesOnMouseClicked" styleClass="navitem">
          <children>
             <Label styleClass="menutext" text="Boxes beheren" textAlignment="CENTER" wrapText="true" />
          </children>
@@ -35,7 +35,7 @@
             <Insets left="30.0" right="30.0" />
          </padding>
       </HBox>
-      <HBox fx:id="hbxSessies" alignment="CENTER" onMouseClicked="#hbxSessiesOnMouseClicked">
+      <HBox fx:id="hbxSessies" alignment="CENTER" onMouseClicked="#hbxSessiesOnMouseClicked" styleClass="navitem">
          <children>
             <Label styleClass="menutext" text="Sessies beheren" textAlignment="CENTER" wrapText="true" />
          </children>
@@ -43,7 +43,7 @@
             <Insets left="30.0" right="30.0" />
          </padding>
       </HBox>
-      <HBox fx:id="hbxActies" alignment="CENTER" onMouseClicked="#hbxhbxActiesOnMouseClicked">
+      <HBox fx:id="hbxActies" alignment="CENTER" onMouseClicked="#hbxhbxActiesOnMouseClicked" styleClass="navitem">
          <children>
             <Label styleClass="menutext" text="Acties beheren" textAlignment="CENTER" wrapText="true" />
          </children>
@@ -51,7 +51,7 @@
             <Insets left="30.0" right="30.0" />
          </padding>
       </HBox>
-      <HBox fx:id="hbxKlassen" alignment="CENTER" onMouseClicked="#hbxKlassenOnMouseClicked">
+      <HBox fx:id="hbxKlassen" alignment="CENTER" onMouseClicked="#hbxKlassenOnMouseClicked" styleClass="navitem">
          <children>
             <Label styleClass="menutext" text="Klassen beheren" textAlignment="CENTER" wrapText="true" />
          </children>

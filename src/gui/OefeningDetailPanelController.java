@@ -178,7 +178,7 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
                 lblError.setText("Openen van de PDF is niet ondersteund.");
             }
         } catch (IOException ioe) {
-            System.out.println(ioe);
+            lblError.setText("Er is iets fout gelopen bij het openen van het bestand.");
         }
     }
 
@@ -186,7 +186,6 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
     private void btnFileOpgaveOnAction(ActionEvent event) {
         fileOpgave = fileChooserOpgave.showOpenDialog((Stage) (this.getScene().getWindow()));
         if (fileOpgave != null) {
-            System.out.println("hier");
             fileOpgaveNaam = fileOpgave.getName();
             lblOpgave.setText(fileOpgaveNaam);
             btnOpenOpgave.setDisable(false);
@@ -203,7 +202,7 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
                 lblError.setText("Openen van de PDF is niet ondersteund.");
             }
         } catch (IOException ioe) {
-            System.out.println(ioe);
+            lblError.setText("Er is iets fout gelopen bij het openen van het bestand.");
         }
     }
 

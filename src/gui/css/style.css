@@ -45,8 +45,10 @@
 /*    -fx-background-radius: 12;*/
     -fx-background-radius: 0;
     -fx-background-color: white;
-    -fx-border-width: 1;
-    -fx-border-color: #42484e;
+/*    -fx-border-width: 1;*/
+    -fx-border-color: #006fe6;
+    -fx-border-width: 2 2 2 18;
+    -fx-padding: 15 15 15 30;
 }
 
 .btn-card .label {
@@ -83,6 +85,14 @@
 }
 
 .menutext {
+    -fx-text-fill: #006fe6;
+}
+
+.navitem {
+    -fx-border-width: 0;
+}
+
+.navitem .label {
     -fx-font-family: "Poppins Medium";
     -fx-font-size: 1.3em;
 }
