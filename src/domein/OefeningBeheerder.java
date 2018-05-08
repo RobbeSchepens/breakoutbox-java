@@ -26,14 +26,14 @@ public final class OefeningBeheerder implements BeheerderSubject, BeheerderObser
     private ObservableList<Groepsbewerking> groepsbewerkingen;
     private ObservableList<Doelstelling> doelstellingen;
     private Set<BeheerderObserver> observers;
-    
+
     public OefeningBeheerder() {
         observers = new HashSet<>();
         setOefRepo(new OefeningDaoJpa());
         setVakRepo(new GenericDaoJpa(Vak.class));
         setGroepsbewerkingRepo(new GenericDaoJpa(Groepsbewerking.class));
         setDoelstellingRepo(new GenericDaoJpa(Doelstelling.class));
-        
+
         // Seeden van database
         OefeningData od = new OefeningData(this, new BoxBeheerder());
     }
@@ -53,49 +53,53 @@ public final class OefeningBeheerder implements BeheerderSubject, BeheerderObser
     public void setDoelstellingRepo(GenericDaoJpa<Doelstelling> mock) {
         doelstellingRepo = mock;
     }
-    
+
     public ObservableList<? extends IOefening> getOefeningen() {
         if (oefeningen == null) {
             oefeningen = FXCollections.observableArrayList(oefRepo.findAll());
-            Collections.sort((ObservableList<Oefening>)oefeningen, Comparator.comparing(Oefening::getNaam));
-            filteredOefeningList = new FilteredList<>((ObservableList<IOefening>)getOefeningen(), p -> true);
+            Collections.sort((ObservableList<Oefening>) oefeningen, Comparator.comparing(Oefening::getNaam));
+            filteredOefeningList = new FilteredList<>((ObservableList<IOefening>) getOefeningen(), p -> true);
         }
         return oefeningen;
     }
 
     public ObservableList<IOefening> getOefeningenFiltered() {
-        if (filteredOefeningList == null)
+        if (filteredOefeningList == null) {
             getOefeningen();
+        }
         return filteredOefeningList;
     }
-    
+
     public void veranderFilter(String filterValue, Vak vak) {
         filteredOefeningList.setPredicate(oefening -> {
             // Als filtervalue of vak null/empty is, toon alle oefeningen
-            if (filterValue == null || filterValue.isEmpty() && vak == null)
+            if (filterValue == null || filterValue.isEmpty() && vak == null) {
                 return true;
-            
+            }
+
             // Filter op vak als naam null/empty is
-            if (filterValue == null || filterValue.isEmpty())
+            if (filterValue == null || filterValue.isEmpty()) {
                 return oefening.getVak() == vak;
-            
+            }
+
             String lowerCaseValue = filterValue.toLowerCase();
-            
+
             // Filter enkel op naam als vak null is
-            if (vak == null)
+            if (vak == null) {
                 return oefening.getNaam().toLowerCase().contains(lowerCaseValue);
-            
+            }
+
             // Filter op beiden
             return oefening.getNaam().toLowerCase().contains(lowerCaseValue) && oefening.getVak() == vak;
         });
     }
-    
+
     public void add(Oefening o) {
         checkOpDubbel(o);
         oefRepo.startTransaction();
         oefRepo.insert(o);
         oefRepo.commitTransaction();
-        ((ObservableList<Oefening>)getOefeningen()).add(o);
+        ((ObservableList<Oefening>) getOefeningen()).add(o);
         notifyObservers();
     }
 
@@ -106,7 +110,7 @@ public final class OefeningBeheerder implements BeheerderSubject, BeheerderObser
         oefRepo.commitTransaction();
         notifyObservers();
     }
-    
+
     public void delete(Oefening o) {
         oefRepo.startTransaction();
         oefRepo.delete(o);
@@ -126,7 +130,7 @@ public final class OefeningBeheerder implements BeheerderSubject, BeheerderObser
         }
 
     }
-    
+
     public Oefening geefOefeningByNaamJpa(String naam) {
         return oefRepo.getOefeningByName(naam);
     }
@@ -154,7 +158,7 @@ public final class OefeningBeheerder implements BeheerderSubject, BeheerderObser
         }
         return doelstellingen;
     }
-    
+
     public void addVak(Vak o) {
         vakRepo.startTransaction();
         vakRepo.insert(o);
@@ -175,22 +179,37 @@ public final class OefeningBeheerder implements BeheerderSubject, BeheerderObser
 
     @Override
     public void addBeheerderObserver(BeheerderObserver o) {
-        if (!observers.contains(o))
+        if (!observers.contains(o)) {
             observers.add(o);
+        }
     }
 
     @Override
     public void removeBeheerderObserver(BeheerderObserver o) {
         observers.remove(o);
     }
-    
+
     private void notifyObservers() {
         observers.forEach(e -> e.updateOefeningen());
     }
 
-    @Override public void updateOefeningen() {}
-    @Override public void updateBoxes() {}
-    @Override public void updateSessies() {}
-    @Override public void updateActies() {}
-    @Override public void updateKlassen() {}
+    @Override
+    public void updateOefeningen() {
+    }
+
+    @Override
+    public void updateBoxes() {
+    }
+
+    @Override
+    public void updateSessies() {
+    }
+
+    @Override
+    public void updateActies() {
+    }
+
+    @Override
+    public void updateKlassen() {
+    }
 }

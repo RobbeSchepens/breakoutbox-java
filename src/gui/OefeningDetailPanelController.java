@@ -33,27 +33,47 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
     private File fileFeedback;
     private String fileOpgaveNaam;
     private String fileFeedbackNaam;
-    
-    @FXML private Label lblTitleRight;
-    @FXML private TextField txfNaam;
-    @FXML private Button btnAdd;
-    @FXML private TextField txfAntwoord;
-    @FXML private ComboBox<Vak> ddlVak;
-    @FXML private Button btnGroepsbewerkingen;
-    @FXML private Label lblGroepsbewerkingenCount;
-    @FXML private Button btnDoelstellingen;
-    @FXML private Label lblDoelstellingenCount;
-    @FXML private Button btnEdit;
-    @FXML private Button btnNieuweOefening;
-    @FXML private Button btnOpenFeedback;
-    @FXML private Button btnFileFeedback;
-    @FXML private Label lblFeedback;
-    @FXML private Button btnOpenOpgave;
-    @FXML private Button btnFileOpgave;
-    @FXML private Label lblOpgave;
-    @FXML private Label lblError;
-    @FXML private Label lblSuccess;
-    @FXML private Button btnAddWithContent;
+
+    @FXML
+    private Label lblTitleRight;
+    @FXML
+    private TextField txfNaam;
+    @FXML
+    private Button btnAdd;
+    @FXML
+    private TextField txfAntwoord;
+    @FXML
+    private ComboBox<Vak> ddlVak;
+    @FXML
+    private Button btnGroepsbewerkingen;
+    @FXML
+    private Label lblGroepsbewerkingenCount;
+    @FXML
+    private Button btnDoelstellingen;
+    @FXML
+    private Label lblDoelstellingenCount;
+    @FXML
+    private Button btnEdit;
+    @FXML
+    private Button btnNieuweOefening;
+    @FXML
+    private Button btnOpenFeedback;
+    @FXML
+    private Button btnFileFeedback;
+    @FXML
+    private Label lblFeedback;
+    @FXML
+    private Button btnOpenOpgave;
+    @FXML
+    private Button btnFileOpgave;
+    @FXML
+    private Label lblOpgave;
+    @FXML
+    private Label lblError;
+    @FXML
+    private Label lblSuccess;
+    @FXML
+    private Button btnAddWithContent;
 
     public OefeningDetailPanelController(OefeningController dcon, OefeningFrameController fc) {
         FXMLLoader loader
@@ -65,19 +85,19 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-        
+
         this.dc = dcon;
         this.fc = fc; // parent controller for showing listview bewerkingen en doelstellingen
-        
+
         this.fileChooserOpgave = new FileChooser();
         fileChooserOpgave.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
         this.fileChooserFeedback = new FileChooser();
         fileChooserFeedback.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
-        
+
         ddlVak.setItems(dc.geefVakken());
         initButtons(true);
     }
-    
+
     private void initButtons(boolean isNew) {
         btnAdd.setManaged(isNew);
         btnAdd.setVisible(isNew);
@@ -93,7 +113,7 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
         initButtons(true);
         clearRender();
     }
-    
+
     private void clearRender() {
         dc.setListDoelstellingenVanOefening(new ArrayList<>());
         dc.setListGroepsbewerkingenVanOefening(new ArrayList<>());
@@ -137,7 +157,7 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
     public void updateCountGroepsb() {
         lblGroepsbewerkingenCount.setText(dc.getAantalTempGroepsbewerkingen() + " bewerkingen geselecteerd");
     }
-    
+
     @Override
     public void updateCountDoelst() {
         lblDoelstellingenCount.setText(dc.getAantalTempDoelstellingen() + " doelstellingen geselecteerd");
@@ -153,7 +173,7 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
         try {
             Desktop desktop = Desktop.getDesktop();
             if (desktop.isSupported(Desktop.Action.OPEN)) {
-                desktop.open(fileFeedback);
+                desktop.open(fileOpgave);
             } else {
                 lblError.setText("Openen van de PDF is niet ondersteund.");
             }
@@ -164,7 +184,7 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
 
     @FXML
     private void btnFileOpgaveOnAction(ActionEvent event) {
-        fileOpgave = fileChooserOpgave.showOpenDialog((Stage)(this.getScene().getWindow()));
+        fileOpgave = fileChooserOpgave.showOpenDialog((Stage) (this.getScene().getWindow()));
         if (fileOpgave != null) {
             System.out.println("hier");
             fileOpgaveNaam = fileOpgave.getName();
@@ -189,7 +209,7 @@ public class OefeningDetailPanelController extends VBox implements OefeningObser
 
     @FXML
     private void btnFileFeedbackOnAction(ActionEvent event) {
-        fileFeedback = fileChooserFeedback.showOpenDialog((Stage)(this.getScene().getWindow()));
+        fileFeedback = fileChooserFeedback.showOpenDialog((Stage) (this.getScene().getWindow()));
         if (fileFeedback != null) {
             fileFeedbackNaam = fileOpgave.getName();
             lblFeedback.setText(fileFeedbackNaam);
