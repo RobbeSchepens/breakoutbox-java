@@ -103,12 +103,12 @@ public final class KlasDetailPanelController extends VBox implements KlasObserve
             Leerling ln = new Leerling(txfNaamLln.getText(), txfVoornaam.getText());
             txfNaamLln.setText("");
             txfVoornaam.setText("");
-            for (Leerling item : lsvLeerlingen.getItems()) {
+            //for (Leerling item : lsvLeerlingen.getItems()) {
                 /*if (item.getVoornaam().trim().equals(ln.getVoornaam().trim()) && item.getAchternaam().trim().equals(ln.getAchternaam().trim())) {
                     lblToegevoegdBoodschap.setText("Leerling bestaat al.");
                     test = true;
                 }*/
-            }
+            //}
             if (test) {
                 //lblToegevoegdBoodschap.setText("");
                 //lblToegevoegdBoodschaperr.setText("Leerling al in lijst!");

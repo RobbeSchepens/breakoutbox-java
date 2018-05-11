@@ -78,13 +78,14 @@ public class ActieBeheerder implements BeheerderSubject, BeheerderObserver {
     }
 
     public void checkOpDubbel(Actie o) {
-        for (IActie item : getActies()) {
+
+        getActies().forEach(item -> {
             if (item.getNaam().equals(o.getNaam())) {
                 if (!(item == o)) {
                     throw new IllegalArgumentException("Deze actie naam is al in gebruik");
                 }
             }
-        }
+        });
     }
 
 

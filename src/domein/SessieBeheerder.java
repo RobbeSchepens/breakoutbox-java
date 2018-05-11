@@ -93,13 +93,14 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
     }
 
     public void checkOpDubbel(Sessie o) {
-        for (ISessie item : getSessies()) {
+        getSessies().forEach(item -> {
             if (item.getNaam().equals(o.getNaam())) {
                 if (!(item == o)) {
-                    throw new IllegalArgumentException("Deze sessie is al in gebruik");
+                    throw new IllegalArgumentException("Deze naam is al in gebruik");
                 }
             }
-        }
+        });
+
     }
     
     public Oefening geefSessieByNaamJpa(String naam) {

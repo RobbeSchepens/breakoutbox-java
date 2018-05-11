@@ -56,9 +56,9 @@ public class OefeningGroepsbDetailPanelController extends VBox implements Oefeni
         this.fc = fc;
 
         List<Groepsbewerking> p = new ArrayList<>(dc.geefGroepsbewerkingen());
-        for (Groepsbewerking item : p) {
-                listGroepsBewerkingenTempAlle.add(item);
-        }
+        p.forEach((item) -> {
+            listGroepsBewerkingenTempAlle.add(item);
+        });
 
         lsvListAlle.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempAlle));
         lblTitleLeftList.setText("Groepsbewerkingen");
@@ -105,15 +105,15 @@ public class OefeningGroepsbDetailPanelController extends VBox implements Oefeni
     public void update(IOefening oefening) {
         listGroepsBewerkingenTempAlle.clear();
         List<Groepsbewerking> p = new ArrayList<>(dc.geefGroepsbewerkingen());
-        for (Groepsbewerking item : p) {
+        p.forEach((item) -> {
             listGroepsBewerkingenTempAlle.add(item);
-        }
+        });
 
         List<Groepsbewerking> m = new ArrayList<>(dc.geefGroepsbewerkingenHuidigeOefening());
         listGroepsBewerkingenTempGeselect = new ArrayList<>();
-        for (Groepsbewerking item : m) {
+        m.forEach((item) -> {
             listGroepsBewerkingenTempGeselect.add(item);
-        }
+        });
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listGroepsBewerkingenTempGeselect));
 
         //listGroepsBewerkingenTempAlle.removeAll(listGroepsBewerkingenTempGeselect); //werkt niet deftig xd

@@ -127,13 +127,13 @@ public final class BoxBeheerder implements BeheerderSubject, BeheerderObserver {
 
     public void checkOpDubbel(Box o) {
 
-        for (IBox item : getBoxen()) {
+        getBoxen().forEach(item -> {
             if (item.getNaam().equals(o.getNaam())) {
                 if (!(item == o)) {
                     throw new IllegalArgumentException("Deze naam is al in gebruik");
                 }
             }
-        }
+        });
 
     }
 

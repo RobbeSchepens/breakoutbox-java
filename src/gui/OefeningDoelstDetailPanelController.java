@@ -56,9 +56,9 @@ public class OefeningDoelstDetailPanelController extends VBox implements Oefenin
         this.fc = fc;
 
         List<Doelstelling> p = new ArrayList<>(dc.geefDoelstellingen());
-        for (Doelstelling item : p) {
+        p.forEach((item) -> {
             listDoelstellingenTempAlle.add(item);
-        }
+        });
 
         lblAantalGeselecteerd.setText("Aantal geselecteerd: " + listDoelstellingenTempGeselect.size());
         lblAantalBeschikbaar.setText("Aantal beschikbaar: " + listDoelstellingenTempAlle.size());

@@ -104,9 +104,7 @@ public class BoxOefDetailPanelController extends VBox implements BoxObserver, Bo
 
         List<IOefening> m = new ArrayList<>(bc.geefOefeningenHuidigeBox());
         listOefeningenTempGeselect = new ArrayList<>();
-        for (IOefening item : m) {
-            listOefeningenTempGeselect.add(item);
-        }
+        m.forEach(item -> listOefeningenTempGeselect.add(item));
 
         bc.setListOefeningenVanBox(listOefeningenTempGeselect);
         lsvListGeselecteerde.setItems(FXCollections.observableArrayList(listOefeningenTempGeselect));
