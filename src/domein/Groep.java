@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
@@ -32,12 +33,11 @@ public class Groep implements Serializable, IGroep {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Pad pad;
 
+
+
     public Groep() {
     }
 
-    public Groep(List<Leerling> leerlingen) {
-        setLeerlingen(leerlingen);
-    }
 
     @Id
     @Access(AccessType.PROPERTY)
@@ -62,6 +62,7 @@ public class Groep implements Serializable, IGroep {
         }*/
         this.leerlingen = leerligen;
     }
+
 
     public Pad getPad() {
 

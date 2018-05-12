@@ -6,8 +6,10 @@ import exceptions.SpecialeTekensInNaamException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.beans.property.SimpleStringProperty;
@@ -60,6 +62,7 @@ public class Sessie implements ISessie, Serializable {
     private boolean isAfstandsonderwijs;
     private String typeGroepen;
     private int aantalGroepen;
+    Random randomGenerator = new Random();
 
     public Sessie() {
     }
@@ -99,6 +102,15 @@ public class Sessie implements ISessie, Serializable {
         controleerNaam(value);
         naam.set(value);
     }
+    
+    public List<Groep> getGroepen() {
+        return groepen;
+    }
+    
+    public void setGroepen(List<Groep> groepen) {
+        this.groepen = groepen;
+    }
+    
 
     @Override
     public StringProperty naamProperty() {
@@ -221,35 +233,76 @@ public class Sessie implements ISessie, Serializable {
 
     }
 
-    public void maakGroepenAuto() { // deze methode equalized
-        List<Leerling> leerlingenKlas = new ArrayList<>(klas.getLeerlingen());
-        List<Groep> groepenInMethode = new ArrayList<>();
-        Groep groep;
-
-        Collections.shuffle(leerlingenKlas);
-        for (int i = 0; i < aantalGroepen; i++) {
-            groep = new Groep(new ArrayList<>());
-            groepenInMethode.add(groep);
-        }
-        boolean test = false;
-        while (!test) {
-            try {
-                groepenInMethode.forEach(item -> {
-                    item.addLeerling(leerlingenKlas.get(0));
-                    leerlingenKlas.remove(0);
-                });
-            } catch (Exception e) {
-                test = true;
-            }
-        }
-        groepen = groepenInMethode;
-    }
-
     private void maakGroepenLeeg() {
         for (int i = 0; i < aantalGroepen; i++) {
-            groepen.add(new Groep(new ArrayList<>()));
+            groepen.add(new Groep());
         }
     }
+    public void maakGroepenAuto() { // deze methode equalized
+        List<Leerling> leerlingenKlas = new ArrayList<>(klas.getLeerlingen());
+        Collections.shuffle(leerlingenKlas);
+        maakGroepenLeeg();
+        for (int i = 0; i < leerlingenKlas.size(); i = i + aantalGroepen) {
+            for (int j = 0; j < aantalGroepen; j++) {
+                try {
+                    groepen.get(j).addLeerling(leerlingenKlas.get(i + j));
+                } catch (Exception e) {
+                    return;
+                }
+            }
+        }
+    }
+
+    private void geefToegangscodesPerGroep() { // elke groep heeft per oefeninng, zelf random genereren ofzo
+
+    }
+    private void geefGroepsbewerkingenPerGroep() { // elke oefening in een groep heeft een groepsbewerking
+
+        List<Groepsbewerking> gbwVanOefInPad = null;
+
+        for (Groep groep : groepen) {
+            //groepsbewerkingenVanPad = null;
+            for (int i = 0; i < box.getOefeningen().size(); i++) {
+                gbwVanOefInPad = groep.getPad().getOefeningen().get(i).getGroepsBewerkingen();
+                randomGenerator = new Random();
+                int indexRandom = randomGenerator.nextInt(gbwVanOefInPad.size());
+                groep.getPad().addGroepsbewerking(gbwVanOefInPad.get(indexRandom));
+            }
+        }
+    }
+
+    private void setOefeningenActiesPerGroep() { // een random volgorde van oefenineingen per groep
+
+        List<Actie> actieLijst = new ArrayList<>(box.getActies());
+        Collections.shuffle(actieLijst);
+        List<Oefening> oefeningenLijst = new ArrayList<>(box.getOefeningen());
+        List<List<Object>> listOefActie = new ArrayList<List<Object>>();
+        
+        for (int i = 0; i < box.getOefeningen().size(); i++) {
+            listOefActie.add(new ArrayList<>(Arrays.asList(oefeningenLijst.get(i), actieLijst.get(i))));
+        }
+        for (Groep groep : groepen) {
+            Collections.shuffle(listOefActie);
+
+            for (int i = 0; i < listOefActie.size(); i++) {
+                groep.getPad().addOefening((Oefening) listOefActie.get(i).get(0));
+                if (i < listOefActie.size() - 1) {
+                    groep.getPad().addActie((Actie) listOefActie.get(i).get(1));
+                } else {
+                    System.out.println("toevoeging laatste actie (schatkist zoeken)");
+                    groep.getPad().addActie(new Actie("Schatkist zoeken"));
+                }
+            }
+        }
+    }
+
+    private void geefActiesPerGroep() {
+        List<Actie> acties = box.getActies();
+
+    }
+
+
+
 
 
 
