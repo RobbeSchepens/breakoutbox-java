@@ -5,6 +5,9 @@ import exceptions.NaamTeLangException;
 import exceptions.SpecialeTekensInNaamException;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,6 +20,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -42,10 +46,17 @@ public class Sessie implements ISessie, Serializable {
     
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Klas klas;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<Groep> groepen;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<Leerling> leerlingen;
     
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Box box;
-    
+
+    private boolean isActief;
     private boolean isAfstandsonderwijs;
     private String typeGroepen;
     private int aantalGroepen;
@@ -53,7 +64,7 @@ public class Sessie implements ISessie, Serializable {
     public Sessie() {
     }
 
-    public Sessie(String naam, String omschrijving, Klas klas, Box box, boolean afstand, 
+    public Sessie(String naam, String omschrijving, Klas klas, Box box, boolean afstand,
             String typeGroepen, int aantalGroepen, LocalDate startdatum) {
         setNaam(naam);
         setCode("XYZ");
@@ -195,6 +206,52 @@ public class Sessie implements ISessie, Serializable {
             throw new IllegalArgumentException("De opgegeven datum moet later dan vandaag vallen.");
         this.startdatum = startdatum;
     }
+
+    private void createSessie() {
+        switch (typeGroepen) {
+            case "auto": ;
+                break;
+            case "handleerkracht":
+                maakGroepenLeeg();
+                break;
+            case "handleerling":
+                maakGroepenLeeg();
+                break;
+        }
+
+    }
+
+    public void maakGroepenAuto() { // deze methode equalized
+        List<Leerling> leerlingenKlas = new ArrayList<>(klas.getLeerlingen());
+        List<Groep> groepenInMethode = new ArrayList<>();
+        Groep groep;
+
+        Collections.shuffle(leerlingenKlas);
+        for (int i = 0; i < aantalGroepen; i++) {
+            groep = new Groep(new ArrayList<>());
+            groepenInMethode.add(groep);
+        }
+        boolean test = false;
+        while (!test) {
+            try {
+                groepenInMethode.forEach(item -> {
+                    item.addLeerling(leerlingenKlas.get(0));
+                    leerlingenKlas.remove(0);
+                });
+            } catch (Exception e) {
+                test = true;
+            }
+        }
+        groepen = groepenInMethode;
+    }
+
+    private void maakGroepenLeeg() {
+        for (int i = 0; i < aantalGroepen; i++) {
+            groepen.add(new Groep(new ArrayList<>()));
+        }
+    }
+
+
 
     @Override
     public String toString() {
