@@ -221,7 +221,8 @@ public class Sessie implements ISessie, Serializable {
 
     private void createSessie() {
         switch (typeGroepen) {
-            case "auto": ;
+            case "auto":
+                maakGroepenAuto();
                 break;
             case "handleerkracht":
                 maakGroepenLeeg();
@@ -254,7 +255,22 @@ public class Sessie implements ISessie, Serializable {
     }
 
     private void geefToegangscodesPerGroep() { // elke groep heeft per oefeninng, zelf random genereren ofzo
+        StringBuffer sb = new StringBuffer();
 
+        Random r = new Random();
+        char c;
+
+        for (Groep groep : groepen) { // elke groep doorgaan
+            for (int z = 0; z < box.getOefeningen().size(); z++) { // toegangscode aan elk  oefening in een pad geven
+                sb = new StringBuffer();
+                for (int i = 0; i < 4; i++) { // random toegangscode van 4 letters
+                    r = new Random();
+                    c = (char) (r.nextInt(26) + 'a');
+                    sb.append(c);
+                }
+                groep.getPad().addToegangscode(new Toegangscode(sb.toString()));
+            }
+        }
     }
     private void geefGroepsbewerkingenPerGroep() { // elke oefening in een groep heeft een groepsbewerking
 
@@ -286,6 +302,7 @@ public class Sessie implements ISessie, Serializable {
 
             for (int i = 0; i < listOefActie.size(); i++) {
                 groep.getPad().addOefening((Oefening) listOefActie.get(i).get(0));
+
                 if (i < listOefActie.size() - 1) {
                     groep.getPad().addActie((Actie) listOefActie.get(i).get(1));
                 } else {

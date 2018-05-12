@@ -36,6 +36,7 @@ public class Groep implements Serializable, IGroep {
 
 
     public Groep() {
+
     }
 
 

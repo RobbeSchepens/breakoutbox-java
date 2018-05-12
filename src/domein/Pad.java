@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +21,8 @@ import javax.persistence.Transient;
  *
  * @author Daan
  */
+@Entity
+@Access(AccessType.FIELD)
 class Pad implements Serializable, IPad {
     @Transient
     private Long id;
@@ -82,6 +85,10 @@ class Pad implements Serializable, IPad {
 
     public void addGroepsbewerking(Groepsbewerking groepsbewerking) {
         groepsBewerkingen.add(groepsbewerking);
+    }
+
+    public void addToegangscode(Toegangscode toegangscode) {
+
     }
 
 
