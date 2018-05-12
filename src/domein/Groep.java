@@ -6,6 +6,7 @@
 package domein;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -24,11 +25,12 @@ import javax.persistence.Transient;
  */
 @Entity
 @Access(AccessType.FIELD)
-public class Groep implements Serializable, IGroep {
+public class Groep implements Serializable {
 
     @Transient
     private Long id;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Leerling> leerlingen;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Pad pad;
@@ -37,6 +39,10 @@ public class Groep implements Serializable, IGroep {
 
     public Groep() {
 
+    }
+
+    Groep(ArrayList<Leerling> leerlingen) {
+        setLeerlingen(leerlingen);
     }
 
 
@@ -51,7 +57,6 @@ public class Groep implements Serializable, IGroep {
         this.id = id;
     }
 
-    @Override
     public List<Leerling> getLeerlingen() {
         return leerlingen;
     }

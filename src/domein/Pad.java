@@ -23,7 +23,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Access(AccessType.FIELD)
-class Pad implements Serializable, IPad {
+class Pad implements Serializable {
     @Transient
     private Long id;
 

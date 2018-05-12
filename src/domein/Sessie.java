@@ -236,7 +236,7 @@ public class Sessie implements ISessie, Serializable {
 
     private void maakGroepenLeeg() {
         for (int i = 0; i < aantalGroepen; i++) {
-            groepen.add(new Groep());
+            groepen.add(new Groep(new ArrayList<>()));
         }
     }
     public void maakGroepenAuto() { // deze methode equalized
