@@ -223,6 +223,9 @@ public class Sessie implements ISessie, Serializable {
         switch (typeGroepen) {
             case "auto":
                 maakGroepenAuto();
+                geefToegangscodesPerGroep();
+                geefToegangscodesPerGroep();
+                System.out.println("in auto");
                 break;
             case "handleerkracht":
                 maakGroepenLeeg();

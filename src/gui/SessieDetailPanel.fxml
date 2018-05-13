@@ -110,7 +110,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <Button mnemonicParsing="false" onAction="#btnActiesOnAction" text="Toon lijst" />
+                  <Button mnemonicParsing="false" text="Toon lijst" />
                   <Label text="Aantal leerlingen: x">
                      <HBox.margin>
                         <Insets left="5.0" />
