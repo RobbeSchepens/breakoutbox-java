@@ -40,7 +40,7 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
     @FXML private TextField txfOmschrijving;
     @FXML private Button btnAdd;
     @FXML private Button btnEdit;
-    @FXML private Button btnAddWithContent;
+    //@FXML private Button btnAddWithContent;
     @FXML private Label lblError;
     @FXML private Label lblSuccess;
     @FXML private Label lblCode;
@@ -198,7 +198,7 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
         }
     }
 
-    @FXML
+    /*@FXML
     private void btnAddWithContentOnAction(ActionEvent event) {
         try {
             String typegroep = "";
@@ -222,5 +222,5 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
             lblSuccess.setText("");
             lblError.setText(ex.getMessage());
         }
-    }
+    }*/
 }

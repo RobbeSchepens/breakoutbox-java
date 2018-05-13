@@ -137,9 +137,6 @@
          <padding>
             <Insets bottom="15.0" />
          </padding>
-         <children>
-            <Button fx:id="btnAddWithContent" mnemonicParsing="false" onAction="#btnAddWithContentOnAction" styleClass="btn-big-action" text="Maak nieuwe sessie met deze gegevens" />
-         </children>
       </HBox>
       <HBox alignment="CENTER">
          <padding>
