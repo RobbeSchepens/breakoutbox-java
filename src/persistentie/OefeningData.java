@@ -381,7 +381,9 @@ public class OefeningData {
                         (Actie) actieDao.get(7L),
                         (Actie) actieDao.get(8L),
                         (Actie) actieDao.get(9L),
-                        (Actie) actieDao.get(10L)
+                        (Actie) actieDao.get(10L),
+                        (Actie) actieDao.get(2L),
+                        (Actie) actieDao.get(3L)
                 )), new ArrayList<Oefening>(Arrays.asList(
                         (Oefening) oDao.get(1L),
                         (Oefening) oDao.get(2L),
@@ -425,7 +427,6 @@ public class OefeningData {
                         (Oefening) oDao.get(3L),
                         (Oefening) oDao.get(4L),
                         (Oefening) oDao.get(5L),
-                        (Oefening) oDao.get(6L),
                         (Oefening) oDao.get(7L),
                         (Oefening) oDao.get(8L),
                         (Oefening) oDao.get(9L),
