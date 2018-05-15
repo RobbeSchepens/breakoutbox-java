@@ -45,7 +45,7 @@ public class Sessie implements ISessie, Serializable {
     private String code;
     private String omschrijving;
     private LocalDate startdatum;
-    
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Klas klas;
 
@@ -54,7 +54,7 @@ public class Sessie implements ISessie, Serializable {
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Leerling> leerlingen;
-    
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Box box;
 
@@ -78,6 +78,8 @@ public class Sessie implements ISessie, Serializable {
         setTypeGroepen(typeGroepen);
         setAantalGroepen(aantalGroepen);
         setStartdatum(startdatum);
+        generateEverything();
+
     }
 
     @Id
@@ -102,15 +104,14 @@ public class Sessie implements ISessie, Serializable {
         controleerNaam(value);
         naam.set(value);
     }
-    
+
     public List<Groep> getGroepen() {
         return groepen;
     }
-    
+
     public void setGroepen(List<Groep> groepen) {
         this.groepen = groepen;
     }
-    
 
     @Override
     public StringProperty naamProperty() {
@@ -160,8 +161,9 @@ public class Sessie implements ISessie, Serializable {
     }
 
     public void setKlas(Klas klas) {
-        if (klas == null)
+        if (klas == null) {
             throw new IllegalArgumentException("Er werd geen klas opgegeven.");
+        }
         this.klas = klas;
     }
 
@@ -171,8 +173,9 @@ public class Sessie implements ISessie, Serializable {
     }
 
     public void setBox(Box box) {
-        if (box == null)
+        if (box == null) {
             throw new IllegalArgumentException("Er werd geen box opgegeven.");
+        }
         this.box = box;
     }
 
@@ -203,8 +206,9 @@ public class Sessie implements ISessie, Serializable {
     }
 
     public void setAantalGroepen(int aantalGroepen) {
-        if (aantalGroepen <= 0)
+        if (aantalGroepen <= 0) {
             throw new IllegalArgumentException("Er werd geen aantal groepen opgegeven.");
+        }
         this.aantalGroepen = aantalGroepen;
     }
 
@@ -214,27 +218,10 @@ public class Sessie implements ISessie, Serializable {
     }
 
     public void setStartdatum(LocalDate startdatum) {
-        if (startdatum.isBefore(LocalDate.now()))
+        if (startdatum.isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("De opgegeven datum moet later dan vandaag vallen.");
-        this.startdatum = startdatum;
-    }
-
-    private void createSessie() {
-        switch (typeGroepen) {
-            case "auto":
-                maakGroepenAuto();
-                geefToegangscodesPerGroep();
-                geefToegangscodesPerGroep();
-                System.out.println("in auto");
-                break;
-            case "handleerkracht":
-                maakGroepenLeeg();
-                break;
-            case "handleerling":
-                maakGroepenLeeg();
-                break;
         }
-
+        this.startdatum = startdatum;
     }
 
     private void maakGroepenLeeg() {
@@ -242,6 +229,7 @@ public class Sessie implements ISessie, Serializable {
             groepen.add(new Groep(new ArrayList<>()));
         }
     }
+
     public void maakGroepenAuto() { // deze methode equalized
         List<Leerling> leerlingenKlas = new ArrayList<>(klas.getLeerlingen());
         Collections.shuffle(leerlingenKlas);
@@ -275,6 +263,7 @@ public class Sessie implements ISessie, Serializable {
             }
         }
     }
+
     private void geefGroepsbewerkingenPerGroep() { // elke oefening in een groep heeft een groepsbewerking
 
         List<Groepsbewerking> gbwVanOefInPad = null;
@@ -296,7 +285,7 @@ public class Sessie implements ISessie, Serializable {
         Collections.shuffle(actieLijst);
         List<Oefening> oefeningenLijst = new ArrayList<>(box.getOefeningen());
         List<List<Object>> listOefActie = new ArrayList<List<Object>>();
-        
+
         for (int i = 0; i < box.getOefeningen().size(); i++) {
             listOefActie.add(new ArrayList<>(Arrays.asList(oefeningenLijst.get(i), actieLijst.get(i))));
         }
@@ -321,13 +310,31 @@ public class Sessie implements ISessie, Serializable {
 
     }
 
-
-
-
-
-
     @Override
     public String toString() {
         return getNaam();
+    }
+
+    //setOefeningenActiesPerGroep
+    //geefGroepsbewerkingenPerGroep
+    //geefToegangscodesPerGroep
+    //maakGroepenAuto
+    //maakGroepenLeeg
+    private void generateEverything() {
+        switch (typeGroepen) {
+            case "auto":
+                maakGroepenAuto();
+                geefToegangscodesPerGroep();
+
+                System.out.println("in auto");
+                break;
+            case "handleerkracht":
+                maakGroepenLeeg();
+                break;
+            case "handleerling":
+                maakGroepenLeeg();
+                break;
+        }
+
     }
 }

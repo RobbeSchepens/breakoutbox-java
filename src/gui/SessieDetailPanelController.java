@@ -30,28 +30,47 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
     private final SessieController sc;
     private final SessieFrameController fc;
     private final ToggleGroup grpRadioButtons = new ToggleGroup();
-    
-    @FXML private Label lblTitleRight;
-    @FXML private Button btnNieuweOefening;
-    @FXML private TextField txfNaam;
-    @FXML private Label lblAantalGroepen;
-    @FXML private ComboBox<IBox> ddlBox;
-    @FXML private ComboBox<IKlas> ddlKlas;
-    @FXML private TextField txfOmschrijving;
-    @FXML private Button btnAdd;
-    @FXML private Button btnEdit;
+
+    @FXML
+    private Label lblTitleRight;
+    @FXML
+    private Button btnNieuweOefening;
+    @FXML
+    private TextField txfNaam;
+    @FXML
+    private Label lblAantalGroepen;
+    @FXML
+    private ComboBox<IBox> ddlBox;
+    @FXML
+    private ComboBox<IKlas> ddlKlas;
+    @FXML
+    private TextField txfOmschrijving;
+    @FXML
+    private Button btnAdd;
+    @FXML
+    private Button btnEdit;
     //@FXML private Button btnAddWithContent;
-    @FXML private Label lblError;
-    @FXML private Label lblSuccess;
-    @FXML private Label lblCode;
-    @FXML private DatePicker dtpStartDatum;
-    @FXML private Slider sliGroepen;
-    @FXML private CheckBox cbxAfstandsonderwijs;
-    @FXML private RadioButton radGroepenAuto;
-    @FXML private RadioButton radGroepenHandLeerkracht;
-    @FXML private RadioButton radGroepenHandLeerlingen;
-    @FXML private Label lblLeerlingenCount;
-    
+    @FXML
+    private Label lblError;
+    @FXML
+    private Label lblSuccess;
+    @FXML
+    private Label lblCode;
+    @FXML
+    private DatePicker dtpStartDatum;
+    @FXML
+    private Slider sliGroepen;
+    @FXML
+    private CheckBox cbxAfstandsonderwijs;
+    @FXML
+    private RadioButton radGroepenAuto;
+    @FXML
+    private RadioButton radGroepenHandLeerkracht;
+    @FXML
+    private RadioButton radGroepenHandLeerlingen;
+    @FXML
+    private Label lblLeerlingenCount;
+
     public SessieDetailPanelController(SessieController sc, SessieFrameController fc) {
         FXMLLoader loader
                 = new FXMLLoader(getClass().getResource("SessieDetailPanel.fxml"));
@@ -62,7 +81,7 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-        
+
         this.sc = sc;
         this.fc = fc;
         initButtons(true);
@@ -72,22 +91,23 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
         radGroepenHandLeerkracht.setToggleGroup(grpRadioButtons);
         radGroepenHandLeerlingen.setToggleGroup(grpRadioButtons);
         radGroepenAuto.setSelected(true);
-        
-        sliGroepen.valueProperty().addListener((obs, oldval, newVal) -> 
-                sliGroepen.setValue(newVal.intValue()));
-        
-        sliGroepen.valueProperty().addListener((ObservableValue<? extends Number> observable, 
+
+        sliGroepen.valueProperty().addListener((obs, oldval, newVal)
+                -> sliGroepen.setValue(newVal.intValue()));
+
+        sliGroepen.valueProperty().addListener((ObservableValue<? extends Number> observable,
                 Number oldValue, Number newValue) -> {
             lblAantalGroepen.setText(String.valueOf(newValue.intValue()));
         });
-        
-        ddlKlas.valueProperty().addListener((ObservableValue<? extends IKlas> observable, 
+
+        ddlKlas.valueProperty().addListener((ObservableValue<? extends IKlas> observable,
                 IKlas oldValue, IKlas newValue) -> {
             int minGroepen = 1;
-            int maxGroepen = newValue.getLeerlingen().size();
+            int maxGroepen = 5;
+            //maxGroepen = newValue.getLeerlingen().size();
             sliGroepen.setMin(minGroepen);
             sliGroepen.setMax(maxGroepen);
-            lblLeerlingenCount.setText(newValue.getLeerlingen().size() 
+            lblLeerlingenCount.setText(/*newValue.getLeerlingen().size()*/"5"
                     + " leerlingen gevonden.");
 //            sliGroepen.setValue(minGroepen);
 //            lblAantalGroepen.setText(String.valueOf(minGroepen));
@@ -150,19 +170,22 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
     private void btnAddOnAction(ActionEvent event) {
         try {
             String typegroep = "";
-            if (radGroepenAuto.isSelected())
+            if (radGroepenAuto.isSelected()) {
                 typegroep = "auto";
-            if (radGroepenHandLeerkracht.isSelected())
+            }
+            if (radGroepenHandLeerkracht.isSelected()) {
                 typegroep = "handleerkracht";
-            if (radGroepenHandLeerlingen.isSelected())
+            }
+            if (radGroepenHandLeerlingen.isSelected()) {
                 typegroep = "handleerling";
-            
-            sc.voegNieuweSessieToe(txfNaam.getText(), txfOmschrijving.getText(), 
+            }
+
+            sc.voegNieuweSessieToe(txfNaam.getText(), txfOmschrijving.getText(),
                     ddlKlas.getSelectionModel().getSelectedItem(),
                     ddlBox.getSelectionModel().getSelectedItem(),
-                    cbxAfstandsonderwijs.isSelected(), typegroep, 
-                    (int)sliGroepen.getValue(), dtpStartDatum.getValue());
-            
+                    cbxAfstandsonderwijs.isSelected(), typegroep,
+                    (int) sliGroepen.getValue(), dtpStartDatum.getValue());
+
             initNieuw();
             lblError.setText("");
             lblSuccess.setText("De sessie werd succesvol toegevoegd.");
@@ -176,18 +199,21 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
     private void btnEditOnAction(ActionEvent event) {
         try {
             String typegroep = "";
-            if (radGroepenAuto.isSelected())
+            if (radGroepenAuto.isSelected()) {
                 typegroep = "auto";
-            if (radGroepenHandLeerkracht.isSelected())
+            }
+            if (radGroepenHandLeerkracht.isSelected()) {
                 typegroep = "handleerkracht";
-            if (radGroepenHandLeerlingen.isSelected())
+            }
+            if (radGroepenHandLeerlingen.isSelected()) {
                 typegroep = "handleerling";
-            
-            sc.voegNieuweSessieToe(txfNaam.getText(), txfOmschrijving.getText(), 
+            }
+
+            sc.pasSessieAan(txfNaam.getText(), txfOmschrijving.getText(),
                     ddlKlas.getSelectionModel().getSelectedItem(),
                     ddlBox.getSelectionModel().getSelectedItem(),
-                    cbxAfstandsonderwijs.isSelected(), typegroep, 
-                    (int)sliGroepen.getValue(), dtpStartDatum.getValue());
+                    cbxAfstandsonderwijs.isSelected(), typegroep,
+                    (int) sliGroepen.getValue(), dtpStartDatum.getValue());
 
             initNieuw();
             lblError.setText("");

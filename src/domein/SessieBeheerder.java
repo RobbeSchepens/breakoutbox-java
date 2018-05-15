@@ -15,14 +15,14 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
     private GenericDaoJpa<Sessie> sessieRepo;
     private GenericDaoJpa<Klas> klasRepo;
     private GenericDaoJpa<Box> boxRepo;
-    
+
     // Lijsten
     private ObservableList<? extends ISessie> sessies;
     private FilteredList<ISessie> filteredSessieList;
     private ObservableList<? extends IKlas> klassen;
     private ObservableList<? extends IBox> boxes;
     private final Set<BeheerderObserver> observers;
-    
+
     public SessieBeheerder() {
         observers = new HashSet<>();
         setSessieRepo(new GenericDaoJpa(Sessie.class));
@@ -41,38 +41,40 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
     public void setBoxRepo(GenericDaoJpa<Box> mock) {
         boxRepo = mock;
     }
-    
+
     public ObservableList<? extends ISessie> getSessies() {
         if (sessies == null) {
             sessies = FXCollections.observableArrayList(sessieRepo.findAll());
-            Collections.sort((ObservableList<Sessie>)sessies, Comparator.comparing(Sessie::getNaam));
-            filteredSessieList = new FilteredList<>((ObservableList<ISessie>)getSessies(), p -> true);
+            Collections.sort((ObservableList<Sessie>) sessies, Comparator.comparing(Sessie::getNaam));
+            filteredSessieList = new FilteredList<>((ObservableList<ISessie>) getSessies(), p -> true);
         }
         return sessies;
     }
 
     public ObservableList<ISessie> getSessiesFiltered() {
-        if (filteredSessieList == null)
+        if (filteredSessieList == null) {
             getSessies();
+        }
         return filteredSessieList;
     }
-    
+
     public void veranderFilter(String filterValue) {
         filteredSessieList.setPredicate(e -> {
-            if (filterValue == null || filterValue.isEmpty())
+            if (filterValue == null || filterValue.isEmpty()) {
                 return true;
-            
+            }
+
             String lowerCaseValue = filterValue.toLowerCase();
             return e.getNaam().toLowerCase().contains(lowerCaseValue);
         });
     }
-    
+
     public void add(Sessie o) {
         checkOpDubbel(o);
         sessieRepo.startTransaction();
         sessieRepo.insert(o);
         sessieRepo.commitTransaction();
-        ((ObservableList<Sessie>)getSessies()).add(o);
+        ((ObservableList<Sessie>) getSessies()).add(o);
         notifyObservers();
     }
 
@@ -83,7 +85,7 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
         sessieRepo.commitTransaction();
         notifyObservers();
     }
-    
+
     public void delete(Sessie o) {
         sessieRepo.startTransaction();
         sessieRepo.delete(o);
@@ -102,7 +104,7 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
         });
 
     }
-    
+
     public Oefening geefSessieByNaamJpa(String naam) {
         return null;
         //return sessieRepo.getSessieByName(naam);
@@ -111,7 +113,7 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
     public ObservableList<? extends IKlas> getKlassen() {
         if (klassen == null) {
             klassen = FXCollections.observableArrayList(klasRepo.findAll());
-            Collections.sort((ObservableList<Klas>)klassen, Comparator.comparing(Klas::getNaam));
+            Collections.sort((ObservableList<Klas>) klassen, Comparator.comparing(Klas::getNaam));
         }
         return klassen;
     }
@@ -119,33 +121,46 @@ public final class SessieBeheerder implements BeheerderSubject, BeheerderObserve
     public ObservableList<? extends IBox> getBoxes() {
         if (boxes == null) {
             boxes = FXCollections.observableArrayList(boxRepo.findAll());
-            Collections.sort((ObservableList<Box>)boxes, Comparator.comparing(Box::getNaam));
+            Collections.sort((ObservableList<Box>) boxes, Comparator.comparing(Box::getNaam));
         }
         return boxes;
     }
 
     @Override
     public void addBeheerderObserver(BeheerderObserver o) {
-        if (!observers.contains(o))
+        if (!observers.contains(o)) {
             observers.add(o);
+        }
     }
 
     @Override
     public void removeBeheerderObserver(BeheerderObserver o) {
         observers.remove(o);
     }
-    
+
     private void notifyObservers() {
         observers.forEach(e -> e.updateSessies());
     }
 
-    @Override public void updateOefeningen() {}
-    @Override public void updateBoxes() {
+    @Override
+    public void updateOefeningen() {
+    }
+
+    @Override
+    public void updateBoxes() {
         boxes = null;
     }
-    @Override public void updateSessies() {}
-    @Override public void updateActies() {}
-    @Override public void updateKlassen() {
+
+    @Override
+    public void updateSessies() {
+    }
+
+    @Override
+    public void updateActies() {
+    }
+
+    @Override
+    public void updateKlassen() {
         klassen = null;
     }
 }
