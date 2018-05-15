@@ -6,6 +6,7 @@
 package domein;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -24,18 +25,18 @@ import javax.persistence.Transient;
 @Entity
 @Access(AccessType.FIELD)
 class Pad implements Serializable {
+
     @Transient
     private Long id;
 
     @ManyToMany(cascade = {CascadeType.PERSIST})
-    private List<Toegangscode> toegangsCodes;
+    private List<Toegangscode> toegangsCodes = new ArrayList<>();
     @ManyToMany(cascade = {CascadeType.PERSIST})
-    private List<Oefening> oefeningen;
+    private List<Oefening> oefeningen = new ArrayList<>();
     @ManyToMany(cascade = {CascadeType.PERSIST})
-    private List<Groepsbewerking> groepsBewerkingen;
+    private List<Groepsbewerking> groepsBewerkingen = new ArrayList<>();
     @ManyToMany(cascade = {CascadeType.PERSIST})
-    private List<Actie> acties;
-
+    private List<Actie> acties = new ArrayList<>();
 
     public Pad() {
     }
@@ -90,7 +91,5 @@ class Pad implements Serializable {
     public void addToegangscode(Toegangscode toegangscode) {
 
     }
-
-
 
 }

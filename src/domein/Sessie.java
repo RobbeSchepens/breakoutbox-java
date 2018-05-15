@@ -50,10 +50,10 @@ public class Sessie implements ISessie, Serializable {
     private Klas klas;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<Groep> groepen;
+    private List<Groep> groepen = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<Leerling> leerlingen;
+    private List<Leerling> leerlingen = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Box box;
@@ -78,8 +78,8 @@ public class Sessie implements ISessie, Serializable {
         setTypeGroepen(typeGroepen);
         setAantalGroepen(aantalGroepen);
         setStartdatum(startdatum);
-        generateEverything();
 
+        generateEverything();
     }
 
     @Id
@@ -324,9 +324,8 @@ public class Sessie implements ISessie, Serializable {
         switch (typeGroepen) {
             case "auto":
                 maakGroepenAuto();
-                geefToegangscodesPerGroep();
-
-                System.out.println("in auto");
+                //geefToegangscodesPerGroep();
+                //System.out.println("in auto");
                 break;
             case "handleerkracht":
                 maakGroepenLeeg();

@@ -35,16 +35,14 @@ public class Groep implements Serializable {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Pad pad;
 
-
-
     public Groep() {
 
     }
 
     Groep(ArrayList<Leerling> leerlingen) {
         setLeerlingen(leerlingen);
+        pad = new Pad();
     }
-
 
     @Id
     @Access(AccessType.PROPERTY)
@@ -61,14 +59,12 @@ public class Groep implements Serializable {
         return leerlingen;
     }
 
-
     public void setLeerlingen(List<Leerling> leerligen) {
         /*if (leerligen == null || leerligen.isEmpty()) {
             throw new IllegalArgumentException("Je moet oefeningen opgeven");
         }*/
         this.leerlingen = leerligen;
     }
-
 
     public Pad getPad() {
 
@@ -82,6 +78,5 @@ public class Groep implements Serializable {
     public void addLeerling(Leerling leerling) {
         leerlingen.add(leerling);
     }
-
 
 }
