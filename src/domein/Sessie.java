@@ -79,7 +79,7 @@ public class Sessie implements ISessie, Serializable {
         setAantalGroepen(aantalGroepen);
         setStartdatum(startdatum);
 
-        generateEverything();
+        //generateEverything();
     }
 
     @Id
