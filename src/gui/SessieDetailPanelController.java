@@ -109,10 +109,8 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
                 maxGroepen = newValue.getLeerlingen().size();
             sliGroepen.setMin(minGroepen);
             sliGroepen.setMax(maxGroepen);
-            lblLeerlingenCount.setText(newValue.getLeerlingen().size()
+            lblLeerlingenCount.setText(maxGroepen
                     + " leerlingen gevonden.");
-//            sliGroepen.setValue(minGroepen);
-//            lblAantalGroepen.setText(String.valueOf(minGroepen));
         });
     }
 
