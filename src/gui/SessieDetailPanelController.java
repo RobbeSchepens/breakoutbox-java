@@ -104,7 +104,9 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
                 IKlas oldValue, IKlas newValue) -> {
             int minGroepen = 1;
             int maxGroepen;
-            maxGroepen = newValue.getLeerlingen().size();
+            if(newValue == null) maxGroepen = 1;
+            else
+                maxGroepen = newValue.getLeerlingen().size();
             sliGroepen.setMin(minGroepen);
             sliGroepen.setMax(maxGroepen);
             lblLeerlingenCount.setText(newValue.getLeerlingen().size()
@@ -215,7 +217,7 @@ public class SessieDetailPanelController extends VBox implements SessieObserver 
                     cbxAfstandsonderwijs.isSelected(), typegroep,
                     (int) sliGroepen.getValue(), dtpStartDatum.getValue());
 
-            initNieuw();
+            //initNieuw();
             lblError.setText("");
             lblSuccess.setText("De sessie werd succesvol aangepast.");
         } catch (SpecialeTekensInNaamException | IllegalArgumentException | NaamTeKortException | NaamTeLangException ex) {
