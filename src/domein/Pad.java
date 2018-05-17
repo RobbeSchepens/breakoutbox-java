@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
-@Entity(name = "Padd")
+@Entity(name = "Padd") // Pad is an sql keyword, therefor we us Padd
 @Access(AccessType.FIELD)
 public class Pad implements Serializable {
 
