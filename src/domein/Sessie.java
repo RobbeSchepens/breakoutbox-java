@@ -80,6 +80,7 @@ public class Sessie implements ISessie, Serializable {
         setStartdatum(startdatum);
 
         generateEverything();
+        // generateEverything();
     }
 
     @Id
@@ -299,7 +300,9 @@ public class Sessie implements ISessie, Serializable {
                     groep.getPad().addActie((Actie) listOefActie.get(i).get(1));
                 } else {
                     System.out.println("toevoeging laatste actie (schatkist zoeken)");
-                    groep.getPad().addActie(new Actie("Schatkist zoeken"));
+                    Actie at = (Actie) listOefActie.get(i).get(1);
+                    at.setNaam("Schatkist zoeken");
+                    groep.getPad().addActie(at);
                 }
             }
         }
