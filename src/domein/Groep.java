@@ -31,7 +31,7 @@ public class Groep implements Serializable {
     private Long id;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<Leerling> leerlingen;
+    private List<Leerling> leerlingen = new ArrayList<>();
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Pad pad;
 
