@@ -307,12 +307,10 @@ public class Sessie implements ISessie, Serializable {
             }
         }
     }
-
     private void geefActiesPerGroep() {
         List<Actie> acties = box.getActies();
 
     }
-
     @Override
     public String toString() {
         return getNaam();
