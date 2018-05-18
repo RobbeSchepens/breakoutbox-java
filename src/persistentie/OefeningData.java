@@ -442,17 +442,17 @@ public class OefeningData {
             boxDao.commitTransaction();
         });
 
-        ArrayList<Sessie> lijstSessie = new ArrayList<>(Arrays.asList(
+        /*ArrayList<Sessie> lijstSessie = new ArrayList<>(Arrays.asList(
                 new Sessie("Wis A1 Ma", "Een sessie wiskunde op donderdag", (Klas) klasDao.get(1L), (Box) boxDao.get(1L), false, "auto", 7, LocalDate.now()),
                 new Sessie("nederlands", "Een sessie nederlands op donderdag", (Klas) klasDao.get(2L), (Box) boxDao.get(2L), false, "auto", 5, LocalDate.now())
-        ));
+        ));*/
 
-        GenericDaoJpa sessieDao = new GenericDaoJpa<>(Sessie.class);
+ /*GenericDaoJpa sessieDao = new GenericDaoJpa<>(Sessie.class);
         lijstSessie.forEach(sessie -> {
             boxDao.startTransaction();
             boxDao.insert(sessie);
             boxDao.commitTransaction();
-        });
+        });*/
 
     }
 }
