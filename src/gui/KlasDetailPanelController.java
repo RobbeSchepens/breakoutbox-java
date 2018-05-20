@@ -157,11 +157,11 @@ public final class KlasDetailPanelController extends VBox implements KlasObserve
             }
 
         } catch (IOException ex) {
-            lblError.setText("Er is iets fout gelopen bij het lezen van de file.");
+            //lblError.setText("Er is iets fout gelopen bij het lezen van de file.");
         } catch (NullPointerException npe) {
-            lblError.setText("Er is iets fout gelopen.");
+            //lblError.setText("Er is iets fout gelopen.");
         } catch (Exception e) {
-            lblError.setText("Er is iets fout gelopen.");
+            //lblError.setText("Er is iets fout gelopen.");
         }
     }
 
