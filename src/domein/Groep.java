@@ -41,7 +41,7 @@ public class Groep implements Serializable {
 
     Groep(ArrayList<Leerling> leerlingen) {
         setLeerlingen(leerlingen);
-        pad = new Pad();
+        pad = new Pad(new ArrayList<>());
     }
 
     @Id

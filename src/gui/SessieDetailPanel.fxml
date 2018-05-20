@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="740.0" type="VBox" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="740.0" type="VBox" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER">
          <children>
@@ -110,7 +110,6 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </ComboBox>
-                  <Button mnemonicParsing="false" text="Toon lijst" />
                </children>
             </HBox>
             <Label fx:id="lblLeerlingenCount" GridPane.columnIndex="1" GridPane.rowIndex="8" />

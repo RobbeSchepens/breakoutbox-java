@@ -32,6 +32,10 @@ public class Pad implements Serializable {
     public Pad() {
     }
 
+    Pad(ArrayList<Object> arrayList) {
+
+    }
+
     @Id
     @Access(AccessType.PROPERTY)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
