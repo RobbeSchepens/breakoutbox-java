@@ -79,7 +79,7 @@ public class Sessie implements ISessie, Serializable {
         setAantalGroepen(aantalGroepen);
         setStartdatum(startdatum);
 
-        generateEverything();
+        // generateEverything();
         // generateEverything();
     }
 
@@ -232,10 +232,10 @@ public class Sessie implements ISessie, Serializable {
     }
 
     public void maakGroepenAuto() { // deze methode equalized
-       /* List<Leerling> leerlingenKlas = new ArrayList<>(klas.getLeerlingen());
-        Collections.shuffle(leerlingenKlas);*/
+        List<Leerling> leerlingenKlas = new ArrayList<>(klas.getLeerlingen());
+        Collections.shuffle(leerlingenKlas);
         maakGroepenLeeg();
-        /* for (int i = 0; i < leerlingenKlas.size(); i = i + aantalGroepen) {
+        for (int i = 0; i < leerlingenKlas.size(); i = i + aantalGroepen) {
             for (int j = 0; j < aantalGroepen; j++) {
                 try {
                     groepen.get(j).addLeerling(leerlingenKlas.get(i + j));
@@ -243,7 +243,7 @@ public class Sessie implements ISessie, Serializable {
                     return;
                 }
             }
-        }*/
+        }
     }
 
     private void geefToegangscodesPerGroep() { // elke groep heeft per oefeninng, zelf random genereren ofzo
@@ -325,14 +325,14 @@ public class Sessie implements ISessie, Serializable {
         switch (typeGroepen) {
             case "auto":
                 maakGroepenAuto();
-                //geefToegangscodesPerGroep();
+                geefToegangscodesPerGroep();
                 System.out.println("in auto");
                 break;
             case "handleerkracht":
-                //maakGroepenLeeg();
+                maakGroepenLeeg();
                 break;
             case "handleerling":
-                //maakGroepenLeeg();
+                maakGroepenLeeg();
                 break;
         }
 
